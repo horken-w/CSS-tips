@@ -15,10 +15,12 @@
 		#gallery ul{
 			list-style: none;
 			margin: 0;padding: 0;
+			overflow: hidden;
+			position: relative;
 		}
 		#gallery ul li{
 			display: inline-table;
-			margin: 1.5%;
+			margin: 0 auto;
 			width: 255px; height: 275px;
 			overflow: hidden;
 		}
@@ -28,13 +30,15 @@
 			cursor: pointer;
 		}
 		.picorg{
-			width: 10%;
+			width: 200%;
+			background: hsla(0, 0%, 0%, 0.5);
 			-webkit-transition: all 0.6s ease-in-out;
 			-moz-transition: all 0.6s ease-in-out;
 			transition: all 0.6s ease-in-out;
 			opacity: 0;
 			visibility: hidden;
 			position: absolute;
+			top: 0; left: 0;
 			border-right: 2px solid hsl(0, 0%, 0%);
 			border-left: 2px solid hsl(0, 0%, 0%);
 			-webkit-box-shadow: inset 2px 10px 20px hsla(0, 0%, 10%, 0.2);
@@ -42,7 +46,9 @@
 			box-shadow: inset 2px 10px 20px hsla(0, 0%, 10%, 0.2);
 		}
 		#gallery ul li:hover .picorg{
-			width: 30%;
+			width: 100%;
+			height: auto;
+			margin: 0 auto;
 			opacity: 1;
 			visibility: visible;
 			float: right;
@@ -62,9 +68,17 @@
 				<img class="piclist" src="https://dl.dropboxusercontent.com/u/50502234/suicune.png" alt="suicune"><img class="picorg" src="https://dl.dropboxusercontent.com/u/50502234/suicune.png" alt="suicune">
 			</li>
 			<li>
-				<img class="piclist" src="https://dl.dropboxusercontent.com/u/50502234/arcanine.png" alt="arcanine"><img class="picorg" src="https://dl.dropboxusercontent.com/u/50502234/arcanine.png" alt="arcanine">
+				<img class="piclist" src="https://dl.dropboxusercontent.com/u/50502234/arcanine.png" alt="arcanine"><img class="picorg"   src="https://dl.dropboxusercontent.com/u/50502234/arcanine.png" alt="arcanine">
 			</li>
 		</ul>
 	</div>
 </body>
+<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+<script>
+	$('li').hover(function(){
+
+	},function(){
+
+	})
+</script>
 </html>
