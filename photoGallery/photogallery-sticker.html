@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Photo Sticker</title>
+	<style>
+		.polaroid{
+			padding: 1%;
+			width: 30%;
+			border: 2px solid hsl(0, 0%, 82%);
+			position: absolute;
+			background: #fff;
+			box-shadow: 10px 10px 30px hsl(0, 0%, 0%);
+		}
+		.polaroid:first-child{
+			top: 80px; left: 350px;
+			-webkit-transform: rotate(30deg);
+			-moz-transform: rotate(30deg);
+			transform: rotate(30deg);
+			z-index: 4;
+		}
+		.polaroid:last-child{
+			top: 80px; left: 120px;
+			-webkit-transform: rotate(-3deg);
+			-moz-transform: rotate(-3deg);
+			transform: rotate(-3deg);
+		}
+		.polaroid:nth-child(2){
+			top: 10px; right: 40px;
+			-webkit-transform: rotate(10deg);
+			-moz-transform: rotate(10deg);
+			transform: rotate(10deg);
+		}
+		.polaroid img{
+			width: 100%;
+			background: #000;
+		}
+		.caption{
+			font-family: tahoma, georgia, sans-serif;
+			text-align: center;
+			font-size: 1.5em;
+			color: hsl(230, 68%, 48%);
+		}
+		.polaroid:nth-child(even) .caption{
+			color: hsl(140, 34%, 62%);
+		}
+	</style>
+</head>
+<body>
+	<div class="polaroid">
+		<img src="https://dl.dropboxusercontent.com/u/50502234/dragonair.png" alt="dragonair">
+		<p class="caption">pokemon - No.148 Dragonair</p>
+	</div>
+	<div class="polaroid">
+		<img src="https://dl.dropboxusercontent.com/u/50502234/articuno.png" alt="articuno">
+		<p class="caption">pokemon - No.144 Articuno</p>
+	</div>
+	<div class="polaroid">
+		<img src="https://dl.dropboxusercontent.com/u/50502234/suicune.png" alt="suicune">
+		<p class="caption">pokemon - No.245 Suicune</p>
+	</div>
+	<div class="polaroid">
+		<img src="https://dl.dropboxusercontent.com/u/50502234/arcanine.png" alt="arcanine">
+		<p class="caption">pokemon - No.059 Arcanine</p>
+	</div>
+</body>
+</html>
