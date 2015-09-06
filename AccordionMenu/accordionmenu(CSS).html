@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Accordion Menu(Puro CSS)</title>
+	<style>
+		.accordion{
+			font: 1em/ 1.3em tahoma, gerogia, sans-serif;
+			color: hsl(0, 0%, 32%);
+			background: #fff;
+			padding: 10px; margin: 0;
+			width: 30%;
+		}
+		h3{
+			font-size: 1.4em;
+			margin: 0;
+			margin-bottom: 10px;
+			text-shadow: 5px 5px 10px hsl(0, 0%, 0%);
+		}
+		h2{
+			margin: 5px 0;
+			padding: 0;
+		}
+		a{
+			font-size: 1em;
+			display: block;
+			font-weight: 400;
+			color: hsl(0, 0%, 24%);
+			text-shadow: 3px 3px 2px hsla(0, 0%, 0%, 0.3);
+			text-decoration: none;
+			margin: 0; padding: 10px;
+			background: -webkit-linear-gradient(top, hsl(0, 0%, 82%), hsl(0, 0%, 48%));
+			background: -moz-linear-gradient(right, hsl(0, 0%, 82%), hsl(0, 0%, 48%));
+			background: -o-linear-gradient(left, hsl(0, 0%, 82%), hsl(0, 0%, 48%));
+			background: linear-gradient(top, hsl(0, 0%, 82%), hsl(0, 0%, 48%));f
+			filter:progid:DXImageTransform.Microsoft.gfradient(startColorstr=#cecece, endColorstr=#8f8f8f);
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+		}
+		.accordion :target h2 a,
+		.accordion h2 a:focus,
+		.accordion h2 a:hover,
+		.accordion h2 :active{
+			background: hsl(198, 100%, 71%);
+			background: -webkit-linear-gradient(top, hsl(198, 100%, 71%), hsl(207, 73%, 50%));
+			background: -moz-linear-gradient(right, hsl(198, 100%, 71%), hsl(207, 73%, 50%));
+			background: -o-linear-gradient(left, hsl(198, 100%, 71%), hsl(207, 73%, 50%));
+			background: linear-gradient(top, hsl(198, 100%, 71%), hsl(207, 73%, 50%));f
+			filter:progid:DXImageTransform.Microsoft.gfradient(startColorstr=#cecece, endColorstr=#8f8f8f);
+			color: #fff;
+		}
+		.avatarlist{
+			
+		}
+		.avatar{
+			padding: 0 10px;
+			height: 0;
+			float: left;
+			width: 50%;
+			overflow: hidden;
+			-moz-transition:height 0.5s ease-in;
+			-webkit-transition:height 0.5s ease-in;
+			-o-transition:height 0.5s ease-in
+			transition:height 0.5s ease-in;
+		}
+		.info{
+			padding: 0 10px;
+			height: 0;
+			overflow: hidden;
+			-moz-transition:height 0.5s ease-in;
+			-webkit-transition:height 0.5s ease-in;
+			-o-transition:height 0.5s ease-in
+			transition:height 0.5s ease-in;
+			font-size: 0.7em;
+			font-weight: 700;
+			padding: 10px; margin: 10px;
+		}
+		.clear{
+			clear: both;
+		}
+		.clear:last-child{
+			height: 0;
+		}
+		:target .avatar, :target .info{
+			overflow: auto;
+			height: 150px;
+		}
+	</style>
+</head>
+<body>
+	<nav class="accordion">
+		<h3>Pokemon Avatar List</h3>
+		<div id="dragonair">
+			<h2 class="clear"><a href="#dragonair">Dragonair</a></h2>
+			<img class="avatar" src="https://dl.dropboxusercontent.com/u/50502234/dragonair.png" alt="dragonair">
+			<p class="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi magnam, doloribus possimus.</p>
+			<p class="clear"></p>
+		</div>
+		<div id="articuno">
+			<h2 class="clear"><a href="#articuno">Articuno</a></h2>
+			<img class="avatar" src="https://dl.dropboxusercontent.com/u/50502234/articuno.png" alt="articuno">
+			<p class="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum id, eaque deleniti!</p>
+			<p class="clear"></p>
+		</div>
+		<div id="suicune">
+			<h2 class="clear"><a href="#suicune">Suicune</a></h2>
+			<img class="avatar" src="https://dl.dropboxusercontent.com/u/50502234/suicune.png" alt="suicune">
+			<p class="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium odio et, inventore!</p>
+			<p class="clear"></p>
+		</div>
+		<div id="arcanine">
+			<h2 class="clear"><a href="#arcanine">Arcanine</a></h2>
+			<img class="avatar" src="https://dl.dropboxusercontent.com/u/50502234/arcanine.png" alt="arcanine">
+			<p class="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis laudantium aut incidunt.</p>
+			<p class="clear"></p>
+		</div>
+	</nav>
+</body>
+</html>
