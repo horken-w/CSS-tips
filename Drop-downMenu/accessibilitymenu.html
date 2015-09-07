@@ -13,9 +13,9 @@
 			position: absolute;
 			visibility: hidden;
 		}
-		.link{
-			width: 20%;
-			margin-top: -10000;
+		.menu .link{
+			width: 300px;
+			margin-top: -9999px;
 			float: left;
 		}
 		.menu a{
@@ -23,39 +23,77 @@
 			display: block;
 			height: 35px;
 			line-height: 25px;
+			color: hsl(180, 35%, 80%);
 			text-decoration: none;
+			float: right;
 			visibility: visible;
+			z-index: 10;
+		}
+		.submenu a{
+			background: hsl(35, 50%, 72%);
+			margin: 0 -1px 0 0;
+			width: 300px;
+			color: hsl(180, 50%, 50%);
+		}
+		.submenu{
+			float: left;
+			background: hsl(36, 100%, 50%);
+			padding-top: 25px;
+			margin-top: -25px;
+		}
+		a.main{
+			margin-top: 9999px;
+			margin-right: -299px;
+			width: 300px;
+			height: 35px;
+			line-height: 25px;
+			float: left;
+			text-align: center;
+			background: hsl(42, 60%, 35%);
+		}
+		a.main:hover, a.main:focus, a.main:active{
+			margin-right: 0;
+			background: hsl(42, 60%, 35%);
+			color: #fff;
+		}
+		.submenu a:hover, .submenu a:focus, .submenu a:active{
+			margin: 0;
+			background: hsl(65, 52%, 48%);
+			color: #fff;
+		}
+		.sub:hover {
+    		clear:both;
 		}
 	</style>
 <body>
 	<nav>
 		<ul class="menu">
-			<li class="link"><a href="javascript:;">menu1</a>
-				<ul>
+			<li class="link"><a class="main" href="javascript:;">menu1</a>
+				<ul class="submenu">
 					<li><a href="javascript:;">submenu1</a></li>
 					<li><a href="javascript:;">submenu2</a></li>
 					<li><a href="javascript:;">submenu3</a></li>
 					<li><a href="javascript:;">submenu4</a></li>
 				</ul>
 			</li>
-			<li class="link"><a href="javascript:;">menu2</a>
-				<ul>
+			<li class="link"><a class="main" href="javascript:;">menu2</a>
+				<ul class="submenu">
 					<li><a href="javascript:;">submenu1</a></li>
 					<li><a href="javascript:;">submenu2</a></li>
 					<li><a href="javascript:;">submenu3</a></li>
 					<li><a href="javascript:;">submenu4</a></li>
 				</ul>
 			</li>
-			<li class="link"><a href="javascript:;">menu3</a>
-				<ul>
+			<li class="link"><a class="main" href="javascript:;">menu3</a>
+				<ul class="submenu">
 					<li><a href="javascript:;">submenu1</a></li>
 					<li><a href="javascript:;">submenu2</a></li>
 					<li><a href="javascript:;">submenu3</a></li>
 					<li><a href="javascript:;">submenu4</a></li>
 				</ul>
 			</li>
-			<li class="link"><a href="javascript:;">menu4</a>
-				<ul>
+			<li class="link"><a class="main" href="javascript:;">menu4</a>
+				<ul class="submenu">
 					<li><a href="javascript:;">submenu1</a></li>
 					<li><a href="javascript:;">submenu2</a></li>
 					<li><a href="javascript:;">submenu3</a></li>
