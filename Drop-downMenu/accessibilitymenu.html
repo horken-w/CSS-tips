@@ -25,15 +25,34 @@
 			line-height: 25px;
 			color: hsl(180, 35%, 80%);
 			text-decoration: none;
+			text-shadow: 0 1px 0 rgba(255,255,255,0.4), 0 -1px 0 rgba(0,0,0,0.2);
 			float: right;
 			visibility: visible;
 			z-index: 10;
 		}
-		.submenu a{
-			background: hsl(35, 50%, 72%);
-			margin: 0 -1px 0 0;
+		a.main{
+			margin-top: 9999px;
+			margin-right: -299px;
 			width: 300px;
-			color: hsl(180, 50%, 50%);
+			float: left;
+			text-align: center;
+			background: -webkit-linear-gradient(top, hsl(0, 0%, 73%), hsl(0, 0%, 48%));
+			background: -moz-linear-gradient(right, hsl(0, 0%, 73%), hsl(0, 0%, 48%));
+			background: -o-linear-gradient(left, hsl(0, 0%, 73%), hsl(0, 0%, 48%));
+			background: linear-gradient(top, hsl(0, 0%, 73%), hsl(0, 0%, 48%));
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			-o-border-radius: 10px;
+			border-radius: 10px;
+			-webkit-box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.6);
+			-moz-box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.6);
+			-o-box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.6);
+			box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.6);
+		}
+		a.main:hover, a.main:focus, a.main:active{
+			margin-right: 0;
+			background: hsl(42, 60%, 35%);
+			color: #fff;
 		}
 		.submenu{
 			float: left;
@@ -41,20 +60,15 @@
 			padding-top: 25px;
 			margin-top: -25px;
 		}
-		a.main{
-			margin-top: 9999px;
-			margin-right: -299px;
+		.submenu a{
+			background: hsl(35, 50%, 72%);
+			margin: 0 -1px 0 0;
 			width: 300px;
-			height: 35px;
-			line-height: 25px;
-			float: left;
-			text-align: center;
-			background: hsl(42, 60%, 35%);
-		}
-		a.main:hover, a.main:focus, a.main:active{
-			margin-right: 0;
-			background: hsl(42, 60%, 35%);
-			color: #fff;
+			color: hsl(180, 50%, 50%);
+			-webkit-box-shadow: 0 5px 7px hsla(0, 0%, 0%, 1);
+			-moz-box-shadow: 0 5px 7px hsla(0, 0%, 0%, 1);
+			-o-box-shadow: 0 5px 7px hsla(0, 0%, 0%, 1);
+			box-shadow: 0 5px 7px hsla(0, 0%, 0%, 1);
 		}
 		.submenu a:hover, .submenu a:focus, .submenu a:active{
 			margin: 0;
