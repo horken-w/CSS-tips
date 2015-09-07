@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Accessibility</title>
+	<style>
+		ul{
+			list-style: none;
+			margin: 0;padding: 0;
+		}
+		.menu{
+			position: absolute;
+			visibility: hidden;
+		}
+		.link{
+			width: 20%;
+			margin-top: -10000;
+			float: left;
+		}
+		.menu a{
+			position: relative;
+			display: block;
+			height: 35px;
+			line-height: 25px;
+			text-decoration: none;
+			visibility: visible;
+		}
+	</style>
+<body>
+	<nav>
+		<ul class="menu">
+			<li class="link"><a href="javascript:;">menu1</a>
+				<ul>
+					<li><a href="javascript:;">submenu1</a></li>
+					<li><a href="javascript:;">submenu2</a></li>
+					<li><a href="javascript:;">submenu3</a></li>
+					<li><a href="javascript:;">submenu4</a></li>
+				</ul>
+			</li>
+			<li class="link"><a href="javascript:;">menu2</a>
+				<ul>
+					<li><a href="javascript:;">submenu1</a></li>
+					<li><a href="javascript:;">submenu2</a></li>
+					<li><a href="javascript:;">submenu3</a></li>
+					<li><a href="javascript:;">submenu4</a></li>
+				</ul>
+			</li>
+			<li class="link"><a href="javascript:;">menu3</a>
+				<ul>
+					<li><a href="javascript:;">submenu1</a></li>
+					<li><a href="javascript:;">submenu2</a></li>
+					<li><a href="javascript:;">submenu3</a></li>
+					<li><a href="javascript:;">submenu4</a></li>
+				</ul>
+			</li>
+			<li class="link"><a href="javascript:;">menu4</a>
+				<ul>
+					<li><a href="javascript:;">submenu1</a></li>
+					<li><a href="javascript:;">submenu2</a></li>
+					<li><a href="javascript:;">submenu3</a></li>
+					<li><a href="javascript:;">submenu4</a></li>
+				</ul>
+			</li>
+		</ul>	
+	</nav>
+</body>
+</html>
