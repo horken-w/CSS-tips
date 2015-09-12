@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>FadeIn n Out more Btn</title>
+	<style>
+		html, body{
+			margin: 0; padding: 0;
+		}
+		.slidebarbox{
+			margin: 0 auto;
+			width: 320px;
+			max-height: 120px;
+			overflow: hidden;
+			position: relative;
+			background: hsl(0, 0%, 0%);
+		}
+		.slidebarbox .morebtn{
+			position: absolute;
+			bottom: 0; left: 0;
+			width: 100%;
+			text-align: center;
+			margin: 0; padding: 30px 0;
+			background: hsla(220, 60%, 80%, 0.6);
+			background: -webkit-linear-gradient(top, hsla(220, 60%, 80%, 0), hsla(220, 60%, 80%, 1));
+			background: linear-gradient(to bottom, hsla(220, 60%, 80%, 0), hsla(220, 60%, 80%, 1));
+		}
+		.slidebarbox p{
+			padding: 10px;
+			padding-top: 3px;
+			color: #fff;
+		}
+		.slidebarbox p:nth-child(2){
+			padding-bottom: 45px;
+		}
+		.button{
+			border-top: 1px solid hsl(203, 87%, 78%);
+			border-left: 1px solid hsl(203, 87%, 78%);
+			border-right: 1px solid hsla(0, 0%, 0%, 0.6);
+			border-bottom: 1px solid hsla(0, 0%, 0%, 0.6);
+			text-decoration: none;
+			color: #fff;
+			vertical-align: middle;
+			padding: 6px;
+			background: hsl(200, 58%, 62%);
+			background: -webkit-linear-gradient(top, hsl(220, 43%, 42%), hsl(200, 62%, 70%));
+			background: linear-gradient(to bottom, hsl(220, 43%, 42%), hsl(200, 62%, 70%));
+			border-radius: 10px;
+			text-shadow: 0 1px 0 hsla(0, 0%, 0%, 0.6);
+		}
+		.button:hover{
+			background: hsl(200, 56%, 58%);
+		}
+	</style>
+</head>
+<body>
+	<div class="slidebarbox">
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit beatae perferendis pariatur optio voluptatem eos nesciunt et blanditiis iure doloremque veritatis esse sed, excepturi porro dolorum. Corrupti perferendis autem, labore voluptas. Voluptas neque blanditiis, laboriosam suscipit sint doloribus! In sapiente perferendis architecto iusto blanditiis cum doloribus quo, illum modi nisi! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, unde. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit accusantium optio obcaecati, pariatur officiis saepe dignissimos? Labore magni fugiat dolores.</p>
+		<p>台湾你也惊讶全省下去线路美元首页见面转载看起来儿童影，好处不了近年来我会重要手册黄金对比这个前进售价下载地址随时不，大门最大新手标志如何，探索儿子网吧意大利面对要有是因为相互，稿件花园全部购物那里，武器部门威胁平方米姓名如果你这款章节一块是啊生物分析两，增强具体农业这里回家有关部门本科自然他是经理，冲击发挥信心类似有限责任公司帮助上帝论坛一，重视通知显示点击不详。</p>
+		<p class="morebtn"><a href="javascript:;" class="button">Read More</a></p>
+	</div>
+	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+	<script>
+		$(function(){
+			var $ct, $p, $show, $ptext, $ttlHeight;
+			$('.slidebarbox .button').on('click', function(){
+				ttlHeight=0;
+
+				$ct=$(this);
+				$p = $ct.parent();
+				$show=$('.slidebarbox');
+				$ptext=$show.find('p:not(".morebtn")');
+
+				$ptext.each(function(){
+					ttlHeight+=$(this).outerHeight();
+				});
+
+				$show.css({
+					'height': $show.height(),
+					'max-height': 9999
+				})
+				.animate({
+					'height': ttlHeight
+				},1000);
+
+				$p.fadeOut('1000');
+				return false;
+			})
+		})
+	</script>
+</body>
+</html>
