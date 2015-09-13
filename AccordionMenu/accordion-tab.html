@@ -4,84 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Tab &amp; Accordion menu</title>
-	<style>
-		body, html{
-			height: 100%;
-			margin: 0 auto;
-			font-weight: 200;
-			background: hsl(250, 30%, 60%);
-			text-align: center;
-			font-family: tahoma, helvetica, gerogia, sans-serif;
-		}
-		nav{
-			position: relative;
-			width: 60%;
-			margin: 0 auto;
-		}
-		nav > h3{
-			width: 100%;
-			font-weight: 900;
-			text-shadow: 3px 3px 10px hsl(0, 0%, 80%);
-		}
-		.menu{
-			width: 160px;
-			height: auto;
-			float: left;
-			overflow: hidden;
-		}
-		.link{
-			display: block;
-			padding: 10px 20px;
-			border-radius: 5px 5px 0 0;
-			color: hsl(200, 100%, 40%);
-			font-size: 24px;
-			background: hsla(0, 0%, 100%, 0.2);
-			-webkit-transition: all 0.5s ease-in-out;
-			-moz-transition: all 0.5s ease-in-out;
-			-o-transition: all 0.5s ease-in-out;
-			transition: all 0.5s ease-in-out;
-		}
-		.menu:not(:last-child) .link{
-			border-right: 1px solid hsl(0, 0%, 75%);
-		}
-		.link > a{
-			text-decoration: none;
-			cursor: pointer;
-		}
-		.link:hover{
-			margin-top: 17px;
-			background: hsla(0, 0%, 100%, 0.5);
-		}
-		.box{
-			width: 100%;
-			display: none;
-			height: auto;
-			text-align: left;
-			margin-top: 58px;
-			padding: 1em;
-			padding-top: 10px;
-			width: 100%;
-			color: #fff;
-			box-sizing: border-box;
-			background: hsl(200, 100%, 40%);
-			-webkit-animation-duration: 0.5s;
-			-moz-animation-duration: 0.5s;
-			-o-animation-duration: 0.5s;
-			animation-duration: 0.5s;
-			position: absolute;
-			top: 50px;
-			left: 0;
-		}
-		.box img{
-			width: 20%;
-			display: block;
-			margin-left: 20%;
-			float: left;
-		}
-		.clear{
-			clear: both;
-		}
-	</style>
+	<link rel="stylesheet" href="accordion-tab/tabstyle.css">
 </head>
 <body>
 	<nav>
@@ -116,8 +39,6 @@
 		</div>
 	</nav>
 	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
-	<script>
-
-	</script>
+	<script src="accordion-tab/tabjs.js"></script>
 </body>
 </html>
