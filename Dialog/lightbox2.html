@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Simple Light Box</title>
+	<link rel="stylesheet" href="">
+	<style>
+		body{font-family: helvetical, arial;}
+		.backdrop{
+			position: absolute;
+			top: 0;left: 0;
+			width: 100%;
+			height: 100%;
+			background: hsl(0, 0%, 0%);
+			opacity: 0;
+			display: none;
+		}
+		.box{
+			position: absolute;
+			top: 20%; left: 20%;
+			width: 60%;
+			height: 40%;
+			background: hsl(0, 0%, 100%);
+			padding: 10px;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+			-webkit-box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.6);
+			-moz-box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.6);
+			box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.6);
+			display: none;
+		}
+		.close{
+			float: right;
+			margin-right: 6px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<h1>Lorem ipsum dolor sit amet.</h1>
+	<a href="#" class="lightbox">Show you lightbox</a>
+	<div class="backdrop"></div>
+	<div class="box"><div class="close">X</div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, corporis, suscipit. Voluptate velit est facilis.</div>
+	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+	<script>
+	$(function(){
+		$('.lightbox').on('click', function(){
+			$('.backdrop, .box').animate({'opacity': '.5'}, 500, 'linear');
+			$('.box').animate({'opacity': '1'}, 500, 'linear');
+			$('.backdrop, .box').css('display', 'block');
+		})
+		$(document).on('click', '.close, .backdrop', function(){
+			$('.backdrop, .box').animate({'opacity': 0}, 1000, 'linear', function(){
+				$('.backdrop, .box').css('display', 'none');
+			});
+		})
+	})
+	</script>
+</body>
+</html>

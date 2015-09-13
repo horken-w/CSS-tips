@@ -1,0 +1,17 @@
+.beforeAfterSlidebar{
+	position: relative;
+	width: 800px;
+	height: 600px;
+	cursor: pointer;
+}
+.beforeAfterSlidebar div{
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	cursor: pointer;
+}
+.topImage{
+	border-right: 4px solid black;
+	background: #fff;
+}

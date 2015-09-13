@@ -1,0 +1,98 @@
+body, html{
+	height: 100%;
+	margin: 0 auto;
+	font-weight: 200;
+	background: hsl(250, 30%, 60%);
+	text-align: center;
+	font-family: tahoma, helvetica, gerogia, sans-serif;
+}
+nav{
+	position: relative;
+	width: 60%;
+	margin: 0 auto;
+}
+nav > h3{
+	width: 100%;
+	font-weight: 900;
+	text-shadow: 3px 3px 10px hsl(0, 0%, 80%);
+}
+.menu{
+	width: 100px;
+	height: auto;
+	float: left;
+	overflow: hidden;
+}
+	@media (max-width: 48em) {
+		.menu{
+			width: 100%;
+			border: 2px solid hsl(0, 0%, 70%);
+		}
+	}
+.link{
+	display: block;
+	padding: 10px 5px;
+	border-radius: 5px 5px 0 0;
+	color: hsl(200, 100%, 40%);
+	font-size: 1em;
+	background: hsla(0, 0%, 100%, 0.2);
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+	@media (max-width: 48em) {
+		.link{
+			border-radius: 0;
+			width: 100%;
+			margin: 0;
+		}
+	}
+.menu:not(:last-child) .link{
+	border-right: 1px solid hsl(0, 0%, 75%);
+}
+.link > a{
+	text-decoration: none;
+	cursor: pointer;
+}
+.link:hover{
+	margin-top: 10px;
+	background: hsla(0, 0%, 100%, 0.5);
+}
+	@media (max-width: 48em) {
+		.link:hover{
+			margin: 0;
+		}
+	}
+.link > a:hover,
+.link > a.active{
+	color: hsl(200, 70%, 62%);
+}
+.box{
+	width: 100%;
+	display: none;
+	height: auto;
+	text-align: left;
+	margin-top: 44px;
+	padding: 1em;
+	padding-top: 10px;
+	width: 100%;
+	color: #fff;
+	box-sizing: border-box;
+	background: hsl(200, 100%, 40%);
+	-webkit-animation-duration: 0.5s;
+	-moz-animation-duration: 0.5s;
+	-o-animation-duration: 0.5s;
+	animation-duration: 0.5s;
+	position: absolute;
+	top: 50px;
+	left: 0;
+}
+.box img{
+	width: 20%;
+	display: block;
+	margin-left: 10%;
+	float: left;
+}
+.clear{
+	clear: both;
+}
