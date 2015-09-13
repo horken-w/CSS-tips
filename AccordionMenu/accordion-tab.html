@@ -14,59 +14,63 @@
 			font-family: tahoma, helvetica, gerogia, sans-serif;
 		}
 		nav{
+			position: relative;
 			width: 60%;
+			margin: 0 auto;
+		}
+		nav > h3{
+			width: 100%;
+			font-weight: 900;
+			text-shadow: 3px 3px 10px hsl(0, 0%, 80%);
 		}
 		.menu{
-			width: 22%;
+			width: 160px;
 			height: auto;
 			float: left;
 			overflow: hidden;
 		}
-		.menu:first-child{
-			padding-left: 50px;
-		}
-		.menu h2{
-			display: inline-block;
-		}
 		.link{
-			position: relative;
-			margin-left: 5px;
-			top: 3px;
+			display: block;
 			padding: 10px 20px;
 			border-radius: 5px 5px 0 0;
 			color: hsl(200, 100%, 40%);
 			font-size: 24px;
 			background: hsla(0, 0%, 100%, 0.2);
-			text-decoration: none;
-			cursor: pointer;
 			-webkit-transition: all 0.5s ease-in-out;
 			-moz-transition: all 0.5s ease-in-out;
 			-o-transition: all 0.5s ease-in-out;
 			transition: all 0.5s ease-in-out;
 		}
+		.menu:not(:last-child) .link{
+			border-right: 1px solid hsl(0, 0%, 75%);
+		}
+		.link > a{
+			text-decoration: none;
+			cursor: pointer;
+		}
 		.link:hover{
-			top: 0;
+			margin-top: 17px;
 			background: hsla(0, 0%, 100%, 0.5);
 		}
 		.box{
 			width: 100%;
-			/*display: none;*/
+			display: none;
 			height: auto;
 			text-align: left;
-			margin-top: 68px;
+			margin-top: 58px;
 			padding: 1em;
 			padding-top: 10px;
 			width: 100%;
 			color: #fff;
-			position: absolute;
-			top: 50px;
-			left: 0;
 			box-sizing: border-box;
 			background: hsl(200, 100%, 40%);
 			-webkit-animation-duration: 0.5s;
 			-moz-animation-duration: 0.5s;
 			-o-animation-duration: 0.5s;
 			animation-duration: 0.5s;
+			position: absolute;
+			top: 50px;
+			left: 0;
 		}
 		.box img{
 			width: 20%;
@@ -83,33 +87,37 @@
 	<nav>
 		<h3>Pokemon Avatar List</h3>
 		<div id="dragonair" class="menu">
-			<h2><a class="link" href="#dragonair">Dragonair</a></h2>
+			<h2 class="link"><a href="#dragonair">Dragonair</a></h2>
 			<div class="box">
 				<img class="avatar" src="https://dl.dropboxusercontent.com/u/50502234/dragonair.png" alt="dragonair">
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 			</div>
 		</div>
 		<div id="rticuno" class="menu">
-			<h2><a class="link" href="#articuno">Articuno</a></h2>
+			<h2 class="link"><a href="#articuno">Articuno</a></h2>
 			<div class="box">
 				<img class="avatar" src="https://dl.dropboxusercontent.com/u/50502234/articuno.png" alt="articuno">
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 			</div>
 		</div>
 		<div id="suicune" class="menu">
-			<h2><a class="link" href="suicune">Suicune</a></h2>
+			<h2 class="link"><a href="suicune">Suicune</a></h2>
 			<div class="box">
 				<img class="avatar" src="https://dl.dropboxusercontent.com/u/50502234/suicune.png" alt="suicune">
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 			</div>
 		</div>
 		<div id="arcanine" class="menu">
-			<h2><a class="link" href="#arcanine">Arcanine</a></h2>
+			<h2 class="link"><a href="#arcanine">Arcanine</a></h2>
 			<div class="box">
 				<img class="avatar" src="https://dl.dropboxusercontent.com/u/50502234/arcanine.png" alt="arcanine">
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 			</div>
 		</div>
 	</nav>
+	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+	<script>
+
+	</script>
 </body>
 </html>
