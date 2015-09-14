@@ -51,6 +51,7 @@
 			height: 500px;
 			clear: both;
 			overflow: auto;
+			scroll
 			margin-top: 100px;
 		}
 	</style>
@@ -92,10 +93,12 @@
 				$(this).addClass('active');
 				e.preventDefault();
 
-				var $target=$($(this).attr('href'));
+				var $target=$(this.hash);
+				console.log($target.offset().top-120)
 				$root.stop().animate({
-					'scrollTop': $target.offset().top
+					'scrollTop': $target.offset().top-120
 				}, 900, 'swing');
+				return false;
 			});
 		});
 	</script>
