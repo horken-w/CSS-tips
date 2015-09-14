@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		html, body{
+			margin: 0; padding: 0;
+		}
+		.list{
+			position: relative;
+			list-style: none;
+			width: 60%;
+			margin: 20px auto; padding: 0;
+			margin-left: 5px;
+		}
+		.btn{
+			display: block;
+			margin-left: 10px;
+			float: left;
+			padding: 15px;
+			border-radius: 10px;
+			color: hsl(200, 100%, 40%);
+			background: -webkit-linear-gradient(top, hsla(220, 60%, 80%, 0), hsla(220, 60%, 80%, 1));
+			background: linear-gradient(to bottom, hsla(220, 60%, 80%, 0), hsla(220, 60%, 80%, 1));
+			box-shadow: 3px 3px 10px hsl(0, 0%, 42%);
+		}
+		.btn > a{
+			color: hsl(25, 72%, 45%);
+			text-decoration: none;
+		}
+		.btn > a:hover,
+		.btn > a.active{
+			color: hsl(15, 65%, 72%);
+			border-bottom: 2px double hsl(15, 65%, 48%);
+		}
+		.list:last-child{
+			position: relative;
+			border: 10px solid hsl(200, 100%, 40%);
+			margin-top: 32px;
+			height: 300px;
+			overflow: hidden;
+
+		}
+		.content{
+			color: hsl(0, 0%, 32%);
+			opacity: 0;
+			display: none;
+			position: absolute;
+			box-sizing: border-box;
+			text-align: left;
+			padding: 1em;
+			padding-top: 10px;
+			width: 100%;
+		}
+		.clear{
+			clear: both;;
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<ul class="list">
+			<li><h2 class="btn"><a class="item active" href="jacascript:;">item1</a></h2></li>
+			<li><h2 class="btn"><a class="item" href="jacascript:;">item2</a></h2></li>
+			<li><h2 class="btn"><a class="item" href="jacascript:;">item3</a></h2></li>
+		</ul>
+		<p class="clear"></p>
+		<ul class="list">
+			<li class="content">
+				<p>担任保障创意比较主要简直今日国产还可以专辑风，随意中有像素最新就能显示习，走进反馈要求不起你有不良优质不去剧情网吧不，不想压缩大声注册妇女说法谢谢开，不代表学历你就考虑研发客户措施本站循环将其集中将军其，对外进去即将负责商务坚持重点外面方向似乎报，觉得物品用户屏幕高考基金怎，排名我要很少动作社会至少自然跟我特色方案要在消，于是对待排名维修大盘不错正在保证原料觉得朋友大多数。</p>
+			</li>
+			<li class="content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae cum excepturi, blanditiis molestiae debitis, laborum illo. Rerum, voluptate. Rem nam corporis adipisci, facilis ullam in!</p>
+			</li>
+			<li class="content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti mollitia saepe nisi. At, assumenda porro.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, vitae.</p>
+			</li>
+		</ul>
+	</nav>
+	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+	<script>
+		$(function(){
+			var animTime=1500, ctindex;
+			$('.content:first').show().animate({'opacity': 1}, 1500);
+			$('.list').on('click', '.item', function(){
+				$('a.active').removeClass('active');
+				$(this).addClass('active');
+				ctindex=$(this).index('a')+1;
+				console.log(ctindex);
+				$('.content').animate({
+					'marginTop': -300,
+					'opacity': 0
+				},1500,function(){
+					$('.content').css({'marginTop': 0})
+				});
+				$('.content:nth-child('+ctindex+')').show()
+				.animate({'opacity': 1, 'marginTop': 0}, 1500);
+
+				console.log('1')				
+			})
+		})	
+	</script>
+</body>
+</html>
