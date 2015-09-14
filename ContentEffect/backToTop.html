@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>BackToTop</title>
+	<style>
+		html, body{
+			margin: 0 auto; padding: 0;
+			width: 60%;
+			font-family: georgia, tahoma, sans-serif;
+		}
+		a{
+			text-decoration: none;
+			color: hsl(260, 48%, 72%);
+		}
+		a:hover{
+			color: hsl(260, 60%, 48%);
+		}
+		#list{
+			list-style: none;
+		}
+		.btn{
+			float: left;
+			margin-left: 10px;
+			padding: 15px;
+			border-radius: 10px;
+			color: hsl(200, 100%, 40%);
+			background: -webkit-linear-gradient(top, hsla(220, 60%, 80%, 0), hsla(220, 60%, 80%, 1));
+			background: linear-gradient(to bottom, hsla(220, 60%, 80%, 0), hsla(220, 60%, 80%, 1));
+			box-shadow: 3px 3px 10px hsl(0, 0%, 42%);
+		}
+		.btn > a{
+			color: hsl(25, 72%, 45%);
+			text-decoration: none;
+		}
+		.btn > a:hover,
+		.btn > a.active{
+			color: hsl(15, 65%, 72%);
+			border-bottom: 2px double hsl(15, 65%, 48%);
+		}
+		h2{
+			color: hsl(180, 100%, 40%);
+		}
+		p:first-letter{
+			font-size: 200%;
+			color: hsl(0, 0%, 75%);
+		}
+		article{
+			position: relative;
+			width: 100%;
+			height: 500px;
+			clear: both;
+			overflow: auto;
+			margin-top: 100px;
+		}
+		.backtop {
+			position: fixed;
+			bottom: 6em;
+			right: 42em;
+			text-decoration: none;
+			color: hsl(0, 0%, 0%);
+			background-color: hsla(0, 0%, 95%, 0.9);
+			font-size: 12px;
+			padding: 1em;
+			display: none;
+			opacity: 0.6;
+		}
+		.backtop:hover {	
+			background-color: hsl(0, 0%, 62%);
+			opacity: 1;
+		}	
+	</style>
+</head>
+<body>
+	<nav>
+		<ul id="list">
+			<li><h2 class="btn"><a href="#item1">item1</a></h2></li>
+			<li><h2 class="btn"><a href="#item2">item2</a></h2></li>
+			<li><h2 class="btn"><a href="#item3">item3</a></h2></li>
+		</ul>
+	</nav>
+	<p class="clear"></p>
+	<article id="top">
+		<section id="item1">
+			<h2>兴奋某些欧洲难道大门，一体同。</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci veniam laudantium est sapiente eius, facere aliquam quis excepturi sequi quaerat aperiam, distinctio iure, hic fuga doloremque! Facere, iure? Velit, beatae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt magni, eaque, quod voluptatem atque facilis minus iure neque veniam recusandae esse eum. Sapiente iste voluptatum eaque nihil tenetur architecto? Tempora voluptatibus delectus ab neque, alias officiis ad sunt deserunt! Dolorum odio saepe, obcaecati corporis quisquam! Nostrum non minus modi sint!</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque cupiditate nulla molestiae magnam quis, alias, maiores excepturi pariatur, hic sint quas soluta laudantium officiis earum neque. Eum totam corporis laborum dolorum dolore eligendi perspiciatis vero. Deserunt earum totam cumque a praesentium ipsa repellendus eum doloremque, labore, laboriosam, eos eius tenetur dolorem impedit distinctio adipisci suscipit porro ut expedita repellat commodi! At beatae, aliquam saepe est!</p>
+		</section>
+		<section id="item2">
+			<h2>裡面方便登記同步難</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci veniam laudantium est sapiente eius, facere aliquam quis excepturi sequi quaerat aperiam, distinctio iure, hic fuga doloremque! Facere, iure? Velit, beatae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt magni, eaque, quod voluptatem atque facilis minus iure neque veniam recusandae esse eum. Sapiente iste voluptatum eaque nihil tenetur architecto? Tempora voluptatibus delectus ab neque, alias officiis ad sunt deserunt! Dolorum odio saepe, obcaecati corporis quisquam! Nostrum non minus modi sint!</p>
+		</section>
+		<section id="item3">
+			<h2>始終球員奇蹟訪問則是，。</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci veniam laudantium est sapiente eius, facere aliquam quis excepturi sequi quaerat aperiam, distinctio iure, hic fuga doloremque! Facere, iure? Velit, beatae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt magni, eaque, quod voluptatem atque facilis minus iure neque veniam recusandae esse eum. Sapiente iste voluptatum eaque nihil tenetur architecto? Tempora voluptatibus delectus ab neque, alias officiis ad sunt deserunt! Dolorum odio saepe, obcaecati corporis quisquam! Nostrum non minus modi sint!</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci veniam laudantium est sapiente eius, facere aliquam quis excepturi sequi quaerat aperiam, distinctio iure, hic fuga doloremque! Facere, iure? Velit, beatae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt magni, eaque, quod voluptatem atque facilis minus iure neque veniam recusandae esse eum. Sapiente iste voluptatum eaque nihil tenetur architecto? Tempora voluptatibus delectus ab neque, alias officiis ad sunt deserunt! Dolorum odio saepe, obcaecati corporis quisquam! Nostrum non minus modi sint!</p>
+		</section>
+	</article>
+	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+	<script>
+		var offset= 50,
+			durinTime= 550,
+			$root=$('#top');
+		$root.on('scroll', function(){
+			if($(this).scrollTop()> offset)	$('<a href="#" class="backtop">Back to Top</a>').appendTo('#top').fadeIn(durinTime);
+			else $('.backtop').fadeOut(durinTime);
+		})
+		$('#top').on('click', '.backtop', function(e){
+			e.preventDefault();
+	        $root.animate({scrollTop: 0}, durinTime);
+	        return false;
+		})
+	</script>
+</body>
+</html>
