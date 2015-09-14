@@ -18,13 +18,11 @@
 			color: hsl(260, 60%, 48%);
 		}
 		#list{
-			width: 100%;
 			list-style: none;
 		}
 		.btn{
-			display: block;
-			margin-left: 10px;
 			float: left;
+			margin-left: 10px;
 			padding: 15px;
 			border-radius: 10px;
 			color: hsl(200, 100%, 40%);
@@ -48,9 +46,13 @@
 			font-size: 200%;
 			color: hsl(0, 0%, 75%);
 		}
-		.clear{
+		article{
+			width: 100%;
+			height: 500px;
+			position: relative;
 			clear: both;
-			height: 0;
+			overflow: auto;
+			margin-top: 100px;
 		}
 	</style>
 </head>
@@ -63,29 +65,29 @@
 		</ul>
 	</nav>
 	<p class="clear"></p>
-	<article>
+	<article id="top">
 		<section id="item1">
 			<h2>兴奋某些欧洲难道大门，一体同。</h2>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci veniam laudantium est sapiente eius, facere aliquam quis excepturi sequi quaerat aperiam, distinctio iure, hic fuga doloremque! Facere, iure? Velit, beatae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt magni, eaque, quod voluptatem atque facilis minus iure neque veniam recusandae esse eum. Sapiente iste voluptatum eaque nihil tenetur architecto? Tempora voluptatibus delectus ab neque, alias officiis ad sunt deserunt! Dolorum odio saepe, obcaecati corporis quisquam! Nostrum non minus modi sint!</p>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque cupiditate nulla molestiae magnam quis, alias, maiores excepturi pariatur, hic sint quas soluta laudantium officiis earum neque. Eum totam corporis laborum dolorum dolore eligendi perspiciatis vero. Deserunt earum totam cumque a praesentium ipsa repellendus eum doloremque, labore, laboriosam, eos eius tenetur dolorem impedit distinctio adipisci suscipit porro ut expedita repellat commodi! At beatae, aliquam saepe est!</p>
-			<div><a href="#list">Top</a></div>
+			<div><a href="#item1">Top</a></div>
 		</section>
 		<section id="item2">
 			<h2>裡面方便登記同步難</h2>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci veniam laudantium est sapiente eius, facere aliquam quis excepturi sequi quaerat aperiam, distinctio iure, hic fuga doloremque! Facere, iure? Velit, beatae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt magni, eaque, quod voluptatem atque facilis minus iure neque veniam recusandae esse eum. Sapiente iste voluptatum eaque nihil tenetur architecto? Tempora voluptatibus delectus ab neque, alias officiis ad sunt deserunt! Dolorum odio saepe, obcaecati corporis quisquam! Nostrum non minus modi sint!</p>
-			<div><a href="#list">Top</a></div>
+			<div><a href="#item1">Top</a></div>
 		</section>
 		<section id="item3">
 			<h2>始終球員奇蹟訪問則是，。</h2>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci veniam laudantium est sapiente eius, facere aliquam quis excepturi sequi quaerat aperiam, distinctio iure, hic fuga doloremque! Facere, iure? Velit, beatae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt magni, eaque, quod voluptatem atque facilis minus iure neque veniam recusandae esse eum. Sapiente iste voluptatum eaque nihil tenetur architecto? Tempora voluptatibus delectus ab neque, alias officiis ad sunt deserunt! Dolorum odio saepe, obcaecati corporis quisquam! Nostrum non minus modi sint!</p>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci veniam laudantium est sapiente eius, facere aliquam quis excepturi sequi quaerat aperiam, distinctio iure, hic fuga doloremque! Facere, iure? Velit, beatae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt magni, eaque, quod voluptatem atque facilis minus iure neque veniam recusandae esse eum. Sapiente iste voluptatum eaque nihil tenetur architecto? Tempora voluptatibus delectus ab neque, alias officiis ad sunt deserunt! Dolorum odio saepe, obcaecati corporis quisquam! Nostrum non minus modi sint!</p>
-			<div><a href="#list">Top</a></div>
+			<div><a href="#item1">Top</a></div>
 		</section>
 	</article>
 	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
 	<script>
 		$(function(){
-			var $root=$('html, body');
+			var $root=$('#top');
 			$('body').on('click', 'a[href^="#"]', function(e){
 				$('.btn > a').removeClass('active')
 				$(this).addClass('active');
