@@ -1,0 +1,107 @@
+.ticket{
+	width: 550px;
+	height: 220px;
+	padding: 0 10px;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+.ticket:before{
+	content: '';
+	position: absolute;
+	top: 0;bottom: 0;
+	left: 10px; right: 10px;
+	z-index: -1;
+}
+.ticket:after{
+	content: '';
+	position: absolute;
+	top: 14px; bottom: 14px;
+	left: 14px; right: 14px;
+	box-shadow: 0 0 20px 1px hsla(0, 0%, 0%, 0.5);
+	z-index: -3;
+}
+.main{
+	float: left;
+	padding: 0 10px;
+	width: 55%;
+	border-right: 2px dashed hsla(0, 0%, 100%, 0.3);
+	text-align: left;
+}
+.main p{color: hsl(0, 0%, 100%);}
+h2{color: hsl(0, 0%, 100%);}
+.main span{
+	font-size: 3em;
+	margin-right: 5px;
+	color: #fff;
+}
+.main .sign{
+	font-size: 2em;
+}
+.main sub{
+	position: relative;
+	top: -5px;
+	color: hsla(0, 0%, 95%, 0.8);
+}
+.ticket i{
+	position: absolute;
+	left: 10%; top: 45px;
+	height: 350px; width: 580px;
+	background: hsla(0, 0%, 100%, 0.15);
+	-webkit-transform: rotate(-30deg);
+	-ms-transform: rotate(-30deg);
+	-o-transform: rotate(-30deg);
+	transform: rotate(-30deg);
+}
+.copy{
+	display: inline-block;
+	padding: 15px 15px;
+	line-height: 1em;
+	width: 35%;
+	vertical-align: text-bottom;
+	font-size: 1.5em;
+	color: hsl(0, 0%, 100%);
+}
+.copy span{
+	font-size: 0.8em;
+}
+.copy p{
+	font-size: 1em;
+	margin-top: 8px;
+}
+
+.draw{
+	background: hsl(180, 70%, 45%);
+	background: radial-gradient(hsla(0, 0%, 0%, 0.0) 0, hsla(0, 0%, 0%, 0.0) 5px, hsl(180, 70%, 45%) 10px);
+	-webkit-background-size: 15px 15px;
+	background-size: 15px 15px;
+	background-position: 8px 3px;
+}
+.draw:before{
+	background-color: hsl(180, 70%, 45%);
+}
+.coupon{
+	background: hsl(160, 60%, 80%);
+}
+.coupon .main{
+	border-right: none;
+	width: 55%;
+	float: left;
+}
+.tips{
+	width: 30%;
+	height: 10%;
+	color: #fff;
+	background: hsl(20, 20%, 50%);
+	position: absolute;
+	top: 15px; right: -20px;
+	text-align: center;
+	transform: rotate(25deg);
+}
+.small{
+	position: absolute;
+	color: #fff;
+	font-size: 1em;
+	bottom: 0;
+	font-weight: 900;
+}
