@@ -4,7 +4,6 @@ body, html{
 .wrapper{
 	width: 70%;
 	margin: 0 auto;
-	overflow: hidden;
 }
 header h1{
 	text-align: center;
@@ -18,10 +17,9 @@ header p{
 } 
 .cutout-top{
 	position: relative;
-	width: 500px;
+	width: 550px;
 	max-height: 500px;
 	margin: 20px auto;
-	padding: 20px;
 	background: #eee;
 	background: 
 	-webkit-linear-gradient(45deg, transparent 20px, hsl(0, 0%, 80%) 20px) bottom left,
@@ -88,13 +86,17 @@ header p{
 	-o-transform: rotate(135deg);
 	transform: rotate(135deg);
 }
+.cutout-btn{
+	margin: 0; padding: 0;
+	overflow: hidden;
+}
 .gallery{
 	width: 2100px;
 	height: 350px;
 	margin-bottom: 80px;
 }
 .gallery img{
-	margin-top: 80px;
+	margin-top: 60px;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
@@ -122,7 +124,7 @@ header p{
     margin-left: 0px;
  }
  100% {
-    margin-left: -1980px;
+    margin-left: -2015px;
  }
 
 }
@@ -132,7 +134,7 @@ header p{
    margin-left: 0px;
  }
  100% {
-   margin-left: -1980px;
+   margin-left: -2015px;
  }
 
 }
@@ -142,7 +144,7 @@ header p{
    margin-left: 0px;
  }
  100% {
-   margin-left: -1980px;
+   margin-left: -2015px;
  }
 
 }
@@ -152,7 +154,7 @@ header p{
    margin-left: 0px;
  }
  100% {
-   margin-left: -1980px;
+   margin-left: -2015px;
  }
 
 }
@@ -162,7 +164,7 @@ header p{
    margin-left: 0px;
  }
  100% {
-   margin-left: -1980px;
+   margin-left: -2015px;
  }
 
 }
