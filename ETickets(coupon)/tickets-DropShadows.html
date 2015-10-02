@@ -10,7 +10,8 @@
 			z-index: 1;
 			overflow: hidden;
 			list-style: none;
-			margin: 0; padding: 0;
+			margin: 0; padding: 5px;
+			background: #999;
 		}
 		ul.box li{
 			position: relative;
@@ -20,11 +21,42 @@
 			padding: 0;
 			border: 1px solid hsl(0, 0%, 75%);
 			margin: 0 30px 30px 0;
+			background: #fff;
 			-webkit-box-shadow: inset 0 1px 4px hsla(0, 0%, 0%, 0.27), 0 0 40px hsla(0, 0%, 0%, 0.06);
 			-moz-box-shadow: inset 0 1px 4px hsla(0, 0%, 0%, 0.27), 0 0 40px hsla(0, 0%, 0%, 0.06);
 			box-shadow: inset 0 1px 4px hsla(0, 0%, 0%, 0.27), 0 0 40px hsla(0, 0%, 0%, 0.06);
 		}
+		ul.box li:before,
+		ul.box li:after{
+			content: '';
+			z-index: -1;
+			position: absolute;
+			left: 10px;
+			bottom: 10px;
+			width: 70%;
+			height: 55%;
+			max-width: 300px;
+			max-height: 100px;
+			-webkit-box-shadow: 0 8px 16px hsla(0, 0%, 0%, 0.3);
+			-moz-box-shadow: 0 8px 16px hsla(0, 0%, 0%, 0.3);
+			box-shadow: 0 8px 16px hsla(0, 0%, 0%, 0.3);
+			-webkit-transform: skew(-15deg) rotate(-6deg);
+			-moz-transform: skew(-15deg) rotate(-6deg);
+			-ms-transform: skew(-15deg) rotate(-6deg);
+			-o-transform: skew(-15deg) rotate(-6deg);
+			transform: skew(-15deg) rotate(-6deg);
+		}
+		ul.box li:after{
+			left: auto;
+			right: 10px;
+			-webkit-transform: skew(15deg) rotate(6deg);
+			-moz-transform: skew(15deg) rotate(6deg);
+			-ms-transform: skew(15deg) rotate(6deg);
+			-o-transform: skew(15deg) rotate(6deg);
+			transform: skew(15deg) rotate(6deg);
+		}
 		.box-sd{
+			margin: 10px;
 			width: 250px;
 			height: 140px;
 			-webkit-border-radius: 10px;
