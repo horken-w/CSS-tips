@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Bubble Effect Gallery</title>
+	<style>
+		html, body{
+			background: hsl(0, 0%, 80%);
+			text-align: center;
+			will-change: all;
+		}
+		.box{
+			width: 25%;
+			height: 25%;
+			position: relative;
+			display: inline-block;
+			margin: 40px;
+			border-radius: 50%;
+			border: 2px dotted hsl(60, 62%, 85%);
+			box-shadow: inset 1px 1px 10px 5px hsla(0, 0%, 0%, 0.4);
+			animation: rr 5s .4s linear infinite alternate;
+		}
+		.box:before, .box:after{
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0; left: 0;
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+			border: 1px groove hsl(160, 52%, 60%);
+		}
+		.box img{
+			width: 100%;
+			height: 100%;
+			border-radius:50%;
+		}
+		@ketframes {
+
+		}
+		@-webkit-ketframes {
+
+		}
+		@ketframes {
+
+		}
+		@-webkit-ketframes {
+
+		}
+	</style>
+</head>
+<body>
+	<div class="box"><img src="https://dl.dropboxusercontent.com/u/50502234/arcanine.png" width="350" height="250" alt=""></div>
+	<div class="box"><img src="https://dl.dropboxusercontent.com/u/50502234/articuno.png" width="350" height="250" alt=""></div>
+	<div class="box"><img src="https://dl.dropboxusercontent.com/u/50502234/suicune.png" width="350" height="250" alt=""></div>
+	<div class="box"><img src="https://dl.dropboxusercontent.com/u/50502234/dragonair.png" width="350" height="250" alt=""></div>
+	<div class="box"><img src="https://dl.dropboxusercontent.com/u/50502234/arcanine.png" width="350" height="250" alt=""></div>
+	<div class="box"><img src="https://dl.dropboxusercontent.com/u/50502234/articuno.png" width="350" height="250" alt=""></div>
+	<div class="box"><img src="https://dl.dropboxusercontent.com/u/50502234/suicune.png" width="350" height="250" alt=""></div>
+	<div class="box"><img src="https://dl.dropboxusercontent.com/u/50502234/dragonair.png" width="350" height="250" alt=""></div>
+</body>
+</html>
