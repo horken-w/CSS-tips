@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>arrow</title>
+    <style>
+    body, html {
+        background: hsl(0, 0%, 95%);
+    }
+    .arrowr {
+        width: 10%;
+        height: 100%;
+        margin-top: 20%;
+        float: right;
+    }
+    .arrowr .arrow-l {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-top: 60px solid transparent;
+        border-left: 35px solid hsl(0, 0%, 100%);
+        border-bottom: 60px solid transparent;
+        margin-left: 25px;
+    }
+    .arrowr .arrow-l:before {
+        content: "";
+        position: absolute;
+        border-top: 60px solid transparent;
+        border-left: 35px solid hsl(0, 0%, 95%);
+        border-bottom: 60px solid transparent;
+        top: -60px;
+        right: 8px;
+    }
+    .arrowr .arrow-s {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-top: 40px solid transparent;
+        border-left: 25px solid hsl(0, 0%, 100%);
+        border-bottom: 40px solid transparent;
+        top: -100px;
+        left: 15px;
+    }
+    .arrowr .arrow-s:before {
+        content: "";
+        position: absolute;
+        border-top: 40px solid transparent;
+        border-left: 25px solid hsl(0, 0%, 95%);
+        border-bottom: 40px solid transparent;
+        top: -40px;
+        left: -30px;
+    }
+    .arrowh {
+        width: 10%;
+        height: 100%;
+        float: right;
+        margin-top: 20%;
+        margin-right: -10%;
+        opacity: 0;
+    }
+    .arrowh:hover{
+        opacity: 1;    	
+    }
+    .arrowh .arrow-l {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-top: 60px solid transparent;
+        border-left: 35px solid hsl(62, 100%, 60%);
+        border-bottom: 60px solid transparent;
+        margin-left: 25px;
+    }
+    .arrowh .arrow-l:before {
+        content: "";
+        position: absolute;
+        border-top: 60px solid transparent;
+        border-left: 35px solid hsl(0, 0%, 95%);
+        border-bottom: 60px solid transparent;
+        top: -60px;
+        right: 8px;
+    }
+    .arrowh .arrow-s {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-top: 40px solid transparent;
+        border-left: 25px solid hsl(62, 100%, 60%);
+        border-bottom: 40px solid transparent;
+        top: -100px;
+        left: 15px;
+    }
+    .arrowh .arrow-s:before {
+        content: "";
+        position: absolute;
+        border-top: 40px solid transparent;
+        border-left: 25px solid hsl(0, 0%, 95%);
+        border-bottom: 40px solid transparent;
+        top: -40px;
+        left: -30px;
+    }
+    .arrowl {
+        width: 10%;
+        height: 100%;
+        margin-top: 20%;
+        float: left;
+    }
+    .arrowl .arrow-l {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-top: 60px solid transparent;
+        border-right: 35px solid hsl(0, 0%, 100%);
+        border-bottom: 60px solid transparent;
+        left: 30px;
+    }
+    .arrowl .arrow-l:before {
+        content: "";
+        position: absolute;
+        border-top: 60px solid transparent;
+        border-right: 35px solid hsl(0, 0%, 95%);
+        border-bottom: 60px solid transparent;
+        top: -60px;
+        left: 8px;
+    }
+    .arrowl .arrow-s {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-top: 40px solid transparent;
+        border-right: 25px solid hsl(0, 0%, 100%);
+        border-bottom: 40px solid transparent;
+        top: -100px;
+        left: 50px;
+    }
+    .arrowl .arrow-s:before {
+        content: "";
+        position: absolute;
+        border-top: 40px solid transparent;
+        border-right: 25px solid hsl(0, 0%, 95%);
+        border-bottom: 40px solid transparent;
+        top: -40px;
+        right: -30px;
+    }
+    .arrowlh {
+        width: 10%;
+        height: 100%;
+        float: left;
+        margin-top: 20%;
+        margin-left: -10%;
+        opacity: 0;
+    }
+    .arrowlh:hover{
+        opacity: 1;    	
+    }
+    .arrowlh .arrow-l {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-top: 60px solid transparent;
+        border-right: 35px solid hsl(62, 100%, 60%);
+        border-bottom: 60px solid transparent;
+        margin-left: 25px;
+    }
+    .arrowlh .arrow-l:before {
+        content: "";
+        position: absolute;
+        border-top: 60px solid transparent;
+        border-right: 35px solid hsl(0, 0%, 95%);
+        border-bottom: 60px solid transparent;
+        top: -60px;
+        left: 8px;
+    }
+    .arrowlh .arrow-s {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-top: 40px solid transparent;
+        border-right: 25px solid hsl(62, 100%, 60%);
+        border-bottom: 40px solid transparent;
+        top: -100px;
+        left: 45px;
+    }
+    .arrowlh .arrow-s:before {
+        content: "";
+        position: absolute;
+        border-top: 40px solid transparent;
+        border-right: 25px solid hsl(0, 0%, 95%);
+        border-bottom: 40px solid transparent;
+        top: -40px;
+        right: -30px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="arrowr">
+        <a href="#">
+            <div class="arrow-l"></div>
+            <div class="arrow-s"></div>
+        </a>
+    </div>
+    <div class="arrowh">
+        <a href="#">
+            <div class="arrow-l"></div>
+            <div class="arrow-s"></div>
+        </a>
+    </div>
+    <div class="arrowl">
+        <a href="#">
+            <div class="arrow-l"></div>
+            <div class="arrow-s"></div>
+        </a>
+    </div>
+    <div class="arrowlh">
+        <a href="#">
+            <div class="arrow-l"></div>
+            <div class="arrow-s"></div>
+        </a>
+    </div>
+    <script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+    <script>
+    // $(document).on({
+    //     mouseenter: function(){
+    //         $('.arrow-l').css('borderLeftColor', 'hsl(62, 100%, 60%)');
+    //         $('.arrow-s').css('borderLeftColor', 'hsl(62, 100%, 60%)');
+    //     },
+    //     mouseleave: function(){
+    //         $('.arrow-l').css('borderLeftColor', 'hsl(0, 0%, 100%)');
+    //         $('.arrow-s').css('borderLeftColor', 'hsl(0, 0%, 100%)');
+    //     }
+    // },'.arrowr')
+    </script>
+</body>
+
+</html>
