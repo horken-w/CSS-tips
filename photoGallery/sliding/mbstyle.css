@@ -1,0 +1,69 @@
+@import url(http://fonts.googleapis.com/css?family=Josefin+Slab:100);
+html, body{
+	height: 100%;
+}
+body{
+	margin: 0; padding: 0;
+	overflow: hidden;
+}
+.animate{
+	transition: transform 0.3s ease-out;
+}
+.ms-touch.slider{
+	overflow-x: scroll;
+	overflow-y: hidden;
+
+	-ms-overflow-style: none;
+	-ms-scroll-chaining: none;
+	-ms-scroll-snap-type: mandatory;
+	-ms-scroll-snap-points-x: snapInterval(0%, 100%);
+}
+.wrap{
+	width: 280px;
+	height: 599px;
+	position: absolute;
+	top: 20%; left: 40%;
+}
+.slider{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.holder{
+	width: 500%;
+	max-height: 599px;
+	height: 100%;
+	overflow-y: hidden;
+}
+.slide-wrap{
+	width: 20%;
+	height: 100%;
+	float: left;
+	position: relative;
+	overflow: hidden;
+}
+.temp{
+	position: absolute;
+	color: white;
+	font-size: 5.6em;
+    bottom: 15px;
+    left: 15px;
+    font-family: 'Josefin Slab', serif;
+    font-weight: 900;
+    z-index: 1;
+}
+.slide img {
+  position: absolute;
+  z-index: 0;
+  transform: translatex(-100px);
+}
+.slide:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(transparent, black);
+}
