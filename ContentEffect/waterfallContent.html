@@ -15,7 +15,6 @@
 			border: 1px solid #ddd;
 			padding: 14px 14px 10px;
 			position: absolute;
-			opacity: 0;
 		}
 		.flow img{
 			width: 100%;
@@ -29,8 +28,14 @@
 		.brick{
 			margin: 5px 0 10px;
 		}
+		.pending{
+			opacity: 0;
+			-webkit-transform: translateY(50px);
+			-moz-transform: translateY(50px);
+			-o-transform: translateY(50px);
+			transform: translateY(50px);
+		}
 		.ready{
-			opacity: 1;
 			-webkit-transition: opacity 1s ease-in-out, box-shadow 300ms ease-in-out, left 700ms ease-in-out, top 700ms ease-in-out, -webkit-transform 700ms ease-in-out;
 		    -moz-transition: opacity 1s ease-in-out, box-shadow 300ms ease-in-out, left 700ms ease-in-out, top 700ms ease-in-out, -moz-transform 700ms ease-in-out;
 		    -o-transition: opacity 1s ease-in-out, box-shadow 300ms ease-in-out, left 700ms ease-in-out, top 700ms ease-in-out, -o-transform 700ms ease-in-out;
@@ -40,76 +45,84 @@
 </head>
 <body>
 	<section id="container">
-		<div class="flow">
+		<div class="flow pending">
 			<p><img src="https://placehold.it/310x330/eee?text=zombie" alt="1st"></p>
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, obcaecati.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x220/eee?text=plant" alt="2nd"></p>
 		 	<span class="brick">Lorem ipsum dolor sit amet.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x350/eee?text=sunflower" alt="3th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x310/eee?text=shroom" alt="4th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi repellat in eius.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x150/eee?text=gravebuster" alt="5th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur adipisicing.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x260/eee?text=flagzombie" alt="6th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x135/eee?text=yetizombie" alt="7th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad quidem sed illo voluptates!</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p></p><img src="https://placehold.it/310x190/eee?text=newspaperzombie" alt="8th">
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, voluptates.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x220/eee?text=dancingzombie" alt="9th"></p>
 			<span class="brick">Lorem ipsum.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x110/eee?text=zomboni" alt="10th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x180/eee?text=targetzombie" alt="11th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam neque perspiciatis corporis.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x340/eee?text=cherrybomb" alt="12th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur adipisicing.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x270/eee?text=tanglekelp" alt="13th"></p>
 			<span class="brick">Lorem ipsum dolor sit.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x230/eee?text=lilypad" alt="14th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima quod ex nulla.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x120/eee?text=cactus" alt="15th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x330/eee?text=coffeebean" alt="16th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod doloremque nesciunt consequuntur facere dolore reiciendis.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x120/eee?text=marigold" alt="17th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
 		</div>
-		<div class="flow">
+		<div class="flow pending">
 		 	<p><img src="https://placehold.it/310x180/eee?text=cattail" alt="18th"></p>
+			<span class="brick">Lorem ipsum dolor sit amet, consectetur.</span>
+		</div>
+		<div class="flow pending">
+		 	<p><img src="https://placehold.it/310x270/eee?text=spikerock" alt="17th"></p>
+			<span class="brick">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+		</div>
+		<div class="flow pending">
+		 	<p><img src="https://placehold.it/310x100/eee?text=iceshroom" alt="18th"></p>
 			<span class="brick">Lorem ipsum dolor sit amet, consectetur.</span>
 		</div>
 	</section>
