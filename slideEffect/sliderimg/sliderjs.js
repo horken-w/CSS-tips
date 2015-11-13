@@ -51,7 +51,8 @@ $.extend(pagesSlider.prototype, {
 		if(this.enableDrag){
 			this.enableDrag=false;
 
-			var delta=event.clientX-this.dragStartX
+			var delta=event.clientX-this.dragStartX;
+			
 		}
 	},
 })
