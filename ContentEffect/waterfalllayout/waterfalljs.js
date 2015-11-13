@@ -1,21 +1,12 @@
 !function(window, document){
-	// ES5 strict mode
-  	"user strict";
+	'user strict';
+	var min_column=3, flowindex=0;
+	var column_width=240, gap_width=15, gap_height=15;
+	var managing = false, loading=false;
+	var columheights, scrollDelay, columnCount;
 
-  	var min_column_count = 3;
-  	var gap_width = 15;
-  	var gap_height= 15;
-  	var column_width= 240;
-  	var cell_padding=28;
+	var wrapper = document.getElementById('container');
 
-  	var columnHeight
-  	var scrollDelay;
-  	var columnCount;
-  	var managing = false, loading=false;
-
-  	var cellsContainer = document.getElementById('container');
-
-  	// Cross-browser compatible event handler.
 	var addEvent = function(element, type, handler) {
 	  if(element.addEventListener) {
 	    addEvent = function(element, type, handler) {
@@ -34,7 +25,7 @@
 	};
 
 	var getColumnCount= function(){
-		return Math.max(min_column_count, Math.floor(document.body.offsetWidth+gap_width)/(column_width+gap_width));
+		return Math.max(min_column, Math.floor((document.body.offsetWidth+gap_width)/(column_width+gap_width)));
 	};
 	var getMinVal=function(arr){
 		return Math.min.apply(Math, arr);
@@ -65,74 +56,80 @@
 		}
 		return key;
 	};
-	var adjustCells=function(flows){
+	var managetiles=function(){
+		managing = true;
+		var flows=wrapper.children;
+		var viewportTop=(document.body.scrollTop || document.documentElement.scrollTop)- wrapper.offsetTop;
+		var viewporBottom= (window.innerHeight || document.documentElement.clientHeight) +viewportTop;
+
+		if(viewporBottom > getMinVal(columheights)) appendtiles(columnCount);
+		managing = false;
+	};
+	var appendtiles=function(count){
+		if(loading) {
+	      return;
+	    }
+	    var fragment = document.createDocumentFragment();
+	    var tiles=[];
+	    for(var i=0; i<count; i++ ){
+	    	tiles.push(wrapper.children[flowindex]);
+	    	flowindex++;
+	    	if(flowindex > wrapper.children.length) return;
+	    }
+	    setTimeout(function() {
+	      loading=false
+	      wrapper.appendChild(fragment);
+	      adjusttiles(tiles);
+	    }, 1000);
+	};
+	var adjusttiles=function(flows){
 		var columnIndex;
     	var columnHeight;
 
     	for(var i=0, l=flows.length; i<l; i++){
-    		columnIndex=getMinkey(columnHeights);
-    		columnHeight=columnHeights[columnIndex];
+    		columnIndex=getMinkey(columheights);
+    		columnHeight=columheights[columnIndex];
 
     		$(flows[i]).css({
     			left: columnIndex*(column_width+gap_width)+'px',
     			top: columnHeight+'px'
     		}).addClass('ready');
-    		columnHeights[columnIndex]=columnHeight + gap_height + flows[i].offsetHeight;
+    		columheights[columnIndex]=columnHeight + gap_height + flows[i].offsetHeight;
+
+    		wrapper.style.height = getMaxVal(columheights) + 'px';
+    		managetiles(flows.length);
     	}
 	}
-	var resetHeights= function(count){
-		columnHeights=[];
+	var resetHeights=function(count){
+		columheights=[];
 		for(var i=0; i<count; i++){
-			columnHeights.push(0);
+			columheights.push(0);
 		}
-		cellsContainer.style.width= (count * (column_width+gap_width)-gap_width)+'px';
+		wrapper.style.width=(count *(column_width+gap_width)-gap_width)+'px';
 	};
-	var appendCells=function(){
-		if(loading) {
-	      return;
-	    }
-	    var fragment = document.createDocumentFragment();
-	    var cells=[];
-	    for(var i=0; i<cellsContainer.children.length; i++ ){
-	    	cells.push(cellsContainer.children[i]);
-	    }
-	    setTimeout(function() {
-	      loading=false;
-	      cellsContainer.appendChild(fragment);
-	      adjustCells(cells);
-	    }, 2000);
-	}
-	var manageCells = function(){
-		managing=true;
+	var reflowtiles=function(){
+		columnCount = getColumnCount();
 
-		var flow=cellsContainer.children;
-		var viewportTop=(document.body.scrollTop || document.documentElement.scrollTop)- cellsContainer.offsetTop;
-		var viewporBottom= (window.innerHeight || document.documentElement.clientHeight) +viewportTop;
-
-		if(viewporBottom > getMinVal(columnHeights)) appendCells(columnCount);
-		managing=false;
 	};
-	var delayedResize= function(){
+
+	var delayedResize=function(){
 		clearTimeout(scrollDelay);
-		scrollDelay=setTimeout(manageCells ,0)
+		scrollDelay=setTimeout(reflowtiles ,500)
 	};
-	var delayedScroll= function(){
-
+	var delayedScroll=function(){
+		clearTimeout(scrollDelay);
+		if(!managing){
+			scrollDelay=setTimeout(managetiles ,500)
+		}
 	};
-
 	var init = function() {
-	    // Add other event listeners.
 	    addEvent(window, 'resize', delayedResize);
 	    addEvent(window, 'scroll', delayedScroll);
 
-	    // Initialize array of column heights and container width.
 	    columnCount = getColumnCount();
 	    resetHeights(columnCount);
 
-	    // Load cells for the first time.
-	    manageCells();
+	    managetiles();
 	  };
-
-  	// Ready to go!
 	addEvent(window, 'load', init);
 }(window, document)
