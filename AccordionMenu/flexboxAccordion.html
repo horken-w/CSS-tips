@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Flexbox accordion</title>
+	<link rel="stylesheet" href="">
+	<style>
+		.actions-list{
+			display: flex;
+			margin: 0 auto; padding: 0;
+		}
+		.actions-list .action-item{
+			flex: 1;
+			transition: all 300ms ease;
+			box-sizing: border-box;
+			overflow: hidden;
+			font-family: helvetica, arial, sans-serif;
+			font-weight: 400;
+			cursor: pointer;
+			background-color: hsl(180, 100%, 50%);
+			background-repeat: no-repeat;
+			background-position: left 10px center;
+			-webkit-background-size: 30px;
+			background-size: 30px;
+			border-left: 1px solid hsla(0, 0%, 0%, 0.2);
+			color: hsl(0, 0%, 0%);
+			padding-left: 3.25em;
+			line-height: 3.25em;
+			height: 3.25em;
+			max-width: 3.13em;
+		}
+		.actions-list .action-item:hover{
+			max-width: 9.38em;
+			background-color: hsl(180, 50%, 50%);
+			padding-right: 10px;
+		}
+		.action-item:first-child{
+			border: none;
+		}
+		.facebook {
+		    background-image: url(http://www.webdeveasy.com/code/assets/images/facebook.png);
+		}
+		.google {
+		    background-image: url(http://www.webdeveasy.com/code/assets/images/google.png);
+		}
+		.linkedin {
+		    background-image: url(http://www.webdeveasy.com/code/assets/images/linkedin.png);
+		}
+		.picasa {
+		    background-image: url(http://www.webdeveasy.com/code/assets/images/picasa.png);
+		}
+		.twitter {
+		    background-image: url(http://www.webdeveasy.com/code/assets/images/twitter.png);
+		}
+		.wikipedia {
+		    background-image: url(http://www.webdeveasy.com/code/assets/images/wikipedia.png);
+		}
+	</style>
+</head>
+<body>
+	<ul class="actions-list">
+		<li class="action-item facebook">Facebook</li>
+		<li class="action-item google">GooglePlus</li>
+		<li class="action-item linkedin">LinkedIn</li>
+		<li class="action-item picasa">Picasa</li>
+		<li class="action-item twitter">Twitter</li>
+		<li class="action-item wikipedia">Wikipedia</li>
+	</ul>
+</body>
+</html>

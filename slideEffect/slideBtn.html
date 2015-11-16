@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Slide button</title>
+	<style>
+		#scrollcontainer{
+			margin: 0 auto;
+			text-align: center;
+			position: relative;
+			width: 907px;
+		}
+		#scrollbar{
+			width: 907px;
+			height: 40px;
+			position: absolute;
+			top: 0; left: 0;
+			background: transparent url('img/scrollbar.png') no-repeat;
+		}
+		#scroller{
+			background: transparent url('img/scroller.png') no-repeat;
+			width: 196px; height: 40px;
+			position: absolute;
+			left: 0; top: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="scrollcontainer">
+		<div id="scrollbar"></div>
+		<div id="scroller"></div>
+	</div>
+<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+<script>
+	$(function(){
+		var myoffset = $('#scroller').offset();
+		var myxpos = parseInt(myoffset.left); 
+		var width = parseInt($('#scrollbar').css("width")) - 196;
+		var action = false;
+		var startpos = 0;
+		var move = 0;
+		var scroller = 0;
+		
+		$('#scroller').mousemove(function(e){
+			move = parseInt(e.pageX-myxpos);
+			$('#scroller').mousedown(function(){	
+				action = true;
+				scroller = parseInt($('#scroller').offset().left);
+				startpos = move - (scroller - myxpos);
+			})
+			if(action)
+			{
+				move = move - startpos;
+				if(move <= 0) move =0;
+				if(move >= width) move = width;
+				if(action)	$('#scroller').css("left", (move)+"px");
+			}
+		})
+		$('*').mouseup(function(){
+				action = false;
+			});			
+	});
+</script>
+</body>
+</html>

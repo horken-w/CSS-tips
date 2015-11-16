@@ -58,7 +58,7 @@ if (navigator.msMaxTouchPoints) {
             var absMove= Math.abs(this.index * this.slideWidth-this.movex);
             
             if(absMove > this.slideWidth / 2 || this.longTouch === false){
-                if(this.movex > this.index*this.slideWidth &&this.index <4) this.index++;
+                if(this.movex > this.index*this.slideWidth &&this.index <this.el.imgSlide.length-1) this.index++;
                 else if(this.movex < this.index*this.slideWidth && this.index> 0) this.index--
             }
             this.el.holder.addClass('animate').css('transform', 'translate3d(-' + this.index*this.slideWidth + 'px,0,0)');

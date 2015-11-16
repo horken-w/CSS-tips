@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Digita Clock</title>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<style>
+		canvas{
+			background: hsl(0, 0%, 90%);
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<img alt="clock" id="myImg">
+</body>
+	<script>
+		var canvas=document.getElementById("canvas");
+		var ctx=canvas.getContext("2d");
+		ctx.strokeStyle="hsl(190, 84%, 80%";
+		ctx.lineWidth=12;
+		ctx.lineCap="round"
+		ctx.shadowBlur=10;
+		ctx.shadowColor="hsl(190, 84%, 90%)";
+
+		function degToRad(deg){
+			var factor=Math.PI/180;
+			return deg*factor;
+		}
+
+		function renderTime(){
+			var now=new Date();
+			var today=now.toDateString();
+			var time=now.toLocaleTimeString();
+			var h=now.getHours();
+			var min=now.getMinutes();
+			var sec=now.getSeconds();
+			var mils=sec+(now.getMilliseconds()/1000);
+
+			gradient=ctx.createRadialGradient(250,250, 5, 250,250, 300);
+			gradient.addColorStop(0, "hsl(190, 84%, 30%)");
+			gradient.addColorStop(1, "hsl(190, 84%, 0%)");
+			ctx.fillStyle=gradient;
+			//ctx.fillStyle="hsl(0,0%, 60%)";
+			ctx.fillRect(0,0 , 500,500)
+
+			ctx.beginPath();
+			ctx.arc(200,230, 180, degToRad(270), degToRad(h*15) -90);
+			ctx.stroke();
+
+			ctx.beginPath();
+			ctx.arc(200,230, 160, degToRad(270), degToRad(min*6) -90);
+			ctx.stroke();
+
+			ctx.beginPath();
+			ctx.arc(200,230, 140, degToRad(270), degToRad(mils*6) -90);
+			ctx.stroke();
+
+			ctx.font="35px Georgia";
+			ctx.fillStyle="hsl(190, 100%, 60%)";
+			ctx.fillText(today, 90, 200);
+
+			ctx.font="30px Georgia";
+			ctx.fillStyle="hsl(190, 100%, 60%)";
+			ctx.fillText(time, 120, 280);
+
+			var dataUrl=canvas.toDataURL();
+			document.getElementById("myImg").src=dataUrl;
+		}
+		setInterval(renderTime, 40);
+	</script>
+</html>
