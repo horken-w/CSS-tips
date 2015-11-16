@@ -66,9 +66,9 @@
 		managing = false;
 	};
 	var appendtiles=function(count){
-		// if(loading) {
-	 //      return;
-	 //    }
+		if(loading) {
+	      return;
+	    }
 	    var fragment = document.createDocumentFragment();
 	    var tiles=[];
 	    for(var i=0; i<count; i++ ){
@@ -107,7 +107,10 @@
 	};
 	var reflowtiles=function(){
 		columnCount = getColumnCount();
-
+		if(columheights.length != columnCount){
+			resetHeights(columnCount);
+			adjusttiles(wrapper.children);
+		}else managetiles();
 	};
 
 	var delayedResize=function(){
