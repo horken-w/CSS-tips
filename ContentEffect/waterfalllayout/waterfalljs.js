@@ -79,7 +79,7 @@
 	      loading=false
 	      wrapper.appendChild(fragment);
 	      adjusttiles(tiles);
-	    }, 1000);
+	    },0);
 	};
 	var adjusttiles=function(flows, reflow){
 		var columnIndex;
@@ -90,6 +90,7 @@
     		columnHeight=columheights[columnIndex];
 
     		$(flows[i]).css({
+    			height: (flows[i].offsetHeight-28)+'px',
     			left: columnIndex*(column_width+gap_width)+'px',
     			top: columnHeight+'px'
     		}).removeClass('pending').addClass('ready');
@@ -115,13 +116,13 @@
 
 	var delayedResize=function(){
 		clearTimeout(scrollDelay);
-		scrollDelay=setTimeout(reflowtiles ,500)
+		scrollDelay=setTimeout(reflowtiles ,0)
 	};
 	var delayedScroll=function(){
 		clearTimeout(scrollDelay);
-		if(!managing){
-			scrollDelay=setTimeout(managetiles ,500)
-		}
+		// if(!managing){
+		// 	scrollDelay=setTimeout(managetiles ,500)
+		// }
 	};
 	var init = function() {
 	    addEvent(window, 'resize', delayedResize);
