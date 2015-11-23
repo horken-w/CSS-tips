@@ -69,15 +69,13 @@
 		if(loading) {
 	      return;
 	    }
-	    var fragment = document.createDocumentFragment();
 	    var tiles=[];
 	    for(var i=0; i<count; i++ ){
 	    	tiles.push(wrapper.children[flowindex]);
 	    	flowindex++;
 	    }
 	    setTimeout(function() {
-	      loading=false
-	      wrapper.appendChild(fragment);
+	      loading=false;
 	      adjusttiles(tiles);
 	    },0);
 	};
