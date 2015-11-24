@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Photo Gallery slider</title>
-	<link rel="stylesheet" href="sliderimg/sliderstyle.css">
-</head>
-<body>
-	<div class="slider">
-		<div class="content">
-			<div class="page"></div>
-			<div class="page"></div>
-			<div class="page"></div>
-			<div class="page"></div>
-		</div>
-	</div>
-	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
-	<script src="sliderimg/sliderjs.js"></script>
-</body>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Photo Gallery slider</title>
+		<link rel="stylesheet" href="sliderimg/sliderstyle.css">
+	</head>
+	<body>
+		<article class="slider">
+			<div class="content">
+				<div class="page" id="photo-1" ></div>
+				<div class="page" id="photo-2"></div>
+				<div class="page" id="photo-3"></div>
+				<div class="page" id="photo-4"></div>
+			</div>
+		</article>
+		<nav class='slider-nav'>
+			<a href="#photo-1" class="active">slide1</a>
+			<a href="#photo-2">slide2</a>
+			<a href="#photo-3">slide3</a>
+			<a href="#photo-4">slide4</a>
+		</nav>
+		<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+		<script src="sliderimg/sliderjs.js"></script>
+	</body>
 </html>
