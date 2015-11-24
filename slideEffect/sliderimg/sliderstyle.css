@@ -1,4 +1,4 @@
-.slider{ overflow: hidden;}
+.slider{ overflow: hidden; display: inline-block;}
 .slider .content{ position: relative;}
 .slider .content .page{ float: left;}
 .page{
