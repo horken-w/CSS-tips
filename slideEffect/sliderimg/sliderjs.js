@@ -100,11 +100,27 @@
 	    }
 	});
 	$.fn.pagesSlider = function(options) {
+		var handleNavClick=function(e, action){
+			var position = $(action).attr('href').split('-').pop();
+
+	        $('.slider').stop().animate({
+	            scrollLeft: position * 500
+	        }, 1000);
+	       	changeActiveNav(action);
+		};
+		var changeActiveNav=function(action){
+	        $('.slider-nav > a').removeClass("active");
+	        $(action).addClass('active');    
+		}
+		$('.slider-nav').on('click', 'a', function(e){
+			e.preventDefault();
+			handleNavClick(e, this);
+		})
         this.each(function(index, slider) {
             var $this = $(slider);
             var pagesSlider = new PagesSlider($this, options);
             $this.data('pagesSlider', pagesSlider);
-        });
+        });        
         return this;
     };
     $(function() {
