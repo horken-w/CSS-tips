@@ -78,10 +78,33 @@
 		.polaroid{
 			position: absolute;
 			top: 45%; left: 60vh;
-			z-index: 50;
+			z-index: 10;
 		}
 		.polaroid img{
+			position: absolute;
 			width: 50vh;
+			z-index: 15;
+		}
+		.polaroid .shadow{
+			position: absolute;
+			top: 10vh;
+			left: -6vh;
+			width: 60vh;
+			height: 30vh;
+			border-radius: 50%;
+			background: black;
+			opacity: 0.6;
+			z-index: 1;
+			transform-origin: top;
+			animation: shadow_move 5s linear infinite;
+		}
+		.polaroid .caption{
+			position: absolute;
+			top: 35vh;
+			color: white;
+			text-shadow: 0 2px 5px black;
+			width: 40vh;
+			z-index: 5;
 		}
 		/*animation*/
 		@keyframes rotate_spotlight{
@@ -96,6 +119,23 @@
 			}
 			75%{
 				transform: rotate(15deg) scaleY(1.1) translateY(-3vh);
+			}
+		}
+		@keyframes shadow_move{
+			0%{
+				transform: skewX(20deg) ;
+			}
+			25%{
+				transform:  skewX(50deg) ;
+			}
+			50%{
+				transform:  skewX(20deg);
+			}
+			75%{
+				transform:  skewX(-50deg) ;
+			}
+			100%{
+				transform: skewX(20deg) ;
 			}
 		}
 		@keyframes move-highlight{
@@ -119,6 +159,7 @@
 		<div class="backdrop">
 			<figure class="polaroid">
 				<img src="https://dl.dropboxusercontent.com/u/50502234/suicune.png" alt="suicune">
+				<div class="shadow"></div>
 				<figcaption class="caption">pokemon - No.245 Suicune</figcaption>
 			</figure>
 		</div>
