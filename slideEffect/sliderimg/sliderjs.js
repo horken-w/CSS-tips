@@ -119,11 +119,11 @@
         this.each(function(index, slider) {
             var $this = $(slider);
             var pagesSlider = new PagesSlider($this, options);
-            $this.data('pagesSlider', pagesSlider);
         });        
         return this;
     };
-    $(function() {
-		$('.slider').pagesSlider();
-	});
 }(jQuery);
+
+$(function() {
+	$('.slider').pagesSlider();
+});
