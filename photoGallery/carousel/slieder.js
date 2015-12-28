@@ -1,33 +1,46 @@
-
-	$(function(){
-		setInterval(function () {
-	        moveRight();
-	    }, 5000);
-		$('.list li:first-child').appendTo('.list');
-	    var slideCount = $('.list li').length, 
-	    	slideWidth = $('.list li').width(),
-	    	slideHeight = $('.list li').height(),
-	    	UlWidth = slideCount * slideWidth;
-
-		$('#slider').css({ width: slideWidth, height: slideHeight });
-		$('.list').css({ width: UlWidth, marginLeft: -slideWidth });
-		function moveRight() {
-	        $('.list').animate({
-	            left: - slideWidth
-	        }, 600, function () {
-	            $('.list li:first-child').appendTo('.list');
-	            $('.list').css('left', 0);
-	        });
-    	};
-    	function moveLeft() {
-	        $('.list').animate({
-	            left: + slideWidth
-	        }, 600, function () {
-	            $('.list li:first-child').appendTo('.list');
-	            $('.list').css('left', 0);
-	        });
-    	};
-	});
+var slideCount = $('.list li').length, 
+    slideWidth = $('.list li').width(),
+    slideHeight = $('.list li').height(),
+    UlWidth = slideCount * slideWidth;
+function moveRight() {
+    $('.list').animate({
+        left: - slideWidth
+    }, 600, function () {
+        $('.list li:first-child').appendTo('.list');
+        $('.list').css('left', 0);
+    });
+};
+function moveLeft() {
+    $('.list').animate({
+        left: + slideWidth
+    }, 600, function () {
+        $('.list li:first-child').appendTo('.list');
+        $('.list').css('left', 0);
+    });
+};
+var timeing=setInterval(function () {
+    moveRight();
+}, 5000);
+$(function(){
+	$('.list li:first-child').appendTo('.list');
+	$('#slider').css({ width: slideWidth, height: slideHeight });
+	$('.list').css({ width: UlWidth, marginLeft: 0 }); //-slideWidth for right side slider
+    $('.control_next').on('click', function(e){
+        e.preventDefault();
+        moveLeft();
+    });
+    $('.control_prev').on('click', function(e){
+        e.preventDefault();
+        moveRight();
+    })
+    $(".list").hover(function(){
+        clearInterval(timeing);
+    }, function(){
+        timeing=setInterval(function () {
+            moveRight();
+        }, 5000);
+    });
+});
 
 //jQuery(document).ready(function ($) {
 
