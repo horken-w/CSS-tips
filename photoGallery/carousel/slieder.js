@@ -3,7 +3,7 @@ var slideCount = $('.list li').length,
     slideHeight = $('.list li').height(),
     UlWidth = slideCount * slideWidth;
 function moveRight() {
-    $('.list').animate({
+    $('.list').stop().animate({
         left: - slideWidth
     }, 600, function () {
         $('.list li:first-child').appendTo('.list');
@@ -11,7 +11,7 @@ function moveRight() {
     });
 };
 function moveLeft() {
-    $('.list').animate({
+    $('.list').stop().animate({
         left: + slideWidth
     }, 600, function () {
         $('.list li:first-child').appendTo('.list');
