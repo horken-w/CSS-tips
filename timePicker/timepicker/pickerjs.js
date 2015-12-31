@@ -1,6 +1,5 @@
 
-var tz='AM';
-var close=false;
+var tz='AM', $inputbox=$('#timepicker');
 
 var checkTime=function(tnum, place){
   var $area=$('.in_txt'), m, h;
@@ -47,16 +46,18 @@ function addZero(i, hours) {
   return i;
 }
 function setInit(){
-  var $time=$('.in_txt'), $inputbox=$('#timepicker');
+  var $time=$('.in_txt'), $area=$('.in_txt');
   var date=new Date();
   var list=[addZero(date.getHours(), true), addZero(date.getMinutes()), tz];
 
   for(var i=0; i<$time.length; i++)	$($time[i]).val(list[i]);
-   setValue($inputbox);
+   setValue($inputbox, $area);
 }
-function setValue(inputbox){
-  var $area=$('.in_txt');
-  inputbox.val($area.eq(0).val()+'：'+$area.eq(1).val()+'：'+$area.eq(2).val());
+function isSetTimeArea(dom){
+	return $.contains($inputbox.parent()[0],dom[0])|| $inputbox.is(dom);
+}
+function setValue(inputbox, area){
+  inputbox.val(area.eq(0).val()+'：'+area.eq(1).val()+'：'+area.eq(2).val());
 }
 function addNum(i){
   return ++i;
@@ -65,12 +66,13 @@ function resuceNum(i){
   return --i;
 }
 function closeIt() {
-  $tab.fadeOut();
+  $tab=$('.timepicker_wrap');
+  $tab.fadeOut(1000);
 }
 !function (){
   'use strict';
-  var $submit=$('input[type=submit]'),$inputbox=$('#timepicker'), $tab=$('.timepicker_wrap');
-
+  var $submit=$('input[type=submit]'), $tab=$('.timepicker_wrap');
+  var $area=$('.in_txt');
   $submit.on('click', function(){
     $('label').text('輸入的時間為 '+$inputbox.val());
   });
@@ -78,16 +80,23 @@ function closeIt() {
   $inputbox.on('focus', function(){
     var input = $(this);
     if (!input.is($inputbox)) input.select();
-    $tab.fadeIn(1000);
+    $tab.stop().fadeIn(1000);
     setInit();
+  });
+  $('body').on('click', function(e){
+  	var _this=e.target;
+  	setTimeout(function(){
+  	  var focused_element = $(document.activeElement);
+      if (focused_element.is(':input') && !isSetTimeArea(_this)) closeIt();
+  	}, 0)
+    
   });
   $('.prev').on('click', function(e){
     checkTime($(e.target.nextElementSibling.children).val(), e.target);
-    setValue($inputbox);
+    setValue($inputbox, $area);
   });
   $('.next').on('click', function(e){
     checkTime($(e.target.previousElementSibling.children).val(), e.target);
-    setValue($inputbox);
+    setValue($inputbox, $area);
   });
-
   }();
