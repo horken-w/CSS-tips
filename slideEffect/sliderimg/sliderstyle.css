@@ -1,4 +1,4 @@
-.slider{ overflow: hidden;}
+.slider{ overflow: hidden; display: inline-block;}
 .slider .content{ position: relative;}
 .slider .content .page{ float: left;}
 .page{
@@ -20,4 +20,20 @@
 }
 .page:nth-child(4){
 	background-image: url("https://dl.dropboxusercontent.com/u/50502234/dragonair.png");
+}
+.slider-nav{
+	text-align: center;
+	margin: 10px 0 0 0;
+}
+.slider-nav > a{
+	width: 10px; height: 10px;
+	display: inline-block;
+	background: hsl(0, 0%, 40%);
+	overflow: hidden;
+	color: hsl(0, 0%, 40%);
+	border-radius: 50%;
+}
+.slider-nav > a.active, .slider-nav > a:hover{
+	background: hsl(0, 0%, 60%);
+	color: hsl(0, 0%, 60%);
 }

@@ -46,7 +46,7 @@
 		return key;
 	};
 	var getMaxVal=function(arr){
-		var key, max=arr[0];
+		var key=0, max=arr[0];
 
 		for(var i=0, l=arr.length; i<l; i++){
 			if(max < arr[i]){
@@ -54,7 +54,7 @@
 				max=arr[i];
 			}
 		}
-		return key;
+		return max;
 	};
 	var managetiles=function(){
 		managing = true;
@@ -77,21 +77,25 @@
 	    setTimeout(function() {
 	      loading=false;
 	      adjusttiles(tiles);
-	    }, 1000);
+	    },500);
 	};
 	var adjusttiles=function(flows, reflow){
 		var columnIndex;
-    	var columnHeight;
+    	var columnheight;
 
     	for(var i=0, l=flows.length; i<l; i++){
-    		columnIndex=getMinkey(columheights);
-    		columnHeight=columheights[columnIndex];
+    		if(flows[i] !== undefined){
+    			columnIndex=getMinkey(columheights);
+	    		columnheight=columheights[columnIndex];
 
-    		$(flows[i]).css({
-    			left: columnIndex*(column_width+gap_width)+'px',
-    			top: columnHeight+'px'
-    		}).removeClass('pending').addClass('ready');
-    		columheights[columnIndex]=columnHeight + gap_height + flows[i].offsetHeight;
+	    		$(flows[i]).css({
+	    			height: (flows[i].offsetHeight-28)+'px',
+	    			left: columnIndex*(column_width+gap_width)+'px',
+	    			top: columnheight+'px'
+	    		}).removeClass('pending').addClass('ready');
+	    		columheights[columnIndex]=columnheight + gap_height + flows[i].offsetHeight;
+    		}else return;
+    		
     	}
     	wrapper.style.height = getMaxVal(columheights) + 'px';
     	managetiles(flows.length);
@@ -113,7 +117,7 @@
 
 	var delayedResize=function(){
 		clearTimeout(scrollDelay);
-		scrollDelay=setTimeout(reflowtiles ,500)
+		scrollDelay=setTimeout(reflowtiles ,0)
 	};
 	var delayedScroll=function(){
 		clearTimeout(scrollDelay);
