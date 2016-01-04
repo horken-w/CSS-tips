@@ -1,6 +1,19 @@
 
 var tz='AM', $inputbox=$('#timepicker');
 
+// var setTimearea=function(){
+//   var $div=$('<div/>'), $input=$('<input type="text" readonly/>');
+//   $div.clone().addClass('timearea').appendTo('body');
+//   $input.clone().attr({
+//     'id': 'timepicker',
+//     'name': 'open'
+//   }).appendTo('.timearea');
+//   $div.clone().addClass('timepicker_wrap').appendTo('.timearea');
+//   $div.clone().addClass('hour').appendTo('.timearea');
+//   $div.clone().addClass('btn prev').appendTo('.hour');
+//   $div.clone().addClass('btn prev').appendTo('.hour');
+//   $div.clone().addClass('btn next').appendTo('.hour');
+// };
 var checkTime=function(tnum, place){
   var $area=$('.in_txt'), m, h;
   switch(place.parentElement.className){
@@ -75,6 +88,7 @@ function closeIt() {
   'use strict';
   var $submit=$('input[type=submit]'), $tab=$('.timepicker_wrap');
   var $area=$('.in_txt');
+  // setTimearea();
   $submit.on('click', function(){
     $('label').text('輸入的時間為 '+$inputbox.val());
   });
