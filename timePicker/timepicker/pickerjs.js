@@ -49,12 +49,14 @@ function setInit(){
   var $time=$('.in_txt'), $area=$('.in_txt');
   var date=new Date();
   var list=[addZero(date.getHours(), true), addZero(date.getMinutes()), tz];
-
-  for(var i=0; i<$time.length; i++)	$($time[i]).val(list[i]);
-   setValue($inputbox, $area);
+  if($inputbox.val().length===0){
+  	for(var i=0; i<$time.length; i++)	$($time[i]).val(list[i]);
+    setValue($inputbox, $area);
+  }
+  
 }
 function isSetTimeArea(dom){
-	return $.contains($inputbox.parent()[0],dom[0])|| $inputbox.is(dom);
+	return $.contains($inputbox.parent()[0],dom)|| $inputbox.is(dom);
 }
 function setValue(inputbox, area){
   inputbox.val(area.eq(0).val()+'：'+area.eq(1).val()+'：'+area.eq(2).val());
@@ -79,15 +81,15 @@ function closeIt() {
 
   $inputbox.on('focus', function(){
     var input = $(this);
-    if (!input.is($inputbox)) input.select();
+    if (input.is($inputbox)) input.select();
     $tab.stop().fadeIn(1000);
     setInit();
   });
-  $('body').on('click', function(e){
+  $(document).on('click', function(e){
   	var _this=e.target;
   	setTimeout(function(){
   	  var focused_element = $(document.activeElement);
-      if (focused_element.is(':input') && !isSetTimeArea(_this)) closeIt();
+      if (!focused_element.is(':input') && !isSetTimeArea(_this)) closeIt();
   	}, 0)
     
   });
