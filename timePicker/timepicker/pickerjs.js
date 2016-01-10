@@ -1,19 +1,23 @@
 
 var tz='AM', $inputbox=$('#timepicker');
 
-// var setTimearea=function(){
-//   var $div=$('<div/>'), $input=$('<input type="text" readonly/>');
-//   $div.clone().addClass('timearea').appendTo('body');
-//   $input.clone().attr({
-//     'id': 'timepicker',
-//     'name': 'open'
-//   }).appendTo('.timearea');
-//   $div.clone().addClass('timepicker_wrap').appendTo('.timearea');
-//   $div.clone().addClass('hour').appendTo('.timearea');
-//   $div.clone().addClass('btn prev').appendTo('.hour');
-//   $div.clone().addClass('btn prev').appendTo('.hour');
-//   $div.clone().addClass('btn next').appendTo('.hour');
-// };
+var setTimearea=function(meridian){
+  var $div=$('<div/>'), $input=$('<input type="text" readonly/>');
+  var lists=['hour', 'min', 'sec'];
+  $div.clone().addClass('timepicker_wrap').insertAfter($inputbox);
+  for(var i=0; i< lists.length; i++){
+    $div.clone().addClass(lists[i]).appendTo('.timepicker_wrap');
+    $div.clone().addClass('btn prev').appendTo('.'+lists[i]);
+    $div.clone().addClass('ti_tx').append($input.clone().addClass('in_txt')).appendTo('.'+lists[i]);
+    $div.clone().addClass('btn next').appendTo('.'+lists[i]);
+  }
+  if(meridian){
+    $div.clone().addClass('meridian').appendTo('.timepicker_wrap');
+    $div.clone().addClass('btn prev').appendTo('.meridian');
+    $div.clone().addClass('ti_tx').append($input.clone().addClass('in_txt')).appendTo('.meridian');
+    $div.clone().addClass('btn next').appendTo('.meridian');
+  }
+};
 var checkTime=function(tnum, place){
   var $area=$('.in_txt'), m, h;
   switch(place.parentElement.className){
@@ -22,7 +26,7 @@ var checkTime=function(tnum, place){
 		h=resuceNum(tnum);
 	  	$area.eq(0).val(addZero(h, true));
 	  }
-	  else{
+	  else if(place.classList[1] === 'next'){
 	  	h=addNum(tnum);
 	  	$area.eq(0).val(addZero(h, true));
 	  }
@@ -32,15 +36,27 @@ var checkTime=function(tnum, place){
 	 	m=resuceNum(tnum);
 	    $area.eq(1).val(addZero(m));
 	  }
-	  else{
+	  else if(place.classList[1] === 'next'){
 	 	m=addNum(tnum);
 	    $area.eq(1).val(addZero(m));
 	  }
-	  break;
+    break;
+  case 'sec':
+    if(place.classList[1] === 'prev') {
+    sec=resuceNum(tnum);
+      $area.eq(2).val(addZero(sec));
+    }
+    else if(place.classList[1] === 'next'){
+    sec=addNum(tnum);
+      $area.eq(2).val(addZero(sec));
+    }
+    break;
+  case 'meridian':
+    if($area.eq(3).val() === 'AM') $area.eq(3).val('PM');
+      else $area.eq(3).val('AM');
+      break;
 	default:
-	  if($area.eq(2).val() === 'AM') $area.eq(2).val('PM');
-	    else $area.eq(2).val('AM');
-	    break;
+	  alert('get fail');
 	}
 }
 function addZero(i, hours) {
@@ -61,7 +77,7 @@ function addZero(i, hours) {
 function setInit(){
   var $time=$('.in_txt'), $area=$('.in_txt');
   var date=new Date();
-  var list=[addZero(date.getHours(), true), addZero(date.getMinutes()), tz];
+  var list=[addZero(date.getHours(), true), addZero(date.getMinutes()), addZero(date.getSeconds()), tz];
   if($inputbox.val().length===0){
   	for(var i=0; i<$time.length; i++)	$($time[i]).val(list[i]);
     setValue($inputbox, $area);
@@ -69,10 +85,12 @@ function setInit(){
   
 }
 function isSetTimeArea(dom){
-	return $.contains($inputbox.parent()[0],dom)|| $inputbox.is(dom);
+	return $.contains($('body').find('.timepicker_wrap')[0],dom)|| $inputbox.is(dom);
 }
 function setValue(inputbox, area){
-  inputbox.val(area.eq(0).val()+'：'+area.eq(1).val()+'：'+area.eq(2).val());
+  area.eq(3).val()===undefined ?
+  inputbox.val(area.eq(0).val()+'：'+area.eq(1).val()+'：'+area.eq(2).val()) : 
+  inputbox.val(area.eq(0).val()+'：'+area.eq(1).val()+'：'+area.eq(2).val()+'：'+area.eq(3).val());
 }
 function addNum(i){
   return ++i;
@@ -82,17 +100,15 @@ function resuceNum(i){
 }
 function closeIt() {
   $tab=$('.timepicker_wrap');
-  $tab.fadeOut(1000);
+  $tab.stop().fadeOut(1000);
 }
+
+window.onLoad=setTimearea(true); //show merdian or not; Empty to hide merdian select
+
 !function (){
   'use strict';
   var $submit=$('input[type=submit]'), $tab=$('.timepicker_wrap');
   var $area=$('.in_txt');
-  // setTimearea();
-  $submit.on('click', function(){
-    $('label').text('輸入的時間為 '+$inputbox.val());
-  });
-
   $inputbox.on('focus', function(){
     var input = $(this);
     if (input.is($inputbox)) input.select();
@@ -115,4 +131,4 @@ function closeIt() {
     checkTime($(e.target.previousElementSibling.children).val(), e.target);
     setValue($inputbox, $area);
   });
-  }();
+  }(window, document);

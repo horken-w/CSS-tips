@@ -5,19 +5,25 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
 	<style>
-	  .timearea{
-	  	width: 80%;
+	body{
+		width: 80%;
+		position: relative;
+	}
+	  #timepicker{
+	  	width: 20%;
 	  	margin: 30px 40%;
-	  	position: relative;
+	  	margin-bottom: 0;
+	  	position: absolute;
 	  }
 	  .timepicker_wrap{
-	  	margin: 10px auto;
+	  	top: 60px;
+	  	left: 39%;
 		display: none;
 		position: absolute;
 		background: hsl(0, 0%, 100%);
 	  	border-radius: 5px;
 	  }
-	  .hour, .min, .meridian{
+	  .hour, .min, .meridian, .sec{
 	  	float: left;
 	  	width: 60px;
 	  	margin: 0 10px;
@@ -56,28 +62,7 @@
 	</style>
   </head>
   <body>
-    <div class="timearea">
-      <input type="text" id="timepicker" name="open" readonly>
-      <div class="timepicker_wrap">
-    	<div class="hour">
-    		<div class="btn prev"></div>
-    		<div class="ti_tx"><input type="text" class="in_txt" readonly></div>
-    		<div class="btn next"></div>
-    	</div>
-    	<div class="min">
-    		<div class="btn prev"></div>
-    		<div class="ti_tx"><input type="text" class="in_txt" readonly></div>
-    		<div class="btn next"></div>
-    	</div>
-    	<div class="meridian">
-    		<div class="btn prev"></div>
-    		<div class="ti_tx"><input type="text" class="in_txt" readonly></div>
-    		<div class="btn next"></div>
-    	</div>
-      </div>
-    </div>
-	
-	<label for="showtime"></label>
+    <input type="text" id="timepicker" name="open" readonly>
 	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
 	<script src="timepicker/pickerjs.js"></script>
   </body>
