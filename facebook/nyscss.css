@@ -1,0 +1,71 @@
+html, body{margin: 0 auto; padding: 0; width: 100%;}
+.banner > img{ width: 100%; height: 50vh; margin: 0;}
+nav > ul > li a{
+	text-decoration: none;
+	color: hsl(220, 80%, 70%);
+	text-shadow: 2px 2px 5px #000;
+	font-weight: 900;
+	padding: 2px 20px;
+}
+nav > ul{
+	margin: 0;
+}
+section{
+	width: 60%;
+	margin: 0 auto;
+}
+.posts{
+	float: left;
+	margin: 5px;
+	padding: 5px 12px;
+}
+.img{
+	width: 20%;
+}
+article:nth-child(odd) .img{
+	float: left;
+}
+article:nth-child(even) .img{
+	float: right;
+}
+ul .list:hover, .active{
+	background: hsl(0, 10%, 100%);
+}
+nav{
+	line-height: 1em;
+	background: hsl(198, 79%, 74%);
+	background: linear-gradient(to bottom, hsl(198, 79%, 82%) 0%, hsl(198, 50%, 45%) 50%, hsl(198, 79%, 82%) 100%);
+	text-align: center;
+	will-change: font-size;
+}
+.menulg{
+	font-size: 3em;
+	transition: font-size 500ms linear;
+}
+.menulg .list{
+	display: inline-block;
+	transition: background-color 500ms linear;
+}
+.menulg:hover .list{
+	will-change: background-color;
+}
+.menusm{
+	width: 100%;
+	position: fixed;
+	top: 0;
+	font-size: 1.5em;
+}
+.menusm .list{
+	display: inline-block;
+	transition: background-color 500ms linear;
+}
+.menusm:hover .list{
+	will-change: background-color;
+}
+.dropbg{
+	position: fixed;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+	background: hsla(0, 0%, 0%, 0.6);
+	display: none;
+}
