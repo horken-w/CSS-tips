@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <style>
+        .drag{
+          position: absolute;
+          width: 200px;
+          height: 200px;
+          background: hsl(250, 80%, 80%);
+        }
+    </style>
+  </head>
+<body>
+  <div class="drag"></div>
+  <pre id="debug"></pre>
+  <script>
+    var _debug = $('debug'),
+        _oldzIndex = 0; 
+    
+    InitDragDrop();
+    function InitDragDrop(){
+      document.onmousedown= dragStart;
+      document.onmouseup=dragStop;
+    }
+
+    function dragStart(e){
+      if(e == null) e=window.event;
+
+      var target = e.target !=null ?e.target :e.srcElement;
+
+      _debug.innerHTML=target.className == 'drag' ? 'draggable element clicked': 'NON-draggable element clicked';
+
+      if((window.event!= null) && target.className=='drag'){
+        _startX=e.clientX;
+        _startY=e.clientY;
+
+        _offsetX=extractNumber(target.style.left);
+        _offsetY=extractNumber(target.style.top);
+
+        _orderzIndex=target.style.zIndex;
+        target.style.zIndex=999;
+
+        _dragElement = target;
+
+        document.onmousemove=onMouseMove;
+
+        document.body.focus();
+
+        return false;
+      }
+    }
+    function onMouseMove(e){
+      if(e==null) var e=window.event;
+
+      _dragElement.style.left=(_offsetX + e.clientX -_startX)+'px';
+      _dragElement.style.top=(_offsetY + e.clientY -_startY)+'px';
+
+      _debug.innerHTML= '('+_dragElement.style.left+', '+_dragElement.style.top+')';
+    }
+    function dragStop(e){
+      if(_dragElement != null){
+        _dragElement.style.zIndex=_oldzIndex;
+
+        document.onmousemove=null;
+        document.onselectstart=null;
+        _dragElement.ondragstart=null;
+        _dragElement=null;
+
+      }
+    }
+    function extractNumber(value){
+      var n= parseInt(value);
+      return n == null || isNaN(n)? 0: n;
+    }
+    function $(id){
+      return document.getElementById(id);
+    }
+  </script>
+</body>
+
+</html>
