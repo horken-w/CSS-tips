@@ -41,8 +41,8 @@
 		}
 		#example3{
 			position: relative;
-			background: url(ingredients/ice.png) no-repeat;
-			background-size: contain;
+			background: url(ingredients/icebow.svg) no-repeat;
+			background-size: cover;
 			padding: 5px;
 			width: 100%;
 			max-height: 760px;
@@ -60,23 +60,24 @@
 	</style>
 </head>
 	<body>
-		<div class="drag hidden">
-			<img src="ingredients/item-1.svg" alt="cottonCandy" class="">
-		</div>
-		<div class="drag hidden">
-			<img src="ingredients/item-2.svg" alt="cherry" class="">
-		</div>
-		<div class="drag hidden">
-			<img src="ingredients/item-3.svg" alt="strawberry" class="">
-		</div>
-		<div class="drag hidden">
-			<img src="ingredients/item-4.svg" alt="jellyDrops" class="">
-		</div>
-		<div class="drag hidden">
-			<img src="ingredients/item-5.svg" alt="chips" class="">
-		</div>
+		<!-- <div class="drag hidden"> -->
+			<img src="ingredients/item-1.svg" alt="cottonCandy" class="drag hidden">
+		<!-- </div> -->
+		<!-- <div class="drag hidden"> -->
+			<img src="ingredients/item-2.svg" alt="cherry" class="drag hidden">
+		<!-- </div> -->
+		<!-- <div class="drag hidden"> -->
+			<img src="ingredients/item-3.svg" alt="strawberry" class="drag hidden">
+		<!-- </div> -->
+		<!-- <div class="drag hidden"> -->
+			<img src="ingredients/item-4.svg" alt="jellyDrops" class="drag hidden">
+		<!-- </div> -->
+		<!-- <div class="drag hidden"> -->
+			<img src="ingredients/item-5.svg" alt="chips" class="drag hidden">
+		<!-- </div> -->
 		<div id="wrap">
 			<div id="example3">
+				<img src="ingredients/item-1.svg" alt="cottonCandy" class="drag">
 	    </div>
 			<div class="ingredients">
 				<img src="ingredients/item-1.svg" alt="cottonCandy" class="lists">
@@ -94,19 +95,49 @@
 
 				InitDragDrop();
 		    function InitDragDrop(){
-		      document.onmousedown= dragStart;
-		      document.onmouseup=dragStop;
+		      document.getElementById('example3').onmousedown= dragStart;
+		      document.getElementById('example3').onmouseup=dragStop;
 		    }
 		    function dragStart(e){
 		    	e==null ? e=window.event: e;
+
+		    	var target = e.target !=null ? e.target : e.srcElement;
+
+		    	if((window.event!=null) && target.className== 'drag'){
+		    		_startX=e.clientX;
+		    		_startY=e.clientY;
+
+		    		_offsetX=extractNumber(target.style.left);
+		    		_offsetY=extractNumber(target.style.top);
+
+		    		_dragElement= target;
+
+		    		document.onmousemove=onMouseMove;
+		    		document.body.focus();
+
+		    		return false;
+		    	}
 		    }
-		    function onMouseMove(){
+		    function onMouseMove(e){
+		    	if(e==null) var e=window.event;
+
+					_dragElement.style.left=(_offsetX+e.clientX-_startX)+'px';
+					_dragElement.style.top=(_offsetY+e.clientY-_startY)+'px';
+
 
 		    }
 		    function dragStop(){
-
+		    	if(_dragElement != null || _dragElement != undefined){
+		    		document.onmousemove=null;
+		    		document.onselectstart=null;
+		    		_dragElement.ondragstart=null;
+		    		_dragElement=null;
+		    	}
 		    }
-
+		    function extractNumber(num){
+		    	var n=parseInt(num);
+		    	return n==null || isNaN(n)? 0: n;
+		    }
 				$('.ingredients').children().each(function(i, v){
 					_item.push(v);
 				})
