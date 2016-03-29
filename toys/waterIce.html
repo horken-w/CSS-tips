@@ -12,7 +12,9 @@
 			border-image: linear-gradient(to left, hsl(80, 80%, 95%) 0%, hsl(80, 100%, 40%) 50%, hsl(80, 80%, 95%) 100%);
 			border-image-slice: 50;
 			display: flex;
+			display: -ms-flexbox;
 			flex-flow: row nowrap;
+			-ms-flex-flow: row nowrap;
 		}
 		.waterice{
 			margin: auto;
@@ -27,6 +29,12 @@
 			flex-flow: column wrap;
 			justify-content: space-around;
 		}
+		@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+			.ingredients{
+				display: inline-block;
+			}
+		}
+		
 		.lists{
 			margin: auto;
 			max-width: 80%;
@@ -77,7 +85,6 @@
 		<!-- </div> -->
 		<div id="wrap">
 			<div id="example3">
-				<img src="ingredients/item-1.svg" alt="cottonCandy" class="drag">
 	    </div>
 			<div class="ingredients">
 				<img src="ingredients/item-1.svg" alt="cottonCandy" class="lists">
@@ -103,7 +110,7 @@
 
 		    	var target = e.target !=null ? e.target : e.srcElement;
 
-		    	if((window.event!=null) && target.className== 'drag'){
+		    	if((window.event!=null || e !=null) && target.className== 'drag'){
 		    		_startX=e.clientX;
 		    		_startY=e.clientY;
 
@@ -144,6 +151,11 @@
 				$(_item).each(function(i, v){
 					$(v).on('click', function(){
 						$('.drag').eq(i).clone().appendTo('#example3');
+						$('#example3').find('.drag')
+							.css({
+								left: 200+'px',
+								top: 200+'px'
+							})
 						$('#example3').find('.hidden').removeClass('hidden');
 					})
 				})
