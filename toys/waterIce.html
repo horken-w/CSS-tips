@@ -150,12 +150,12 @@
 				})
 				$(_item).each(function(i, v){
 					$(v).on('click', function(){
-						$('.drag').eq(i).clone().appendTo('#example3');
-						$('#example3').find('.drag')
+						$('.drag').eq(i).clone()
 							.css({
-								left: 200+'px',
-								top: 200+'px'
-							})
+									left: 200+'px',
+									top: 200+'px'
+								})
+							.appendTo('#example3');
 						$('#example3').find('.hidden').removeClass('hidden');
 					})
 				})
