@@ -13,7 +13,7 @@ function addEvent(obj, evt, fn) {
     obj.attachEvent('on' + evt, fn);
 }
 
-function dragEvent() {
+function dragEvent() { // mouse drag & touch drag
   var canvas=document.getElementById('mycv');
 
   var extractNumber= function(num){
@@ -26,7 +26,7 @@ function dragEvent() {
   	_dragElement.style.left=(_offsetX+e.clientX-_startX)+'px';
   	_dragElement.style.top=(_offsetY+e.clientY-_startY)+'px';
   }
-  var dragStart=function(e){
+  var mouseDragStart=function(e){
   	e==null ? e=window.event: e;
   	var _target=e.target != null ? e.target: e.srcElement;
   	
@@ -45,7 +45,7 @@ function dragEvent() {
 		  return false;
   	}
   }
-  var dragStop=function(){
+  var mouseDragStop=function(){
   	if(_dragElement != null || _dragElement != undefined){
 		  document.onmousemove=null;
 		  document.onselectstart=null;
@@ -53,8 +53,14 @@ function dragEvent() {
 		 	_dragElement=null;
 		}
   }
-  document.getElementById('mycv').onmousedown= dragStart;
-  document.getElementById('mycv').onmouseup= dragStop;
+  var touchMoveStart=function(e){
+  	alert(e);
+  }
+  document.getElementById('mycv').onmousedown= mouseDragStart;
+  document.getElementById('mycv').onmouseup= mouseDragStop;
+  document.getElementById('mycv').ontouchstart= touchMoveStart;
+  document.getElementById('mycv').ontouchend= touchMoveStart;
+  document.getElementById('mycv').ontouchcancel= touchMoveStart;
 }
 function cloneItems(e) {
   var _target = e.target;
@@ -86,7 +92,7 @@ function imageSetting(){
 		imgobj.y=imgitems[0].offsetTop-canv.offsetTop;
 		imgobj.obj=imgitems[0];
 		Imagesdraw(imgobj);
-		imgobj.obj.remove();
+		imgobj.obj.parentNode.removeChild(imgobj.obj);
 	}
 }
 function initCanvas() {
@@ -107,5 +113,5 @@ function open() {
   var dataURL = canvas.toDataURL('image/png');
   document.getElementById('canvasImg').src = dataURL;
 }
-addEvent(document.getElementById('mypaper'), 'click', open)
+// addEvent(document.getElementById('mypaper'), 'click', open)
 addEvent(window, 'load', initCanvas);
