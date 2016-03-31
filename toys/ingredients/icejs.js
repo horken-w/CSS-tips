@@ -4,7 +4,7 @@ var width = 720;
 var height = 645;
 var _startX, _startY, _offsetX, _offsetY, _dragElement;
 var bgimg = new Image();
-bgimg.src = 'ingredients/icebow.svg';
+bgimg.src = 'ingredients/images/icebow.svg';
 
 function addEvent(obj, evt, fn) {
   if (obj.addEventListener)
@@ -74,18 +74,19 @@ function cloneItems(e) {
 }
 function imageSetting(){
 	var imgitems=document.getElementsByClassName('drag'),
-			canv=document.getElementById('mypaper');
+			canv=document.getElementById('mypaper'),
+			objlen=imgitems.length;
 			
 	var Imagesdraw = function(obj){
 		ctx.drawImage(obj.obj, obj.x, obj.y);
-		obj.obj.remove();
 	}
-	for(var i=0; i<imgitems.length; i++){
+	while (imgitems[0] != undefined){
 		var imgobj={};
-		imgobj.x=imgitems[i].offsetLeft-canv.offsetLeft;
-		imgobj.y=imgitems[i].offsetTop-canv.offsetTop;
-		imgobj.obj=imgitems[i];
+		imgobj.x=imgitems[0].offsetLeft-canv.offsetLeft;
+		imgobj.y=imgitems[0].offsetTop-canv.offsetTop;
+		imgobj.obj=imgitems[0];
 		Imagesdraw(imgobj);
+		imgobj.obj.remove();
 	}
 }
 function initCanvas() {
