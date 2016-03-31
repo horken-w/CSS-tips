@@ -23,8 +23,8 @@ function dragEvent() {
   var mouseMove=function(e){
   	if(e==null) var e=window.event;
 
-  	_dragElement.style.left=(_offsetY+e.clientX-_startX)+'px';
-  	_dragElement.style.top=(_offsetX+e.clientY-_startY)+'px';
+  	_dragElement.style.left=(_offsetX+e.clientX-_startX)+'px';
+  	_dragElement.style.top=(_offsetY+e.clientY-_startY)+'px';
   }
   var dragStart=function(e){
   	e==null ? e=window.event: e;
@@ -34,8 +34,8 @@ function dragEvent() {
   		_startX=e.clientX;
   		_startY=e.clientY;
 
-  		_offsetX=extractNumber(_target.offsetLeft);
-  		_offsetY=extractNumber(_target.offsetTop);
+  		_offsetX=extractNumber(_target.style.left);
+  		_offsetY=extractNumber(_target.style.top);
 
   		_dragElement= _target;
 
@@ -56,22 +56,38 @@ function dragEvent() {
   document.getElementById('mycv').onmousedown= dragStart;
   document.getElementById('mycv').onmouseup= dragStop;
 }
-
 function cloneItems(e) {
   var _target = e.target;
   var imgTag = function(src, alt) {
     var _img = document.createElement('img');
   	_img.setAttribute('alt', alt);
     _img.setAttribute('src', src);
+    _img.style.left=200+'px';
+    _img.style.top=200+'px';
 
     return _img
 	}
 	var comp = imgTag(_target.src, _target.alt),
   local = document.getElementById('mypaper');
-	comp.className = 'drag itemsinit';
+	comp.className = 'drag';
 	local.parentNode.insertBefore(comp, local);
 }
-
+function imageSetting(){
+	var imgitems=document.getElementsByClassName('drag'),
+			canv=document.getElementById('mypaper');
+			
+	var Imagesdraw = function(obj){
+		ctx.drawImage(obj.obj, obj.x, obj.y);
+		obj.obj.remove();
+	}
+	for(var i=0; i<imgitems.length; i++){
+		var imgobj={};
+		imgobj.x=imgitems[i].offsetLeft-canv.offsetLeft;
+		imgobj.y=imgitems[i].offsetTop-canv.offsetTop;
+		imgobj.obj=imgitems[i];
+		Imagesdraw(imgobj);
+	}
+}
 function initCanvas() {
   var listitems = document.getElementById('ingredients').children;
   canvas = document.getElementById("mypaper");
@@ -82,11 +98,13 @@ function initCanvas() {
     addEvent(listitems[i], 'touchstart', cloneItems);
   }
 	dragEvent();
+	addEvent(document.getElementById('draw'), 'click', imageSetting);
+	addEvent(document.getElementById('draw'), 'tuchstart', imageSetting);
 }
 
 function open() {
   var dataURL = canvas.toDataURL('image/png');
   document.getElementById('canvasImg').src = dataURL;
 }
-// addEvent(document.getElementById('mypaper'), 'click', open)
+addEvent(document.getElementById('mypaper'), 'click', open)
 addEvent(window, 'load', initCanvas);
