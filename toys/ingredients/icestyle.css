@@ -5,10 +5,11 @@
 }
 #wrap{
 	width: 75%;
+	height: calc(142px*5);
 	border: 10px solid transparent;
 	border-image: linear-gradient(to left, hsl(80, 80%, 95%) 0%, hsl(80, 100%, 40%) 50%, hsl(80, 80%, 95%) 100%);
 	border-image-slice: 50;
-	padding: 5px;
+	padding: 0;
 	display: -webkit-flex;
 	display: -moz-flex;
 	display: -ms-flexbox;
@@ -20,30 +21,73 @@
 }
 #mycv{
 	flex: 2 50%;
-	position: relative;
+	order: 2;
 }
 #ingredients{
-	flex: 3 40%;
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: space-around;
+	flex: 1 30%;
+	flex-flow: column wrap;
+	order: 1;
+	position: relative;
 }
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-	.ingredients{
-		display: inline-block;
-	}
+#ingredients .tabs{
+	display: inline-block;
+	width: 10em;
+	background: hsl(0, 0%, 100%);
+	position: absolute;
+	margin-top: 2em;
+	border-radius: 5px;
+	box-shadow: 0 3px 3px rgba(0,0,0,0.1);
 }
-.lists{
-	margin: 0;
+#ingredients .tabs > h3{
+	position: absolute;
+	font: 800 1em/1em '微軟細黑體';
+	width: 60px;
+	height: 1.8em;
+	top: -1.9em;
+	left: 10px;
+	padding: 0;
+	padding-top: 5px;
+	margin: auto;
+	text-align: center;
+	color: hsl(220, 30%, 40%);
+	background-color: #ddd;
+	border-radius: 5px;
+}
+#ingredients .tabs:first-child{
+	z-index: 1;
+}
+#ingredients .tabs:nth-child(2) h3{
+	left: 75px;
+}
+#ingredients .tabs:nth-child(3) h3{
+	left: 140px;
+}
+#ingredients .tabs:last-child h3{
+	left: 205px;
+}
+#ingredients .tabs a{
+	text-decoration: none;
+	color: inherit;
+	outline: 0 none;
+}
+#ingredients .tabs .imgpackage{
+	margin: auto;
+	margin-top: 3em;
 	width: 6.25em;
 }
+.lists{
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
 .lists:hover{
+	top: -10px;
 	margin-right: 2px;
 	border: 5px solid hsl(120, 100%, 80%);
 }
 .drag{
 	position: absolute;
-  height: 20%;
+  height: 130px;
   background: transparent;
   z-index: 2;
   opacity: 0.4;
