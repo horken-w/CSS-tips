@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+    body {background-color:rgba(67,67,67,1); margin:0;padding:0;}
+  </style>
+</head>
+<body>
+  <p>Click here to transition between chart</p>
+  <script type="text/javascript" src="http://use.typekit.com/gkh2zdn.js"></script>
+  <script>
+    try {
+      Typekit.load({
+        active: function() {
+          // Javascript to execute when fonts become active
+          init();
+        }
+      })
+    } catch(e) {}
+
+    // screen size variables
+    var SCREEN_WIDTH = window.innerWidth,
+    SCREEN_HEIGHT = window.innerHeight;
+    
+      //our fillText parameters
+    var textAscent = 150;
+      var textOffsetLeft = 40;
+    var words ="hello web fonts!";
+    
+    //the rcanvas is just a working canvas where we get everything set up     
+    var rcanvas = document.createElement('canvas');
+      var rcontext = rcanvas.getContext('2d');
+      
+    //the drawing canvas is the one we'll actually add to our document and display
+      var dcanvas = document.createElement('canvas');
+      var dcontext = dcanvas.getContext('2d');
+      
+    //everyone's width and height are exactly the same
+    rcanvas.width = dcanvas.width = SCREEN_WIDTH;
+    rcanvas.height = dcanvas.height = SCREEN_HEIGHT;
+    
+     // Add our drawing canvas
+      document.body.appendChild(dcanvas); 
+
+    //set the font properties we'd like to see (proxima nova soft has been added to my typekit kit)
+    rcontext.font = "700 162px proxima-nova-soft";
+              
+      function init() {
+        //set a fill style and  fill the shadow text
+      rcontext.fillStyle  ="rgba(230,80,91,0.3)";
+      rcontext.fillText(words, textOffsetLeft, textAscent);           
+      //render the text we just made into the canvas we can actually see
+      dcontext.drawImage(rcanvas, -4,2);
+      
+      //same thing with a different colour for the main filled text     
+      rcontext.fillStyle = "rgba(227,130,178,1)";
+      rcontext.fillText(words, textOffsetLeft, textAscent);
+      //draw into our drawing canvas    
+      dcontext.drawImage(rcanvas, 0,0);
+
+      }
+  </script>
+</body>
+</html>

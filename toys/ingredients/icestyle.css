@@ -53,6 +53,19 @@
 	background-color: #ddd;
 	border-radius: 5px;
 }
+/* #ingredients .tabs,  */
+#ingredients .tabs h3{
+	-webkit-transition: all 500ms ease-in-out;
+	-moz-transition: all 500ms ease-in-out;
+	transition: all 500ms ease-in-out;
+}
+#ingredients .tabs:target{
+	z-index: 2;
+}
+#ingredients .tabs:target h3{
+	color: hsl(220, 80%, 90%);
+	background: hsl(260, 100%, 60%);
+}
 #ingredients .tabs:first-child{
 	z-index: 1;
 }
