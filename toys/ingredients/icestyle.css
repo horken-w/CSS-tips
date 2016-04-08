@@ -100,8 +100,17 @@
 }
 .drag{
 	position: absolute;
-  height: 130px;
   background: transparent;
   z-index: 2;
-  opacity: 0.4;
+}
+/*tool btn*/
+.toolbtn{
+	width: 120px;
+	height: 60px;
+	background: hsl(180, 20%, 60%);
+	margin: 2px;
+	display: inline-block;
+}
+.toolbtn:hover{
+	box-shadow: 0 0 10px 2px hsla(120, 30%, 60%, 1);
 }
