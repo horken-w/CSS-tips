@@ -1,72 +1,123 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head lang=zh-Hant>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<link rel="stylesheet" href="ingredients/icestyle.css">
-	<style>
-		
-	</style>
+	<style></style>
 </head>
 	<body>
 		<div id="wrap">
 			<div id="mycv">
-				<canvas id="mypaper" width=700 height=645></canvas>
+				<canvas id="mypaper" width=640 height=640></canvas>
 			</div>
 			<div id="ingredients">
 				<div id="tab1" class="tabs">
-					<h3><a href="#tab1">第一頁</a></h3>
-					<div class="imgpackage">
-						<img src="ingredients/images/item-1.png" alt="cottonCandy" class="lists">
-						<img src="ingredients/images/item-2.png" alt="cherry" class="lists">
-						<img src="ingredients/images/item-3.png" alt="strawberry" class="lists">
-						<img src="ingredients/images/item-4.png" alt="jellyDrops" class="lists">
-						<img src="ingredients/images/item-5.png" alt="chips" class="lists">
+					<h3><a href="#tab1" class="desserts hiddentext">配料</a></h3>
+					<div class="imgpackage desertlist">
+						<div id="gummy" class="rectangle"></div>
+						<div id="gummybear" class="rectangle"></div>
+						<div id="taro" class="rectangle"></div>
+						<div id="cottoncandy" class="rectangle"></div>
+						<div id="dumpling" class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div id="straws" class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
 					</div>
 				</div>
 				<div id="tab2" class="tabs">
-					<h3><a href="#tab2">第二頁</a></h3>
-					<div class="imgpackage">
-						<img src="ingredients/images/item-4.png" alt="jellyDrops" class="lists">
-						<img src="ingredients/images/item-1.png" alt="cottonCandy" class="lists">
-						<img src="ingredients/images/item-3.png" alt="strawberry" class="lists">
-						<img src="ingredients/images/item-2.png" alt="cherry" class="lists">
-						<img src="ingredients/images/item-5.png" alt="chips" class="lists">
+					<h3><a href="#tab2" class="foods hiddentext">台味</a></h3>
+					<div class="imgpackage foodslist">
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
 					</div>
 				</div>
 				<div id="tab3" class="tabs">
-					<h3><a href="#tab3">第三頁</a></h3>
-					<div class="imgpackage">
-						<img src="ingredients/images/item-5.png" alt="chips" class="lists">
-						<img src="ingredients/images/item-2.png" alt="cherry" class="lists">
-						<img src="ingredients/images/item-3.png" alt="strawberry" class="lists">
-						<img src="ingredients/images/item-1.png" alt="cottonCandy" class="lists">
-						<img src="ingredients/images/item-4.png" alt="jellyDrops" class="lists">
+					<h3><a href="#tab3" class="fruits hiddentext">水果</a></h3>
+					<div class="imgpackage fruitslist">
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
 					</div>
 				</div>
 				<div id="tab4" class="tabs">
-					<h3><a href="#tab4">第四頁</a></h3>
-					<div class="imgpackage">
-						<img src="ingredients/images/item-1.png" alt="cottonCandy" class="lists">
-						<img src="ingredients/images/item-3.png" alt="strawberry" class="lists">
-						<img src="ingredients/images/item-2.png" alt="cherry" class="lists">
-						<img src="ingredients/images/item-5.png" alt="chips" class="lists">
-						<img src="ingredients/images/item-4.png" alt="jellyDrops" class="lists">
+					<h3><a href="#tab4" class="decoration hiddentext">裝飾</a></h3>
+					<div class="imgpackage decorationlist">
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
 					</div>
+				</div>
+				<div id="tab5" class="tabs">
+					<h3><a href="#tab5" class="symbol hiddentext">文字</a></h3>
+					<div class="imgpackage symbollist">
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+					</div>
+				</div>
+				<div class="btn_group">
+					<div class="btn_func btn_prev"><img src="ingredients/images/iceBg/ice-button-prev.png" alt="eventTaiwan"></div>
+					<div class="btn_func btn_next"><img src="ingredients/images/iceBg/ice-button-next.png" alt="eventTaiwan"></div>
+					<div id="draw" class="btn_func btn_sent"><img src="ingredients/images/iceBg/ice-button-ok.png" alt="eventTaiwan"></div>
 				</div>
 			</div>
 		</div>
-		<div class="tooling">
-			<div id="grow" class="toolbtn">放大</div>
-			<div id="shrink" class="toolbtn">縮小</div>
-			<div id="rotate" class="toolbtn">旋轉</div>
-			<div id="reflexion" class="toolbtn">鏡射</div>
+		<div class="btn_action hidden">
+			<div id="grow" class="action"></div>
+			<div id="shrink" class="action"></div>
+			<div id="mirrored" class="action"></div>
+			<div id="rotate" class="action"></div>
+			<div id="remove" class="action"></div>
 		</div>
 		<img alt="MyCanvas" id="canvasImg">
-		<button id="draw">觀看我的作品</button>
 
 	  <script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
 		<script src="ingredients/icejs.js"></script>
+		<script src="ingredients/html2canvas.js"></script>
+		<script>
+		</script>
 	</body>
 </html>

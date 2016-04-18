@@ -2,13 +2,11 @@
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 #wrap{
-	width: 75%;
-	height: calc(142px*5);
-	border: 10px solid transparent;
-	border-image: linear-gradient(to left, hsl(80, 80%, 95%) 0%, hsl(80, 100%, 40%) 50%, hsl(80, 80%, 95%) 100%);
-	border-image-slice: 50;
+	width: 960px;
 	padding: 0;
 	display: -webkit-flex;
 	display: -moz-flex;
@@ -17,100 +15,225 @@
 	flex-flow: row nowrap;
 	-ms-flex-flow: row nowrap;
 	justify-content: flex-end;
-	overflow: hidden;
 }
-#mycv{
-	flex: 2 50%;
-	order: 2;
-}
-#ingredients{
-	flex: 1 30%;
-	flex-flow: column wrap;
-	order: 1;
-	position: relative;
-}
-#ingredients .tabs{
+/* items menu */
+.hiddentext{
 	display: inline-block;
-	width: 10em;
-	background: hsl(0, 0%, 100%);
-	position: absolute;
-	margin-top: 2em;
-	border-radius: 5px;
-	box-shadow: 0 3px 3px rgba(0,0,0,0.1);
+	text-indent: 100%;
+	white-space: nowrap;
+  overflow: hidden;
 }
-#ingredients .tabs > h3{
-	position: absolute;
-	font: 800 1em/1em '微軟細黑體';
-	width: 60px;
-	height: 1.8em;
-	top: -1.9em;
-	left: 10px;
-	padding: 0;
-	padding-top: 5px;
-	margin: auto;
-	text-align: center;
-	color: hsl(220, 30%, 40%);
-	background-color: #ddd;
-	border-radius: 5px;
+.desserts{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-14px top;
+	height:102px; 
+	width:52px;
+}
+.foods{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-74px top; 
+	height:102px; 
+	width:52px;
+}
+.fruits{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-134px top; 
+	height:102px; 
+	width:52px;
+}
+.decoration{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-194px top; 
+	height:102px; 
+	width:52px;
+}
+.symbol{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-254px top; 
+	height:102px; 
+	width:52px;
+}
+.desserts:hover{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-14px -102px;
+	height:102px; 
+	width:52px;
+}
+.foods:hover{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-74px -102px; 
+	height:102px; 
+	width:52px;
+}
+.fruits:hover{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-134px -102px; 
+	height:102px; 
+	width:52px;
+}
+.decoration:hover{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-194px -102px; 
+	height:102px; 
+	width:52px;
+}
+.symbol:hover{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-254px -102px; 
+	height:102px; 
+	width:52px;
+}
+#ingredients .tabs:target .desserts{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-14px -102px;
+	height:102px; 
+	width:52px;
+}
+#ingredients .tabs:target .foods{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-74px -102px; 
+	height:102px; 
+	width:52px;
+}
+#ingredients .tabs:target .fruits{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-134px -102px; 
+	height:102px; 
+	width:52px;
+}
+#ingredients .tabs:target .decoration{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-194px -102px; 
+	height:102px; 
+	width:52px;
+}
+#ingredients .tabs:target .symbol{
+	background: url("images/iceBg/ice-item.png");
+	background-position:-254px -102px; 
+	height:102px; 
+	width:52px;
 }
 /* #ingredients .tabs,  */
-#ingredients .tabs h3{
+#ingredients .tabs{
+	position: absolute;
 	-webkit-transition: all 500ms ease-in-out;
 	-moz-transition: all 500ms ease-in-out;
 	transition: all 500ms ease-in-out;
 }
-#ingredients .tabs:target{
+
+#ingredients .tabs > h3{
+	position: absolute;
+	left: -15px;
+	padding: 0;
+	margin: auto;
+	background-color: transparent;
 	z-index: 2;
 }
-#ingredients .tabs:target h3{
-	color: hsl(220, 80%, 90%);
-	background: hsl(260, 100%, 60%);
+
+#ingredients .tabs:target{
+	z-index: 2;
 }
 #ingredients .tabs:first-child{
 	z-index: 1;
 }
 #ingredients .tabs:nth-child(2) h3{
-	left: 75px;
+	left: 54px;
 }
 #ingredients .tabs:nth-child(3) h3{
-	left: 140px;
+	left: 120px;
 }
-#ingredients .tabs:last-child h3{
-	left: 205px;
+#ingredients .tabs:nth-child(4) h3{
+	left: 185px;
 }
-#ingredients .tabs a{
-	text-decoration: none;
-	color: inherit;
-	outline: 0 none;
+#ingredients .tabs:nth-child(5) h3{
+	left: 245px;
+}
+/*Menu item*/
+
+#mycv{
+	flex: 2 0;
+	order: 1;
+}
+#ingredients{
+	flex: 1 0;
+	flex-flow: column wrap;
+	order: 2;
+	background: url("images/iceBg/ice-tab.png") no-repeat;
+	position: relative;
+	padding: 0 19px;
 }
 #ingredients .tabs .imgpackage{
-	margin: auto;
-	margin-top: 3em;
-	width: 6.25em;
-}
-.lists{
-	position: relative;
+	position: absolute;
+	width: calc(94px * 3);
+	top: 103px;
 	margin: 0;
 	padding: 0;
 }
-.lists:hover{
-	top: -10px;
-	margin-right: 2px;
-	border: 5px solid hsl(120, 100%, 80%);
+/*items List & BG*/
+.desertlist{
+	background: url('images/ingredientsItem/itemList.png') no-repeat -18px 0, url('images/iceBg/menubg.png') repeat-y left;
+	height:calc(114px*4); 
+}
+.foodslist{
+	background: url('images/ingredientsItem/itemList.png') no-repeat -18px -380px, url('images/iceBg/menubg.png') repeat-y left;
+	height:calc(114px*4); 
+}
+.fruitslist{
+	background: url('images/ingredientsItem/itemList.png') no-repeat -18px 11px, url('images/iceBg/menubg.png') repeat-y left;
+	height:calc(114px*4); 
+}
+.decorationlist{
+	background: url('images/ingredientsItem/itemList.png') no-repeat -18px -380px, url('images/iceBg/menubg.png') repeat-y left;
+	height:calc(114px*4);
+}
+.symbollist{
+	background: url('images/ingredientsItem/itemList.png') no-repeat -18px -380px, url('images/iceBg/menubg.png') repeat-y left;
+	height:calc(114px*4);
+}
+.rectangle{
+	display: block;
+	float: left;
+	width: 94px;
+	height: 114px;
+	padding: 0;
+	cursor: pointer;
 }
 .drag{
 	position: absolute;
   background: transparent;
   z-index: 2;
 }
-/*tool btn*/
-.toolbtn{
-	width: 120px;
-	height: 60px;
-	background: hsl(180, 20%, 60%);
-	margin: 2px;
-	display: inline-block;
+
+.btn_group{
+	position: absolute;
+	bottom: 0;
+	width: 88%;
+	left: 6%;
+	bottom: 10px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
 }
-.toolbtn:hover{
-	box-shadow: 0 0 10px 2px hsla(120, 30%, 60%, 1);
+.btn_action{
+	background: url('images/iceBg/ice-icon.png') no-repeat left / 100% border-box;
+	height: 30px;
+	width: 150px;
+	margin-left: 30%;
+	position: absolute;
+	top: -25px;
+}
+.btn_action > .action{
+	display: block;
+	float: left;
+	width: 30px;
+	height: 30px;
+}
+
+
+.hidden{
+	display: none;
 }

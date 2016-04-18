@@ -1,8 +1,9 @@
 var canvas;
-var ctx, rage=1.5;
+var ctx, imagePackage;
+var posX=0, posY=0, angle=0;
 var _startX, _startY, _offsetX, _offsetY, _dragElement;
 var bgimg = new Image();
-bgimg.src = 'ingredients/images/ice.png';
+bgimg.src = 'ingredients/images/iceBg/ice-01.png';
 var hasTouch = 'ontouchstart' in document;
 
 function addEvent(obj, evt, fn) {
@@ -13,6 +14,10 @@ function addEvent(obj, evt, fn) {
 }
 function tag(tag){
   return document.getElementById(tag);
+}
+var actionBtn=function(){
+  document.getElementsByClassName('btn_action')[0].classList.remove('hidden');
+  return document.getElementsByClassName('btn_action')[0];
 }
 function dragEvent() { // mouse drag & touch drag
   var canvas=tag('mycv');
@@ -26,7 +31,7 @@ function dragEvent() { // mouse drag & touch drag
     if(!e.touches){
       _dragElement.style.left=(_offsetX+e.clientX-_startX)+'px';
       _dragElement.style.top=(_offsetY+e.clientY-_startY)+'px';
-    }else if(e.target.classList[0] == 'drag'){
+    }else if(e.target.parentNode.classList[0] == 'drag'){
       e.preventDefault();
       _dragElement.style.left=(_offsetX+e.touches[0].clientX-_startX)+'px';
       _dragElement.style.top=(_offsetY+e.touches[0].clientY-_startY)+'px';
@@ -34,10 +39,14 @@ function dragEvent() { // mouse drag & touch drag
   }
   var onStartEvent=function(e){
   	e.touches == null ? e: e=e.touches[0];
-  	var _target=e.target != null ? e.target: e.srcElement;
+  	var _target=e.target.parentNode != null ? e.target.parentNode: e.srcElement.parentElement;
     tag('pickup') === null ? '' : tag('pickup').removeAttribute('id');
-    _target.id+='pickup';
+    _target.className === 'drag' ? _target.id ='pickup' : 
+      _target.parentNode.className ==='drag' ?
+      _target.parentNode.id ='pickup' : '';
+
   	if(e!=null && _target.classList[0] == 'drag'){
+      _target.appendChild(actionBtn());
   		_startX=e.clientX;
   		_startY=e.clientY;
 
@@ -48,7 +57,9 @@ function dragEvent() { // mouse drag & touch drag
       if(!hasTouch)	document.onmousemove=onMoveEvent;
 		  document.body.focus();
 		  return false;
-  	}
+  	} else if (!document.getElementById('pickup')) {
+      document.getElementsByClassName('btn_action')[0].className += ' hidden';
+    }
   }
   var onStopEvent=function(){
   	if(_dragElement != null || _dragElement != undefined){
@@ -67,41 +78,79 @@ function dragEvent() { // mouse drag & touch drag
   canvas.onmousedown=onStartEvent;
   document.addEventListener('mouseup', onStopEvent, false);
 }
+var getMirDirection = function(tarimg){
+  var transScaleRegex = /\.*scaleX\(([-+]?[0-9])\)/g;
+  return parseInt(transScaleRegex.exec(tarimg.getAttribute('style'))[1]||1);
+}
+var getRotAngle = function(tarimg){
+  var transRotateRegex= /\.*rotate\((\d*deg)\)/g;
+  return parseInt(transRotateRegex.exec(tarimg.getAttribute('style'))[1])||0;
+}
 function reSizeImg(){
-  var grow = function(){
-    var tarimg=tag('pickup') || document.getElementsByClassName('drag')[0];
-    if(tarimg.height < tarimg.naturalHeight*rage){
-       tarimg.style.height=tarimg.height*1.1+'px';
+  var deg=0,range=1.2, mirX=1; 
+  var growItem = function(){
+    var tarimg= tag('pickup')!=undefined ? tag('pickup').childNodes[0] : document.getElementsByClassName('drag')[0].childNodes[0];
+    if(tarimg.height < tarimg.naturalHeight){
+       tarimg.style.height=tarimg.height*range+'px';
     }
   };
-  var shrink= function(){
-    var tarimg=tag('pickup') || document.getElementsByClassName('drag')[0];
-    if(tarimg.height > tarimg.naturalHeight/rage){
-       tarimg.style.height=tarimg.height/1.1+'px';
+  var shrinkItem= function(){
+    var tarimg= tag('pickup')!=undefined ? tag('pickup').childNodes[0] : document.getElementsByClassName('drag')[0].childNodes[0];
+    if(tarimg.height > tarimg.naturalHeight*0.6){
+       tarimg.style.height=tarimg.height/range+'px';
     }
   }
-  var rotate= function(){
-    var tarimg=tag('pickup') || document.getElementsByClassName('drag')[0];
+  
+  var rotateItem= function(){
+    var tarimg= tag('pickup')!=undefined ? tag('pickup').childNodes[0] : document.getElementsByClassName('drag')[0].childNodes[0] || undefined;
+    if(tarimg !== undefined){
+      var mirX = getMirDirection(tarimg);
+      var deg = getRotAngle(tarimg);
+      deg>345 ? deg=45 : deg+=45;
+      tarimg.style.transform='rotate('+deg+'deg) scaleX('+mirX+')';
+    }
   }
-  var reflexion= function(){
-    var tarimg=tag('pickup') || document.getElementsByClassName('drag')[0];
+  var reflexionItem= function(){
+    var tarimg= tag('pickup')!=undefined ? tag('pickup').childNodes[0] : document.getElementsByClassName('drag')[0].childNodes[0] || undefined;
+    if(tarimg !== undefined){
+      var mirX = getMirDirection(tarimg);
+      var deg = getRotAngle(tarimg);
+      if(mirX === 1){
+        mirX =-1;
+      }else{
+        mirX =1;
+      }
+      tarimg.style.transform='rotate('+deg+'deg) scaleX('+mirX+')';
+    }
   }
-  addEvent(tag('grow'), 'click', grow);
-  addEvent(tag('shrink'), 'click', shrink);
+  var removeItem=function(){
+    var tarimg= tag('pickup')!=undefined ? tag('pickup').childNodes[0] : document.getElementsByClassName('drag')[0].childNodes[0];
+    tag('mycv').children[0].appendChild(actionBtn());
+    document.getElementsByClassName('btn_action')[0].className += ' hidden';
+    if (tag('mycv').children.length-1 > 1 ) tarimg.remove();
+  }
+  addEvent(tag('grow'), 'click', growItem);
+  addEvent(tag('shrink'), 'click', shrinkItem);
+  addEvent(tag('rotate'), 'click', rotateItem);
+  addEvent(tag('mirrored'), 'click', reflexionItem);
+  addEvent(tag('remove'), 'click', removeItem);
 }
 function cloneItems(e) {
   var _target = e.target;
   var imgTag = function(src, alt) {
-    var _img = document.createElement('img');
-  	_img.setAttribute('alt', alt);
-    _img.setAttribute('src', src);
-    _img.style.left=500+'px';
-    _img.style.top=200+'px';
+    var _img = document.createElement('img'), _div=document.createElement('div');
+  	_img.setAttribute('alt', alt ? alt : '食物被偷吃掉了') ;
+    src ? _img.setAttribute('src', src) : '';;
+    _img.style.height=_img.height*0.8+'px';
+    _img.style.transform='rotate(0deg) scaleX(1)';
+    _div.appendChild(_img)
+    _div.style.left=200+'px';
+    _div.style.top=280+'px'
 
-    return _img
+    return _div;
 	}
-  if(e.target.localName === 'img'){
-    var comp = imgTag(_target.src, _target.alt),
+  if(_target.localName === 'div'){
+    var comp = imgTag(imagePackage[_target.id] !== undefined ? imagePackage[_target.id].src : '', _target.id|| ''),
     local = tag('mypaper');
     comp.className = 'drag';
     local.parentNode.insertBefore(comp, local);
@@ -109,32 +158,62 @@ function cloneItems(e) {
 	
 }
 function imageSetting(){
-	var imgitems=document.getElementsByClassName('drag'),
-			canv=tag('mypaper'),
-			objlen=imgitems.length;
+	// var imgitems=document.getElementsByClassName('drag'),
+	// 		canv=tag('mypaper'),
+	// 		objlen=imgitems.length;
 			
-	var Imagesdraw = function(obj){
-    ctx.translate(125, 125);
-    ctx.rotate(1);
-		ctx.drawImage(obj.obj, obj.x, obj.y, obj.width, obj.height);
-	}
-	while (imgitems[0] != undefined){
-		var imgobj={};
-		imgobj.x=imgitems[0].offsetLeft-canv.offsetLeft;
-		imgobj.y=imgitems[0].offsetTop-canv.offsetTop;
-		imgobj.obj=imgitems[0];
-    imgobj.width=imgitems[0].width;
-    imgobj.height=imgitems[0].height;
-		Imagesdraw(imgobj);
-		imgobj.obj.parentNode.removeChild(imgobj.obj);
-	}
-  open();
+	// var Imagesdraw = function(obj){
+ //    var TO_RADIANS = Math.PI/180;
+	// 	ctx.drawImage(obj.obj, obj.x, obj.y, obj.width, obj.height);
+	// }
+	// while (imgitems[0] != undefined){
+	// 	var imgobj={};
+	// 	imgobj.x=imgitems[0].offsetLeft-canv.offsetLeft;
+	// 	imgobj.y=imgitems[0].offsetTop-canv.offsetTop;
+	// 	imgobj.obj=imgitems[0];
+ //    imgobj.width=imgitems[0].width;
+ //    imgobj.height=imgitems[0].height;
+	// 	Imagesdraw(imgobj);
+	// 	imgobj.obj.parentNode.removeChild(imgobj.obj);
+	// }
+ //  open();
+  $('#ingredients').addClass('hidden');
+  html2canvas(document.body, {
+    onrendered: function(canvas) {
+      var dataURL = canvas.toDataURL('image/png');
+      tag('canvasImg').src = dataURL;
+    }
+  });
+}
+
+function imageLoading(callback){
+  var source = { 
+    gummy: './ingredients/images/ingredientsItem/item-001.png',
+    gummybear: './ingredients/images/ingredientsItem/item-002.png',
+    cottoncandy: './ingredients/images/ingredientsItem/item-004.png',
+    taro: './ingredients/images/ingredientsItem/item-003.png',
+    straws: './ingredients/images/ingredientsItem/item-007.png',
+    dumpling: './ingredients/images/ingredientsItem/item-005.png'
+  }, loadImg=0, countImg=0, images={};
+  for (var src in source){
+    countImg++;
+  }
+  for (var src in source){
+    images[src]= new Image();
+    // images[src].onload=function(){
+    //   if(++loadImg >= countImg) callback(images);
+    // }
+    images[src].src=source[src];
+  };
+  return images;
 }
 function initCanvas() {
   var listitems = tag('ingredients').children;
   canvas = tag("mypaper");
   ctx = canvas.getContext("2d");
   ctx.drawImage(bgimg, 0, 0, canvas.width, canvas.height);
+  // imageLoading(function(images){ctx.drawImage(images.gummy, 20, 20, 75, 75)});
+  imagePackage=imageLoading()
   for (var i = 0; i < listitems.length; i++) {
     hasTouch
       ? addEvent(listitems[i], 'touchstart', cloneItems)
@@ -144,9 +223,5 @@ function initCanvas() {
   reSizeImg();
   addEvent(tag('draw'), 'tuchstart', imageSetting) 
   addEvent(tag('draw'), 'click', imageSetting);
-}
-function open() {
-  var dataURL = canvas.toDataURL('image/png');
-  tag('canvasImg').src = dataURL;
 }
 addEvent(window, 'load', initCanvas);
