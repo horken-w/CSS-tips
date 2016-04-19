@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="mycanvas" width="860" height="860"></canvas>
+    <script src="breakoutClone/breakoutCloneJs.js"></script>
+    <script>
+      var ballr = 10;
+      var rowcolors = ["#FF1C0A", "#FFFD0A", "#00A308", "#0008DB", "#EB0093"];
+      var paddlecolor = "hsla(69, 50%, 30%, 1)";
+      var ballcolor = "#FFFFFF", backcolor = "#000000";
+
+      function draw(){
+        ctx.fillStyle = backcolor;
+        clear();
+        ctx.fillStyle-ballcolor;
+        circle(x, y, ballr);
+
+        if (rightDown) paddlex+=5;
+        else if (leftDown) paddlex -=5;
+        ctx.fillStyle = paddlecolor;
+        rect( paddlex, height-paddleh, paddlew, paddleh);
+        
+        drawbricks();
+
+        rowheight =brickheight + padding;
+        colwidth = brickwidth + padding;
+        row = Math.floor(y/rowheight);
+        col = Math.floor(x/colwidth);
+        if( y < nrows * rowheight && row >= 0 && col >= 0 && bricks[row][col] == 1){
+          dy = -dy;
+          bricks[row][col] = 0;
+        }
+        if(x + dx +ballr > width || x + dx < 0) 
+          dx = -dx;
+        if(y + dy - ballr < 0) dy = -dy;
+        else if (y + dy + ballr > height -padding){
+          if (x > paddlex && x < paddlex + paddlew){
+            dx = 8*((x-(paddlex+paddlew/2))/paddlew);
+            dy = -dy;
+          }
+          else if (y + dy + ballr > height)
+            clearInterval(intervalId)
+        }
+        x+=dx;
+        y+=dy;
+      }
+      init();
+      initbricks();
+    </script>
+  </body>
+</html>   
