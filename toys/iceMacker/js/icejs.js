@@ -200,12 +200,12 @@ function imageSetting(){
 
 function imageLoading(callback){
   var source = { 
-    gummy: './ingredients/images/ingredientsItem/item-001.png',
-    gummybear: './ingredients/images/ingredientsItem/item-002.png',
-    cottoncandy: './ingredients/images/ingredientsItem/item-004.png',
-    taro: './ingredients/images/ingredientsItem/item-003.png',
-    straws: './ingredients/images/ingredientsItem/item-007.png',
-    dumpling: './ingredients/images/ingredientsItem/item-005.png'
+    gummy: './images/ingredientsItem/item-001.png',
+    gummybear: './images/ingredientsItem/item-002.png',
+    cottoncandy: './images/ingredientsItem/item-004.png',
+    taro: './images/ingredientsItem/item-003.png',
+    straws: './images/ingredientsItem/item-007.png',
+    dumpling: './images/ingredientsItem/item-005.png'
   }, loadImg=0, countImg=0, images={};
   for (var src in source){
     countImg++;

@@ -26,7 +26,7 @@
 }
 #ingredients, #formwrap{
 	height: 100vh;
-	background: url("images/icetools/ice-portrait.png") no-repeat top left / 100% border-box;
+	background: url("../images/icetools/ice-portrait.png") no-repeat top left / 100% border-box;
 	position: relative;
 	padding: 0 10px;
 	margin: -5px;
@@ -39,7 +39,7 @@
 }
 
 .icelist{
-	background: url('images/icebg/ice-portrait.png') no-repeat -12px 0;
+	background: url("../images/icebg/ice-portrait.png") no-repeat -12px 0;
 	left: 80px;
 }
 @media (min-device-width: 60em){
@@ -61,7 +61,7 @@
 	#ingredients, #formwrap{
 		flex: 1 100%;
 		order: 2;
-		background: url("images/icetools/ice-landscrap.png") no-repeat;
+		background: url("../images/icetools/ice-landscrap.png") no-repeat;
 		position: relative;
 		padding: 0 19px;
 	}
@@ -73,7 +73,7 @@
 		padding: 0;
 	}
 	.icelist{
-		background: url('images/icebg/ice-landscrap.png') no-repeat -18px 0;
+		background: url("../images/icebg/ice-landscrap.png") no-repeat -18px 0;
 		height:calc(114px*4);
 		left: 0;
 	}
@@ -86,7 +86,7 @@
 		height: 30vh;
 	}
 	.icelist{
-		background: url('images/icebg/ice-portrait.png') no-repeat -12px 0;
+		background: url("../images/icebg/ice-portrait.png") no-repeat -12px 0;
 		left: 50px;
 		-webkit-background-size: 70%;
 		background-size: 70%;
@@ -101,91 +101,91 @@
   overflow: hidden;
 }
 .desserts{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-14px top;
 	height:102px; 
 	width:52px;
 }
 .foods{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-74px top; 
 	height:102px; 
 	width:52px;
 }
 .fruits{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-134px top; 
 	height:102px; 
 	width:52px;
 }
 .decoration{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-194px top; 
 	height:102px; 
 	width:52px;
 }
 .symbol{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-254px top; 
 	height:102px; 
 	width:52px;
 }
 .desserts:hover{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-14px -102px;
 	height:102px; 
 	width:52px;
 }
 .foods:hover{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-74px -102px; 
 	height:102px; 
 	width:52px;
 }
 .fruits:hover{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-134px -102px; 
 	height:102px; 
 	width:52px;
 }
 .decoration:hover{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-194px -102px; 
 	height:102px; 
 	width:52px;
 }
 .symbol:hover{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-254px -102px; 
 	height:102px; 
 	width:52px;
 }
 #ingredients .tabs:target .desserts{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-14px -102px;
 	height:102px; 
 	width:52px;
 }
 #ingredients .tabs:target .foods{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-74px -102px; 
 	height:102px; 
 	width:52px;
 }
 #ingredients .tabs:target .fruits{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-134px -102px; 
 	height:102px; 
 	width:52px;
 }
 #ingredients .tabs:target .decoration{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-194px -102px; 
 	height:102px; 
 	width:52px;
 }
 #ingredients .tabs:target .symbol{
-	background: url("images/icetools/ice-item.png");
+	background: url("../images/icetools/ice-item.png");
 	background-position:-254px -102px; 
 	height:102px; 
 	width:52px;
@@ -226,23 +226,23 @@
 
 /*items List & BG*/
 .desertlist{
-	background: url('images/ingredientsItem/itemList.png') no-repeat -18px 0, url('images/icetools/menubg.png') repeat-y left;
+	background: url("../images/ingredientsItem/itemList.png") no-repeat -18px 0, url("../images/icetools/menubg.png") repeat-y left;
 	height:calc(114px*4); 
 }
 .foodslist{
-	background: url('images/ingredientsItem/itemList.png') no-repeat -18px -380px, url('images/icetools/menubg.png') repeat-y left;
+	background: url("../images/ingredientsItem/itemList.png") no-repeat -18px -380px, url("../images/icetools/menubg.png") repeat-y left;
 	height:calc(114px*4); 
 }
 .fruitslist{
-	background: url('images/ingredientsItem/itemList.png') no-repeat -18px 11px, url('images/icetools/menubg.png') repeat-y left;
+	background: url("../images/ingredientsItem/itemList.png") no-repeat -18px 11px, url("../images/icetools/menubg.png") repeat-y left;
 	height:calc(114px*4); 
 }
 .decorationlist{
-	background: url('images/ingredientsItem/itemList.png') no-repeat -18px -380px, url('images/icetools/menubg.png') repeat-y left;
+	background: url("../images/ingredientsItem/itemList.png") no-repeat -18px -380px, url("../images/icetools/menubg.png") repeat-y left;
 	height:calc(114px*4);
 }
 .symbollist{
-	background: url('images/ingredientsItem/itemList.png') no-repeat -18px -380px, url('images/icetools/menubg.png') repeat-y left;
+	background: url("../images/ingredientsItem/itemList.png") no-repeat -18px -380px, url("../images/icetools/menubg.png") repeat-y left;
 	height:calc(114px*4);
 }
 .rectangle{
@@ -303,7 +303,7 @@
 	}
 }
 .btn_action{
-	background: url('images/icetools/ice-icon.png') no-repeat left / 100% border-box;
+	background: url("../images/icetools/ice-icon.png") no-repeat left / 100% border-box;
 	height: 30px;
 	width: 150px;
 	margin-left: 30%;
@@ -324,7 +324,7 @@
 /* Preview Page*/
 #formwrap{
 	line-height: 2em;
-	font-family: '微軟正黑體', '標楷體', sans-serif;
+	font-family: "微軟正黑體", "標楷體", sans-serif;
 }
 #formwrap .formpaper{
 	position: relative;

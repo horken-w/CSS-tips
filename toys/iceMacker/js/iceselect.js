@@ -27,51 +27,51 @@ function getBackground(evt){
   var iceModel, _tarimg=evt.target.id;
   switch (_tarimg){
     case 'pureice':
-      iceModel={pureice: './ingredients/images/icebg/ice-01-bg.png'};
+      iceModel={pureice: './images/icebg/ice-01-bg.png'};
       imageLoading(iceModel, function(images){ ctx.drawImage(images.pureice, 0, 0, canvas.width, canvas.height);});
       break;
     case 'purpleice':
-      iceModel={purpleice: './ingredients/images/icebg/ice-02-bg.png'};
+      iceModel={purpleice: './images/icebg/ice-02-bg.png'};
       imageLoading(iceModel, function(images){ ctx.drawImage(images.purpleice, 0, 0, canvas.width, canvas.height);});
       break;
     case 'blackice':
-      iceModel={blackice: './ingredients/images/icebg/ice-03-bg.png'};
+      iceModel={blackice: './images/icebg/ice-03-bg.png'};
       imageLoading(iceModel, function(images){ ctx.drawImage(images.blackice, 0, 0, canvas.width, canvas.height);});
       break;
     case 'blueice':
-      iceModel={blueice: './ingredients/images/icebg/ice-04-bg.png'};
+      iceModel={blueice: './images/icebg/ice-04-bg.png'};
       imageLoading(iceModel, function(images){ ctx.drawImage(images.blueice, 0, 0, canvas.width, canvas.height);});
       break;
     case 'orangeice':
-      iceModel={orangeice: './ingredients/images/icebg/ice-05-bg.png'};
+      iceModel={orangeice: './images/icebg/ice-05-bg.png'};
       imageLoading(iceModel, function(images){ ctx.drawImage(images.orangeice, 0, 0, canvas.width, canvas.height);});
       break;
     case 'yellownOrange':
-      iceModel={yellownOrange: './ingredients/images/icebg/ice-06-bg.png'};
+      iceModel={yellownOrange: './images/icebg/ice-06-bg.png'};
       imageLoading(iceModel, function(images){ ctx.drawImage(images.yellownOrange, 0, 0, canvas.width, canvas.height);});
       break;
     case 'snowmanice':
-      iceModel={snowmanice: './ingredients/images/icebg/ice-07-bg.png'};
+      iceModel={snowmanice: './images/icebg/ice-07-bg.png'};
       imageLoading(iceModel, function(images){ ctx.drawImage(images.snowmanice, 0, 0, canvas.width, canvas.height);});
       break;
     case 'sunice':
-      iceModel={sunice: './ingredients/images/icebg/ice-08-bg.png'};
+      iceModel={sunice: './images/icebg/ice-08-bg.png'};
       imageLoading(iceModel, function(images){ ctx.drawImage(images.sunice, 0, 0, canvas.width, canvas.height);});
       break;
     case 'retangleice':
-      iceModel={retangleice: './ingredients/images/icebg/ice-09-bg.png'};
+      iceModel={retangleice: './images/icebg/ice-09-bg.png'};
       imageLoading(iceModel, function(images){ ctx.drawImage(images.retangleice, 0, 0, canvas.width, canvas.height);});
       break;
     case 'meatice':
-      iceModel={meatice: './ingredients/images/icebg/ice-11-bg.png'};
+      iceModel={meatice: './images/icebg/ice-11-bg.png'};
       imageLoading(iceModel, function(images){ ctx.drawImage(images.meatice, 0, 0, canvas.width, canvas.height);});
       break;
     case 'bubble':
-      iceModel={bubble: './ingredients/images/icebg/ice-10-bg.png'};
+      iceModel={bubble: './images/icebg/ice-10-bg.png'};
       imageLoading(iceModel, function(images){ ctx.drawImage(images.bubble, 0, 0, canvas.width, canvas.height);});
       break;
     case 'noneice':
-      iceModel={noneice: './ingredients/images/icebg/ice-12-bg.png'};
+      iceModel={noneice: './images/icebg/ice-12-bg.png'};
       imageLoading(iceModel, function(images){ ctx.drawImage(images.noneice, 0, 0, canvas.width, canvas.height);});
       break;
     default:
@@ -86,7 +86,7 @@ function initCanvas() {
   ctx = canvas.getContext("2d");
   window.addEventListener('resize', detectPortrait('wrap'));
   if(tag('ingredients')){
-    initbg = {pureice: './ingredients/images/icebg/ice-01-bg.png'};
+    initbg = {pureice: './images/icebg/ice-01-bg.png'};
     imageLoading(initbg, function(images){ ctx.drawImage(images.pureice, 0, 0, canvas.width, canvas.height);});
   }
   else{
