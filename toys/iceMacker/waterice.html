@@ -1,21 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head lang=zh-Hant>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-	<link rel="stylesheet" href="ingredients/icestyle.css">
-	<style></style>
-</head>
+	<head lang="zh-Hant-TW">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=0.5"> -->
+		<title></title>
+		<link rel="stylesheet" href="ingredients/iceLanstyle.css" media="screen and (orientation: landscape)">
+		<link rel="stylesheet" href="ingredients/icePorstyle.css" media="(orientation: portrait)">
+		<style>Ice Maker Beta</style>
+	</head>
 	<body>
 		<div id="wrap">
 			<div id="mycv">
 				<canvas id="mypaper" width=640 height=640></canvas>
 			</div>
-			<div id="ingredients">
+			<div id="ingredients" class="decorate">
 				<div id="tab1" class="tabs">
-					<h3><a href="#tab1" class="desserts hiddentext">配料</a></h3>
+					<h2><a href="#tab1" title="EventTaiwan - Line 235" class="desserts hiddentext">配料</a></h2>
 					<div class="imgpackage desertlist">
+						<div id="gummy" class="rectangle"></div>
+						<div id="gummybear" class="rectangle"></div>
+						<div id="taro" class="rectangle"></div>
+						<div id="cottoncandy" class="rectangle"></div>
+						<div id="dumpling" class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div id="straws" class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+					</div>
+					<div class="imgpackage foodslist hidden">
+						<div id="gummy" class="rectangle"></div>
+						<div id="gummybear" class="rectangle"></div>
+						<div id="taro" class="rectangle"></div>
+						<div id="cottoncandy" class="rectangle"></div>
+						<div id="dumpling" class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div id="straws" class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+						<div class="rectangle"></div>
+					</div>					
+					<div class="imgpackage desertlist hidden">
 						<div id="gummy" class="rectangle"></div>
 						<div id="gummybear" class="rectangle"></div>
 						<div id="taro" class="rectangle"></div>
@@ -31,7 +61,7 @@
 					</div>
 				</div>
 				<div id="tab2" class="tabs">
-					<h3><a href="#tab2" class="foods hiddentext">台味</a></h3>
+					<h2><a href="#tab2" title="EventTaiwan - Line 235" class="foods hiddentext">台味</a></h2>
 					<div class="imgpackage foodslist">
 						<div class="rectangle"></div>
 						<div class="rectangle"></div>
@@ -48,7 +78,7 @@
 					</div>
 				</div>
 				<div id="tab3" class="tabs">
-					<h3><a href="#tab3" class="fruits hiddentext">水果</a></h3>
+					<h2><a href="#tab3" title="EventTaiwan - Line 235" class="fruits hiddentext">水果</a></h2>
 					<div class="imgpackage fruitslist">
 						<div class="rectangle"></div>
 						<div class="rectangle"></div>
@@ -65,7 +95,7 @@
 					</div>
 				</div>
 				<div id="tab4" class="tabs">
-					<h3><a href="#tab4" class="decoration hiddentext">裝飾</a></h3>
+					<h2><a href="#tab4" title="EventTaiwan - Line 235" class="decoration hiddentext">裝飾</a></h2>
 					<div class="imgpackage decorationlist">
 						<div class="rectangle"></div>
 						<div class="rectangle"></div>
@@ -82,7 +112,7 @@
 					</div>
 				</div>
 				<div id="tab5" class="tabs">
-					<h3><a href="#tab5" class="symbol hiddentext">文字</a></h3>
+					<h2><a href="#tab5" title="EventTaiwan - Line 235" class="symbol hiddentext">文字</a></h2>
 					<div class="imgpackage symbollist">
 						<div class="rectangle"></div>
 						<div class="rectangle"></div>
@@ -99,9 +129,9 @@
 					</div>
 				</div>
 				<div class="btn_group">
-					<div class="btn_func btn_prev"><img src="ingredients/images/iceBg/ice-button-prev.png" alt="eventTaiwan"></div>
-					<div class="btn_func btn_next"><img src="ingredients/images/iceBg/ice-button-next.png" alt="eventTaiwan"></div>
-					<div id="draw" class="btn_func btn_sent"><img src="ingredients/images/iceBg/ice-button-ok.png" alt="eventTaiwan"></div>
+					<div id="btn_prev" class="btn_func"><img src="ingredients/images/icetools/ice-button-prev.png" alt="eventTaiwan"></div>
+					<div id="btn_next" class="btn_func"><img src="ingredients/images/icetools/ice-button-next.png" alt="eventTaiwan"></div>
+					<div id="draw" class="btn_func btn_sent"><img src="ingredients/images/icetools/ice-button-ok.png" alt="eventTaiwan"></div>
 				</div>
 			</div>
 		</div>
@@ -114,7 +144,6 @@
 		</div>
 		<img alt="MyCanvas" id="canvasImg">
 
-	  <script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
 		<script src="ingredients/icejs.js"></script>
 		<script src="ingredients/html2canvas.js"></script>
 		<script>

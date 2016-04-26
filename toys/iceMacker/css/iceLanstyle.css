@@ -1,0 +1,299 @@
+*{ 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+#wrap{
+	width: 960px;
+	padding: 0;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: flex;
+	flex-flow: row nowrap;
+	-ms-flex-flow: row nowrap;
+	justify-content: flex-end;
+}
+
+/*Menu item*/
+#mycv{
+	/* float: left;
+	width: 66.5%; */
+	flex: 1 100%;
+	order: 1;
+}
+#ingredients, #formwrap{
+	/* float: right; */
+	/* width: 33.5%;
+	height: 640px; */
+	flex: 1 100%;
+	order: 2;
+	background: url("images/icetools/ice-landscrap.png") no-repeat;
+	position: relative;
+	padding: 0 19px;
+}
+#ingredients .tabs .imgpackage{
+	position: absolute;
+	width: calc(94px * 3);
+	top: 103px;
+	margin: 0;
+	padding: 0;
+}
+
+.icelist{
+	background: url('images/icebg/ice-landscrap.png') no-repeat -18px 0;
+	height:calc(114px*4);
+}
+
+/* items menu */
+.hiddentext{
+	display: inline-block;
+	text-indent: 100%;
+	white-space: nowrap;
+  overflow: hidden;
+}
+.desserts{
+	background: url("images/icetools/ice-item.png");
+	background-position:-14px top;
+	height:102px; 
+	width:52px;
+}
+.foods{
+	background: url("images/icetools/ice-item.png");
+	background-position:-74px top; 
+	height:102px; 
+	width:52px;
+}
+.fruits{
+	background: url("images/icetools/ice-item.png");
+	background-position:-134px top; 
+	height:102px; 
+	width:52px;
+}
+.decoration{
+	background: url("images/icetools/ice-item.png");
+	background-position:-194px top; 
+	height:102px; 
+	width:52px;
+}
+.symbol{
+	background: url("images/icetools/ice-item.png");
+	background-position:-254px top; 
+	height:102px; 
+	width:52px;
+}
+.desserts:hover{
+	background: url("images/icetools/ice-item.png");
+	background-position:-14px -102px;
+	height:102px; 
+	width:52px;
+}
+.foods:hover{
+	background: url("images/icetools/ice-item.png");
+	background-position:-74px -102px; 
+	height:102px; 
+	width:52px;
+}
+.fruits:hover{
+	background: url("images/icetools/ice-item.png");
+	background-position:-134px -102px; 
+	height:102px; 
+	width:52px;
+}
+.decoration:hover{
+	background: url("images/icetools/ice-item.png");
+	background-position:-194px -102px; 
+	height:102px; 
+	width:52px;
+}
+.symbol:hover{
+	background: url("images/icetools/ice-item.png");
+	background-position:-254px -102px; 
+	height:102px; 
+	width:52px;
+}
+#ingredients .tabs:target .desserts{
+	background: url("images/icetools/ice-item.png");
+	background-position:-14px -102px;
+	height:102px; 
+	width:52px;
+}
+#ingredients .tabs:target .foods{
+	background: url("images/icetools/ice-item.png");
+	background-position:-74px -102px; 
+	height:102px; 
+	width:52px;
+}
+#ingredients .tabs:target .fruits{
+	background: url("images/icetools/ice-item.png");
+	background-position:-134px -102px; 
+	height:102px; 
+	width:52px;
+}
+#ingredients .tabs:target .decoration{
+	background: url("images/icetools/ice-item.png");
+	background-position:-194px -102px; 
+	height:102px; 
+	width:52px;
+}
+#ingredients .tabs:target .symbol{
+	background: url("images/icetools/ice-item.png");
+	background-position:-254px -102px; 
+	height:102px; 
+	width:52px;
+}
+/* #ingredients .tabs,  */
+#ingredients .tabs{
+	position: absolute;
+	-webkit-transition: all 500ms ease-in-out;
+	-moz-transition: all 500ms ease-in-out;
+	transition: all 500ms ease-in-out;
+}
+
+#ingredients .tabs > h2{
+	position: absolute;
+	left: -10px;
+	padding: 0;
+	margin: auto;
+	background-color: transparent;
+	z-index: 2;
+}
+
+#ingredients .tabs:target{
+	z-index: 2;
+}
+#ingredients .tabs:first-child{
+	z-index: 1;
+}
+#ingredients .tabs:nth-child(2) h2{
+	left: calc(280px/5*1);
+}
+#ingredients .tabs:nth-child(3) h2{
+	left: calc(300px/5*2);
+}
+#ingredients .tabs:nth-child(4) h2{
+	left: calc(300px/5*3);
+}
+#ingredients .tabs:nth-child(5) h2{
+	left: calc(300px/5*4);
+}
+
+/*Ice choice menu*/
+h2.titlepos{
+	left: -18px!important;
+}
+
+/*items List & BG*/
+.desertlist{
+	background: url('images/ingredientsItem/itemList.png') no-repeat -18px 0, url('images/icetools/menubg.png') repeat-y left;
+	height:calc(114px*4); 
+}
+.foodslist{
+	background: url('images/ingredientsItem/itemList.png') no-repeat -18px -380px, url('images/icetools/menubg.png') repeat-y left;
+	height:calc(114px*4); 
+}
+.fruitslist{
+	background: url('images/ingredientsItem/itemList.png') no-repeat -18px 11px, url('images/icetools/menubg.png') repeat-y left;
+	height:calc(114px*4); 
+}
+.decorationlist{
+	background: url('images/ingredientsItem/itemList.png') no-repeat -18px -380px, url('images/icetools/menubg.png') repeat-y left;
+	height:calc(114px*4);
+}
+.symbollist{
+	background: url('images/ingredientsItem/itemList.png') no-repeat -18px -380px, url('images/icetools/menubg.png') repeat-y left;
+	height:calc(114px*4);
+}
+.rectangle{
+	display: block;
+	float: left;
+	width: 94px;
+	height: 114px;
+	padding: 0;
+	cursor: pointer;
+}
+.drag{
+	position: absolute;
+  background: transparent;
+  z-index: 2;
+}
+
+.btn_group{
+	position: absolute;
+	bottom: 0;
+	width: 88%;
+	left: 6%;
+	bottom: 10px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+}
+.btn_group .btn_func{
+	cursor: pointer;
+}
+.btn_action{
+	background: url('images/icetools/ice-icon.png') no-repeat left / 100% border-box;
+	height: 30px;
+	width: 150px;
+	margin-left: 30%;
+	position: absolute;
+	top: -25px;
+}
+.btn_action > .action{
+	display: block;
+	float: left;
+	width: 30px;
+	height: 30px;
+}
+
+.hidden{
+	display: none;
+}
+
+/* Preview Page*/
+#formwrap{
+	line-height: 2em;
+	font-family: '微軟正黑體', '標楷體', sans-serif;
+}
+#formwrap .formpaper{
+	position: relative;
+	top: 102px;
+	padding: 10px 0;
+	margin-top: 19px;
+}
+#formwrap .form-control {
+	font-family:"微軟正黑體";
+	display: block; 
+	width: 100%; 
+	padding: 6px 12px; 
+	font-size:16px; 
+	line-height: 1.42857143; 
+	color: #333; 
+	border: 2px solid #fff; 
+	border-radius: 4px;
+}
+#formwrap p{
+	margin: 1em 0;
+	padding: 1em 0;
+}
+input[type=checkbox]{
+	-ms-transform: scale(1.8); 
+	-moz-transform: scale(1.8);
+	-webkit-transform: scale(1.8);
+	-o-transform: scale(1.8);padding: 5px;
+}
+.send{ 
+	width:216px; 
+	margin:0 auto; 
+	display:block;
+}
+.send a:hover{
+	filter:alpha(opacity=90); 
+	opacity:0.9;
+}

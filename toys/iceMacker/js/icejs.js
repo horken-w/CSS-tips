@@ -2,8 +2,8 @@ var canvas;
 var ctx, imagePackage;
 var posX=0, posY=0, angle=0;
 var _startX, _startY, _offsetX, _offsetY, _dragElement;
-var bgimg = new Image();
-bgimg.src = 'ingredients/images/iceBg/ice-01.png';
+var bgimg = new Image();  
+bgimg.src = localStorage.getItem('icetype');
 var hasTouch = 'ontouchstart' in document;
 
 function addEvent(obj, evt, fn) {
@@ -58,7 +58,8 @@ function dragEvent() { // mouse drag & touch drag
 		  document.body.focus();
 		  return false;
   	} else if (!document.getElementById('pickup')) {
-      document.getElementsByClassName('btn_action')[0].className += ' hidden';
+      if(document.getElementsByClassName('btn_action')[0].classList.length === 1)
+        document.getElementsByClassName('btn_action')[0].className += ' hidden';
     }
   }
   var onStopEvent=function(){
@@ -127,7 +128,7 @@ function reSizeImg(){
     var tarimg= tag('pickup')!=undefined ? tag('pickup').childNodes[0] : document.getElementsByClassName('drag')[0].childNodes[0];
     tag('mycv').children[0].appendChild(actionBtn());
     document.getElementsByClassName('btn_action')[0].className += ' hidden';
-    if (tag('mycv').children.length-1 > 1 ) tarimg.remove();
+    tarimg.remove();
   }
   addEvent(tag('grow'), 'click', growItem);
   addEvent(tag('shrink'), 'click', shrinkItem);
@@ -137,6 +138,8 @@ function reSizeImg(){
 }
 function cloneItems(e) {
   var _target = e.target;
+  if(document.getElementsByClassName('btn_action')[0].classList.length === 1)
+    document.getElementsByClassName('btn_action')[0].className +=' hidden';
   var imgTag = function(src, alt) {
     var _img = document.createElement('img'), _div=document.createElement('div');
   	_img.setAttribute('alt', alt ? alt : '食物被偷吃掉了') ;
@@ -155,7 +158,6 @@ function cloneItems(e) {
     comp.className = 'drag';
     local.parentNode.insertBefore(comp, local);
   }
-	
 }
 function imageSetting(){
 	// var imgitems=document.getElementsByClassName('drag'),
@@ -177,11 +179,21 @@ function imageSetting(){
 	// 	imgobj.obj.parentNode.removeChild(imgobj.obj);
 	// }
  //  open();
-  $('#ingredients').addClass('hidden');
+  tag('ingredients').className ='hidden';
+  document.getElementsByClassName('btn_action')[0].className='hidden';
+
   html2canvas(document.body, {
     onrendered: function(canvas) {
       var dataURL = canvas.toDataURL('image/png');
-      tag('canvasImg').src = dataURL;
+      var orgimg = new Image();
+      orgimg.src=dataURL;
+      orgimg.onload=function(){
+        canvas = tag("mypaper");
+        ctx.drawImage(orgimg, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
+        var dataURLN = canvas.toDataURL('image/png');
+        localStorage.setItem('final', dataURLN);
+        window.location='./preview.html';
+      }
     }
   });
 }
@@ -207,21 +219,53 @@ function imageLoading(callback){
   };
   return images;
 }
+function chkIndexOf(actionTarg){
+  for(var i=1; i< actionTarg.length; i++){
+    if (actionTarg[i].classList.length ==2)
+       return i;
+  }
+}
 function initCanvas() {
   var listitems = tag('ingredients').children;
   canvas = tag("mypaper");
   ctx = canvas.getContext("2d");
   ctx.drawImage(bgimg, 0, 0, canvas.width, canvas.height);
-  // imageLoading(function(images){ctx.drawImage(images.gummy, 20, 20, 75, 75)});
   imagePackage=imageLoading()
+  listitems[0].children[0].id='active';
+  tag('active').children[0].click();
   for (var i = 0; i < listitems.length; i++) {
+    if(i < listitems.length-1){
+      listitems[i].children[0].addEventListener('click', function(e){
+        var _this=e.target.parentElement;
+        tag('active') ? tag('active').removeAttribute('id') : '';
+        _this.id='active';
+      })
+    }
     hasTouch
       ? addEvent(listitems[i], 'touchstart', cloneItems)
       : addEvent(listitems[i], 'click', cloneItems);
   }
-	dragEvent();
+	
+  dragEvent();
   reSizeImg();
-  addEvent(tag('draw'), 'tuchstart', imageSetting) 
+
+  addEvent(tag('draw'), 'tuchstart', imageSetting);
   addEvent(tag('draw'), 'click', imageSetting);
 }
 addEvent(window, 'load', initCanvas);
+!function(){
+  tag('btn_next').addEventListener('click', function(){
+    var actionTarg = tag('active').parentElement;
+    var idx= chkIndexOf(actionTarg.children);
+    actionTarg.children[idx].className+= ' hidden';
+    (idx+1 > actionTarg.children[idx].classList.length) ? idx=1 : idx++;
+    actionTarg.children[idx].classList.remove('hidden');
+  })
+  tag('btn_prev').addEventListener('click', function(){
+    var actionTarg = tag('active').parentElement;
+    var idx= chkIndexOf(actionTarg.children);
+    actionTarg.children[idx].className+= ' hidden';
+    (idx-1 < 1) ? idx=actionTarg.children[idx].classList.length : idx--;
+    actionTarg.children[idx].classList.remove('hidden');
+  })
+}();
