@@ -1,0 +1,12 @@
+<div *ngFor="let todo of todos">
+	<input type="checkbox" #chkbox [checked]="todo.completed" (click)="setCompleted(todo, chkbox.value)" />
+	{{todo.text}}
+	<a (click)="removeTodo(todo)">X</a>
+</div>
+
+<br>
+<button *ngIf="todos.length > 1" (click)="completeAll()">Complete all</button>
+<br>
+
+<input #todotext (keyup)="doneTyping($event)">
+<button (click)="addTodo(todotext)">Add todo</button>
