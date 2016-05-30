@@ -197,6 +197,7 @@
 	height: 114px;
 	padding: 0;
 	cursor: pointer;
+	background: hsla(0, 0%, 100%, 0.4);
 }
 .drag{
 	position: absolute;
