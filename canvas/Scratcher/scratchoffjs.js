@@ -3,26 +3,10 @@ var imagebox={
 				'back': {'url': './images/Articuno.png', 'img': null}
 			}
 var cvsdraw = { temp: null, draw: null};
+var mouseDown = false;
+
 function supportsCanvas() {
 	return !!document.createElement('canvas').getContext;
-}
-
-function recompositeCanvases(){
-	var canvas=document.getElementById('mycanvas'),
-			tempctx= cvsdraw.temp.getContext('2d');
-			mainctx=canvas.getContext('2d');
-
-			cvsdraw.temp.width=cvsdraw.temp.width;
-
-			tempctx.drawImage(cvsdraw.draw, 0, 0);
-
-			tempctx.globalCompositeOperation = 'source-atop';
-			tempctx.drawImage(imagebox.back.img, 0, 0);
-
-			mainctx.drawImage(imagebox.front.img, 0, 0);
-
-			mainctx.drawImage(cvsdraw.temp, 0, 0);
-
 }
 
 function getEventCoords(ev){
@@ -52,12 +36,31 @@ function getLocalcoords(elem, coords){
 	return { 'x': coords.pageX - ox, 'y': coords.pageY - oy};
 }
 
+function recompositeCanvases(){
+	var canvas=document.getElementById('mycanvas'),
+			tempctx= cvsdraw.temp.getContext('2d');
+			mainctx=canvas.getContext('2d');
+
+			cvsdraw.temp.width=cvsdraw.temp.width;
+
+			tempctx.drawImage(cvsdraw.draw, 0, 0);
+
+			tempctx.globalCompositeOperation = 'source-atop';
+			tempctx.drawImage(imagebox.back.img, 0, 0);
+
+			mainctx.drawImage(imagebox.front.img, 0, 0);
+
+			mainctx.drawImage(cvsdraw.temp, 0, 0);
+}
+
+
 function scratchLine(canvas, x, y, fresh){
 	var ctx = canvas.getContext('2d');
 	ctx.lineWidth = 45;
 	ctx.lineCap = ctx.lineJoin = 'round';
 	ctx.strokeStyle = '#fff';
 	if (fresh){
+		ctx.beginPath();
 		ctx.moveTo(x+0.01, y);
 	}
 	ctx.lineTo(x, y);
@@ -89,7 +92,30 @@ function initialImage(){
 
 	}
 
+	function drawmove_handler(e) {
+		if (!mouseDown) { return true; }
+
+		var local = getLocalcoords(canvas, getEventCoords(e));
+
+		scratchLine(cvsdraw.draw, local.x, local.y, false);
+		recompositeCanvases();
+
+		return false;
+	};
+
+	function drawdone_handler(e) {
+		if (mouseDown) {
+			mouseDown = false;
+			return false;
+		}
+
+		return true;
+	};
+
+
 	$('#mycanvas').on('mousedown', drawstart_handler).on('touchstart', drawstart_handler);
+	$(document).on('mousemove', drawmove_handler).on('touchmove', drawmove_handler);
+	$(document).on('mouseup', drawdone_handler).on('touchend', drawdone_handler);
 }
 
 function loadingComplete() {
