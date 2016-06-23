@@ -1,153 +1,189 @@
-var imagebox={
-				'front': {'url': './images/articuno-gray.png', 'img': null},
-				'back': {'url': './images/Articuno.png', 'img': null}
+Scratcher = (function(){
+
+	function getEventCoords(ev){
+		var touchev, coords={};
+		var origev=ev.originalEvent;
+
+		if (origev.changedTouches != undefined){
+			touchev = origev.changedTouches[0];
+			coords.pageX = touchev.pageX;
+			coords.pageY = touchev.pageY;
+		}else {
+			coords.pageX = ev.pageX;
+			coords.pageY = ev.pageY;
+		}
+		return coords;
+	}
+
+	function getLocalcoords(elem, coords){
+		var offset = $(elem).offset();
+		return { 'x': coords.pageX - offset.left, 'y': coords.pageY - offset.top};
+	}
+
+	function Scratcher(cvsId){
+		this.cvsinfo = { 
+					'main': document.getElementById(cvsId),
+					'temp': null,
+					'draw': null
+				};
+		this.mouseDown = false;
+		this.cvsid = cvsId;
+		this._initialCanvas();
+		this.setupImage();
+		this._eventListeners={};
+	}
+
+	Scratcher.prototype.setupImage = function(){
+		this.imagebox = {
+				'front': {'url': './images/Articuno2.png', 'img': null},
+				'back': {'url': './images/Articuno1.png', 'img': null}
 			}
-var cvsdraw = { temp: null, draw: null};
-var mouseDown = false;
-
-function supportsCanvas() {
-	return !!document.createElement('canvas').getContext;
-}
-
-function getEventCoords(ev){
-	var touchev, coords={};
-	var origev=ev.originalEvent;
-
-	if (origev.changedTouches != undefined){
-		touchev = origev.changedTouches[0];
-		coords.pageX = touchev.pageX;
-		coords.pageY = touchev.pageY;
-	}else {
-		coords.pageX = ev.pageX;
-		coords.pageY = ev.pageY;
-	}
-	return coords;
-}
-
-function getLocalcoords(elem, coords){
-	var ox=0, oy=0;
-
-	while(elem != null){
-		ox += elem.offsetLeft;
-		oy += elem.offsetTop;
-		elem = elem.offsetParent;
+		
+		this._imageLoaded();
 	}
 
-	return { 'x': coords.pageX - ox, 'y': coords.pageY - oy};
-}
+	Scratcher.prototype._imageLoaded = function(){
+		var loadCount = 0;
+		
+		function imageLoaded(e){
+			loadCount++;
 
-function recompositeCanvases(){
-	var canvas=document.getElementById('mycanvas'),
-			tempctx= cvsdraw.temp.getContext('2d');
-			mainctx=canvas.getContext('2d');
+			if(loadCount >= 2){
+				this.dispatchEvent(this.createEvent('imagesLoaded'));
+				this.reset();
+			}
+		}
 
-			cvsdraw.temp.width=cvsdraw.temp.width;
-
-			tempctx.drawImage(cvsdraw.draw, 0, 0);
-
-			tempctx.globalCompositeOperation = 'source-atop';
-			tempctx.drawImage(imagebox.back.img, 0, 0);
-
-			mainctx.drawImage(imagebox.front.img, 0, 0);
-
-			mainctx.drawImage(cvsdraw.temp, 0, 0);
-}
-
-
-function scratchLine(canvas, x, y, fresh){
-	var ctx = canvas.getContext('2d');
-	ctx.lineWidth = 45;
-	ctx.lineCap = ctx.lineJoin = 'round';
-	ctx.strokeStyle = '#fff';
-	if (fresh){
-		ctx.beginPath();
-		ctx.moveTo(x+0.01, y);
+		for (k in this.imagebox) if(this.imagebox.hasOwnProperty(k)){
+			this.imagebox[k].img=document.createElement('img');
+			$(this.imagebox[k].img).on('load', imageLoaded.bind(this));
+			this.imagebox[k].img.src=this.imagebox[k].url;
+		}
 	}
-	ctx.lineTo(x, y);
-	ctx.stroke();
-}
 
-function initialImage(){
-	var canvas=document.getElementById('mycanvas');
+	Scratcher.prototype.recompositeCanvases = function(){
+		var tempctx= this.cvsinfo.temp.getContext('2d');
+				mainctx= this.cvsinfo.main.getContext('2d');
 
-	canvas.width= imagebox.back.img.width;
-	canvas.height= imagebox.back.img.height;
+				this.cvsinfo.temp.width=this.cvsinfo.temp.width;
 
-	cvsdraw.temp= document.createElement('canvas');
-	cvsdraw.draw=document.createElement('canvas');
+				tempctx.drawImage(this.cvsinfo.draw, 0, 0);
 
-	cvsdraw.temp.width=cvsdraw.draw.width=canvas.width;
-	cvsdraw.temp.height=cvsdraw.draw.height=canvas.height;
+				tempctx.globalCompositeOperation = 'source-atop';
+				tempctx.drawImage(this.imagebox.back.img, 0, 0);
 
-	recompositeCanvases();
+				mainctx.drawImage(this.imagebox.front.img, 0, 0);
 
-	function drawstart_handler(e){
-		var local = getLocalcoords(canvas, getEventCoords(e));
-		mouseDown=true;
-
-		scratchLine(cvsdraw.draw, local.x, local.y, true);
-		recompositeCanvases();
-
-		return false;
+				mainctx.drawImage(this.cvsinfo.temp, 0, 0);
 
 	}
 
-	function drawmove_handler(e) {
-		if (!mouseDown) { return true; }
+	Scratcher.prototype.scratchLine = function(x, y, fresh){
+		var canvas = this.cvsinfo.draw,
+				ctx = canvas.getContext('2d');
 
-		var local = getLocalcoords(canvas, getEventCoords(e));
+		ctx.lineWidth = 45;
+		ctx.lineCap = ctx.lineJoin = 'round';
+		ctx.strokeStyle = '#fff';
+		if (fresh){
+			ctx.moveTo(x+0.01, y);
+		}
+		ctx.lineTo(x, y);
+		ctx.stroke();
 
-		scratchLine(cvsdraw.draw, local.x, local.y, false);
-		recompositeCanvases();
+		this.dispatchEvent(this.createEvent('scratch'));
+	}
 
-		return false;
-	};
+	Scratcher.prototype._initialCanvas = function(){
+		var canvas=this.cvsinfo.main;
 
-	function drawdone_handler(e) {
-		if (mouseDown) {
-			mouseDown = false;
+		this.cvsinfo.temp= document.createElement('canvas');
+		this.cvsinfo.draw= document.createElement('canvas');
+		this.cvsinfo.temp.width=this.cvsinfo.draw.width=canvas.width;
+		this.cvsinfo.temp.height=this.cvsinfo.draw.height=canvas.height;
+
+		function drawstart_handler(e){
+			var local = getLocalcoords(canvas, getEventCoords(e));
+			this.mouseDown=true;
+
+			this.scratchLine(local.x, local.y, true);
+			this.recompositeCanvases();
+
+			this.dispatchEvent(this.createEvent('scratchesbegan'));
+
 			return false;
 		}
 
-		return true;
-	};
+		function drawmove_handler(e){
+			if(!this.mouseDown) return true;
 
+			var local = getLocalcoords(canvas, getEventCoords(e));
 
-	$('#mycanvas').on('mousedown', drawstart_handler).on('touchstart', drawstart_handler);
-	$(document).on('mousemove', drawmove_handler).on('touchmove', drawmove_handler);
-	$(document).on('mouseup', drawdone_handler).on('touchend', drawdone_handler);
-}
+			this.scratchLine(local.x, local.y, true);
+			this.recompositeCanvases();
 
-function loadingComplete() {
-	$('#loading').hide();
-	$('#main').show();
-}
-
-function setupImage(){
-	var loads=0,
-			total=0;
-	
-	var imageLoaded=function(){
-		loads++;
-
-		if(loads >= total){
-			initialImage();
-			loadingComplete();
+			return false;
 		}
+
+		function drawdone_handler(){
+			if (this.mouseDown) {
+				this.mouseDown = false;
+				this.dispatchEvent(this.createEvent('scratchesended'));
+
+				return false;
+			}
+			return true;
+		}
+
+		$(canvas).on('mousedown touchstart', drawstart_handler.bind(this));
+		$(document).on('mousemove', drawmove_handler.bind(this));
+		$(document).on('touchmove', drawmove_handler.bind(this));
+		$(document).on('mouseup', drawdone_handler.bind(this));
+		$(document).on('touchend', drawdone_handler.bind(this));
 	}
 
-	for (k in imagebox) if(imagebox.hasOwnProperty(k)) total++;
-	for (k in imagebox) if(imagebox.hasOwnProperty(k)){
-		imagebox[k].img=document.createElement('img');
-		imagebox[k].img.onload=imageLoaded;
-		imagebox[k].img.src=imagebox[k].url;
+	Scratcher.prototype.reset = function(){
+		this.cvsinfo.draw.width = this.cvsinfo.draw.width;
+		this.recompositeCanvases();
 	}
-}
 
-(function(){
+	Scratcher.prototype.createEvent = function(type){
+		var evt = {
+			'type': type,
+			'target': this,
+			'currentTarget': this
+		};
+		return evt;
+	}
+	Scratcher.prototype.dispatchEvent = function(evt){
+		var el = this._eventListeners,
+				i, len, type = evt.type.toLowerCase();
+	}
 
-	if(supportsCanvas()) {
-		setupImage();
-	}	else $('#lamebrowser').show();
+	if (!Function.prototype.bind) {
+		Function.prototype.bind = function (oThis) {
+			if (typeof this !== "function") {
+				// closest thing possible to the ECMAScript 5 internal
+				// IsCallable function
+				throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+			}
 
-})()
+			var aArgs = Array.prototype.slice.call(arguments, 1), 
+					fToBind = this, 
+					fNOP = function () {},
+					fBound = function () {
+						return fToBind.apply(this instanceof fNOP
+						     ? this
+						     : oThis || window,
+						     aArgs.concat(Array.prototype.slice.call(arguments)));
+					};
+
+			fNOP.prototype = this.prototype;
+			fBound.prototype = new fNOP();
+
+			return fBound;
+		};
+	}
+
+	return Scratcher;
+})();
