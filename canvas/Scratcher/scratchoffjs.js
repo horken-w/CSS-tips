@@ -147,6 +147,32 @@ Scratcher = (function(){
 		this.recompositeCanvases();
 	}
 
+	Scratcher.prototype.fullAmount = function(stride) {
+		var i, l;
+		var can = this.cvsinfo.draw;
+		var ctx = can.getContext('2d');
+		var count, total;
+		var pixels, pdata;
+
+		if (!stride || stride < 1) { stride = 1; }
+
+		stride *= 4; // 4 elements per pixel
+
+		pixels = ctx.getImageData(0, 0, can.width, can.height);
+		pdata = pixels.data;
+		l = pdata.length; // 4 entries per pixel
+
+		total = (l / stride)|0;
+
+		for (i = count = 0; i < l; i += stride) {
+			if (pdata[i] != 0) {
+				count++;
+			}
+		}
+
+		return count / total;
+	};
+
 	Scratcher.prototype.createEvent = function(type){
 		var evt = {
 			'type': type,
@@ -155,9 +181,32 @@ Scratcher = (function(){
 		};
 		return evt;
 	}
+
+	Scratcher.prototype.addEventListener = function (type, handler) {
+		var el = this._eventListeners;
+		    type = type.toLowerCase();
+
+    if (!el.hasOwnProperty(type)) {
+		  el[type] = [];
+		}
+
+		if (el[type].indexOf(handler) == -1) {
+		  el[type].push(handler);
+		}
+	};
+
 	Scratcher.prototype.dispatchEvent = function(evt){
 		var el = this._eventListeners,
-				i, len, type = evt.type.toLowerCase();
+				i, len,
+				type = evt.type.toLowerCase();
+
+		if (!el.hasOwnProperty(type)) { return; }
+
+		len = el[type].length;
+
+		for(i = 0; i < len; i++) {
+			el[type][i].call(this, evt);
+		}
 	}
 
 	if (!Function.prototype.bind) {
