@@ -195,6 +195,20 @@ Scratcher = (function(){
 		}
 	};
 
+  Scratcher.prototype.removeEventListener = function(type, handler) {
+    var el = this._eventListeners;
+    var i;
+
+    type = type.toLowerCase();
+
+    if (!el.hasOwnProperty(type)) { return; }
+    if (handler) {
+      if ((i = el[type].indexOf(handler)) != -1) {
+        el[type].splice(i, 1);
+      }
+    } else el[type] = [];
+  };
+
 	Scratcher.prototype.dispatchEvent = function(evt){
 		var el = this._eventListeners,
 				i, len,
