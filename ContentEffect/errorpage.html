@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Error Page - 404</title>
+	<style>
+		body{
+			background: hsl(0, 0%, 7%);
+		}
+		div{
+			padding: 2.5em;
+			font-size: 4.7em;
+			font-family: 'Monoton', cursive;
+			text-align: center;
+			text-transform: uppercase;
+			text-shadow: 0 0 80px hsl(0, 100%, 50%), 0 0 30px hsl(0, 68%, 42%), 0 0 6px hsl(0, 100%, 27%);
+			color: red;
+		}
+		div p{
+			margin: 0;
+		}
+		#error:hover{
+			text-shadow: 0 0 200px hsl(0, 0%, 100%), 0 0 80px hsl(33, 100%, 25%), 0 0 6px hsl(67, 100%, 50%);
+		}
+		#code:hover{
+			text-shadow: 0 0 100px hsl(0, 100%, 50%), 0 0 40px hsl(0, 68%, 60%), 0 0 8px hsl(0, 100%, 27%);
+		}
+		#error{
+			color: hsl(0, 0%, 100%);
+			text-shadow: 0 0 80px hsl(0, 0%, 100%), 0 0 30px hsl(33, 100%, 25%), 0 0 6px hsl(67, 100%, 50%);
+		}
+		#error span{
+			animation: upper 11s linear infinite;
+		}
+		#code span:nth-of-type(1){
+			text-shadow: none;
+			opacity: .4;
+		}
+		#code span:nth-of-type(2){
+			animation: lower 10s linear infinite;
+		}
+
+		@keyframes upper{
+			0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%{
+				opacity: .99;
+				text-shadow: 0 0 80px hsl(0, 0%, 100%), 0 0 30px hsl(33, 100%, 25%), 0 0 6px hsl(67, 100%, 50%);
+			}
+			20%, 21.999%, 63%, 63.999%, 65%, 69.999%{
+				opacity: .4;
+				text-shadow: none;
+			}
+		}
+		@keyframes lower{
+			0%, 12%, 18.999%, 23%, 31.999%, 37%, 44.999%, 46%, 49.999%, 51%, 58.999%, 61%, 68.999%, 71%, 85.999%, 96%, 100%{
+				opacity: .99;
+				text-shadow: 0 0 80px hsl(0, 100%, 50%), 0 0 30px hsl(0, 68%, 42%), 0 0 6px hsl(0, 100%, 27%);
+			}
+			19%, 22.999%, 32%, 36.999%, 45%, 45.999%, 50%, 50.99%, 59%, 60.99%, 69%, 70.99%, 86%, 95.999%{
+				opacity: .4;
+				text-shadow: none;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<p id="error">e<span>r</span>ror</p>
+		<p id="code">4<span>0</span><span>4</span></p>
+	</div>
+</body>
+</html>
