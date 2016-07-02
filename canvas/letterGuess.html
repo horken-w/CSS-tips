@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div class="cvs">
+		<canvas width="500" height="300" id="mycanvas">Sorry! Your brower does not support Canvas.</canvas>
+		<form action="">
+			<input type="button" id="createImg" value="Export to Canvas">
+		</form>
+	</div>
+	<script>
+		var guesses = 0, message = "Guess the Letter from A(lower) to Z(higher)";
+		var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+									'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+		var today = new Date();
+		var letterToGuess, HorL = '', letteresGuessed, gameOver = false;
+		var canvas = document.getElementById('mycanvas');
+		var context = canvas.getContext('2d')
+		initGame();
+
+		function evtKeyPress(evt){
+
+			if(!gameOver){
+				var letterPressed = String.fromCharCode(evt.keyCode);
+				letterPressed = letterPressed.toLowerCase();
+				guesses++;
+				letteresGuessed.push(letterPressed);
+
+				if(letterPressed == letterToGuess) gameOver = true;
+				else{ 
+					letterIdx = letters.indexOf(letterToGuess);
+					guessIdx = letters.indexOf(letterPressed);
+
+					if( guessIdx < 0) HorL = 'This is not a letter.';
+					else if( guessIdx > letterIdx) HorL= 'Lower';
+					else HorL= 'Higher'
+				}
+			}
+			drawScreen();
+		}
+
+		function drawScreen(){
+			context.fillStyle = 'hsl(80, 60%, 60%)';
+			context.fillRect(0, 0, 500, 300); //rectangle
+
+			context.strokeStyle = 'hsl(0, 0%, 100%)';
+			context.strokeRect(5, 5, 490, 290);
+
+			context.textBaseline = 'top';
+
+			context.fillStyle = 'hsl(0, 0%, 0%)';
+			context.font = '10px _sans';
+			context.fillText(today, 150, 10);
+
+			context.fillStyle = 'hsl(0, 80%, 50%)';
+			context.font = '14px _sans';
+			context.fillText(message, 125, 30);
+
+			context.fillStyle = 'hsl(68, 60%, 60%)';
+			context.font = '1em _sans';
+			context.fillText('Guesses: '+ guesses, 215, 50);
+
+			context.fillStyle = 'hsl(0, 0%, 0%)';
+			context.font = '1em _sans';
+			context.fillText('Hight or Lower: ' + HorL, 150, 125);
+
+			context.fillStyle = 'hsl(0, 80%, 60%)';
+			context.font = '1em _sans';
+			context.fillText('Letter Guessed: ' + letteresGuessed.toString(), 10, 260);
+
+			if(gameOver){
+				context.fillStyle = 'hsl(0, 80%, 60%)';
+				context.font = '3em _sans';
+				context.fillText('You got it!!', 150, 180);
+			}
+		}
+
+		function initGame(){
+			var letterIdx = Math.floor(Math.random() * letters.length);
+			letterToGuess = letters[letterIdx];
+			guesses = 0;
+			gameOver = false;
+			letteresGuessed = [];
+
+			window.addEventListener('keyup', evtKeyPress, true);
+
+			drawScreen();
+		} 
+	</script>
+</body>
+</html>

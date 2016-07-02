@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>colour me~~</title>
+	<link rel="stylesheet" href="">
+</head>
+	<style>
+		:root{
+			background: hsl(40, 60%, 50%);
+		}
+		#buttons button{
+			display: inline-block;
+			width: 224px;
+			height: 80px;
+			margin: 0 10px 20px;
+			padding: 0;
+			font: 800 1em georgia, sans-serif;
+			letter-spacing: 0.15em;
+			color: hsl(40, 60%, 50%);
+			background: hsl(0, 0%, 100%);
+			border: none;
+			border-radius: 20px;
+		}
+		#buttons button:nth-child(2){
+			border: solid 0 hsl(270, 50%, 60%);
+		}
+		#buttons button:nth-child(3){
+			position: relative;
+		}
+		#buttons button .bg{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 0;
+			height: 100%;
+			overflow: hidden;
+		}
+		#buttons button span span{
+			display: block;
+			width: 14em;
+			height: 5em;
+			line-height: 5em;
+			color: hsl(0, 0%, 100%);
+			background: hsl(270, 50%, 60%);
+			border-radius: 20px;
+			z-index: 1;
+		}
+	</style>
+<body>
+	<div class="wrap">
+		<div id="buttons">
+			<div class="inner clearfix">
+				<button>
+					Ibis
+				</button>
+				<button>
+					Jaeger
+				</button>
+				<button>
+					Lark
+					<span class="bg">
+					<span>Lark</span>
+				</button>
+			</div>
+		</div>
+	</div>
+	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+	<script src="jquery-ui-1.10.3.custom.min.js"></script>
+	<script>
+		$(function(){
+			var duration=1500, $btn1=$('#buttons button:nth-child(1)'), $btn2=$('#buttons button:nth-child(2)'), $btn3=$('#buttons button:nth-child(3)');
+			$btn1.on('mouseover', function(){
+				$(this).stop().animate({
+					backgroundColor: 'hsl(300, 60%, 50%)',
+					color: 'hsl(0, 0%, 100%)'
+				}, duration);
+			})
+			.on('mouseout', function(){
+				$(this).stop().animate({
+					backgroundColor: 'hsl(0, 0%, 100%)',
+					color: 'hsl(40, 60%, 50%)'
+				}, duration)
+			});
+			$btn2.on('mouseover', function(){
+				$(this).stop().animate({
+					borderWidth: 12,
+					color: 'hsl(270, 50%, 60%)'
+				}, duration, 'easeOutSine');
+			})
+			.on('mouseout', function(){
+				$(this).stop().animate({
+					borderWidth: 0,
+					color: 'hsl(40, 60%, 50%)'
+				}, duration, 'easeOutSine')
+			})
+			$btn3.on('mouseover', function(){
+				$(this).find('> span').stop().animate({
+					width: '100%',
+					color: 'hsl(0, 0%, 100%)'
+				}, duration, 'easeOutSine');
+			})
+			.on('mouseout', function(){
+				$(this).find('> span').stop().animate({
+					width: '0%'
+				}, duration, 'easeOutSine')
+			})
+		})
+	</script>
+</body>
+</html>
