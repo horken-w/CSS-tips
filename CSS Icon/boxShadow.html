@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Box-Shadow Magic</title>
+	<style>
+		div{
+			border-radius: 50%;
+			height: 2px; width: 2px;
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -1px; margin-left: -1px;
+			box-shadow: 
+				-75px -125px 0 40px hsl(15, 80%, 50%),
+				75px -125px 0 40px hsl(85, 80%, 50%),
+				150px 0 0 40px hsl(125, 80%, 50%),
+				75px 125px 0 40px hsl(145, 80%, 50%),
+				-75px 125px 0 40px hsl(185, 80%, 50%),
+				-150px 0 0 40px hsl(245, 80%, 50%);
+			-webkit-animation: rotate 12s infinite linear;
+			animation: rotate 12s infinite linear;
+		}
+		@-webkit-keyframes rotate{
+			16.67%{
+				box-shadow: 
+					-75px -125px 0 40px hsl(245, 80%, 50%),
+					75px -125px 0 40px hsl(15, 80%, 50%),
+					150px 0 0 40px hsl(85, 80%, 50%),
+					75px 125px 0 40px hsl(125, 80%, 50%),
+					-75px 125px 0 40px hsl(145, 80%, 50%),
+					-150px 0 0 40px hsl(185, 80%, 50%);
+			}
+			33.33%{
+				box-shadow: 
+					-75px -125px 0 40px hsl(185, 80%, 50%),
+					75px -125px 0 40px hsl(245, 80%, 50%),
+					150px 0 0 40px hsl(15, 80%, 50%),
+					75px 125px 0 40px hsl(85, 80%, 50%),
+					-75px 125px 0 40px hsl(125, 80%, 50%),
+					-150px 0 0 40px hsl(145, 80%, 50%);
+			}
+			50%{
+				box-shadow: 
+					-75px -125px 0 40px hsl(145, 80%, 50%),
+					75px -125px 0 40px hsl(185, 80%, 50%),
+					150px 0 0 40px hsl(245, 80%, 50%),
+					75px 125px 0 40px hsl(15, 80%, 50%),
+					-75px 125px 0 40px hsl(85, 80%, 50%),
+					-150px 0 0 40px hsl(125, 80%, 50%);
+			}
+			66.67%{
+				box-shadow: 
+					-75px -125px 0 40px hsl(125, 80%, 50%),
+					75px -125px 0 40px hsl(145, 80%, 50%),
+					150px 0 0 40px hsl(185, 80%, 50%)
+					75px 125px 0 40px hsl(245, 80%, 50%),
+					-75px 125px 0 40px ,hsl(15, 80%, 50%),
+					-150px 0 0 40px hsl(85, 80%, 50%);
+			}
+			88.88%{
+				box-shadow: 
+					-75px -125px 0 40px hsl(85, 80%, 50%),
+					75px -125px 0 40px hsl(125, 80%, 50%),
+					150px 0 0 40px hsl(145, 80%, 50%),
+					75px 125px 0 40px hsl(185, 80%, 50%),
+					-75px 125px 0 40px hsl(245, 80%, 50%),
+					-150px 0 0 40px hsl(15, 80%, 50%);
+			}
+			100%{
+				transform: rotate(-360deg);
+				box-shadow: 
+					-75px -125px 0 40px hsl(15, 80%, 50%),
+					75px -125px 0 40px hsl(85, 80%, 50%),
+					150px 0 0 40px hsl(125, 80%, 50%),
+					75px 125px 0 40px hsl(145, 80%, 50%),
+					-75px 125px 0 40px hsl(185, 80%, 50%),
+					-150px 0 0 40px hsl(245, 80%, 50%);
+			}
+		}
+		@keyframes rotate{
+			16.67%{
+				box-shadow: 
+					-75px -125px 0 40px hsl(245, 80%, 50%),
+					75px -125px 0 40px hsl(15, 80%, 50%),
+					150px 0 0 40px hsl(85, 80%, 50%),
+					75px 125px 0 40px hsl(125, 80%, 50%),
+					-75px 125px 0 40px hsl(145, 80%, 50%),
+					-150px 0 0 40px hsl(185, 80%, 50%);
+			}
+			33.33%{
+				box-shadow: 
+					-75px -125px 0 40px hsl(185, 80%, 50%),
+					75px -125px 0 40px hsl(245, 80%, 50%),
+					150px 0 0 40px hsl(15, 80%, 50%),
+					75px 125px 0 40px hsl(85, 80%, 50%),
+					-75px 125px 0 40px hsl(125, 80%, 50%),
+					-150px 0 0 40px hsl(145, 80%, 50%);
+			}
+			50%{
+				box-shadow: 
+					-75px -125px 0 40px hsl(145, 80%, 50%),
+					75px -125px 0 40px hsl(185, 80%, 50%),
+					150px 0 0 40px hsl(245, 80%, 50%),
+					75px 125px 0 40px hsl(15, 80%, 50%),
+					-75px 125px 0 40px hsl(85, 80%, 50%),
+					-150px 0 0 40px hsl(125, 80%, 50%);
+			}
+			66.67%{
+				box-shadow: 
+					-75px -125px 0 40px hsl(125, 80%, 50%),
+					75px -125px 0 40px hsl(145, 80%, 50%),
+					150px 0 0 40px hsl(185, 80%, 50%)
+					75px 125px 0 40px hsl(245, 80%, 50%),
+					-75px 125px 0 40px ,hsl(15, 80%, 50%),
+					-150px 0 0 40px hsl(85, 80%, 50%);
+			}
+			88.88%{
+				box-shadow: 
+					-75px -125px 0 40px hsl(85, 80%, 50%),
+					75px -125px 0 40px hsl(125, 80%, 50%),
+					150px 0 0 40px hsl(145, 80%, 50%),
+					75px 125px 0 40px hsl(185, 80%, 50%),
+					-75px 125px 0 40px hsl(245, 80%, 50%),
+					-150px 0 0 40px hsl(15, 80%, 50%);
+			}
+			100%{
+				transform: rotate(-360deg);
+				box-shadow: 
+					-75px -125px 0 40px hsl(15, 80%, 50%),
+					75px -125px 0 40px hsl(85, 80%, 50%),
+					150px 0 0 40px hsl(125, 80%, 50%),
+					75px 125px 0 40px hsl(145, 80%, 50%),
+					-75px 125px 0 40px hsl(185, 80%, 50%),
+					-150px 0 0 40px hsl(245, 80%, 50%);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+</body>
+</html>
