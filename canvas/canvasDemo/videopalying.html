@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<!-- <form>
+		Video Size:
+		<input type="range" id="videosize" min="80" max="1026" step="2" value="320">
+	</form>
+	<video loop controls id="thevideo" width="320" height="240">
+		<source src="video/muirbeach.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+		<source src="video/muirbeach.webm" type='video/webm; codecs="vp8, vorbis"'>
+		<source src="video/muirbeach.ogg" type='video/ogg; codecs="theora, vorbis"'>
+	</video>
+
+	<div>
+		<div id="loadstatus">0%</div>
+	</div> -->
+	<canvas id="mycvs" width="500" height="500"></canvas>
+	<script>
+		window.addEventListener('load', eventWindowLoaded);
+		var videoEl, videoDiv;
+
+		function supportsCanvas() {
+			return !!document.createElement('canvas').getContext;
+		}
+
+		function eventWindowLoaded(){
+			// sizeEl.addEventListener('change', videoChange); //dynamic adjusted width and height
+			// var sizeEl = document.getElementById('videosize');
+			// var ratio = videoEl.width / videoEl.height;
+
+			// function videoChange(e){
+			// 	var target = e.target;
+			// 	videoEl.width = target.value;
+			// 	videoEl.height = target.value/ratio;
+			// }
+
+			videoEl = document.createElement('video');
+			videoDiv = document.createElement('div');
+			document.body.appendChild(videoDiv);
+			videoDiv.appendChild(videoEl);
+			// videoDiv.style.display = 'none';
+			videoEl.style.position = 'absolute';
+			videoEl.style.top = '50px';
+			videoEl.style.left = '600px';
+			var videoType = supportedVideo(videoEl);
+			if(!videoType){
+				alert('Do not support video tag');
+				return;
+			}
+			videoEl.src = 'video/muirbeach.' + videoType;
+			videoEl.addEventListener('canplaythrough', videoloaded);
+		}
+
+		function supportedVideo(video){
+			var extension;
+			if (video.canPlayType("video/webm") =="probably" || video.canPlayType("video/webm") == "maybe") {
+				extension = "webm";
+			} else if(video.canPlayType("video/mp4") == "probably" || video.canPlayType("video/mp4") == "maybe") {
+				extension = "mp4";
+			} else if(video.canPlayType("video/ogg") =="probably" || video.canPlayType("video/ogg") == "maybe") {
+				extension = "ogg";
+			} 
+			//console.log("extension:" + extension);
+			return extension;
+		}
+
+		function videoloaded(){
+			canvasApp();
+		}
+
+		function canvasApp(){
+			if(!supportsCanvas()) return;
+			var rotation = 2;
+
+			function drawScreen(){
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.strokeStyle = 'hsl(0, 0%, 75%)';
+				ctx.strokeRect(1, 1, canvas.width-3, canvas.height-3);
+				// ctx.drawImage(videoEl, 85, 30);
+
+				// for( var i = 0; i<messages.length; i++){
+				// 	var tempMessage = messages[i];
+				// 	if(videoEl.currentTime > tempMessage.time){
+				// 		ctx.fillStyle = 'hsl(180, 100%, 50%)';
+				// 		ctx.fillText(tempMessage.message, tempMessage.x, tempMessage.y);}
+				// }
+
+				ctx.save();
+				ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+				var angleInRadians = rotation * Math.PI / 180;
+				var x = 100, y = 100;
+				var cvsWidth = 320, cvsHeight = 240;
+				ctx.translate(x+.5*cvsWidth, y+.5*cvsHeight);
+				ctx.rotate(angleInRadians);
+				ctx.drawImage(videoEl, -.5*cvsWidth, -.5*cvsHeight);
+
+				ctx.restore();
+				rotation++;
+			}
+
+			var messages = new Array(4);
+			messages[0] = {time: 0, message: '', x: 0, y: 0};
+			messages[1] = {time: 1, message: 'This is Muir Beach!', x: 90, y: 200};
+			messages[2] = {time: 4, message: 'Look at Waves', x: 240, y: 240};
+			messages[3] = {time: 8, message: 'Look at those Rocks!', x: 100, y: 100};
+
+			var canvas = document.getElementById('mycvs');
+			var ctx=canvas.getContext('2d');
+			videoEl.play();
+
+			setInterval(drawScreen, 33);
+		}
+
+	</script>
+</body>
+</html>

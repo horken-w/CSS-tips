@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<canvas id="mycanvas" width="500" height="500"></canvas>
+	<script>
+		var canvas = document.getElementById('mycanvas');
+		var ctx = canvas.getContext('2d');
+
+		var starWar = function(){
+			setInterval(drawImg, 100);
+		}
+
+		var spaceShip = new Image();
+		spaceShip.addEventListener('load', starWar, false);
+		spaceShip.src = 'ships.png';		
+		var counter = 0;
+
+		function drawImg(){
+			// drawScreen(ctx, spaceShip, 0, 0, 64, 64);
+			// drawScreen(ctx, spaceShip, 50, 50);	
+
+			counter++;
+			if(counter > 1) counter = 0;
+
+			ctx.drawImage(spaceShip, 32*counter, 0, 32, 32, 50, 50, 64, 64)
+		}
+
+		function drawScreen(ctx, obj, posX, posY, width, height){
+			if(width && height)
+				ctx.drawImage(obj, posX, posY, width, height);
+			else 
+				ctx.drawImage(obj, posX, posY);
+		}
+	</script>
+</body>
+</html>

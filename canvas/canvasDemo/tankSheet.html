@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<canvas id="mycanvas" width="500" height="500"></canvas>
+	<script>
+		var canvas = document.getElementById('mycanvas');
+		var ctx = canvas.getContext('2d');
+
+		var starWar = function(){
+			setInterval(drawImg, 100);
+		}
+
+		var spaceShip = new Image();
+		spaceShip.addEventListener('load', starWar, false);
+		spaceShip.src = 'tanks_sheet.png';		
+		var animationFrames = [1,2,3,4,5,6,7,8], frameIdx = 0,
+				dx=1, dy=0, x=50, y=50, rt=90;
+
+		function drawImg(){
+			// drawScreen(ctx, spaceShip, 0, 0, 64, 64);
+			// drawScreen(ctx, spaceShip, 50, 50);	
+
+			y = y+dy;
+			x = x+dx
+
+			ctx.clearRect(0, 0, 350, 350);
+			
+			ctx.save();
+			ctx.setTransform(1,0,0,1,0,0);
+			ctx.translate(x+16, y+16);
+			var angleRadians= rt *Math.PI / 180;
+			ctx.rotate(angleRadians);
+
+			var sourceX = Math.floor(animationFrames[frameIdx]%8) *32;
+			var sourceY = Math.floor(animationFrames[frameIdx]/8) *32;
+
+			frameIdx++;
+			if(frameIdx == animationFrames.length) frameIdx=0;
+			ctx.drawImage(spaceShip, sourceX, sourceY, 32, 32, -16, -16, 64, 64);
+			ctx.restore();
+		}
+
+		function drawScreen(ctx, obj, posX, posY, width, height){
+			if(width && height)
+				ctx.drawImage(obj, posX, posY, width, height);
+			else 
+				ctx.drawImage(obj, posX, posY);
+		}
+	</script>
+</body>
+</html>

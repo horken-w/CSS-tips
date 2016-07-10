@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	
+	<canvas id="mycvs" width="370" height="300"></canvas>
+	<script>
+		window.addEventListener('load', eventWindowLoaded);
+		var videoEl, videoDiv;
+
+		function supportsCanvas() {
+			return !!document.createElement('canvas').getContext;
+		}
+
+		function eventWindowLoaded(){
+
+			videoEl = document.createElement('video');
+			videoDiv = document.createElement('div');
+			document.body.appendChild(videoDiv);
+			videoDiv.appendChild(videoEl);
+			videoDiv.style.display = 'none';
+			var videoType = supportedVideo(videoEl);
+			if(!videoType){
+				alert('Do not support video tag');
+				return;
+			}
+			videoEl.src = 'video/muirbeach.' + videoType;
+			videoEl.addEventListener('canplaythrough', videoloaded);
+		}
+
+		function supportedVideo(video){
+			var extension;
+			if (video.canPlayType("video/webm") =="probably" || video.canPlayType("video/webm") == "maybe") {
+				extension = "webm";
+			} else if(video.canPlayType("video/mp4") == "probably" || video.canPlayType("video/mp4") == "maybe") {
+				extension = "mp4";
+			} else if(video.canPlayType("video/ogg") =="probably" || video.canPlayType("video/ogg") == "maybe") {
+				extension = "ogg";
+			} 
+			//console.log("extension:" + extension);
+			return extension;
+		}
+
+		function videoloaded(){
+			canvasApp();
+		}
+
+		function canvasApp(){
+			if(!supportsCanvas()) return;
+
+			function drawScreen(){
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.strokeStyle = 'hsl(0, 0%, 75%)';
+				ctx.strokeRect(1, 1, canvas.width-3, canvas.height-3);
+
+				for(var c =0; c < cols; c++){
+					for(var r = 0; r < rows; r++){
+						var tempPiece = board[c][r];
+						var imageX = tempPiece.finalCol * partWidth,
+								imageY = tempPiece.finalRow * partHeight;
+						var placeX = c*partWidth + c*xPad + startXoffset,
+								placeY = r*partHeight + r*yPad +startYoffset;
+
+						ctx.drawImage(videoEl, imageX, imageY, partWidth, partHeight, placeX, placeY, partWidth, partHeight);
+						if(tempPiece.selected){
+							ctx.strokeStyle = 'hsl(0, 0%, 60%)';
+							ctx.strokeRect( placeX, placeY, partWidth, partHeight);
+						}
+					}
+				}
+			}
+
+			function randomizeBoard(board){
+				var newBoard = new Array();
+				var cols = board.length, rows = board[0].length;
+
+				for(var i=0; i< cols; i++){
+					newBoard[i] = new Array();
+					for(var j=0; j<rows; j++){
+						var found = false;
+						var rndCol = 0, rndRow = 0;
+
+						while(!found){
+							var rndCol = Math.floor(Math.random() * cols),
+									rndRow = Math.floor(Math.random() * rows);
+							if(board[rndCol][rndRow] != false){
+								found = true;
+							}
+						}
+						newBoard[i][j] = board[rndCol][rndRow];
+						board[rndCol][rndRow] = false;
+					}
+				}
+				return newBoard;
+			}
+
+			function eventMouseUp(evt){
+				var mouseX, mouseY, pieceX, pieceY;
+
+				if(evt.layerX || evt.layerY == 0){
+					mouseX = evt.layerX;
+					mouseY = evt.layerY;
+				}
+				else if(evt.offsetX || evt.offsetY == 0){
+					mouseX = evt.offsetX;
+					mouseY = evt.offsetY;
+				}
+				var selectedList = [];
+				for(var c = 0; c<cols; c++){
+					for(var r = 0; r<rows; r++){
+						pieceX = c*partWidth + c*xPad + startXoffset;
+						pieceY = r*partHeight + r*yPad + startYoffset;
+
+						if((mouseX >= pieceX) && (mouseX <= pieceX+partWidth) && (mouseY>=pieceY) && (mouseY<=pieceY+partHeight)){
+							if(board[c][r].selected) board[c][r].selected =false;
+							else board[c][r].selected =true;
+						}
+						if(board[c][r].selected) selectedList.push({col:c, row:r})
+					}
+				}
+				if(selectedList.length == 2){
+					var selected1 = selectedList[0], selected2 = selectedList[1];
+					var tempPlace = board[selected1.col][selected1.row];
+
+					board[selected1.col][selected1.row] = board[selected2.col][selected2.row];
+					board[selected2.col][selected2.row] = tempPlace;
+					board[selected1.col][selected1.row].selected = false;
+					board[selected2.col][selected2.row].selected = false;
+				}
+			}
+
+			var canvas = document.getElementById('mycvs');
+			var ctx=canvas.getContext('2d');
+			videoEl.play();
+
+			var rows = 4, cols = 4;
+			var xPad = 10, yPad = 10;
+			var startXoffset = 10, startYoffset = 10;
+			var partWidth = videoEl.width / cols, partHeight = videoEl.height / rows;
+			partWidth = 80, partHeight = 60;
+			var board = new Array();
+
+			for(var i = 0; i<cols; i++){
+				board[i] = new Array()
+				for(var j=0; j<rows; j++){
+					board[i][j] = { finalCol:i, finalRow:j, selected: false};
+				}
+			}
+
+			board = randomizeBoard(board);
+			canvas.addEventListener('mouseup', eventMouseUp);
+
+
+			setInterval(drawScreen, 33);
+		}
+
+	</script>
+</body>
+</html>
