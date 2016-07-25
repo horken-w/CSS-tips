@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Table Click to Edit</title>
+	<link rel="stylesheet" href="">
+	<style>
+		#tableview{
+			width: 550px;
+		}
+		.tabel{
+			display: table;
+		}
+		.thead{
+			display: table-header-group;
+		}
+		.tbody{
+			display: table-row-group;
+		}
+		.tr{
+			display: table-row;
+		}
+		.td{
+			display: table-cell;
+		}
+		.thead > .tr > .td{
+			font-weight: 700;
+			text-align: center;
+		}
+		.td:first-child{
+			width: 5%;
+		}
+		.td:nth-child(2){
+			width: 15%;
+		}
+		.td:nth-child(3){
+			width: 30%;
+		}
+		.td:last-child{
+			width: 15%;
+		}
+	</style>
+</head>
+<body>
+	<div id="tableview" class="table editable">
+		<div class="thead">
+			<div class="tr">
+				<div class="td">Code</div>
+				<div class="td">Name</div>
+				<div class="td">Email</div>
+				<div class="td">Phone</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+	<script>
+		var database=[
+			{name: 'shahid', email: 'takfjdf@yahoo.com.tw', phone: '012-2354-5225'}, 
+			{name: 'Anakin', email: 'AnakinAfor@hotmail.com', phone: '012-345-678'}
+			] 
+		String.prototype.hashtag = function() {
+	    return '#' + this;
+	  };
+	  String.prototype.dot = function() {
+	    return '.' + this;
+	  };
+
+		function editableTable(tableName){
+			this.target = $(tableName.hashtag()).length ? $(tableName.hashtag()) : $(tableName.dot())
+			this.tbody = $('<div class="tbody"/>');
+			this.id = 0;
+			this._editingRow = null;
+			this.init();
+		}
+		editableTable.prototype = {
+			init: function(){
+
+				database.forEach( function(v, i){
+						this.tbody.append($('<div class="tr"/>'));
+						this.tbody.find('.tr').eq(i).append(this.tdMade(i+1));
+						this.tbody.find('.tr').eq(i).append(this.tdMade(v));
+				}, this);
+				this.target.append(this.tbody);
+
+				this.target.find('.td').not('.thead > .tr > .td').on('dblclick', this.editItem);
+				$(document).on('keypress', this.editOver);
+				$(document).on('click', this.editOver);
+			},
+			tdMade: function(data){
+				var td;
+				if(typeof data === 'number') td = '<div class="td">'+data+'</div>';
+				else {
+					td = '<div class="td">'+data.name+'</div>'+
+							 '<div class="td">'+data.email+'</div>'+
+							 '<div class="td">'+data.phone+'</div>'
+				}
+				return td
+			},
+			editItem: function(td){
+				var target = td.target.closest('.tr'), input=$('<input type="text"/>');
+
+				$(target).addClass('rowedit');
+				$(target).find('.td').each( function(i, v){
+					$(v).html(input.clone().val(v.innerHTML));
+				})
+				$(this).eq(1).focus();
+				$(target).find('input').dblclick(function(e){
+            e.stopPropagation(); 
+        });
+			},
+			editOver: function(e){
+				var txtArray = [];
+				if(e.which == 13 || !$.contains(document.getElementsByClassName('tbody')[0], e.target)){
+					$(this).find('input').each(function(i, v){
+						txtArray.push(v.value);
+						this.parentElement.innerHTML = v.value;
+					})
+					document.getElementsByClassName('rowedit').className = 'tr';
+				}
+				
+			}
+		}
+		var tabular = new editableTable('tableview');
+
+	</script>
+</body>
+</html>
