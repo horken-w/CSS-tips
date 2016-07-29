@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		body{
+			font: 14px/1.5 helvetica-neue, helvetica, arial;
+			padding: 10px;
+		}
+		h1{
+			margin-top: 0;
+		}
+		#main{
+			width: 300px;
+			margin: auto;
+			background: #ececec;
+			padding: 20px;
+			border: 1px solid #ccc;
+		}
+		#image-list{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		#image-list li{
+			background: #fff;
+			border: 1px solid #ccc;
+			text-align: center;
+			padding: 20px;
+			margin-bottom: 19px;
+		}
+		#image-list li img{
+			width: 258px;
+			vertical-align: middle;
+			border: 1px solid #474747;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<h1>Upload Your Images</h1>
+		<form>
+			<input type="file" name="images[]" id="images" multiple>
+			<button type="submit" id="sent">Upload Files!</button>
+		</form>
+
+		<div id="response"></div>
+		<ul id="image-list"></ul>
+	</div>
+	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+	<script src="./uploadlist/upload.js"></script>
+</body>
+</html>
