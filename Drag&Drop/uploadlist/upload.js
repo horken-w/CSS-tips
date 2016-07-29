@@ -33,10 +33,31 @@
 			_this.children[0].removeEventListener('click', addToEdit); 
 		}
 		else{
+			var formdata = new FormData(), index=0;
 			orgtxt = _this.value;
+			index = Array.prototype.indexOf.call(_this.parentElement.parentElement.parentElement.children, _this.parentElement.parentElement)
+			formdata.append('id', index);
+			formdata.append('images', _this.parentElement.parentElement.children[0].src);
+			formdata.append('name', orgtxt);
 			_this.parentElement.innerHTML=orgtxt;
+			sentToServerSide(formdata)
 		}
 
+	}
+
+	function sentToServerSide(files, url){
+		var uploadURL = 'http://hayageek.com/examples/jquery/drag-drop-file-upload/upload.php';
+
+		$.ajax({
+		  url: url ? url : uploadURL,
+		  type: "POST",
+		  data: files,
+		  processData: false,
+		  contentType: false,
+		  success: function (res) {
+		    document.getElementById("response").innerHTML = res; 
+		  }
+		});
 	}
 
 	input.addEventListener('change', function(evt){
@@ -57,19 +78,6 @@
 			}
 			formdata.append('images[]', file);
 		}
-		if(formdata){
-			var uploadURL = 'http://hayageek.com/examples/jquery/drag-drop-file-upload/upload.php';
-
-			$.ajax({
-		    url: uploadURL,
-		    type: "POST",
-		    data: formdata,
-		    processData: false,
-		    contentType: false,
-		    success: function (res) {
-		      document.getElementById("response").innerHTML = res; 
-		    }
-		  });
-		}
+		if(formdata) sentToServerSide(formdata)
 	})
 })()
