@@ -1,0 +1,267 @@
+@font-face {
+	font-family: 'icomoon';
+	src: url('../fonts/icomoon.eot');
+	src: url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/icomoon.svg#icomoon') format('svg'),
+		 url('../fonts/icomoon.woff') format('woff'),
+		 url('../fonts/icomoon.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* init CSS style */
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html, body{
+	font-size: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+    color: deepskyblue;
+}
+
+/* content CSS */
+html, body, container, .main{ 
+	width: 90%;
+    max-width: 70em;
+    margin: 0 auto;
+    padding: 0 1.875em 3.125em 1.875em;
+	height: 100%;
+}
+
+.contentslider{
+	width: 100%;
+	height: 70%;
+	margin: 1em auto;
+	position: relative;
+	border: 4px solid skyblue;
+}
+
+.contentslider > ul{
+	list-style: none;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	padding: 0; margin: 0;
+}
+
+.contentslider > ul li{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;top: 0;
+	padding: 1em;
+	background: white;
+}
+
+/* use target to instead of JS click event */
+.contentslider > ul li:target{
+	z-index: 100;
+}
+
+.contentslider nav{
+	position: absolute;
+	bottom: 0; left: 0; right: 0;
+	height: 3.313em;
+	z-index: 1000;
+	border-top: 4px solid skyblue;
+	overflow: hidden;
+}
+
+.contentslider nav a{
+	float: left;
+	display: block;
+	width: 20%;
+	height: 100%;
+	font-weight: 400;
+	letter-spacing: 0.1em;
+	overflow: hidden;
+	color: skyblue;
+	background: white;
+	outline: none;
+	text-align: center;
+	line-height: 3;
+	padding-left: 3.125em;
+	position: relative;
+	text-transform: uppercase;
+	border-right: 4px solid skyblue;
+	-webkit-transition: color 0.2s ease-in-out, background-color: 0.2s ease-in-out;
+	-moz-transition: color 0.2s ease-in-out, background-color: 0.2s ease-in-out;
+	transition: color 0.2s ease-in-out, background-color: 0.2s ease-in-out;
+}
+
+.contentslider nav a span{
+	display: block;
+}
+
+.contentslider nav a:last-child{
+	border: none;
+	box-shadow: 1px 0 skyblue;
+}
+
+.contentslider nav a:hover{
+	background-color: skyblue;
+	color: white;
+}
+
+.contentslider nav a.rc-active{
+	background-color: skyblue;
+	color: white;
+}
+
+.contentslider [class^="icon-"]:before,
+.contentslider [class*=" icon-"]:before{
+	font-family: 'icomoon';
+	font-style: normal;
+	text-align: center;
+	font-weight: 400;
+	line-height: 2.5;
+	font-size: 2em;
+	margin: -1.250em 0 0 0;
+	height: 2.5em;
+	width: 2.5em;
+	color: hsla(0, 0%, 0%, 0.1);
+	position: absolute;
+	left: 10%;
+	top: 50%;
+	-webkit-font-smoothing: antialiased;
+}
+
+.contentslider .icon-wolf:before{
+	content: "\56";
+}
+
+.contentslider .icon-rabbit:before{
+	content: "\52";
+}
+.contentslider .icon-turtle:before{
+	content: "\54";
+}
+
+.contentslider .icon-platypus:before{
+	content: "\42";
+}
+
+.contentslider .icon-aligator:before{
+	content: "\41";
+}
+
+.contentslider [class^="icon-"].rc-active:before,
+.contentslider [class*=" icon-"].rc-active:before,
+.contentslider nav a:hover:before{
+	color: hsla(0, 0%, 100%, 0.9);
+}
+
+.contentslider h3{
+	font-size: 4em;
+	height: 2em;
+	line-height: 1.7;
+	font-weight: 300;
+	margin: 0 0 0.3em;
+	color: skyblue;
+	text-transform: uppercase;
+	text-align: right;
+	letter-spacing: 0.3em;
+	padding: 0 0.2em 0 0;
+	border-bottom: 4px solid skyblue;
+	position: relative;
+}
+
+.contentslider h3[class^="icon-"]:before,
+.contentslider h3[class*=" icon-"]:before{
+	top: 0;
+	left: 0;
+	width: 2em;
+	line-height: 1;
+	height: 1.2em;
+	margin: 0;
+	color: skyblue;
+}
+
+.contentslider li > div{
+	position: absolute;
+	width: 100%;
+	top: 9em;
+	bottom: 3.313em;
+	left: 0;
+	padding: 0 1em;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.contentslider .content{
+	-webkit-column-rule: 1px solid deepskyblue;
+	-moz-column-rule: 1px solid deepskyblue;
+	column-rule: 1px solid deepskyblue;
+	-webkit-columns: auto 2;
+	-moz-columns: auto 2;
+	columns: auto 2;
+	-webkit-column-gap: 1em;
+	-moz-column-gap: 1em;
+	column-gap: 1em;
+	vertical-align: top;
+	padding: 1em;
+}
+
+.contentslider p{
+	color: deepskyblue;
+	padding: 0 0 0.5em 0.4em;
+	margin: 0;
+	font-size: 1.2em;
+	font-weight: 300;
+	text-align: justify;
+	line-height: 1.6;
+}
+
+
+/* Media queries */
+
+@media screen and (max-width: 70em){
+	.contentslider p{
+		font-size: 100%;
+	}
+}
+
+@media screen and (max-width: 67.75em){
+	.contentslider{ font-size: 85%;}
+
+	.contentslider nav a[class^="icon-"]:before,
+	.contentslider nav a[class*=" icon-"]:before{
+		left: 50%;
+		margin-left: -1.25em;
+	}
+
+	.contentslider nav a span{
+		display: none;
+	}
+}
+
+@media screen and (max-width: 43em){
+	.contentslider h3{
+		font-size: 2em;
+	}
+
+	.contentslider .content{
+		-webkit-columns: auto 1;
+		-moz-columns: auto 1;
+		columns: auto 1;
+	}
+
+	.contentslider li > div{
+		top: 5em;
+	}
+}
+
+@media screen and (max-width: 25em){
+	.contentslider nav a{ padding: 0;}
+	.contentslider h3[class ^= "icon-"]:before,
+	.contentslider h3[class*=" icon-"]:before{ display: none; }
+}
+
