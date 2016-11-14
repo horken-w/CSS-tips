@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>download test</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	
+	<script src="./vendor/jszip.min.js"></script>
+	<script src="./vendor/FileSaver.js"></script>
+	<script src="./vendor/jszip-utils.js"></script>
+	<!--[if IE]>
+	<script type="text/javascript" src="dist/jszip-utils-ie.js"></script>
+	<![endif]-->
+	<script>
+		var zip = new JSZip();
+		var count = 0;
+		var zipFilename = 'text.zip';
+		var urls = ["http://117.56.68.32/download/連江縣/2.候選人登記/IMAG2168_03.JPG"]
+
+		
+
+		// loading a file and add it in a zip file
+		urls.forEach(function(url){
+		var filename = "filename";
+		  // loading a file and add it in a zip file
+		  JSZipUtils.getBinaryContent(url, function (err, data) {
+		    if(err) {
+		       throw err; // or handle the error
+		    }
+		    zip.file(filename, data, {binary:true});
+		    count++;
+		    if (count == urls.length) {
+			    zip.generateAsync({type:'blob'}).then(function(content) {
+			    	saveAs(content, zipFilename);
+			    });
+			}
+		  });
+		});
+	</script>
+</body>
+</html>
