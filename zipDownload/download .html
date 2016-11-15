@@ -10,21 +10,21 @@
 	
 	<script src="./vendor/jszip.min.js"></script>
 	<script src="./vendor/FileSaver.js"></script>
-	<script src="./vendor/jszip-utils.js"></script>
+	<script src="./vendor/jszip-utils.min.js"></script>
 	<!--[if IE]>
 	<script type="text/javascript" src="dist/jszip-utils-ie.js"></script>
 	<![endif]-->
 	<script>
 		var zip = new JSZip();
 		var count = 0;
-		var zipFilename = 'text.zip';
-		var urls = ["http://117.56.68.32/download/連江縣/2.候選人登記/IMAG2168_03.JPG"]
+		var zipFilename = 'filesZipDownload.zip';
+		var urls = ['./messageImage.jpg', './43598.jpg']
 
 		
 
 		// loading a file and add it in a zip file
 		urls.forEach(function(url){
-		var filename = "filename";
+		var filename = url.split('/')[1];
 		  // loading a file and add it in a zip file
 		  JSZipUtils.getBinaryContent(url, function (err, data) {
 		    if(err) {
