@@ -33,12 +33,17 @@
 		    zip.file(filename, data, {binary:true});
 		    count++;
 		    if (count == urls.length) {
-			    zip.generateAsync({type:'blob'}).then(function(content) {
-			    	saveAs(content, zipFilename);
+			    zip.generateAsync({type:"base64"}).then(function(content) {
+			    	// saveAs(content, zipFilename);
+			    	console.log("data:application/zip;base64," +content);
 			    });
 			}
 		  });
 		});
+
 	</script>
 </body>
 </html>
+
+<!-- url = window.URL.createObjectURL(blob);
+window.URL.revokeObjectURL(url); -->
