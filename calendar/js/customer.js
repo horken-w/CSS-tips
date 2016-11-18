@@ -152,58 +152,14 @@ function getView(ww){
   return (ww <= 480) ? 'basicWeek' : 'month';
 }
 
-$(function () {
-  // window.prettyPrint && prettyPrint();
-
-  if($.browser.mobile) window.location = './content_list.html' //if on mobile device redirect to list page;
-
-  $('#datetimepicker6').datetimepicker({format:'YYYY/M/D HH:mm:ss'});
-  $('#datetimepicker7').datetimepicker({
-    useCurrent: false, //Important! See issue #1075
-    format:'YYYY/M/D HH:mm:ss'
-  });
-
-  $('#table').bootstrapTable(); // init via javascript
-    $(window).resize(function () {
-      $('#table').bootstrapTable('resetView');
-    });
-  });
-  
-  var $table = $('#table'),
-      $button = $('#button');
-  
-  $button.click(function () {
-    var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
-         return row.id;
-    });
-    $table.bootstrapTable('remove', {
-      field: 'id',
-      values: ids
-    });
-  });
-  
-  function operateFormatter(value, row, index) {
-    return [
-      '<a class="remove ml10" href="javascript:void(0)" title="Remove">',
-        '<i class="glyphicon icon-remove"></i>',
-      '</a>'
-      ].join('');
-  }
-
-  window.operateEvents = {
-    'click .remove': function (e, value, row, index) {
-        alert('You click remove icon, row: ' + JSON.stringify(row));
-        console.log(value, row, index);
-    }
-  };
   var today = new Date();
   today= moment(today).format('YYYY-MM-DD');
   $('#table-list').fullCalendar({
     locale: 'zh-tw',
     header: {
-        left: 'today prev,next',
+        left: '',
         center: 'title',
-        right: ''
+        right: 'today prev,next'
     },
     defaultDate: today,
     theme: true,
@@ -216,14 +172,41 @@ $(function () {
         alert('there was an error while fetching events!');
       },
     },
-    eventRender: function(date, cell){
-      // element.append('<div style="float:left;">/*push pin image*/</div>');
+    eventAfterRender: function(event, element, view){
+      var top = 0, left = 5,
+          length = element[0].parentElement.parentElement.parentElement.childElementCount;
+      if(getWindowWidth() > 480){
+          if(length>1){
+          var boxWidth = $(element[0].parentElement).width()-10,
+              itemsLeft = Math.floor(boxWidth/5);
+
+          for(var i=0; i<length; i++){
+            if(!i){
+              $(element[0].parentElement.parentElement.parentElement.childNodes[i]).find('.typeicon').css({'left': left+'px', top: top+'px'})
+              top-=1; left += itemsLeft
+            }
+            else{
+              $(element[0].parentElement.parentElement.parentElement.childNodes[i]).find('.typeicon').css({'left': left+'px', top: top+'px'})  
+              top-=1; left += itemsLeft
+              if(left > boxWidth){
+                top+=20; left = 5;
+              }
+            }
+          }
+        }
+        else{
+          top = 0, left = 5
+          $(element[0]).find('.typeicon').css({'left': left+'px', top: top+'px'})
+        }
+      }
     },
     windowResize: function( viewEl ){
       var ww = getWindowWidth();
       var view = getView(ww);
       if($('#table-list').fullCalendar('getView').type !== view)
         $('#table-list').fullCalendar('changeView',view);
+      else
+        $('#table-list').fullCalendar('rerenderEvents');
     },
     dayClick: function(date, jsEvent, view) {
       // $('.dropbg').empty();

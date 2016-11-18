@@ -1,7 +1,7 @@
 $.fullCalendar.locale("zh-tw", {
 	closeText: "關閉", 
-	prevText: "&#x3C;上月", 
-	nextText: "下月&#x3E;", 
+	prevText: "&#x3C;前一月", 
+	nextText: "後一月&#x3E;", 
 	currentText: "今天", 
 	monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], 
 	monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], 
@@ -21,8 +21,6 @@ $.fullCalendar.locale("zh-tw", {
         list: "活動列表"
     },
     allDayText: "整天",
-    eventLimitText: function(n) {
-        return '顯示更多';
-    },
+    eventLimitText:'顯示更多',
     noEventsMessage: "没有任何活動"
 });

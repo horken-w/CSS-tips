@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="../css/library/bootstrap.min.css">
 <link rel="stylesheet" href="../css/library/jquery-ui.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../css/library/boxmodel.css" />
+<!-- <link rel="stylesheet" href="../css/library/boxmodel.css" /> -->
 <link rel="stylesheet" href="../css/fullcalendar.css">
 <link rel="stylesheet" media="print" href="../css/fullcalendar.print.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -91,7 +91,18 @@
       visibility: visible;
     }
   }
-  
+  @media only screen and (max-width : 30em){
+    .fc-content-skeleton{
+      min-height: 30vh;
+    }
+    .fc-event .fc-content{
+      padding: 0;
+    }
+    .typeicon + .alt{
+      position: static;
+      height: 25px;
+    }
+  }
 </style>
 <body class="hold-transition sidebar-mini">
 <!-- Main content -->
@@ -119,7 +130,7 @@
 <!-- REQUIRED JS SCRIPTS --> 
   <script src="../js/library/jquery.min.js"></script> 
   <script src="../js/library/bootstrap.min.js"></script> 
-  <script src="../js/velocity.min.js"></script> 
+  <!-- <script src="../js/velocity.min.js"></script>  -->
   <script src="../js/library/detectmobilebrowser.js"></script>
   <script src="../js/library/moment-with-locales.js"></script>
   <script src="../js/calendar/fullcalendar.js"></script>
