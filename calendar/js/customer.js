@@ -166,7 +166,7 @@ function getView(ww){
     editable: false,
     eventLimit: false, // allow "more" link when too many events
     events: {
-      url: '../calendar/data1.json',
+      url: '../calendar/data2.json',
       type: 'POST',
       error: function() {
         alert('there was an error while fetching events!');
@@ -180,24 +180,25 @@ function getView(ww){
           var boxWidth = $(element[0].parentElement).width()-10,
               itemsLeft = Math.floor(boxWidth/5);
 
-          for(var i=0; i<length; i++){
-            if(!i){
-              $(element[0].parentElement.parentElement.parentElement.childNodes[i]).find('.typeicon').css({'left': left+'px', top: top+'px'})
-              top-=1; left += itemsLeft
-            }
-            else{
-              $(element[0].parentElement.parentElement.parentElement.childNodes[i]).find('.typeicon').css({'left': left+'px', top: top+'px'})  
-              top-=1; left += itemsLeft
-              if(left > boxWidth){
-                top+=20; left = 5;
+            for(var i=0; i<length; i++){
+              if(!i){
+                $(element[0].parentElement.parentElement.parentElement.childNodes[i]).find('.typeicon').css({'left': left+'px', top: top+'px'})
+                top-=1; left += itemsLeft
+              }
+              else{
+                $(element[0].parentElement.parentElement.parentElement.childNodes[i]).find('.typeicon').css({'left': left+'px', top: top+'px'})  
+                top-=1; left += itemsLeft
+                if(left > boxWidth){
+                  top+=25; left = 5;
+                }
               }
             }
           }
-        }
-        else{
-          top = 0, left = 5
-          $(element[0]).find('.typeicon').css({'left': left+'px', top: top+'px'})
-        }
+          else{
+            top = 0, left = 5
+            $(element[0]).find('.typeicon').css({'left': left+'px', top: top+'px'})
+          }
+          $(element[0]).find('.alt').css('top', 25*Math.ceil(length/5));
       }
     },
     windowResize: function( viewEl ){

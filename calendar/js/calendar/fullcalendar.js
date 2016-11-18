@@ -6053,13 +6053,13 @@ DayGrid.mixin({
 		classes.unshift('fc-day-grid-event', 'fc-h-event');
 
 		switch(event.titleID){
-			case '記者會':
+			case 'Meeting':
 				typecolor = 'typeicon-green';
 				break;
-			case '活動':
+			case 'Event':
 				typecolor = 'typeicon-blue';
 				break;
-			case '媒體參訪':
+			case 'Dinner':
 				typecolor = 'typeicon-orange';
 				break;
 			case '':
@@ -6085,7 +6085,7 @@ DayGrid.mixin({
 				(htmlEscape(event.titleID || '') || '&nbsp;') + // we always want one line of height
 			'</span>'+
 			'<span class="fc-title"> - ' +
-				(htmlEscape($(event.title).text() || '') || '&nbsp;') + // we always want one line of height
+				(htmlEscape(event.title || '') || '&nbsp;') + // we always want one line of height
 			'</span></div>';
 		
 		return '<a class="' + classes.join(' ') + '"' +
