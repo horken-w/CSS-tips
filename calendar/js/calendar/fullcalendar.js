@@ -6052,26 +6052,6 @@ DayGrid.mixin({
 
 		classes.unshift('fc-day-grid-event', 'fc-h-event');
 
-		switch(event.titleID){
-			case 'Meeting':
-				typecolor = 'typeicon-green';
-				break;
-			case 'Event':
-				typecolor = 'typeicon-blue';
-				break;
-			case 'Dinner':
-				typecolor = 'typeicon-orange';
-				break;
-			case '':
-				typecolor = 'typeicon-purple';
-				break;
-			default:
-				console.log('unKnow event type!');
-				break;
-		}
-		
-		eventIcon = '<span class="typeicon '+typecolor+'"/><div class="alt">';
-
 		// Only display a timed events time if it is the starting segment
 		if (seg.isStart) {
 			timeText = this.getEventTimeText(event);
@@ -6081,12 +6061,9 @@ DayGrid.mixin({
 		}
 
 		titleHtml =
-			'<span class="fc-type">' +
-				(htmlEscape(event.titleID || '') || '&nbsp;') + // we always want one line of height
-			'</span>'+
 			'<span class="fc-title"> - ' +
 				(htmlEscape(event.title || '') || '&nbsp;') + // we always want one line of height
-			'</span></div>';
+			'</span>';
 		
 		return '<a class="' + classes.join(' ') + '"' +
 				(event.url ?
@@ -6100,8 +6077,9 @@ DayGrid.mixin({
 			'>' +
 				'<div class="fc-content">' +
 					(this.isRTL ?
-						eventIcon+ ' ' +titleHtml + ' ' + timeHtml : // put a natural space in between
-						eventIcon+ ' ' +timeHtml + ' ' + titleHtml   //
+						//add div class alt to make all description like tool tag
+						'<div class="alt">'+titleHtml + ' ' + timeHtml+'</div>' : // put a natural space in between
+						'<div class="alt">'+timeHtml + ' ' + titleHtml+'</div>'   //
 						) +
 				'</div>' +
 				(isResizableFromStart ?

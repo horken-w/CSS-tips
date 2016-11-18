@@ -149,7 +149,7 @@ function getWindowWidth(){
   return $(window).width();
 }
 function getView(ww){
-  return (ww <= 480) ? 'basicWeek' : 'month';
+  return (ww <= 640) ? 'basicWeek' : 'month';
 }
 
   var today = new Date();
@@ -172,10 +172,36 @@ function getView(ww){
         alert('there was an error while fetching events!');
       },
     },
+    eventRender: function( event, element, view ) { 
+        var typecolor='', eventIcon, eventTitle;
+        
+        switch(event.titleID){
+            case 'Meeting':
+              typecolor = 'typeicon-green';
+              break;
+            case 'Event':
+              typecolor = 'typeicon-blue';
+              break;
+            case 'Dinner':
+              typecolor = 'typeicon-orange';
+              break;
+            case '':
+              typecolor = 'typeicon-purple';
+              break;
+            default:
+              console.log('unKnow event type!');
+              break;
+        }
+        eventIcon = '<span class="typeicon '+typecolor+'"/>';
+        eventTitle = '<span class="fc-type">' +event.titleID +'</span>';
+        $(eventIcon).insertBefore($(element).find('.alt'));
+        $(eventTitle).insertBefore($(element).find('.fc-title'));
+
+    },
     eventAfterRender: function(event, element, view){
       var top = 0, left = 5,
           length = element[0].parentElement.parentElement.parentElement.childElementCount;
-      if(getWindowWidth() > 480){
+      if(getWindowWidth() > 640){
           if(length>1){
           var boxWidth = $(element[0].parentElement).width()-10,
               itemsLeft = Math.floor(boxWidth/5);
