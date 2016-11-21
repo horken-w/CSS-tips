@@ -154,7 +154,10 @@ function getView(ww){
 
   var today = new Date();
   today= moment(today).format('YYYY-MM-DD');
+  var view = getView(getWindowWidth());
+
   $('#table-list').fullCalendar({
+    defaultView: view,
     locale: 'zh-tw',
     header: {
         left: '',
@@ -162,6 +165,7 @@ function getView(ww){
         right: 'today prev,next'
     },
     defaultDate: today,
+    titleFormat: view === 'basicWeek' ? 'YYYY': 'MMMM YYYY',
     theme: true,
     editable: false,
     eventLimit: false, // allow "more" link when too many events
@@ -177,20 +181,20 @@ function getView(ww){
         
         switch(event.titleID){
             case 'Meeting':
-              typecolor = 'typeicon-green';
-              break;
+                typecolor = 'typeicon-green';
+                break;
             case 'Event':
-              typecolor = 'typeicon-blue';
-              break;
+                typecolor = 'typeicon-blue';
+                break;
             case 'Dinner':
-              typecolor = 'typeicon-orange';
-              break;
+                typecolor = 'typeicon-orange';
+                break;
             case '':
-              typecolor = 'typeicon-purple';
-              break;
+                typecolor = 'typeicon-purple';
+                break;
             default:
-              console.log('unKnow event type!');
-              break;
+                console.log('unKnow event type!');
+                break;
         }
         eventIcon = '<span class="typeicon '+typecolor+'"/>';
         eventTitle = '<span class="fc-type">' +event.titleID +'</span>';
@@ -199,12 +203,12 @@ function getView(ww){
 
     },
     eventAfterRender: function(event, element, view){
-      var top = 0, left = 5,
+      var top = 0, left = 10,
           length = element[0].parentElement.parentElement.parentElement.childElementCount;
       if(getWindowWidth() > 640){
           if(length>1){
-          var boxWidth = $(element[0].parentElement).width()-10,
-              itemsLeft = Math.floor(boxWidth/5);
+          var boxWidth = $(element[0].parentElement).width()-20,
+              itemsLeft = Math.floor(boxWidth/4);
 
             for(var i=0; i<length; i++){
               if(!i){
@@ -215,21 +219,21 @@ function getView(ww){
                 $(element[0].parentElement.parentElement.parentElement.childNodes[i]).find('.typeicon').css({'left': left+'px', top: top+'px'})  
                 top-=1; left += itemsLeft
                 if(left > boxWidth){
-                  top+=25; left = 5;
+                  top+=25; left = 10;
                 }
               }
             }
           }
           else{
-            top = 0, left = 5
+            top = 0, left = 10
             $(element[0]).find('.typeicon').css({'left': left+'px', top: top+'px'})
           }
-          $(element[0]).find('.alt').css('top', 25*Math.ceil(length/5));
+          $(element[0]).find('.alt').css('top', 25*Math.ceil(length/4));
       }
     },
     windowResize: function( viewEl ){
       var ww = getWindowWidth();
-      var view = getView(ww);
+      view = getView(ww);
       if($('#table-list').fullCalendar('getView').type !== view)
         $('#table-list').fullCalendar('changeView',view);
       else
@@ -251,18 +255,5 @@ function getView(ww){
       // $('.close').on('click', function(){
       //   $('.dropbg').fadeOut(500);
       // })
-    }
-  });
-$('#show-list').fullCalendar({
-    defaultDate: today,
-    theme: true,
-    editable: true,
-    eventLimit: true, // allow "more" link when too many events
-    events: {
-      url: './contentadmin/data1.json',
-      type: 'POST',
-      error: function() {
-        alert('there was an error while fetching events!');
-      }
     }
   });
