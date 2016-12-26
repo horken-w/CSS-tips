@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="./swiper.min.css">
+	<style>
+	    html, body {
+	        position: relative;
+	        height: 100%;
+	    }
+	    body {
+	        background: #eee;
+	        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	        font-size: 14px;
+	        color:#000;
+	        margin: 0;
+	        padding: 0;
+	    }
+	    .rides-box {
+	        width: 47%;
+	        height: 25%;
+	        margin: 30px 15px 0 2px;
+	        float: left;
+	    }
+	    .rides-box:nth-child(2){
+	    	margin-top: 80px;
+	    }
+	    .swiper-container {
+	        width: 100%;
+	        height: 100%;
+	    }
+	    .swiper-slide {
+	        text-align: center;
+	        font-size: 18px;
+	        background: hsla(300, 76%, 72%, 0.2);
+	        /* Center slide text vertically */
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: -webkit-flex;
+	        display: flex;
+	        -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	        -webkit-justify-content: center;
+	        justify-content: center;
+	        -webkit-box-align: center;
+	        -ms-flex-align: center;
+	        -webkit-align-items: center;
+	        align-items: center;
+	        flex-flow: row wrap;
+	    }
+	    .swiper-slide:nth-child(5):before{
+	    	content: '';
+			background: url('./flyeagle.png') no-repeat;
+			background-size: cover;
+			opacity: 0.3;
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			z-index: -1;
+	    }
+		.swiper-button-prev, .swiper-button-next{
+			width: 20%;
+			height: 20%;
+		}
+		h2{
+			display: inline-block;
+			margin-bottom: 0.3em;
+		}
+		.detail h2{
+			display: block;
+		}
+		.totalppl-count{
+			margin: 0;
+			margin-top: 25px;
+			padding: 0;
+			line-height: 1.2em;
+			font-size: 1.2em;
+			float: right;
+		}
+		.detail .totalppl-count:nth-child(2){
+			float: left;
+		}
+		.detail .totalppl-count:nth-child(2n+1){
+			clear: both;
+			float: left;
+		}
+		.red{
+			color: red;
+		}
+		.rides-name, .rides-waitnum{
+			flex: 1 100%;
+		}
+		.rides-used, .rides-cancel, .rides-expire, .rides-willuse{
+			flex: 1 50%;
+			font-weight: 800;
+			color: hsl(0, 100%, 11%);
+			text-shadow: 3px -3px 5px hsla(0, 50%, 70%, .6);
+		}
+		.rides-waitnum{
+			font-size: 0;
+		}
+		.rides-name{
+			margin-left: 10px;
+			text-align: left;
+			color: hsl(4, 100%, 40%);
+			font-size: 1.5em;
+			font-weight: 800;
+		}
+		.numberlist{
+			background: url('number_w.png') no-repeat;
+			height: 80px;
+			display: inline-block;
+		}
+		.numberlist:after{
+			content: '';
+			background: url('number.png') no-repeat;
+			height: 90px;
+			display: inline-block;
+			position: absolute;
+			z-index: 1;
+		}
+		.num-1{
+			background-position: -5px -3px, left;
+			width: 54px;
+		}
+		.num-1:after{
+			background-position: -5px -24px, left;
+			width: 35px;
+		    margin-top: 43px;
+		    margin-left: -60px;
+		    transform: skew(-70deg);
+		    opacity: 0.5;
+		    z-index: -1;
+		}
+		.num-2{
+			background-position: -60px -4px, left;
+			width: 54px;
+		}
+		.num-2:after{
+			background-position: -45px -24px, left;
+			width: 35px;
+		    margin-top: 43px;
+		    margin-left: -60px;
+		    transform: skew(-70deg);
+		    opacity: 0.5;
+		    z-index: -1;
+		}
+		.num-3{
+			background-position: -115px -3px, left;
+			width: 54px;
+		}
+		.num-3:after{
+			background-position: -88px -26px, left;
+			width: 35px;
+		    margin-top: 43px;
+		    margin-left: -60px;
+		    transform: skew(-70deg);
+		    opacity: 0.5;
+		    z-index: -1;
+		}
+		.num-4{
+			background-position: -170px 0, left;
+			width: 54px;
+		}
+		.num-4:after{
+			background-position: -120px -24px, left;
+			width: 35px;
+		    margin-top: 43px;
+		    margin-left: -60px;
+		    transform: skew(-70deg);
+		    opacity: 0.5;
+		    z-index: -1;
+		}
+		.num-5{
+			background-position: -227px -5px, left;
+			width: 54px;
+		}
+		.num-5:after{
+			background-position: -163px -24px, left;
+			width: 35px;
+		    margin-top: 43px;
+		    margin-left: -60px;
+		    transform: skew(-70deg);
+		    opacity: 0.5;
+		    z-index: -1;
+		}
+		.num-6{
+			background-position: -283px -3px, left;
+			width: 54px;
+		}
+		.num-6:after{
+			background-position: -200px -24px, left;
+			width: 35px;
+		    margin-top: 43px;
+		    margin-left: -60px;
+		    transform: skew(-70deg);
+		    opacity: 0.5;
+		    z-index: -1;
+		}
+		.num-7{
+			background-position: -335px -3px, left;
+			width: 54px;
+		}
+		.num-7:after{
+			background-position: -228px -24px, left;
+			width: 35px;
+		    margin-top: 43px;
+		    margin-left: -60px;
+		    transform: skew(-70deg);
+		    opacity: 0.5;
+		    z-index: -1;
+		}
+		.num-8{
+			background-position: -393px -3px, left;
+			width: 54px;
+		}
+		.num-8:after{
+			background-position: -275px -24px, left;
+			width: 35px;
+		    margin-top: 43px;
+		    margin-left: -60px;
+		    transform: skew(-70deg);
+		    opacity: 0.5;
+		    z-index: -1;
+		}
+		.num-9{
+			background-position: -443px -3px, left;
+			width: 54px;
+		}
+		.num-9:after{
+			background-position: -305px -24px, left;
+			width: 35px;
+		    margin-top: 43px;
+		    margin-left: -60px;
+		    transform: skew(-70deg);
+		    opacity: 0.5;
+		    z-index: -1;
+		}
+		.num-0{
+			background-position: -499px -3px, left;
+			width: 54px;
+		}
+		.num-0:after{
+			background-position: -350px -24px, left;
+			width: 35px;
+		    margin-top: 43px;
+		    margin-left: -60px;
+		    transform: skew(-70deg);
+		    opacity: 0.5;
+		    z-index: -1;
+		}
+		.more{
+			float: right;
+		}
+    </style>
+</head>
+<body>
+	<div class="rides-box">
+		<h2>設施排隊概況<span style="font-size: small">(可以考慮不顯示)</span></h2>
+		<p class="totalppl-count">今天使用總人數: <span id="totallyppl" class="red">25316</span></p>
+		<div class="swiper-container">
+		    <div class="swiper-wrapper">
+		        <div class="swiper-slide">
+		            <div class="rides-name">急流泛舟 - 總取票人數</div>
+		            <div class="rides-waitnum">
+		            	<div class="numberlist num-2"></div>
+		            	<div class="numberlist num-7"></div>
+		            	<div class="numberlist num-2"></div>
+		            </div>
+		            <div class="rides-used">已剪票人數: <span class="red">64</span></div>
+		            <div class="rides-expire">未使用人數: <span class="red">38</span></div>
+		            <div class="rides-willuse">已逾期人數: <span class="red">110</span></div>
+		            <div class="rides-cancel">自行取消人數: <span class="red">60</span></div>
+		        </div>
+		        <div class="swiper-slide">
+		           	<div class="rides-name">火山歷險 - 總取票人數</div>
+		           	<div class="rides-waitnum">
+		           		<div class="numberlist num-1"></div>
+		           		<div class="numberlist num-8"></div>
+		           		<div class="numberlist num-0"></div>
+		           	</div>
+		           	<div class="rides-used">已剪票人數: <span class="red">75</span></div>
+		           	<div class="rides-expire">未使用人數: <span class="red">20</span></div>
+		           	<div class="rides-willuse">已逾期人數: <span class="red">80</span></div>
+		           	<div class="rides-cancel">自行取消人數: <span class="red">5</span></div>
+		        </div>
+		        <div class="swiper-slide">
+		           	<div class="rides-name">蒸汽火車 - 總取票人數</div>
+		           	<div class="rides-waitnum">
+		           		<div class="numberlist num-4"></div>
+		           		<div class="numberlist num-1"></div>
+		           		<div class="numberlist num-7"></div>
+		           	</div>
+		           	<div class="rides-used">已剪票人數: <span class="red">120</span></div>
+		           	<div class="rides-expire">未使用人數: <span class="red">35</span></div>
+		           	<div class="rides-willuse">已逾期人數: <span class="red">250</span></div>
+		           	<div class="rides-cancel">自行取消人數: <span class="red">12</span></div>
+		        </div>
+		        <div class="swiper-slide">
+		        	<div class="rides-name">笑傲飛鷹 - 總取票人數</div>
+		           	<div class="rides-waitnum">
+		           		<div class="numberlist num-5"></div>
+		           		<div class="numberlist num-3"></div>
+		           		<div class="numberlist num-0"></div>
+		           	</div>
+		           	<div class="rides-used">已剪票人數: <span class="red">180</span></div>
+		           	<div class="rides-expire">未使用人數: <span class="red">64</span></div>
+		           	<div class="rides-willuse">已逾期人數: <span class="red">244</span></div>
+		           	<div class="rides-cancel">自行取消人數: <span class="red">42</span></div>
+		        </div>
+		        <div class="swiper-slide">
+		           	<div class="rides-name">大海嘯 - 總取票人數</div>
+		           	<div class="rides-waitnum">
+		           		<div class="numberlist num-2"></div>
+		           		<div class="numberlist num-8"></div>
+		           		<div class="numberlist num-8"></div>
+		           	</div>
+		           	<div class="rides-used">已剪票人數: <span class="red">75</span></div>
+		           	<div class="rides-expire">未使用人數: <span class="red">12</span></div>
+		           	<div class="rides-willuse">已逾期人數: <span class="red">168</span></div>
+		           	<div class="rides-cancel">自行取消人數: <span class="red">33</span></div>
+		        </div>
+		    </div>
+		    <!-- Add Pagination -->
+		    <div class="swiper-pagination"></div>
+		    <!-- Add Arrows -->
+		    <div class="swiper-button-next"></div>
+		    <div class="swiper-button-prev"></div>
+		</div>
+		<div class="more"><a href="#">查看詳細資料....</a></div>
+	</div>
+
+	<div class="rides-box">
+		<div class="swiper-container">
+		    <div class="swiper-wrapper">
+		        <div class="swiper-slide">
+		           	<div class="rides-name">急流泛舟 - 總取票人數</div>
+		           	<div class="rides-waitnum">
+		           		<div class="numberlist num-2"></div>
+		           		<div class="numberlist num-7"></div>
+		           		<div class="numberlist num-2"></div>
+		           	</div>
+		           	<div class="rides-used">已剪票人數: <span class="red">64</span></div>
+		           	<div class="rides-expire">未使用人數: <span class="red">38</span></div>
+		           	<div class="rides-willuse">已逾期人數: <span class="red">110</span></div>
+		           	<div class="rides-cancel">自行取消人數: <span class="red">60</span></div>
+		        </div>
+		        <div class="swiper-slide">
+		           	<div class="rides-name">火山歷險 - 總取票人數</div>
+		           	<div class="rides-waitnum">
+		           		<div class="numberlist num-1"></div>
+		           		<div class="numberlist num-8"></div>
+		           		<div class="numberlist num-0"></div>
+		           	</div>
+		           	<div class="rides-used">已剪票人數: <span class="red">75</span></div>
+		           	<div class="rides-expire">未使用人數: <span class="red">20</span></div>
+		           	<div class="rides-willuse">已逾期人數: <span class="red">80</span></div>
+		           	<div class="rides-cancel">自行取消人數: <span class="red">5</span></div>
+		        </div>
+		        <div class="swiper-slide">
+		           	<div class="rides-name">蒸汽火車 - 總取票人數</div>
+		           	<div class="rides-waitnum">
+		           		<div class="numberlist num-4"></div>
+		           		<div class="numberlist num-1"></div>
+		           		<div class="numberlist num-7"></div>
+		           	</div>
+		           	<div class="rides-used">已剪票人數: <span class="red">120</span></div>
+		           	<div class="rides-expire">未使用人數: <span class="red">35</span></div>
+		           	<div class="rides-willuse">已逾期人數: <span class="red">250</span></div>
+		           	<div class="rides-cancel">自行取消人數: <span class="red">12</span></div>
+		        </div>
+		        <div class="swiper-slide">
+		           	<div class="rides-name">笑傲飛鷹 - 總取票人數</div>
+		           	<div class="rides-waitnum">
+		           		<div class="numberlist num-5"></div>
+		           		<div class="numberlist num-3"></div>
+		           		<div class="numberlist num-0"></div>
+		           	</div>
+		           	<div class="rides-used">已剪票人數: <span class="red">180</span></div>
+		           	<div class="rides-expire">未使用人數: <span class="red">64</span></div>
+		           	<div class="rides-willuse">已逾期人數: <span class="red">244</span></div>
+		           	<div class="rides-cancel">自行取消人數: <span class="red">42</span></div>
+		        </div>
+		        <div class="swiper-slide">
+		           	<div class="rides-name">大海嘯 - 總取票人數</div>
+		           	<div class="rides-waitnum">
+		           		<div class="numberlist num-2"></div>
+		           		<div class="numberlist num-8"></div>
+		           		<div class="numberlist num-8"></div>
+		           	</div>
+		           	<div class="rides-used">已剪票人數: <span class="red">75</span></div>
+		           	<div class="rides-expire">未使用人數: <span class="red">12</span></div>
+		          	<div class="rides-willuse">已逾期人數: <span class="red">168</span></div>
+		         	<div class="rides-cancel">自行取消人數: <span class="red">33</span></div>
+		        </div>
+		    </div>
+		    <!-- Add Pagination -->
+		    <div class="swiper-pagination"></div>
+		    <!-- Add Arrows -->
+		    <div class="swiper-button-next"></div>
+		    <div class="swiper-button-prev"></div>
+		</div>
+		<div class="detail">
+			<h2>設施排隊總覽</h2>
+			<p class="totalppl-count">總取票人數: <span id="totallyppl" class="red">25316</span></p>
+			<p class="totalppl-count">總剪票人數: <span id="totallyppl" class="red">22514</span></p>
+			<p class="totalppl-count">未使用總人數: <span id="totallyppl" class="red">8023</span></p>
+			<p class="totalppl-count">總逾期人數: <span id="totallyppl" class="red">7524</span></p>
+			<p class="totalppl-count">自行取消人數: <span id="totallyppl" class="red">125</span></p>
+		</div>
+	</div>
+	<script src="./swiper.js"></script>
+	<script>
+		var swiper = new Swiper('.swiper-container', {
+	        pagination: '.swiper-pagination',
+	        paginationClickable: true,
+	        nextButton: '.swiper-button-next',
+	        prevButton: '.swiper-button-prev',
+	        spaceBetween: 30,
+	        loop: true,
+	        // autoplay: 4000,
+        	autoplayDisableOnInteraction: false
+	    });
+
+	</script>
+</body>
+</html>

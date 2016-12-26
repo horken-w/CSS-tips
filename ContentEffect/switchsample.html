@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style>
+		.rides-box{
+			box-shadow: inset 0 0 15px hsla(0, 0%, 0%, 0.8);
+			width: 30%;
+			padding: 20px;
+			border-radius: 30px;
+		}
+	    .rides-box > h2, .rides-box > p{
+	    	margin: 0 auto;
+			display: inline-block;
+	    }
+	    .rides-box > p{
+	    	float: right;
+	    }
+	    .rides-box .table{
+	    	display: table;
+	    	width: 100%;
+	    	border: 1px solid hsla(0, 0%, 0%, 0.6);
+	    }
+	    .rides-box .caption{
+		    display: table-caption;
+		    text-align: center;
+		}
+		.rides-box .thead{
+			display: table-header-group;
+			text-align: center;
+		}
+		.rides-box .tbody{
+			display: table-row-group;
+		}
+		.rides-box .tr{
+			display: table-row;
+		}
+		.rides-box .tr:nth-child(even){
+			background-color: hsla(0, 0%, 70%, 0.4);
+		}
+		.rides-box .td{
+			display: table-cell;
+			border: 1px solid black;
+		}
+	    .red{
+	    	color: red;
+	    }
+    </style>
+</head>
+<body>
+	<div class="rides-box">
+		<p class="totalppl-count">今天使用總人數: <span id="totallyppl" class="red">25316</span></p>
+		<div class="table">
+			<div class="caption"><h2>設施排隊概況</h2></div>
+			<div class="thead">
+				<div class="tr">
+					<div class="td">設施名稱</div>
+					<div class="td">目前取票總人數</div>
+				</div>
+			</div>
+			<div class="tbody">
+				<div class="tr">
+					<div class="td">笑傲飛鷹</div>
+					<div class="td">1250</div>
+				</div>
+				<div class="tr">
+					<div class="td">大海盜船</div>
+					<div class="td">860</div>
+				</div>
+				<div class="tr">
+					<div class="td">急流泛舟</div>
+					<div class="td">1875</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+
+	</script>
+</body>
+</html>
