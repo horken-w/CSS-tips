@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>detect brightness</title>
+	<link rel="stylesheet" href="">
+	<style>
+		figure{
+			position: relative;
+		}
+		figcaption{
+			position: absolute;
+			top: 3px;
+		}
+	</style>
+</head>
+<body>
+	<section>
+		<figure>
+			<img src='data:image/jpg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABgAGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDxHcdu3tnNJk+tAJGffikoAXJoz70UZoGGTRn3oo70CDNFBOWJwBk9BSsBuO0kj3FADaWlVc55HTPJpDQAUlPkPRQ5ZQOM9qZQAtLRilyNoGOc9c0DAYB5GR6U3NLRigAFFLSsrIcMMEjNAhuKO9StEPl2NuyMnjofSp7fTbi6bbFGSaAuU6URswyAcetbn9hiEGR33qvX0J9KpXEpSMxcAZz/APWp27iv2M8jmil6mikMUjBxQQRjIPNJmjOaAFXbn5gce1OduNin5ASRkc0ynRpvcA8DPJFACBSxwK1dO0W4vpAqITn2rT8PeHn1G5UAfLnqa9q8M6ZoukRjEZvLoD7kQ4B9yeKbtHczcm9EcToPwrubpFmuUKR9Tnjirmq2mmaHbNb24jLgYLYr0DxBrhWzKzypbw4/1MJ5P1NeJeJNeikldbdQo9e9EJNktamVqupoPkQdOg7fWuakkMjkk9afcTGRiSahldW2bI9mFAPJO4+tDdzSKsFLmmg8U5lIUEggHofWkUFFFHU0AOMbh9hU7vStOxswWUscn0FUo2CcDBz611Hh/wDsU280up3xhZQPLVVySaa3Jlc39FSG3Cm5k/dDqgOB+NbE/jS002Fo7ONE7ZA6151q+qQC722jsYsAk561iS3TyE8k03Z7kqLOo1rxXdak7fOxHWuVlnaRiSafbC2klb7XLLGmxipjQMS2OAQSOM96ji8olvNLgbTt2gH5u2fapv0KUbER5puKcaSgoO1BYkAEnA6UdaSgY+inttwNoIOOcmmUCFyaTNOXbu+cEr7HFMoAeSFKlGJOOeMYNMzS4OM4OM4zSxxvNIscaM8jnaqqMkn0FAxuaM0MCrFSCCDyD2pKAA0UUmaQiWGaSCTzImKvgjI9xg1GScnPWnIjlGkCOUXqwHAPbNISWJJOSepNMY4nmngs8ezKhVy3OBUdFAgpKM0ZoANx27cnGc4pASDkcGg0UDCiiikIKaetOpCM0wASOqMgdgjdVB4NOR2UMAfvDBpmKeAT0GaAP//Z'/>
+			<figcaption></figcaption>
+		</figure>
+	</section>
+
+	<figure>
+		<img src='data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCABAAEADASIAAhEBAxEB/8QAHAAAAgIDAQEAAAAAAAAAAAAABAUCBgEDBwAI/8QAMRAAAQMDAwIDBwMFAAAAAAAAAQIDBAARIQUSMQYHIkFRExRCYXGBoSNS0TKRscHC/8QAGAEBAQEBAQAAAAAAAAAAAAAABAMCAQb/xAAgEQACAgICAwEBAAAAAAAAAAABAgADBBFBgRMhofAx/9oADAMBAAIRAxEAPwBE1G+VGNR/lRTca/lRbMSxGK9+1oE8cogzMbjFMGY3HhohmIfSijp77qNrMlTCv3BtKj+cVB7pZUJkWIvqKYMRcDFS07TnGG9jry3l3ytfJ+3A+gsKbsQzi4ozWyy1HcHYin0plHicYrfHiWtimLEXjFHe4S61zlDUcXwKNZjZGKkyyKPYZ4xWmyJNaJFiNb4aPYjHyTWxlnF7UeyyL8UdsiKTHMixGJIsKYsRsjw1mO0Ba9MWGuDYUZ8iXWgzDEYm2KYMRj6VJhr5UwYaBtRmyRKrjzibCvpTGORfIqrMawEi3hN/UUfG1oI+K16w1rS6Y6iWqOU80xZUmquzrjSs7U0azrDZ4P5ozWvFLQvBlqYUjmj2VJ5FVRnWWwQCtP8AejmtYQLELGag1jSy0rLYwtJtmmDLqBVQZ1tA+IUY3ribc0VrGlRSs+Lh3I11viHANv2uqP8AsVuT3R1ttNzDgk+gcVf/ADVCUI1gEFo3wPCkVhQhgkF1F+MBP8U45ZPA/dwYxdcn91OhI7v60g2VEgot6rJ/6qS+83UCWlexd0ltzadu5tarHyv4651sj+bwObDKP4rxEUoCkSE5IF9yMfisHIB9kTYoYfwyzyO5vcHW5AhN9UMx3nHW2o/u+nIUd4UnatN1HJVnINrfatcbuZ3BhOstyO5OoL92UQ4DEZUXVBWd2ePKwxaqjOb94iONRp0qO/YLQ7GkBpxBSoG6Vj+k4+tbFohlRUqYdxVclTnJPB55rnlB9amjWw97+y0T+7HXk0pQ51/qbSUFRAisMskgngmxJtbFCwu7HX8Bft1dea26oI2+Nbagk58lJIP3F8VLTuqdJhdOOaC9oMGUp1SlJlLessXUFDyuRdIB8WQAMZvukdb6QtvS1jp+CV6cpHtXgtoKkAABW79O11bQLkHAFhe5I2yriSvh2Nnlej38nPGwO9z/2Q=='/>
+		<figcaption></figcaption>
+	</figure>
+	<pre>Click on image for brightness value</pre>
+
+	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+	<script>
+		function getImgBrightness(imgSrc, textarea, callback){
+			var img = document.createElement('img');
+			img.src = imgSrc;
+			img.style.display = 'none';
+			img.placeText = textarea
+			document.body.appendChild(img);
+
+			var colorSum = 0;
+
+			img.onload = function(){
+				var cvs = document.createElement('canvas');
+				cvs.width = this.width;
+				cvs.height = this.height;
+
+				var ctx = cvs.getContext('2d');
+				ctx.drawImage(this, 0, 0);
+
+				var imageData = ctx.getImageData(0, 0, cvs.width, cvs.height),
+					data = imageData.data;
+
+				var r, g, b, avg;
+
+				for(var x = 0, len = data.length; x < len; x += 4){
+					r = data[x];
+					g = data[x+1];
+					b = data[x+2];
+
+					avg = Math.floor((r+g+b)/3);
+					colorSum += avg;
+				}
+
+				var brightness = Math.floor(colorSum / (this.width * this.height));
+
+				this.placeText.innerHTML = callback(brightness);
+				brightness < 135 ? this.placeText.style.color = 'white' : this.placeText.style.color = 'black';
+			}
+
+		}
+
+		var img = document.getElementsByTagName('img');
+
+		for(var x=0; x<img.length; x++)
+			document.getElementsByTagName('figure')[x].onclick = function(){
+				getImgBrightness(this.children[0].src, this.children[1], function(brightness){
+					document.getElementsByTagName('pre')[0].innerHTML = 'Brightness' + brightness;
+					return 'Brightness: ' + brightness;
+				})
+			}
+	</script>
+</body>
+</html>
