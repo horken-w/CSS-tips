@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Canvas Bee Game</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<canvas id="mycanvas" width="500" height="500"></canvas>
+
+	<script>
+		window.addEventListener('load', canvasApp);
+
+		function supportsCanvas() {
+			return !!document.createElement('canvas').getContext;
+		}
+
+		function supportedAudioFormat(audio) {
+			var returnExtension = "";
+			if (audio.canPlayType("audio/ogg") =="probably" || audio.canPlayType("audio/ogg") == "maybe") {
+				returnExtension = "ogg";
+			} else if(audio.canPlayType("audio/wav") =="probably" || audio.canPlayType("audio/wav") == "maybe") {
+				returnExtension = "wav";
+			} else if(audio.canPlayType("audio/mp3") == "probably" || audio.canPlayType("audio/mp3") == "maybe") {
+				returnExtension = "mp3";
+			}
+			
+			return returnExtension;
+			
+		}
+
+		function canvasApp(){
+			var state_Init = 10,
+					state_Load = 20,
+					state_Reset = 30,
+					state_Playing = 40,
+					appState = state_Init;
+			var loadCount = 0,
+					itemToLoad = 0;
+			var alienImg = new Image(),
+					missileImg = new Image(),
+					planeImg = new Image();
+
+			var explodeSound, shootSound, audioType;
+			var sound_Explode = 'video/explode1', sound_Shoot = 'video/shoot1';
+			var sounds = new Array();
+
+			var mouseX, mouseY, player = {x:250, y:475};
+			var aliens = new Array(), missiles = new Array();
+
+			var alienX = alienY = 25,
+					alien_rows = 4, alien_cols = 8, alien_Spacing = 40;
+
+			if(!supportsCanvas()) return;
+
+			function itemLoad(){
+				loadCount++;
+				if(loadCount >= itemToLoad){
+					shootSound.removeEventListener('caplaythough', itemLoad);
+					explodeSound.removeEventListener('canplaythough', itemLoad);
+
+					appState = state_Reset;
+				}
+			}
+
+			function playSound(sound, volume){
+				var tempSound = document.createElement('audio');
+				tempSound.src = sound+'.'+ audioType;
+				tempSound.loop = false;
+				tempSound.volume = volume;
+				tempSound.play();
+				sounds.push(tempSound);
+			}
+
+			function initApp(){
+				loadCount = 0;
+				itemToLoad = 5;
+				explodeSound = document.createElement('audio');
+				document.body.appendChild(explodeSound);
+				audioType = supportedAudioFormat(explodeSound);
+				explodeSound.src = 'video/explode1.' + audioType;
+				explodeSound.addEventListener('canplaythough', itemLoad);
+
+				shootSound = document.createElement('audio');
+				document.body.appendChild(shootSound);
+				shootSound.src = 'video/shoot1.' + audioType;
+				shootSound.addEventListener('canplaythough', itemLoad);
+
+				alienImg.onload = itemLoad;
+				alienImg.src = 'video/alien.png';
+				planeImg.onload = itemLoad;
+				planeImg.src = 'video/player.png';
+				missileImg.onload = itemLoad;
+				missileImg.src = 'video/missile.png';
+
+				appState = state_Load;
+			}
+
+			function startLevel(){
+				for(var r = 0; r < alien_rows; r++){
+					for(var c = 0; c < alien_cols; c++){
+						aliens.push({speed:2, x:alienX+c*alien_Spacing, y:alienY+r*alien_Spacing,
+													width: alienImg.width, height: alienImg.height});
+					}
+				}
+			}
+
+			function resetApp(){
+				startLevel();
+				shootSound.volume = .5;
+				explodeSound.volume = .5;
+				appState = state_Playing;
+			}
+
+			var canvas = document.getElementById('mycanvas');
+			var ctx = canvas.getContext('2d');
+
+
+			canvas.addEventListener('mouseup', evtMouseUp);
+			canvas.addEventListener('mousemove', evtmouseDown);
+
+			function evtmouseDown(evt){
+				if(evt.layerX || evt.layerX == 0){
+					mouseX = evt.layerX;
+					mouseY = evt.layerY;
+				}else if(evt.offsetX || evt.offsetX == 0){
+					mouseX = evt.offsetX;
+					mouseY = evt.offsetY;
+				}
+				player.x = mouseX;
+				player.y = mouseY;
+			}
+
+			function evtMouseUp(evt){
+				missiles.push({speed: 5, x: player.x+.5*planeImg.width, y: player.y - missileImg.height ,width: missileImg.width, height: missileImg.height});
+				playSound(sound_Shoot, 0.5);
+			}
+
+			function run(){
+				switch (appState){
+					case state_Init:
+						initApp();
+						break;
+					case state_Load:
+						//do nothing, just wait here;
+						break;
+					case state_Reset:
+						resetApp();
+						break;
+					case state_Playing:
+						drawScreen();
+						break;
+				}
+			}
+
+			function missileHit(img1, img2){
+				alienL = img1.x;
+				alienT = img1.y;
+				alienB = img1.y + img1.height;
+				alienR = img1.x + img1.width;
+				bulletL = img2.x;
+				bulletT = img2.y;
+				bulletR = img2.x + img2.width;
+				bulletB = img2.y + img.height;
+				retval = false;
+
+				if((alienL > bulletR) || (alienR < bulletL) || (alienB < bulletT) || (alienT > bulletB))
+					retval = false;
+				else retval = true;
+
+				return retval;
+			}
+
+			function drawScreen(){
+				for(var i = missiles.length-1; i--;){
+					missiles[i].y -= missiles[i].speed;
+					if(missiles[i].y < (0-missiles[i].height)){
+						missiles.splice(i,1);
+					}
+				}
+
+				for(var i = aliens.length-1; i--;){
+					aliens[i].x += aliens[i].speed;
+					if(aliens[i].x < (canvas.width - aliens[i].width || aliens[i].x < 0)){
+						aliens.speed *= -1;
+						aliens.y += 20;
+					}
+					if(aliens[i].y > canvas.height){
+						aliens.splice(i, 1);
+					}
+				}
+
+				missile: for(var i = missiles.length-1; i--;){
+									var tempMissile = missiles[i];
+									for(var j = aliens.length-1; j--;){
+										var tempAlien = aliens[j];
+
+										if(missileHit(tempMissile, tempAlien)){
+											explodeSound.play();
+											missiles.splice(i, 1);
+											aliens.splice(j, 1);
+											break missile;
+										}
+									}
+							if (aliens.length<=0){
+								appState = state_Reset;
+							}
+					}
+
+				ctx.fillStyle = "#000000";
+				ctx.fillRect(0, 0, theCanvas.width, theCanvas.height);
+				//Box
+				ctx.strokeStyle = "#EEEEEE"; 
+				ctx.strokeRect(5,  5, theCanvas.width-10, theCanvas.height-10);
+
+				ctx.drawImage(planeImg, player.x, player.y);
+
+				for(var i= missiles.length-1; i--;)
+					ctx.drawImage(missileImg, missiles[i].x, missiles[i].y);
+
+				for(var i=aliens.length-1; i--;){
+					ctx.drawImage(alienImg, aliens[i].x, aliens[i].y);
+				}
+			}
+
+			function gameLoop(){
+				setTimeout(gameLoop, 33);
+				run();
+			}
+			gameLoop()
+		}
+	</script>
+</body>
+</html>

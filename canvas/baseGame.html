@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>canvas game</title>
+	<link rel="stylesheet" href="">
+	<style>
+		.cvswrap{
+			position: absolute;
+			top: 50px;
+			left: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="cvswrap">
+		<canvas id="canvas" width="200," height="200">
+			你的瀏覽器並不支援Canvas功能
+		</canvas>
+	</div>
+	<script>
+		window.addEventListener('load', eventWindowLoad, false);
+
+		function eventWindowLoad(){
+			canvasApp();
+		}
+
+		function canvasApp(){
+			var cvs = document.getElementById('canvas'),
+				ctx = cvs.getContext('2d');
+			if(!ctx) return;
+
+			const GAME_STATE_TITLE = 0;
+			const GAME_STATE_NEW_GAME = 1;
+			const GAME_STATE_NEW_LEVEL = 2;
+			const GAME_STATE_PLAYER_START = 3;
+			const GAME_STATE_PLAY_LEVEL = 4;
+			const GAME_STATE_PLAYER_DIE = 5;
+			const GAME_STATE_GAME_OVER = 6;
+
+			var currentGameState = 0,
+				currentGameStateFunction = null;
+
+			function switchGameState(newstate){
+				currentGameState = newstate;
+
+				switch(currentGameState){
+					case GAME_STATE_NEW_LEVEL:
+						currentGameStateFunction = gameStateTitle;
+						break;
+					case GAME_STATE_NEW_LEVEL:
+						currentGameStateFunction = appStatePlayerLevel
+						break;
+					case GAME_STATE_GAME_OVER:
+						currentGameStateFunction = gameStateGameOver;
+						break;
+				}
+			}
+
+			function gameStateTitle(){
+
+			}
+
+			function appStatePlayerLevel(){
+				
+			}
+
+			function gameStateGameOver(){
+				
+			}
+
+			var rotation = 0,
+				x = 50,
+				y = 50,
+				facingX = 0,
+				facingY = 0,
+				movingX = 0,
+				movingY = 0,
+				width = 20,
+				height = 20,
+				rotationalvelocity = 5, //單次旋轉幾度
+				thrustAcceleration = .03, //前進速度
+				keyPressList = [],
+				maxVelocity = 2; //Maxma speed
+
+			function gameStatePlayLevel(){
+				checkKeys();
+				update();
+				render();
+			}
+
+			function checkKeys(){
+				if(keyPressList[38]){
+					var angleInRatians = rotation * Math.PI / 180; //計算飛船前進面對的角度
+
+					facingX = Math.cos(angleInRatians);//計算飛船前進時面對的X與Y數值
+					facingY = Math.sin(angleInRatians);
+
+					var moveXNew = movingX + thrustAcceleration * facingX;
+					var moveYNew = movingY + thrustAcceleration * facingY;
+
+					var currentVelocity = Math.sqrt((moveXNew * moveXNew)+(moveYNew * moveYNew))
+
+					if(currentVelocity < maxVelocity){
+						movingX = moveXNew;
+						movingY = moveYNew;
+					}
+				}
+
+				if(keyPressList[37]){
+					//逆時針旋轉
+					rotation += rotationalvelocity;
+				}
+
+				if(keyPressList[39]){
+					//順時針旋轉
+					rotation -= rotationalvelocity;
+				}
+
+				x = x + movingX;
+				y = y + movingY;
+				var alpha = 1;
+				ctx.fillStyle = 'black';
+				ctx.fillRect(0, 0, 200, 200);
+				ctx.fillStyle = 'white';
+				ctx.font = '20px _sans';
+				ctx.textBaseline = 'top';
+				ctx.fillText ("Player ship - key turn", 0, 180);
+
+				var angleInRatians = rotation * Math.PI / 180;
+				ctx.globalAlpha = alpha;
+				ctx.save();
+				ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+				var halfWidth = width * .5, halfHeight = height * .5; //set width and height
+				ctx.translate(x+halfWidth, y+halfHeight);
+				ctx.rotate(angleInRatians);
+
+				//繪製飛行船
+				ctx.strokeStyle = 'white';
+				ctx.beginPath();
+				ctx.moveTo(-10, -10);
+				ctx.lineTo(10, 0);
+				ctx.moveTo(10, 1);
+				ctx.lineTo(-10, 10);
+				ctx.lineTo(1, 1);
+				ctx.moveTo(1, -1);
+				ctx.lineTo(-10, -10);
+
+				ctx.stroke();
+				ctx.closePath();
+
+				ctx.restore();
+			}
+
+			function runGame(){
+				currentGameStateFunction();
+			}
+
+			switchGameState(GAME_STATE_TITLE);
+
+			const FRAME_RATE = 40;
+			var interValTime = 1000/FRAME_RATE;
+			setInterval(runGame, interValTime);
+
+			document.addEventListener('keydown', function(evt){
+				evt = evt ? evt : window.event;
+				keyPressList[evt.keyCode] = true;
+			})
+			document.addEventListener('keyup', function(evt){
+				evt = evt ? evt : window.event;
+				keyPressList[evt.keyCode] = false;
+			})
+		}
+	</script>
+</body>
+</html>
