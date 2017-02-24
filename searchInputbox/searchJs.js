@@ -76,7 +76,7 @@
 
 			var idx = findArrayIndex(value, $(this).parent().text().substring(0, $(this).parent().text().length-1));
 			$('.selected').map(function(i, v){
-				if($(v).text() === value[idx]) $(this).removeClass('selected')
+				if($(v).text() === value[idx]) $(this).removeClass('selected');
 			})
 			if(idx>-1) value.splice(idx, 1);
 			selectOptions(value);
@@ -96,7 +96,8 @@
 
 	function defaultInput(data){
 		$('.txt-select-item').remove();
-		domRoot.input.css('width', '100%');	}
+		domRoot.input.css('width', '100%');
+	}
 
 	function madeSearchItem(data, root){
 		data.map(function(v, i){
@@ -112,6 +113,8 @@
 					if(idx>-1) value.splice(idx, 1);
 				}
 				selectOptions(value);
+				domRoot.input.val('');
+				$(domRoot.ul).children().show();
 			}).appendTo(domRoot.ul);
 		})
 
