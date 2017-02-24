@@ -12,6 +12,7 @@
 	}, value=[];
 
 	function fastSearchFilter(){
+		var inputBox = domRoot.input;
 		domRoot.input.on('focus', function(){
 			domRoot.root.addClass('ckactive');
 			domRoot.ul.fadeIn(500);
@@ -33,6 +34,18 @@
 
 			return select.val();
 		}
+
+		inputBox.on('keyup', function(evt){
+			var search = evt.target.value.toLowerCase();
+			if(!search)
+				$(domRoot.ul).children().show();
+		    else {
+				$(domRoot.ul).children().each(function(){
+					var text = $(this).text().toLowerCase();
+					(text.indexOf(search) >= 0) ? $(this).show() : $(this).hide();
+				});
+			};
+		})
 	}
 
 	function findArrayIndex(array, value){
@@ -78,6 +91,7 @@
 			width+=(_div.outerWidth()+15);
 		})
 		domRoot.input.css('width', domRoot.input.width()-width);
+
 	}
 
 	function defaultInput(data){
