@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		textarea{
+			resize: none;
+		}
+		.highlight{
+			color: grey;
+			font-weight: 800;
+		}
+	</style>
+</head>
+<body>
+	<textarea name="" cols="30" rows="10" maxlength="50"></textarea>
+	<!-- 關閉 textarea 可以調整大小的功能 -->
+	<div>剩餘字數: <span class="highlight"></span>個字</div>
+	<!-- 需求: 統計textarea裡面的字數顯示在底下 .highlight裡面 -->
+	<textarea name="" cols="30" rows="10" maxlength="200"></textarea>
+	<!-- 關閉 textarea 可以調整大小的功能 -->
+	<div>剩餘字數: <span class="highlight"></span>個字</div>
+	<!-- 需求: 統計textarea裡面的字數顯示在底下 .highlight裡面 -->
+	<script src="./characterCounts/counts.js"></script>
+</body>
+</html>
