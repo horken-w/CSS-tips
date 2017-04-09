@@ -7,7 +7,18 @@
 	<link rel="stylesheet" href="">
 	<style>
 		textarea{
+			width: 100%;
+			padding: 15px 0;
 			resize: none;
+		}
+		.txtremain{
+			width: 300px;
+			position: relative;
+		}
+		.txtremain > span{
+			position: absolute;
+			top: 0;
+			right: 0;
 		}
 		.highlight{
 			color: grey;
@@ -16,14 +27,12 @@
 	</style>
 </head>
 <body>
-	<textarea name="" cols="30" rows="10" maxlength="50"></textarea>
-	<!-- 關閉 textarea 可以調整大小的功能 -->
-	<div>剩餘字數: <span class="highlight"></span>個字</div>
-	<!-- 需求: 統計textarea裡面的字數顯示在底下 .highlight裡面 -->
-	<textarea name="" cols="30" rows="10" maxlength="200"></textarea>
-	<!-- 關閉 textarea 可以調整大小的功能 -->
-	<div>剩餘字數: <span class="highlight"></span>個字</div>
-	<!-- 需求: 統計textarea裡面的字數顯示在底下 .highlight裡面 -->
+	<div class="txtremain">
+		<textarea name="" cols="30" rows="5" maxlength="5"></textarea>
+	</div>
+	<div class="txtremain">
+		<textarea name="" cols="30" rows="5" maxlength="200"></textarea>
+	</div>
 	<script src="./characterCounts/counts.js"></script>
 </body>
 </html>
