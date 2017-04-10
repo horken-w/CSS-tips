@@ -127,9 +127,9 @@
     <script>
     	$('.banner').find('.one').addClass('inside').end()
     	.delay(500).queue(function(){
-    		$(this).find('.two').addClass('inside');
+    		$(this).find('.two').addClass('inside').dequeue();
     	}).end().delay(800).queue(function(){
-    		$(this).find('.three').addClass('inside');
+    		$(this).find('.three').addClass('inside').dequeue();
     	})
     </script>
 </body>

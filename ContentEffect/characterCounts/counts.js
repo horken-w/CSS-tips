@@ -14,11 +14,12 @@
 
 		checked = 
 		(keycode > 47 && keycode < 58)   || // number
-        keycode == 32 || keycode == 8    || // spacebar & backspace
+        keycode == 32 || keycode == 13   || // spacebar & enter
         (keycode > 64 && keycode < 91)   || // letter
         (keycode > 95 && keycode < 112)  || // numpad
         (keycode > 185 && keycode < 193) || // ;=,-./`
-        (keycode > 218 && keycode < 223);   // [\]'   
+        (keycode > 218 && keycode < 223) || // [\]'
+        keycode == 8;  						// backspace
 
 		return checked;
 	}
@@ -28,7 +29,7 @@
 
 		if(isChrome) 
 			if(validateChacter(evt.keyCode) && this.value.length <= max)
-				this.nextElementSibling.innerText = max - this.value.replace(/\r(?!\n)|\n(?!\r)/g, "\r\n").length;
+				this.nextElementSibling.innerText = max - this.value.replace(/\r(?!\n)|\n(?!\r)/g, '\r').length;
 
 		else if(validateChacter(evt.keyCode) && this.value.length <= max)
 			this.nextElementSibling.innerText = max - this.value.length;
