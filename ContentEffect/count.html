@@ -8,8 +8,11 @@
 	<style>
 		textarea{
 			width: 100%;
-			padding: 15px 0;
+			padding: 15px 0 0;
 			resize: none;
+			min-height: 100px;
+			max-height: 300px;
+			overflow: hidden;
 		}
 		.txtremain{
 			width: 300px;
@@ -28,10 +31,10 @@
 </head>
 <body>
 	<div class="txtremain">
-		<textarea name="" cols="30" rows="5" maxlength="5"></textarea>
+		<textarea name="" cols="30" maxlength="5"></textarea>
 	</div>
 	<div class="txtremain">
-		<textarea name="" cols="30" rows="5" maxlength="200"></textarea>
+		<textarea name="" cols="30" maxlength="200"></textarea>
 	</div>
 	<script src="./characterCounts/counts.js"></script>
 </body>

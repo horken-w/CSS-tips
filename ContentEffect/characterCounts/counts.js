@@ -34,7 +34,16 @@
 		else if(validateChacter(evt.keyCode) && this.value.length <= max)
 			this.nextElementSibling.innerText = max - this.value.length;
 		// else
-		// 	this.value = this.value.slice(0, -1);
+		// 	this.value = this.value.slice(0, -1); //remove last chacter;
+
+		dynamicGroup(evt.target)
+	}
+
+	function dynamicGroup(target){
+		if (target.scrollHeight > 115){
+		 	target.style.height = "2px";
+    		target.style.height = target.scrollHeight + "px";
+		}
 	}
 
 	function setRemainArea(node){
@@ -48,6 +57,7 @@
 		domEl.forEach(function(i, v) {
 			setRemainArea(i);
 			addEvent(i, 'keyup', textCounts)
+			console.log(i);
 	    })
 	}
 
