@@ -27,10 +27,10 @@
 	function textCounts(evt){
 		var max = this.maxLength, isChrome = window.chrome;
 
-		if(isChrome) 
+		if(isChrome){ 
 			if(validateChacter(evt.keyCode) && this.value.length <= max)
 				this.nextElementSibling.innerText = max - this.value.replace(/\r(?!\n)|\n(?!\r)/g, '\r').length;
-
+		}
 		else if(validateChacter(evt.keyCode) && this.value.length <= max)
 			this.nextElementSibling.innerText = max - this.value.length;
 		// else
