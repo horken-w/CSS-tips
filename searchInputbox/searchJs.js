@@ -45,6 +45,28 @@
 					(text.indexOf(search) >= 0) ? $(this).show() : $(this).hide();
 				});
 			};
+		});
+		inputBox.on('keypress', function(evt){
+			var found = false;
+			if(evt.keyCode === 13) {
+				var search = $(this).val().toLowerCase();
+				$(domRoot.ul).children().each(function(){
+					var text = $(this).text().toLowerCase();
+					if (text === search){
+						$(this).click();
+						found = true;
+					}
+					else found = false;
+				});
+				if(!found) {
+					var opt = $('<option>');
+					opt.val(search).text(search);
+					opt.appendTo(domRoot.select);
+					value.push(search);
+					selectOptions(value);
+					$(this).val('');
+				};
+			};
 		})
 	}
 
@@ -68,7 +90,6 @@
 			div=$('<div class="txt-select-item" />'),
 			btn=$('<button class="removebtn" type="button">X</button>'),
 			width = 0;
-
 		defaultInput(selectData);
 
 		btn.on('click', function(evt){
