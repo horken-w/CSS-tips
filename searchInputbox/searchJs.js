@@ -29,6 +29,10 @@
 				domRoot.ul.fadeOut(500);
 			}
 		})
+		this.customList = function(listArr){
+			dataList = listArr;
+		}
+
 		this.export = function(){
 			select = domRoot.select;
 
@@ -142,16 +146,20 @@
 		
 	}
 
+	var selectStruct = new fastSearchFilter();
+	window.onload = selectStruct;
+
+	//自訂搜尋下拉欄位
+	selectStruct.customList(['Articuno', 'Arcanine', 'Suicune', 'Poliwhirl', 'Ditto']);
+
 	dataList.map(function(v, i){
 		var opt = $('<option>');
 		opt.val(dataList[i]).text(dataList[i]);
 		opt.appendTo(domRoot.select);
 	})
 	madeSearchItem(dataList);
-	var selectStruct = new fastSearchFilter();
-	window.onload = selectStruct;
 
-	
+	// 匯出選取值
 	$('#clickme').on('click', function(){
 		$('#showselect').text(selectStruct.export());
 	})
