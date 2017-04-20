@@ -52,7 +52,7 @@
 		});
 		inputBox.on('keypress', function(evt){
 			var found = false;
-			if(evt.keyCode === 13) {
+			if(evt.keyCode === 13 && $(this).val().length) {
 				var search = $(this).val().toLowerCase();
 				$(domRoot.ul).children().each(function(){
 					var text = $(this).text().toLowerCase();
