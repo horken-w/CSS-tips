@@ -1,7 +1,7 @@
 !function(window, document){
 	'user strict';
 
-	var dataList = ['Articuno', 'Arcanine', 'Suicune', 'Poliwhirl', 'Ditto'];
+	var dataList = ['項目一', '項目二', '項目三', '項目四', '最後一項'];
 
 	var domRoot = {
 		root: $('.txtsearch'),
