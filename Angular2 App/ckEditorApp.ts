@@ -1,3 +1,4 @@
+//inline CKEDITOR cdn in index.html
 import {
   AfterViewInit, Component, EventEmitter, forwardRef, Input, OnInit, Output, TemplateRef, ViewChild
 } from '@angular/core';
@@ -8,7 +9,8 @@ declare let CKEDITOR: any;
 @Component({
   selector: 'techmore-ckeditor',
   template: `
-    <textarea class="form-control" rows="3" #host name="host"></textarea>
+    <div [class.deny]="disabled"><textarea class="form-control" rows="3" #host name="host"></textarea></div>
+
 
     <template #template2>
       <section class="row clearfix">
@@ -62,7 +64,9 @@ declare let CKEDITOR: any;
       </section>
     </template>
 
-    <template #templateDefault><div></div></template>
+    <template #templateDefault>
+      <div></div>
+    </template>
   `,
   providers: [
     {
@@ -70,12 +74,14 @@ declare let CKEDITOR: any;
       useExisting: forwardRef(() => CkeditorComponent),
       multi: true
     }
-  ]
+  ],
+  styleUrls: ['ckeditor.component.css'],
 })
 export class CkeditorComponent implements OnInit, AfterViewInit {
   @ViewChild('host') host: any;
   @Input() debounce: string;
   @Input() tempNum: any;
+  @Input() disabled: boolean;
 
   @Input() txtConfig: any = {
     toolbarGroups: [
@@ -94,6 +100,7 @@ export class CkeditorComponent implements OnInit, AfterViewInit {
       {name: 'others', groups: ['others']},
       {name: 'about', groups: ['about']}
     ],
+    extraPlugins: 'embedbase,videoembed,widget,notificationaggregator,lineutils,notification,widgetselection',
     removeButtons: 'Save,Print,Preview,NewPage,Templates,PasteFromWord,Scayt,HiddenField,ImageButton,Strike,BidiRtl,BidiLtr,Language,Flash,Table,PageBreak,Iframe,Maximize,ShowBlocks,Source,Find,CreateDiv,About',
     contentsCss: ['https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'],
     allowedContent: true,
@@ -103,9 +110,6 @@ export class CkeditorComponent implements OnInit, AfterViewInit {
   @Output() change = new EventEmitter();
   // @Output() blur = new EventEmitter();
   // @Output() focus = new EventEmitter();
-
-  constructor() {
-  }
 
   @ViewChild('template2')
   tplRef2: TemplateRef<any>;
@@ -117,6 +121,9 @@ export class CkeditorComponent implements OnInit, AfterViewInit {
   _value = '';
   instance: any;
   debounceTimeout: any;
+
+  constructor() { }
+
 
   writeValue(value: any) {
     if (!value) return;
@@ -186,7 +193,15 @@ export class CkeditorComponent implements OnInit, AfterViewInit {
       embeddedView.rootNodes.forEach((node) => {//make HTML5 temp transform to DOM element
         root.appendChild(node);
       });
-
+      
+      //Import plugin
+      CKEDITOR.plugins.addExternal( 'embedbase', '/js/ckeditor/plugins/embedbase/plugin.js', '' );
+      CKEDITOR.plugins.addExternal( 'videoembed', '/js/ckeditor/plugins/videoembed/plugin.js', '' );
+      CKEDITOR.plugins.addExternal( 'widget', '/js/ckeditor/plugins/widget/plugin.js', '' );
+      CKEDITOR.plugins.addExternal( 'notificationaggregator', '/js/ckeditor/plugins/notificationaggregator/plugin.js', '' );
+      CKEDITOR.plugins.addExternal( 'lineutils', '/js/ckeditor/plugins/lineutils/plugin.js', '' );
+      CKEDITOR.plugins.addExternal( 'notification', '/js/ckeditor/plugins/notification/plugin.js', '' );
+      CKEDITOR.plugins.addExternal( 'widgetselection', '/js/ckeditor/plugins/widgetselection/plugin.js', '' );
       this.instance = CKEDITOR.replace(this.host.nativeElement, config);
       this.instance.setData(root.innerHTML);
       this.instance.on('instanceReady', (evt: any) => {
