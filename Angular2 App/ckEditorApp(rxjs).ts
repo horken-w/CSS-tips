@@ -59,6 +59,7 @@ export class CkeditorComponent implements OnInit, AfterViewInit, ControlValueAcc
   @ViewChild('host') host: any;
   @Input() debounce: string;
   @Input() disabled: boolean;
+  setCKData: boolean = true;
 
   @Input() txtConfig: any = {
     toolbarGroups: [
@@ -111,7 +112,11 @@ export class CkeditorComponent implements OnInit, AfterViewInit, ControlValueAcc
   subscription: Subscription;
   instanceLin = new BehaviorSubject<any>(null);
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe(() => this.setCKData = true)
+  }
 
   get tempNum(){
     return this._tempNum.getValue();
@@ -158,15 +163,23 @@ export class CkeditorComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   ngOnInit() {
+    // Configuration
 
-    //create Observable multiple line to avoide async problem
-    this.subscription = Observable.combineLatest(this._value, this.instanceLin, (value, i) => {return {
-      value: value,
-      instance: i
-    }})
-      .filter(sub => !isNullOrUndefined(sub.instance) )
-      .subscribe(sub=> {
-        sub.instance.setData(sub.value);
+
+    this.subscription = Observable.combineLatest(
+      this._value.distinctUntilChanged((x, y) => JSON.stringify(x) === JSON.stringify(y)),
+      this.instanceLin, (value, i) => {
+        return {
+          value: value,
+          instance: i
+        }
+      })
+      .filter(sub => !isNullOrUndefined(sub.instance))
+      .debounceTime(500)
+      .subscribe(sub => {
+        if (this.setCKData) {
+          sub.instance.setData(sub.value);
+        }
       })
 
     this._tempNum
@@ -299,17 +312,18 @@ export class CkeditorComponent implements OnInit, AfterViewInit, ControlValueAcc
       });
 
       this.instance.on('change', (evt) => {
-        // this.onTouched();
+        this.onTouched();
         const value = this.instance.getData();
-        // if (this.debounce) {
-        //   if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
-        //   this.debounceTimeout = setTimeout(() => {
-        //     this.updateValue(value);
-        //     this.debounceTimeout = null;
-        //   }, parseInt(this.debounce));
-        // }
-        // else this.updateValue(value);
-        this.updateValue(value);
+        if (value.length) this.setCKData = false;
+        if (this.debounce) {
+          if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
+          this.debounceTimeout = setTimeout(() => {
+            this.updateValue(value);
+            this.debounceTimeout = null;
+          }, parseInt(this.debounce));
+        }
+        else this.updateValue(value);
+        // this.updateValue(value);
 
         // this.instance.setData(this.value);
       })
