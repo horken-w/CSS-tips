@@ -1,0 +1,143 @@
+.txtsearch {
+  position: relative;
+  margin: 0 auto;
+  max-width: 50em;
+  border: 1px solid #D7D7D7;
+  box-sizing: border-box;
+  color: #232323;
+  font-size: 1em;
+  background-color: white;
+}
+.txtsearch.ckactive,
+.txtsearch.ckactive .multi-selectbox {
+  -webkit-box-shadow: 0 0.2em 0.2em 0 rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0.2em 0.2em 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.2em 0.2em 0 rgba(0, 0, 0, 0.1);
+}
+.txtsearch .txt-ctrl {
+  box-sizing: border-box;
+  padding: 0 0.5em 0em 0.5em;
+  overflow: hidden;
+  width: 100%;
+  cursor: text;
+}
+.txtsearch .txt-ctrl .txt-inputexpend {
+  float: none;
+  padding: 0.2em .1em;
+  width: 100%;
+  font-size: 1.4em;
+  border: none;
+  outline: none;
+}
+.txtsearch .txt-ctrl .txt-input {
+  width: 20em;
+  padding: 0.2em .1em;
+  float: left;
+  border: none;
+  outline: none;
+}
+.txtsearch .multi-selectbox {
+  position: absolute;
+  max-height: 35em;
+  top: 100%;
+  left: -1px;
+  right: -1px;
+  border: 1px solid #D7D7D7;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: white;
+  z-index: 10;
+}
+.txtsearch ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: none;
+}
+.txtsearch .txt-item {
+  font-size: 1.4em;
+  display: block;
+  padding: .5em .71429em;
+  margin: 0;
+  cursor: pointer;
+  border-top: 1px solid white;
+}
+.txtsearch .txt-item:hover,
+.txtsearch .txt-item.selected {
+  background: #adb8eb;
+  color: white;
+}
+select[name="selectarea"] {
+  position: absolute;
+  visibility: hidden;
+}
+.txt-select-item {
+  display: inline-block;
+  font-size: 1.2em;
+  position: relative;
+  margin: 0.2em;
+  padding: .33333em .33333em .33333em 1.5em;
+  float: left;
+  border-radius: .25em;
+  border: 1px solid #adb8eb;
+  cursor: auto;
+  color: white;
+  background-color: #adb8eb;
+  -webkit-animation: fstAnimationEnter 0.2s;
+  -moz-animation: fstAnimationEnter 0.2s;
+  animation: fstAnimationEnter 0.2s;
+}
+.removebtn {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: none;
+  font-size: 1.16667em;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 1.28571em;
+  line-height: 1.28571em;
+  margin-top: -0.64286em;
+  text-align: center;
+  color: white;
+}
+@-webkit-keyframes fstAnimationEnter {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -1em, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+}
+@-moz-keyframes fstAnimationEnter {
+  from {
+    opacity: 0;
+    -moz-transform: translate3d(0, -1em, 0);
+  }
+  to {
+    opacity: 1;
+    -moz-transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes fstAnimationEnter {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -1em, 0);
+    -moz-transform: translate3d(0, -1em, 0);
+    -ms-transform: translate3d(0, -1em, 0);
+    -o-transform: translate3d(0, -1em, 0);
+    transform: translate3d(0, -1em, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}

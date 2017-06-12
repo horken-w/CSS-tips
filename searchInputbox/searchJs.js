@@ -97,7 +97,7 @@
 		defaultInput(selectData);
 
 		btn.on('click', function(evt){
-			event.stopPropagation();
+			evt.stopPropagation();
 
 			var idx = findArrayIndex(value, $(this).parent().text().substring(0, $(this).parent().text().length-1));
 			$('.selected').map(function(i, v){
