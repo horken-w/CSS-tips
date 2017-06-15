@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="./cropImage/css/jquery.Jcrop.min.css">
+    <style></style>
+</head>
+
+<body>
+    <div class="col-md-7 col-sm-12 responsive-1024">
+        <h4>An example with a basic event handler.</h4>
+        <p> Here we've tied several form values together with a simple event handler invocation. The result is that the form values are updated in real-time as the selection is changed using Jcrop's
+            <em>onChange</em> handler. </p>
+        <img src="./cropImage/image2.jpg" id="demo2" alt="Jcrop Example" class="img-responsive" /> 
+    </div>
+    <div class="col-md-5 col-sm-12 responsive-1024">
+        <h4>Cropped Image Details:</h4>
+        <button id="animbutton">animbutton</button>
+        <form id="coords" class="coords form-inline" onsubmit="return false;" action="#">
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <label class="control-label">X1</label>
+                    </td>
+                    <td>
+                        <input type="text" id="x1" name="x1" class="form-control btn-sm" /> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">Y1</label>
+                    </td>
+                    <td>
+                        <input type="text" id="y1" name="y1" class="form-control btn-sm" /> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">X2</label>
+                    </td>
+                    <td>
+                        <input type="text" id="x2" name="x2" class="form-control btn-sm" /> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">Y2</label>
+                    </td>
+                    <td>
+                        <input type="text" id="y2" name="y2" class="form-control btn-sm" /> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">Width</label>
+                    </td>
+                    <td>
+                        <input type="text" id="w" name="w" class="form-control btn-sm" /> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">Height</label>
+                    </td>
+                    <td>
+                        <input type="text" id="h" name="h" class="form-control btn-sm" /> </td>
+                </tr>
+            </table>
+        </form>
+        <canvas id="mycanvas" style="display: none"></canvas>
+        <img id="aftercrop" src="#" alt="cropImage">
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="./cropImage/js/jquery.Jcrop.js"></script>
+    <script>
+        var demo2 = function() {
+            var jcrop_api;
+
+            $('#demo2').Jcrop({
+              onChange:   showCoords,
+              onSelect:   showCoords,
+              onRelease:  clearCoords,
+            },function(){
+              jcrop_api = this;
+            });
+
+            $('#animbutton').click(function(e){
+                // jcrop_api.animateTo([ 120,120,80,80 ]);
+                // jcrop_api.destroy()
+                const ctx = $('#mycanvas')[0].getContext('2d'),
+                      img = $('#demo2')[0];
+                let cropImg;
+                $('#mycanvas').attr({'width': $('#w').val(), 'height': $('#h').val()})
+                ctx.drawImage(img, $('#x1').val(), $('#y1').val(), $('#w').val(), $('#h').val(), 0, 0, $('#w').val(), $('#h').val());
+                crop = $('#mycanvas')[0].toDataURL('image/jpg');
+                $('#aftercrop').attr('src', crop);
+                crop = crop.split(',')[1];
+                crop = window.atob(crop);
+                var ia = new Uint8Array(crop.length); //transform base64 to binary
+                for (var i = 0; i < crop.length; i++) {
+                    ia[i] = crop.charCodeAt(i); //transform binary to charCode for Blob later
+                };
+                var blob=new Blob([ia], {type:"image/jpg"}); //blob set file as jpg extension
+                
+                var fd=new FormData();
+
+                fd.append('qqfile', blob, 'abc3.jpg');
+                $.ajax({ //sent file to server side
+                    url:"server_side_address",
+                    type:"POST",
+                    headers: {
+                        'access_token': '8CC1C549-35D7-4691-9E1D-67D8EC7951B5',
+                    },
+                    data: fd,
+                    processData: false,
+                    contentType: false,   // tell jQuery not to set contentType
+                    success:function(){
+                        debugger;
+                    }
+                });
+
+              })
+
+            $('#coords').on('change','input',function(e){
+              var x1 = $('#x1').val(),
+                  x2 = $('#x2').val(),
+                  y1 = $('#y1').val(),
+                  y2 = $('#y2').val();
+              jcrop_api.setSelect([x1,y1,x2,y2]);
+            });
+
+            // Simple event handler, called from onChange and onSelect
+            // event handlers, as per the Jcrop invocation above
+            function showCoords(c)
+            {
+                $('#x1').val(c.x);
+                $('#y1').val(c.y);
+                $('#x2').val(c.x2);
+                $('#y2').val(c.y2);
+                $('#w').val(c.w);
+                $('#h').val(c.h);
+            };
+
+            function clearCoords()
+            {
+                $('#coords input').val('');
+            };
+        }
+        demo2();
+    </script>
+</body>
+
+</html>
