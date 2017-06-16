@@ -82,7 +82,27 @@
               jcrop_api = this;
             });
 
-            $('#animbutton').click(function(e){
+            $('#fineupload').click(function(evt) { //uploader via canvas wrapper
+                const ctx = $('#mycanvas')[0].getContext('2d'),
+                    img = $('#demo2')[0];
+                let cropImg;
+                $('#mycanvas').attr({
+                    'width': $('#w').val(),
+                    'height': $('#h').val()
+                })
+                ctx.drawImage(img, $('#x1').val(), $('#y1').val(), $('#w').val(), $('#h').val(), 0, 0, $('#w').val(), $('#h').val());
+                crop = $('#mycanvas')[0].toDataURL('image/jpeg');
+                $('#aftercrop').attr('src', crop);
+                $('#uploader').fineUploader('addFiles', {
+                    canvas: $('#mycanvas')[0],
+                    name: 'canvas.jpg',
+                    quality: '80',
+                    type: 'image/jpeg'
+                });
+                // $('#uploader').fineUploader('uploadStoredFiles');
+            })
+
+            $('#animbutton').click(function(e){ //upload via jQuery ajax
                 // jcrop_api.animateTo([ 120,120,80,80 ]);
                 // jcrop_api.destroy()
                 const ctx = $('#mycanvas')[0].getContext('2d'),
@@ -90,7 +110,7 @@
                 let cropImg;
                 $('#mycanvas').attr({'width': $('#w').val(), 'height': $('#h').val()})
                 ctx.drawImage(img, $('#x1').val(), $('#y1').val(), $('#w').val(), $('#h').val(), 0, 0, $('#w').val(), $('#h').val());
-                crop = $('#mycanvas')[0].toDataURL('image/jpg');
+                crop = $('#mycanvas')[0].toDataURL('image/jpeg');
                 $('#aftercrop').attr('src', crop);
                 crop = crop.split(',')[1];
                 crop = window.atob(crop);
@@ -98,13 +118,13 @@
                 for (var i = 0; i < crop.length; i++) {
                     ia[i] = crop.charCodeAt(i); //transform binary to charCode for Blob later
                 };
-                var blob=new Blob([ia], {type:"image/jpg"}); //blob set file as jpg extension
+                var blob=new Blob([ia], {type:"image/jpeg"}); //blob set file as jpg extension
                 
                 var fd=new FormData();
 
                 fd.append('qqfile', blob, 'abc3.jpg');
                 $.ajax({ //sent file to server side
-                    url:"server_side_address",
+                    url:"upload_server_address_here",
                     type:"POST",
                     headers: {
                         'access_token': '8CC1C549-35D7-4691-9E1D-67D8EC7951B5',
@@ -117,6 +137,37 @@
                     }
                 });
 
+            })
+
+            $('#fineuploader').click(function(e){ //upload via fineuploader addFiles
+                const ctx = $('#mycanvas')[0].getContext('2d'),
+                img = $('#demo2')[0];
+                let cropImg;
+                $('#mycanvas').attr({
+                    'width': $('#w').val(),
+                    'height': $('#h').val()
+                })
+                ctx.drawImage(img, $('#x1').val(), $('#y1').val(), $('#w').val(), $('#h').val(), 0, 0, $('#w').val(), $('#h').val());
+                crop = $('#mycanvas')[0].toDataURL('image/jpeg');
+                $('#aftercrop').attr('src', crop);
+                crop = crop.split(',')[1];
+                crop = window.atob(crop);
+                var ia = new Uint8Array(crop.length);
+                for (var i = 0; i < crop.length; i++) {
+                    ia[i] = crop.charCodeAt(i);
+                };
+                // var blob = new Blob([ia], { //use blob to upload
+                //     type: "image/jpeg"
+                // });
+                // $('#uploader').fineUploader('addFiles', {
+                //     blob: blob,
+                //     name: 'aFileName.jpg'
+                // });
+
+                var fileOfBlob = new File([ia], 'aFileName.jpg', {type: 'image/jpeg'}); // use file object to upload
+                $('#uploader').fineUploader('addFiles', fileOfBlob);
+
+                $('#uploader').fineUploader('uploadStoredFiles');
               })
 
             $('#coords').on('change','input',function(e){
@@ -144,7 +195,38 @@
                 $('#coords input').val('');
             };
         }
-        demo2();
+        $(function() {
+            $('#uploader').fineUploader({
+                template: 'qq-template-gallery',
+                multiple: false,
+                request: {
+                    endpoint: 'upload_server_address_here',
+                    customHeaders: {
+                        'access_token': '8CC1C549-35D7-4691-9E1D-67D8EC7951B5'
+                    }
+                },
+                autoUpload: false,
+                debug: true,
+                callbacks: {
+                    onError: function(id, name, errorReason, xhrOrXdr) {
+                        alert(qq.format("Error on file number {} - {}.  Reason: {}", id, name, errorReason));
+                    }
+                }
+            });
+            $('[name=qqfile]').on('change', function(evt) {//get uploader img to prepare to crop
+                if(this.files && this.files[0]){
+                    var reader = new FileReader();
+                
+                    reader.onload = function (e) {
+                        $('.img-responsive').eq(0).attr('src', e.target.result);
+                        demo2();
+                    }
+                    
+                    reader.readAsDataURL(this.files[0]);
+                }
+                debugger;
+            })
+        })
     </script>
 </body>
 
