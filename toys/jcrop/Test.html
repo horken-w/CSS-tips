@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./jcrop/css/jquery.Jcrop.min.css">
+    <link rel="stylesheet" href="./fine-uploader_o/fine-uploader-gallery.min.css">
+    <style></style>
+</head>
+
+<body>
+    <div class="col-md-7 col-sm-12 responsive-1024">
+        <h4>An example with a basic event handler.</h4>
+        <p> Here we've tied several form values together with a simple event handler invocation. The result is that the form values are updated in real-time as the selection is changed using Jcrop's
+            <em>onChange</em> handler. </p>
+        <img src="./image2.jpg" id="demo2" alt="Jcrop Example" class="img-responsive" />
+    </div>
+    <button id="submit">animbutton</button>
+    <div class="col-md-5 col-sm-12 responsive-1024">
+        <h4>Cropped Image Details:</h4>
+        <form id="coords" class="coords form-inline" onsubmit="return false;" action="#">
+            <table class="table table-bordered" style="display: none">
+                <tr>
+                    <td>
+                        <label class="control-label">X1</label>
+                    </td>
+                    <td>
+                        <input type="text" id="x1" name="x1" class="form-control btn-sm" /> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">Y1</label>
+                    </td>
+                    <td>
+                        <input type="text" id="y1" name="y1" class="form-control btn-sm" /> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">X2</label>
+                    </td>
+                    <td>
+                        <input type="text" id="x2" name="x2" class="form-control btn-sm" /> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">Y2</label>
+                    </td>
+                    <td>
+                        <input type="text" id="y2" name="y2" class="form-control btn-sm" /> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">Width</label>
+                    </td>
+                    <td>
+                        <input type="text" id="w" name="w" class="form-control btn-sm" /> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">Height</label>
+                    </td>
+                    <td>
+                        <input type="text" id="h" name="h" class="form-control btn-sm" /> </td>
+                </tr>
+            </table>
+        </form>
+        <div id="uploader"></div>
+        <canvas id="mycanvas" style="display: none"></canvas>
+        <img id="aftercrop" src="#" alt="cropImage">
+
+        <input type="file" id="files" name="files">
+        <div id="out"></div>
+    </div>
+    <script type="text/template" id="qq-template-gallery">
+        <div class="qq-uploader-selector qq-uploader qq-gallery" qq-drop-area-text="拖曳檔案至此範圍內">
+            <div class="qq-upload-button-selector qq-upload-button">
+                <div>選擇檔案</div>
+            </div>
+            <div class="clickarea"></div>
+            <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
+                <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
+            </div>
+            <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+                <span class="qq-upload-drop-area-text-selector"></span>
+            </div>
+            <span class="qq-drop-processing-selector qq-drop-processing">
+                <span>檔案上傳中...</span>
+            <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+            </span>
+            <ul class="qq-upload-list-selector qq-upload-list" role="region" aria-live="polite" aria-relevant="additions removals">
+                <li class="col-md-3 col-sm-6">
+                    <a>
+                        <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+                        <div class="qq-progress-bar-container-selector qq-progress-bar-container">
+                            <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
+                        </div>
+                        <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                        <div class="qq-thumbnail-wrapper">
+                            <img class="qq-thumbnail-selector" qq-max-size="120" qq-server-scale>
+                        </div>
+                        <div class="qq-upload-cancel-selector">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </div>
+                        <button type="button" class="qq-upload-retry-selector qq-upload-retry">重試</button>
+                        <div class="qq-file-info">
+                            <div class="qq-file-name" style="display: inline-block">
+                                <span class="qq-upload-file-selector qq-upload-file"></span>
+                                <!-- <span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span> -->
+                            </div>
+                            <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+                            <span class="qq-upload-size-selector qq-upload-size"></span>
+                            <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">
+                                <span class="glyphicon glyphicon-trash" aria-label="Delete"></span>
+                            </button>
+                            <button type="button" class="qq-btn qq-upload-pause-selector qq-upload-pause">
+                                <span class="qq-btn qq-pause-icon" aria-label="Pause"></span>
+                            </button>
+                            <button type="button" class="qq-btn qq-upload-continue-selector qq-upload-continue">
+                                <span class="qq-btn qq-continue-icon" aria-label="Continue"></span>
+                            </button>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <dialog class="qq-alert-dialog-selector">
+                <div class="qq-dialog-message-selector"></div>
+                <div class="qq-dialog-buttons">
+                    <button type="button" class="qq-cancel-button-selector">關閉</button>
+                </div>
+            </dialog>
+            <dialog class="qq-confirm-dialog-selector">
+                <div class="qq-dialog-message-selector"></div>
+                <div class="qq-dialog-buttons">
+                    <button type="button" class="qq-cancel-button-selector">否</button>
+                    <button type="button" class="qq-ok-button-selector">是</button>
+                </div>
+            </dialog>
+            <dialog class="qq-prompt-dialog-selector">
+                <div class="qq-dialog-message-selector"></div>
+                <input type="text">
+                <div class="qq-dialog-buttons">
+                    <button type="button" class="qq-cancel-button-selector">取消</button>
+                    <button type="button" class="qq-ok-button-selector">上傳</button>
+                </div>
+            </dialog>
+        </div>
+    </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="./jcrop/js/jquery.Jcrop.js"></script>
+    <script src="./fine-uploader_o/jquery.fine-uploader.js"></script>
+    <script>
+        var jcrop_api, Xaxis, Yaxis, width, height;
+        var demo2 = function() {
+            $('#demo2').Jcrop({
+                onChange: showCoords,
+                onSelect: showCoords,
+                onRelease: clearCoords,
+                setSelect: [0,0,400,800],
+                minSize: [300, 100],
+                maxSize: [400, 800],
+                allowResize: false,
+                aspectRatio: 3 / 1
+            }, function() {
+                jcrop_api = this;
+            });
+            $('#fineupload').click(function(evt) {
+                const ctx = $('#mycanvas')[0].getContext('2d'),
+                    img = $('#demo2')[0];
+                let cropImg;
+                $('#mycanvas').attr({
+                    'width': width,
+                    'height': height
+                })
+                ctx.drawImage(img, Xaxis, Yaxis, $('#w').val(), width, 0, 0, Xaxis, Yaxis);
+                crop = $('#mycanvas')[0].toDataURL('image/jpeg');
+                $('#aftercrop').attr('src', crop);
+                $('#uploader').fineUploader('addFiles', {
+                    canvas: $('#mycanvas')[0],
+                    name: 'canvas.jpg',
+                    quality: '80',
+                    type: 'image/jpeg'
+                });
+                // $('#uploader').fineUploader('uploadStoredFiles');
+            })
+
+            $('#submit').click(function(e) {
+                // jcrop_api.animateTo([ 120,120,80,80 ]);
+                // jcrop_api.destroy()
+                const ctx = $('#mycanvas')[0].getContext('2d'),
+                    img = $('#demo2')[0];
+                let cropImg;
+                $('#mycanvas').attr({
+                    'width': width,
+                    'height': height
+                })
+                ctx.drawImage(img, Xaxis, Yaxis, width, height, 0, 0, width, height);
+                crop = $('#mycanvas')[0].toDataURL('image/jpeg');
+                $('#aftercrop').attr('src', crop);
+                crop = crop.split(',')[1];
+                crop = window.atob(crop);
+                var ia = new Uint8Array(crop.length);
+                for (var i = 0; i < crop.length; i++) {
+                    ia[i] = crop.charCodeAt(i);
+                };
+                var fileOfBlob = new File([ia], 'aFileName.jpg', { // use file object to upload
+                    type: 'image/jpeg'
+                }); 
+
+                $('#uploader').fineUploader('addFiles', fileOfBlob);
+
+                // $('#uploader').fineUploader('uploadStoredFiles');
+
+            })
+
+            $('#coords').on('change', 'input', function(e) {
+                var x1 = $('#x1').val(),
+                    x2 = $('#x2').val(),
+                    y1 = $('#y1').val(),
+                    y2 = $('#y2').val();
+                jcrop_api.setSelect([x1, y1, x2, y2]);
+            });
+
+            // Simple event handler, called from onChange and onSelect
+            // event handlers, as per the Jcrop invocation above
+            function showCoords(c) {
+                const zoomSize = $('#demo2')[0].naturalWidth / $('#demo2').width()
+                Xaxis = c.x * zoomSize;
+                Yaxis = c.y * zoomSize; 
+                width = c.w * zoomSize;
+                height = c.h * zoomSize;
+            };
+
+            function clearCoords() {
+                $('#coords input').val('');
+            };
+        }
+        $(function() {
+            $('#uploader').fineUploader({
+                template: 'qq-template-gallery',
+                multiple: false,
+                request: {
+                    endpoint: 'http://localhost:8080/api/common/file.upload?type=collection',
+                    customHeaders: {
+                        'access_token': '8CC1C549-35D7-4691-9E1D-67D8EC7951B5'
+                    }
+                },
+                autoUpload: false,
+                debug: true,
+                callbacks: {
+                    onSubmit: () => {
+                        if( jcrop_api ) {
+                            jcrop_api.destroy();
+                            $('img').eq(0).removeAttr('style');
+                        };
+                        const fileInput = document.getElementsByName('qqfile')[0];
+                        if (fileInput.files && fileInput.files[0]) {
+                            var promise = Promise.resolve();
+                            Array.from(fileInput.files).forEach(file => 
+                                promise.then(() => 
+                                    imageReader(file))
+                                    .then((img) => {
+                                        $('.img-responsive').eq(0).attr('src', img.target.result);
+                                        demo2();
+                                    }));
+                            promise.then(() => console.log('all done...'));
+                        }
+
+                    },
+                    onError: function(id, name, errorReason, xhrOrXdr) {
+                        alert(qq.format("Error on file number {} - {}.  Reason: {}", id, name, errorReason));
+                    }
+                }
+            });
+            function imageReader(files) {
+                return new Promise((resolve, reject) => {
+                    var reader = new FileReader();
+                    reader.onload = resolve;
+                    reader.readAsDataURL(files);
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>
