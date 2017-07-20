@@ -210,15 +210,14 @@ export class CkeditorComponent implements OnInit, AfterViewInit, ControlValueAcc
         this.value = root.innerHTML;
       })
 
-    // this._value
-    //   .subscribe(
-    //     (content) => {
-    //       this.onChange(content);
-    //       if (this.instance)
-    //         this.instance.setData(content);
-    //     }
-    //   )
-    this.ckeditorInit(this.txtConfig || {});
+    if (!document.getElementById('ck_cdn')) { // create CKEditor cdn tag if it doesn't exist
+      const script = document.createElement('script');
+      script.src = 'https://cdn.ckeditor.com/4.5.11/full/ckeditor.js';
+      script.id = 'ck_cdn';
+      document.getElementsByTagName('head')[0].appendChild(script);
+      script.onload = () => setTimeout(() => this.ckeditorInit(this.txtConfig || {}));
+    }
+    else setTimeout(() => this.ckeditorInit(this.txtConfig || {}));
   }
 
   ngAfterViewInit() {
