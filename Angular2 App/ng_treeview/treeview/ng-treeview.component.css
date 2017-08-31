@@ -1,0 +1,36 @@
+/*:host .list-group-item{*/
+  /*border: none;*/
+  /*border-radius: 0;*/
+/*}*/
+
+/*:host .list-group-item:hover{*/
+  /*border-bottom: 1px solid black;*/
+  /*margin: 1px 0;*/
+/*}*/
+
+>>> .sub_item .treeview-item .list-group-item{
+      border: none;
+    }
+
+:host .list-group-item > label{
+  padding-left: 25px;
+}
+
+:host .list-group-item > span ~ label{
+  padding-left: 4px;
+}
+
+:host .list-group-item > label{
+  padding-left: 25px;
+}
+
+:host label, :host label > input, :host span{
+  cursor: pointer;
+}
+:host label{
+  width: 90%;
+}
+:host label > input{
+  margin-right: 10px;
+  cursor: pointer;
+}
