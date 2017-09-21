@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Album use Flexbox</title>
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css">
+    <style>
+    .image-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        margin: auto;
+    }
+    
+    .image-container .item {
+        height: inherit;
+        max-width: 100%;
+        background: gray;
+        border: 2px solid white;
+        background-size: cover;
+        /* background-position: center top; */
+        background-position: center;
+        background-repeat: no-repeat;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 auto;
+        flex: 1 auto;
+    }
+    
+    .image-container .item img {
+        height: auto;
+        width: 100%;
+        max-height: 300px;
+        width: auto;
+        visibility: hidden;
+    }
+    
+    .item {
+        position: relative;
+        cursor: pointer;
+        -webkit-transition: all .1s linear;
+        transition: all .1s linear;
+    }
+    
+    figure {
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <section class="image-container">
+        <figure class="item">
+            <a href="http://albertohartzet.com//portfolio/graph/coca-cola-botella.jpg" data-size="800x600"><img src="http://albertohartzet.com//portfolio/graph/coca-cola-botella.jpg" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="http://albertohartzet.com//portfolio/graph/dribbble-thanks.jpg" data-size="800x600"><img src="http://albertohartzet.com//portfolio/graph/dribbble-thanks.jpg" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="http://albertohartzet.com//portfolio/web/icon-1.jpg" data-size="800x720"><img src="http://albertohartzet.com//portfolio/web/icon-1.jpg" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="https://d13yacurqjgara.cloudfront.net/users/116339/screenshots/2949411/we-d-at-m-drbl.png" data-size="800x600"><img src="https://d13yacurqjgara.cloudfront.net/users/116339/screenshots/2949411/we-d-at-m-drbl.png" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="http://albertohartzet.com//portfolio/graph/dudebreaker.jpg" data-size="403x403"><img src="http://albertohartzet.com//portfolio/graph/dudebreaker.jpg" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="https://lh3.googleusercontent.com/l45JwbKK2N2yUB7nu_2qrhOd4tRtTry3SQUIalOXI35lRMwjnXkA_QAbyfelwWjFWY0OdHMeNfzsAEHhGvB8xjQHei171Ms4RWLSlv9bz6e_f8pKBzhaj3wtgCD-B6kG3dr21tLW1XkMRJ2XJY1G7ZghgiRc4oXRAHONxlg_a_vCcupmw4RPTolmJ_H678FPO8RuYactIzXnUSe84F7m-r4xpg6M7hJcSunJciTnxrOCt6hJ4ZTIWW--Q1WugwMp1Y8bZilpIKgFgceAhIVNMWKIuokRAyeQu6XZcxsXC9j7PrhC00RKjff5d0VfgW4Y9O-tHsVCEr7C2iryqvPD8mmXIvj1mquOUFuQfHsrovFcnfSjW6hQfA4yaFCbpK14-iZ2yLSTBdKIFffff4fWuBfDqBJwsBeSujfzaJkm6Xk6Rhdo-LGSwTnkuHyIpWrWkQyIMMKaj6KUyOB0jifCx5pkImR5oEdFTl1GGsTN0Tsqww3QGU1Nt8oiJjszIiZDHqGSWODu4eXWm1lH51ZOTCAd_vQhBFS7v9hUvzx3HMeNynjPFjTpUK0MMmpsEyh0df3HvTxpIQJHVeOmOyhArXPeLg4_L6pAtMF_VkOM9kY2ub7ascSxoA=w629-h1104-no" data-size="628x1104"><img src="https://lh3.googleusercontent.com/l45JwbKK2N2yUB7nu_2qrhOd4tRtTry3SQUIalOXI35lRMwjnXkA_QAbyfelwWjFWY0OdHMeNfzsAEHhGvB8xjQHei171Ms4RWLSlv9bz6e_f8pKBzhaj3wtgCD-B6kG3dr21tLW1XkMRJ2XJY1G7ZghgiRc4oXRAHONxlg_a_vCcupmw4RPTolmJ_H678FPO8RuYactIzXnUSe84F7m-r4xpg6M7hJcSunJciTnxrOCt6hJ4ZTIWW--Q1WugwMp1Y8bZilpIKgFgceAhIVNMWKIuokRAyeQu6XZcxsXC9j7PrhC00RKjff5d0VfgW4Y9O-tHsVCEr7C2iryqvPD8mmXIvj1mquOUFuQfHsrovFcnfSjW6hQfA4yaFCbpK14-iZ2yLSTBdKIFffff4fWuBfDqBJwsBeSujfzaJkm6Xk6Rhdo-LGSwTnkuHyIpWrWkQyIMMKaj6KUyOB0jifCx5pkImR5oEdFTl1GGsTN0Tsqww3QGU1Nt8oiJjszIiZDHqGSWODu4eXWm1lH51ZOTCAd_vQhBFS7v9hUvzx3HMeNynjPFjTpUK0MMmpsEyh0df3HvTxpIQJHVeOmOyhArXPeLg4_L6pAtMF_VkOM9kY2ub7ascSxoA=w629-h1104-no" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="https://d13yacurqjgara.cloudfront.net/users/116339/screenshots/2501728/dribbble-shot-metro-mexico.png" data-size="800x600"><img src="https://d13yacurqjgara.cloudfront.net/users/116339/screenshots/2501728/dribbble-shot-metro-mexico.png" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="https://d13yacurqjgara.cloudfront.net/users/116339/screenshots/2950769/ninja-airplane-drbl.png" data-size="800x600"><img src="https://d13yacurqjgara.cloudfront.net/users/116339/screenshots/2950769/ninja-airplane-drbl.png" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="https://lh3.googleusercontent.com/Vy_uW1yFU2A9I7AfoyKH646njW2sBUtXmigQQ9tssNPxXgnNIaH2a03xPxoUadOE4iueltxZbsCGkn0k2_c4dhKpL3_whzalg9QVQpbSwnlci1UFoea0hLtaRSpPP5q7QcoZHOeeAffyhdJEXdugh5R4M4zWd5i3Nm82dX7iF_8TQ7iItHigktiEaixmShtWYi6LAdBf5sNRuDyjosG15ySdubVNwbN_x6trF6fSeVFJTbcANJ9dOyWH7Gw-IviP0EoPegeh8KJk3il69fdUVnKuWjXssBazLKI_9KXKoQR1TSaiZDd456ShRpG34Sm_JpLqcnxPttjDSMwcvxYZlgCMqNg8eB2aSWX9jXpJEN2JL1b_KHeWDW9cD9muTqdYrNP0qOJ5KWE9ccunZQSi7X7M-1-EI-Tu52z4TTa4a52Bkb-Q6z5h4lK9yBxQH0KZuESl-zgK-qaxGDvGy7RrbOReWBjzEnWLToqI_tEje1fiDlIxW_C9J5e-Uvr57RswwLTHDrit2PcSLYEjz5PO6OpPswCFLGSKrOiNpbNyNhPVomLvNla8-E9do4p-89ecLCmGpbFsh6itpxF-uOWmGz7gI4yWJ2TItpGenUUvctESwP24W_veyw=s1104-no" data-size="1104x1104"><img src="https://lh3.googleusercontent.com/Vy_uW1yFU2A9I7AfoyKH646njW2sBUtXmigQQ9tssNPxXgnNIaH2a03xPxoUadOE4iueltxZbsCGkn0k2_c4dhKpL3_whzalg9QVQpbSwnlci1UFoea0hLtaRSpPP5q7QcoZHOeeAffyhdJEXdugh5R4M4zWd5i3Nm82dX7iF_8TQ7iItHigktiEaixmShtWYi6LAdBf5sNRuDyjosG15ySdubVNwbN_x6trF6fSeVFJTbcANJ9dOyWH7Gw-IviP0EoPegeh8KJk3il69fdUVnKuWjXssBazLKI_9KXKoQR1TSaiZDd456ShRpG34Sm_JpLqcnxPttjDSMwcvxYZlgCMqNg8eB2aSWX9jXpJEN2JL1b_KHeWDW9cD9muTqdYrNP0qOJ5KWE9ccunZQSi7X7M-1-EI-Tu52z4TTa4a52Bkb-Q6z5h4lK9yBxQH0KZuESl-zgK-qaxGDvGy7RrbOReWBjzEnWLToqI_tEje1fiDlIxW_C9J5e-Uvr57RswwLTHDrit2PcSLYEjz5PO6OpPswCFLGSKrOiNpbNyNhPVomLvNla8-E9do4p-89ecLCmGpbFsh6itpxF-uOWmGz7gI4yWJ2TItpGenUUvctESwP24W_veyw=s1104-no" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="http://albertohartzet.com//portfolio/graph/wtm.jpg" data-size="1064x600"><img src="http://albertohartzet.com//portfolio/graph/wtm.jpg" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="https://lh3.googleusercontent.com/0VFqqk9UDTZMDhk91dDmDGZ1RN3qs-kHAjMMDl-xYfLV8mFBwriBg6oxQ_jpX_HKxL4X8qOYYSH69Na6qP8knqs8y37XIlmLq9NUwvGjibs6nqqAZ3SOc8vEh6_mVlb6rftD5by6d_PD0jeMKQKioT14ufHq0sMMfM_D1te-Gg7dEwyzcEGX4srFjVjpbhwTfuzmGGEhQG-Eo04QzpUiT3BOjlEvx-kzvU4mSiX4WU8hKE4esPjk4v9eIAN_--Q4S06SgAR5s2m6KDfx5M2kVNf7Ebf-tSRIl3-51bW_ygiRlKVNp1Fe56rremJnB1JllPiCO8TgLKF1k-yNv3-4eWTU4cOoP6o9zCd28Eh7e8Cw5EbnlHak8fPJiiRsZhuavya4DBTMBfCYA5l1tKqIjGxkpdz_KOpBpwjm2tw3STKbRSoF4fyEuFmwgeimV9XCbm9TkUoI3itLVTAY0LOaxTp5EX7DHkN6JYICHHEpL6P96VMr-UynmWxniYEGdkp2aXc3Og1j6zLRQDj_qXMJJqBRVY0Btfe-NZBV45nnzidpwoMc66ircopx6ohdR-0wtMZhMqxM-Uz8uCaOFm-SAjmnVLIAXuSB2awWSn1yHy3OahV_iQFotQ=w1900-h760-no" data-size="1900x760"><img src="https://lh3.googleusercontent.com/0VFqqk9UDTZMDhk91dDmDGZ1RN3qs-kHAjMMDl-xYfLV8mFBwriBg6oxQ_jpX_HKxL4X8qOYYSH69Na6qP8knqs8y37XIlmLq9NUwvGjibs6nqqAZ3SOc8vEh6_mVlb6rftD5by6d_PD0jeMKQKioT14ufHq0sMMfM_D1te-Gg7dEwyzcEGX4srFjVjpbhwTfuzmGGEhQG-Eo04QzpUiT3BOjlEvx-kzvU4mSiX4WU8hKE4esPjk4v9eIAN_--Q4S06SgAR5s2m6KDfx5M2kVNf7Ebf-tSRIl3-51bW_ygiRlKVNp1Fe56rremJnB1JllPiCO8TgLKF1k-yNv3-4eWTU4cOoP6o9zCd28Eh7e8Cw5EbnlHak8fPJiiRsZhuavya4DBTMBfCYA5l1tKqIjGxkpdz_KOpBpwjm2tw3STKbRSoF4fyEuFmwgeimV9XCbm9TkUoI3itLVTAY0LOaxTp5EX7DHkN6JYICHHEpL6P96VMr-UynmWxniYEGdkp2aXc3Og1j6zLRQDj_qXMJJqBRVY0Btfe-NZBV45nnzidpwoMc66ircopx6ohdR-0wtMZhMqxM-Uz8uCaOFm-SAjmnVLIAXuSB2awWSn1yHy3OahV_iQFotQ=w1900-h760-no" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="http://albertohartzet.com/portfolio/graph/designers-hunt.jpg" data-size="980x980"><img src="http://albertohartzet.com/portfolio/graph/designers-hunt.jpg" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="https://d13yacurqjgara.cloudfront.net/users/116339/screenshots/2502030/dribbble-shot-midi-icon.png" data-size="800x600"><img src="https://d13yacurqjgara.cloudfront.net/users/116339/screenshots/2502030/dribbble-shot-midi-icon.png" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="https://timedotcom.files.wordpress.com/2016/04/time-100-influential-animals-joel-stein_26-kobasu1.jpg?quality=75&strip=color&w=640" data-size="640x480"><img src="https://timedotcom.files.wordpress.com/2016/04/time-100-influential-animals-joel-stein_26-kobasu1.jpg?quality=75&strip=color&w=640" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+        <figure class="item">
+            <a href="http://www.extremetech.com/wp-content/uploads/2013/09/4Vln8-640x428.jpg" data-size="640x428"><img src="http://www.extremetech.com/wp-content/uploads/2013/09/4Vln8-640x428.jpg" alt="xxx"></a>
+            <figcaption itemprop="caption description">Image caption</figcaption>
+        </figure>
+    </section>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <!-- Background of PhotoSwipe. 
+           It's a separate element as animating opacity is faster than rgba(). -->
+        <div class="pswp__bg"></div>
+        <!-- Slides wrapper with overflow:hidden. -->
+        <div class="pswp__scroll-wrap">
+            <!-- Container that holds slides. 
+              PhotoSwipe keeps only 3 of them in the DOM to save memory.
+              Don't modify these 3 pswp__item elements, data is added later on. -->
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <!--  Controls are self-explanatory. Order can be changed. -->
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    <button class="pswp__button pswp__button--share" title="Share"></button>
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                    <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                    <!-- element will get class pswp__preloader--active when preloader is running -->
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                </button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                </button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js"></script>
+    <script>
+    var item = Array.prototype.slice.call(document.getElementsByClassName('item'));
+
+    item.forEach(function(v) {
+        v.style.backgroundImage = 'url(' + v.children[0].href + ')';
+        // debugger;
+    })
+
+    var initPhotoSwipeFromDOM = function(gallerySelector) {
+
+        // parse slide data (url, title, size ...) from DOM elements 
+        // (children of gallerySelector)
+        var parseThumbnailElements = function(el) {
+            var thumbElements = el.childNodes,
+                numNodes = thumbElements.length,
+                items = [],
+                figureEl,
+                linkEl,
+                size,
+                item;
+
+            for (var i = 0; i < numNodes; i++) {
+
+                figureEl = thumbElements[i]; // <figure> element
+
+                // include only element nodes 
+                if (figureEl.nodeType !== 1) {
+                    continue;
+                }
+
+                linkEl = figureEl.children[0]; // <a> element
+
+                size = linkEl.getAttribute('data-size').split('x');
+
+                // create slide object
+                item = {
+                    src: linkEl.getAttribute('href'),
+                    w: parseInt(size[0], 10),
+                    h: parseInt(size[1], 10)
+                };
+
+
+
+                if (figureEl.children.length > 1) {
+                    // <figcaption> content
+                    item.title = figureEl.children[1].innerHTML;
+                }
+
+                if (linkEl.children.length > 0) {
+                    // <img> thumbnail element, retrieving thumbnail url
+                    item.msrc = linkEl.children[0].getAttribute('src');
+                }
+
+                item.el = figureEl; // save link to element for getThumbBoundsFn
+                items.push(item);
+            }
+
+            return items;
+        };
+
+        // find nearest parent element
+        var closest = function closest(el, fn) {
+            return el && (fn(el) ? el : closest(el.parentNode, fn));
+        };
+
+        // triggers when user clicks on thumbnail
+        var onThumbnailsClick = function(e) {
+            e = e || window.event;
+            e.preventDefault ? e.preventDefault() : e.returnValue = false;
+
+            var eTarget = e.target || e.srcElement;
+
+            // find root element of slide
+            var clickedListItem = closest(eTarget, function(el) {
+                return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
+            });
+
+            if (!clickedListItem) {
+                return;
+            }
+
+            // find index of clicked item by looping through all child nodes
+            // alternatively, you may define index via data- attribute
+            var clickedGallery = clickedListItem.parentNode,
+                childNodes = clickedListItem.parentNode.childNodes,
+                numChildNodes = childNodes.length,
+                nodeIndex = 0,
+                index;
+
+            for (var i = 0; i < numChildNodes; i++) {
+                if (childNodes[i].nodeType !== 1) {
+                    continue;
+                }
+
+                if (childNodes[i] === clickedListItem) {
+                    index = nodeIndex;
+                    break;
+                }
+                nodeIndex++;
+            }
+
+
+
+            if (index >= 0) {
+                // open PhotoSwipe if valid index found
+                openPhotoSwipe(index, clickedGallery);
+            }
+            return false;
+        };
+
+        // parse picture index and gallery index from URL (#&pid=1&gid=2)
+        var photoswipeParseHash = function() {
+            var hash = window.location.hash.substring(1),
+                params = {};
+
+            if (hash.length < 5) {
+                return params;
+            }
+
+            var vars = hash.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                if (!vars[i]) {
+                    continue;
+                }
+                var pair = vars[i].split('=');
+                if (pair.length < 2) {
+                    continue;
+                }
+                params[pair[0]] = pair[1];
+            }
+
+            if (params.gid) {
+                params.gid = parseInt(params.gid, 10);
+            }
+
+            return params;
+        };
+
+        var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+            var pswpElement = document.querySelectorAll('.pswp')[0],
+                gallery,
+                options,
+                items;
+
+            items = parseThumbnailElements(galleryElement);
+
+            // define options (if needed)
+            options = {
+
+                // define gallery index (for URL)
+                galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+
+                getThumbBoundsFn: function(index) {
+                    // See Options -> getThumbBoundsFn section of documentation for more info
+                    var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+                        pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                        rect = thumbnail.getBoundingClientRect();
+
+                    return {
+                        x: rect.left,
+                        y: rect.top + pageYScroll,
+                        w: rect.width
+                    };
+                }
+
+            };
+
+            // PhotoSwipe opened from URL
+            if (fromURL) {
+                if (options.galleryPIDs) {
+                    // parse real index when custom PIDs are used 
+                    // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
+                    for (var j = 0; j < items.length; j++) {
+                        if (items[j].pid == index) {
+                            options.index = j;
+                            break;
+                        }
+                    }
+                } else {
+                    // in URL indexes start from 1
+                    options.index = parseInt(index, 10) - 1;
+                }
+            } else {
+                options.index = parseInt(index, 10);
+            }
+
+            // exit if index not found
+            if (isNaN(options.index)) {
+                return;
+            }
+
+            if (disableAnimation) {
+                options.showAnimationDuration = 0;
+            }
+
+            // Pass data to PhotoSwipe and initialize it
+            gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+            gallery.init();
+        };
+
+        // loop through all gallery elements and bind events
+        var galleryElements = document.querySelectorAll(gallerySelector);
+
+        for (var i = 0, l = galleryElements.length; i < l; i++) {
+            galleryElements[i].setAttribute('data-pswp-uid', i + 1);
+            galleryElements[i].onclick = onThumbnailsClick;
+        }
+
+        // Parse URL and open gallery if it contains #&pid=3&gid=1
+        var hashData = photoswipeParseHash();
+        if (hashData.pid && hashData.gid) {
+            openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true);
+        }
+    };
+
+    // execute above function
+    initPhotoSwipeFromDOM('.image-container');
+    </script>
+</body>
+
+</html>
