@@ -1,0 +1,134 @@
+<div class="container-fluid row mb-1">
+  <div class="col-2" *ngIf="titleEditBtn">
+    <div class="btn btn-warning" (click)="imgDetail.open()">修改圖片資訊</div>
+  </div>
+  <div class="col-4" style="padding: 0.375rem 0.75rem;">上傳格式: <span class="extention">{{extendTypes.type | transformToString:'array'}}</span></div>
+</div>
+<!--files detail modify model-->
+<modal [animation]="true" [keyboard]="true" [backdrop]="true" size="lg" (onDismiss)="true" #imgDetail>
+  <modal-body>
+    <div class="container-fluid row">
+        <div class="col-lg-12">
+          <!-- main Content -->
+          <div class="row">
+            <div class="col-12">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="col-12 responsive-1024">
+                    <div class="fake_h4">圖說文字修改</div>
+                    <div class=" twrap">
+                      <div class="row  thead">
+                        <div class="col-md-6">
+                          圖片樣式
+                        </div>
+                        <div class="col-md-6">
+                          圖說文字
+                        </div>
+                      </div>
+                      <div class="row tbody" *ngIf="imgList">
+                        <div class="col-12 tcell row" *ngFor="let img of imgList; let i =index">
+                          <div class="col-md-6">
+                            <img [src]="safeURL(img.thumbnailUrl)" class="img-responsive">
+                          </div>
+                          <div class="col-md-6">
+                            <textarea cols="30" rows="5" (change)="addImageDescription($event)" [attr.data-img-id]="img.fileid" [value]="img.description?img.description: ''"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-primary" (click)="imgDetail.close()">送出</button>
+  </modal-footer>
+</modal>
+
+<ng-template #imgTemplate>
+  <div class="qq-uploader-selector qq-uploader qq-gallery" qq-drop-area-text="拖曳檔案至此範圍內">
+    <div class="qq-upload-button-selector qq-upload-button">
+      <div>選擇檔案</div>
+    </div>
+    <div class="clickarea"></div>
+    <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
+      <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
+    </div>
+    <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+      <span class="qq-upload-drop-area-text-selector"></span>
+    </div>
+    <span class="qq-drop-processing-selector qq-drop-processing">
+                <span>檔案上傳中...</span>
+            <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+            </span>
+    <ul class="qq-upload-list-selector qq-upload-list row" role="region" aria-live="polite" aria-relevant="additions removals">
+      <li class="col-md-3 col-sm-6">
+        <a>
+          <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+          <div class="qq-progress-bar-container-selector qq-progress-bar-container">
+            <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
+          </div>
+          <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+          <div class="qq-thumbnail-wrapper">
+            <img class="qq-thumbnail-selector" qq-max-size="120" qq-server-scale>
+          </div>
+          <div class="qq-default-image qq-hide">
+            <label>代表圖像</label>
+            <input type="radio" name="defaultImg" title="預設代表圖像">
+          </div>
+          <div class="qq-upload-cancel-selector">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
+          <button type="button" class="qq-upload-retry-selector qq-upload-retry">重試</button>
+          <div class="qq-file-info">
+            <div class="qq-file-name">
+              <span class="qq-upload-file-selector qq-upload-file"></span>
+              <!-- <span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span> -->
+            </div>
+            <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+            <span class="qq-upload-size-selector qq-upload-size qq-hide"></span>
+            <button type="button" class="qq-btn qq-upload-crop qq-upload-crop-selector" style="display: none;">
+              <span class="glyphicon glyphicon-scissors" aria-label="Crop"></span>
+            </button>
+            <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">
+              <span class="fa fa-trash" aria-label="Delete"></span>
+            </button>
+            <button type="button" class="qq-btn qq-upload-pause-selector qq-upload-pause">
+              <span class="qq-btn qq-pause-icon" aria-label="Pause"></span>
+            </button>
+            <button type="button" class="qq-btn qq-upload-continue-selector qq-upload-continue">
+              <span class="qq-btn qq-continue-icon" aria-label="Continue"></span>
+            </button>
+          </div>
+        </a>
+      </li>
+    </ul>
+    <dialog class="qq-alert-dialog-selector">
+      <div class="qq-dialog-message-selector"></div>
+      <div class="qq-dialog-buttons">
+        <button type="button" class="qq-cancel-button-selector">關閉</button>
+      </div>
+    </dialog>
+    <dialog class="qq-confirm-dialog-selector">
+      <div class="qq-dialog-message-selector"></div>
+      <div class="qq-dialog-buttons">
+        <button type="button" class="qq-cancel-button-selector">否</button>
+        <button type="button" class="qq-ok-button-selector">是</button>
+      </div>
+    </dialog>
+    <dialog class="qq-prompt-dialog-selector">
+      <div class="qq-dialog-message-selector"></div>
+      <input type="text">
+      <div class="qq-dialog-buttons">
+        <button type="button" class="qq-cancel-button-selector">取消</button>
+        <button type="button" class="qq-ok-button-selector">上傳</button>
+      </div>
+    </dialog>
+  </div>
+</ng-template>
+<ng-container></ng-container>
+
