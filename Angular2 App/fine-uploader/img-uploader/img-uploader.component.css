@@ -41,6 +41,11 @@
       margin-bottom: 5px;
     }
 
+.deny, .deny + >>> div{
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 /* crop frame style */
  .frame_square{
       width: 80px;

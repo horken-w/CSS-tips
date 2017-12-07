@@ -29,20 +29,7 @@
   margin-bottom: 5px;
 }
 
-.img-responsive{
-  max-width: 80%;
-}
-/* crop frame style */
-.frame_square{
-      width: 80px;
-      height: 80px;
-      border: 3px dashed #000000;
-      background: #ddd;
-    }
-
-.frame_rectangle{
-  width: 80px;
-  height: 60px;
-  border: 3px dashed #000000;
-  background: #ddd;
+.deny, .deny + >>> div{
+  pointer-events: none;
+  cursor: not-allowed;
 }

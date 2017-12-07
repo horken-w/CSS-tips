@@ -25,11 +25,6 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class ImgUploaderComponent implements AfterViewInit, ControlValueAccessor{
   propagateChange = (_: any) => {};
   touch =  (_: any) => {};
-
-  setDisabledState(isDisabled: boolean): void{
-
-  };
-
   writeValue(obj: Array<any>): void {
     if (obj)
       this.dataArray = obj;
@@ -43,6 +38,9 @@ export class ImgUploaderComponent implements AfterViewInit, ControlValueAccessor
 
   registerOnTouched(fn: any): void {
     this.touch = fn;
+  }
+  setDisabledState(isDisabled: boolean): void{
+    if(isDisabled) this.disabled = isDisabled;
   }
 
   @Input() single: boolean = false;
@@ -60,6 +58,7 @@ export class ImgUploaderComponent implements AfterViewInit, ControlValueAccessor
   dataArray: Array<any> = []; // Collect all uploader files information
   titleEditBtn = false;
   imgList: Array<any>;
+  disabled: boolean = false;
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
@@ -183,7 +182,7 @@ export class ImgUploaderComponent implements AfterViewInit, ControlValueAccessor
           //完成刪除
           _that.dataArray[id] = undefined;
           _that.propagateChange(this.getAllFiles());
-          this.titleEditBtn = false;
+          if(!this.getAllFiles().length) this.titleEditBtn = false;
         },
         onUpload: (id, name) => {
           // 等待上傳中
@@ -195,9 +194,11 @@ export class ImgUploaderComponent implements AfterViewInit, ControlValueAccessor
         }
       }
     });
+
     this.renderer.listen(this.elementRef.nativeElement.getElementsByClassName('clickarea')[0], 'click', (evt) => {
       evt.target.parentNode.getElementsByTagName('input')[0].click();
     });
+
     if (this.dataArray.length){ // init file icon if file already exists
       this.fineUploader.addInitialFiles(this.dataArray);
       // this.fineUploader.find('a').each(function(){

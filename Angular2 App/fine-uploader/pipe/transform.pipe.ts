@@ -7,7 +7,6 @@ import {isNullOrUndefined} from "util";
 export class TransformPipe implements PipeTransform {
 
   transform(value: any, size: string, backup_size?: string): string {
-    console.log(value);
     if(isNullOrUndefined(value))
       return '/images/no-pic.png';
 

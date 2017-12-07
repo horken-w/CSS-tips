@@ -38,8 +38,8 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
   registerOnTouched(fn: any): void {
     this.touch = fn;
   }
-  setDisabledState(isDisabled: boolean): void{
-
+  setDisabledState?(isDisabled: boolean): void{
+    if(isDisabled) this.disabled = isDisabled;
   }
 
   @Input() single: boolean = false;
@@ -53,6 +53,7 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
   fineUploader: any;
   dataArray: Array<any>=[]; //Collect all uploader files information
   titleEditBtn: boolean;
+  disabled: boolean = false;
 
   constructor(
     private elementRef: ElementRef,
@@ -122,10 +123,7 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
             value.getElementsByTagName('a')[0].setAttribute ('href', item.thumbnailUrl);
             value.getElementsByTagName('a')[0].setAttribute ('target', '_target');
           });
-          // if(!this.imageSelected){
-          //   $('.qq-default-image').find('[type=radio]').eq(0).click();
-          // }
-          // that.propagateChange(this.getAllFilesList());
+          this.titleEditBtn = true; // show hide title edit btn
         },
         onComplete: (id, name, responseJSON, xhr) => {
           //完成上傳
@@ -144,10 +142,7 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
           //完成刪除
           _that.dataArray[id] = undefined;
           _that.propagateChange(this.getAllFiles());
-          // const imgWrapList = this.getAllFilesList();
-          // that.propagateChange(imgWrapList);
-          // this.change.emit(this.dataArray);
-          // if (!imgWrapList.length) this.imgExist.emit(false); //show hide title edit btn
+          if(!this.getAllFiles().length) this.titleEditBtn = false;
         },
         onUpload: (id, name) => {
           //等待上傳中
@@ -158,9 +153,9 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
       }
     });
 
-    this.renderer.listen(this.elementRef.nativeElement.getElementsByClassName('clickarea')[0], 'click', (evt) => {
-      evt.target.parentNode.getElementsByTagName('input')[0].click()
-    });
+      this.renderer.listen(this.elementRef.nativeElement.getElementsByClassName('clickarea')[0], 'click', (evt) => {
+        evt.target.parentNode.getElementsByTagName('input')[0].click();
+      });
 
     if(this.dataArray.length) // init file icon if file already exists
       this.fineUploader.addInitialFiles(this.dataArray);

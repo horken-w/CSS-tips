@@ -1,4 +1,4 @@
-<div class="container-fluid row mb-1">
+<div class="container-fluid row mb-1" [class.deny]="disabled">
   <div class="col-2" *ngIf="titleEditBtn">
     <div class="btn btn-warning" (click)="imgDetail.open()">修改圖片資訊</div>
   </div>
