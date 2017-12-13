@@ -55,11 +55,52 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
   titleEditBtn: boolean;
   disabled: boolean = false;
 
+  fineUploaderCallBack={
+    onAllComplete: () => {
+      this.touch('');
+      this.propagateChange(this.getAllFiles());
+      let item;
+      this.elementRef.nativeElement.querySelectorAll('[qq-file-id]').forEach((value) => {
+        item = this.dataArray.filter(el =>{
+          return el ? el.filesId == value.getAttribute('qq-file-id') : false;
+        });
+        value.getElementsByTagName('a')[0].setAttribute ('href', item.thumbnailUrl);
+        value.getElementsByTagName('a')[0].setAttribute ('target', '_target');
+      });
+      this.titleEditBtn = true; // show hide title edit btn
+    },
+    onComplete: (id, name, responseJSON, xhr) => {
+      //完成上傳
+      if(this.single) this.dataArray = [];
+      if (responseJSON.success) {
+        responseJSON.filesId=id;
+        this.dataArray[id] = responseJSON;
+      }
+      else
+        this.dataArray[id] = undefined;
+    },
+    onSubmitDelete: (id) => {
+      //點擊刪除按鈕
+    },
+    onDeleteComplete: (id, xhr, isError) => {
+      //完成刪除
+      this.dataArray[id] = undefined;
+      this.propagateChange(this.getAllFiles());
+      if(!this.getAllFiles().length) this.titleEditBtn = false;
+    },
+    onUpload: (id, name) => {
+      //等待上傳中
+    },
+    onError: (id, name, errorReason, xhr) => {
+      console.log(errorReason);
+    }
+  };
+
   constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
-    private uploadService: FilesuploaderService,
-    private http: HttpClient
+    protected elementRef: ElementRef,
+    protected renderer: Renderer2,
+    protected uploadService: FilesuploaderService,
+    protected http: HttpClient
   ) { }
 
   ngAfterViewInit(): void {
@@ -75,7 +116,6 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
   }
 
   initUploadZone(targetNode){
-    const _that=this;
     this.fineUploader = new FineUploader({
       debug: false,
       element: this.elementRef.nativeElement,
@@ -111,46 +151,7 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
         typeError: '上傳檔案格式不同，允許的檔案格式為: {extensions}.',
         sizeError: '超過檔案最大上傳大小',
       },
-      callbacks: {
-        onAllComplete: () => {
-          _that.touch('');
-          _that.propagateChange(this.getAllFiles());
-          let item;
-          _that.elementRef.nativeElement.querySelectorAll('[qq-file-id]').forEach((value) => {
-            item = _that.dataArray.filter(el =>{
-              return el ? el.filesId == value.getAttribute('qq-file-id') : false;
-            });
-            value.getElementsByTagName('a')[0].setAttribute ('href', item.thumbnailUrl);
-            value.getElementsByTagName('a')[0].setAttribute ('target', '_target');
-          });
-          this.titleEditBtn = true; // show hide title edit btn
-        },
-        onComplete: (id, name, responseJSON, xhr) => {
-          //完成上傳
-          if(_that.single) _that.dataArray = [];
-          if (responseJSON.success) {
-            responseJSON.filesId=id;
-            _that.dataArray[id] = responseJSON;
-          }
-          else
-            _that.dataArray[id] = undefined;
-        },
-        onSubmitDelete: (id) => {
-          //點擊刪除按鈕
-        },
-        onDeleteComplete: (id, xhr, isError) => {
-          //完成刪除
-          _that.dataArray[id] = undefined;
-          _that.propagateChange(this.getAllFiles());
-          if(!this.getAllFiles().length) this.titleEditBtn = false;
-        },
-        onUpload: (id, name) => {
-          //等待上傳中
-        },
-        onError: (id, name, errorReason, xhr) => {
-          console.log(errorReason);
-        }
-      }
+      callbacks: this.fineUploaderCallBack
     });
 
       this.renderer.listen(this.elementRef.nativeElement.getElementsByClassName('clickarea')[0], 'click', (evt) => {

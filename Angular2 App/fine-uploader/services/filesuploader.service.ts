@@ -16,7 +16,7 @@ export class FilesuploaderService {
   resetAllRepresentImg(items: Array<object>){
     items.forEach((data) => { // reset all represent img selected
       data['represent'] = false;
-    })
+    });
     return items;
   }
 }
