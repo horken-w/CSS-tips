@@ -1,15 +1,15 @@
 import {
-  Component, ElementRef, forwardRef, Input, Renderer2, TemplateRef,
+  Component, ElementRef, EventEmitter, forwardRef, Inject, Input, Output, Renderer2, TemplateRef,
   ViewChild
 } from '@angular/core';
 import {FineUploader} from 'fine-uploader';
-import {HttpClient} from "@angular/common/http";
-import {FilesuploaderService} from "@techmore/fine-uploader/services/filesuploader.service";
-import {ModalComponent} from "ng2-bs4-modal/lib/components/modal";
-import {environment} from "@env/environment";
+import {APP_CONFIG_TOKEN, Config} from "../../../../core/service/config";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {DomSanitizer} from "@angular/platform-browser";
-import {FilesUploaderComponent} from "@techmore/fine-uploader/files-uploader/files-uploader.component";
+import {FilesUploaderComponent} from "../files-uploader/files-uploader.component";
+import {FilesuploaderService} from "../services/filesuploader.service";
+import {Http} from "@angular/http";
+import {ImgJcropComponent} from "../img-jcrop/img-jcrop.component";
 
 @Component({
   selector: 'tm-img-uploader',
@@ -24,30 +24,44 @@ import {FilesUploaderComponent} from "@techmore/fine-uploader/files-uploader/fil
   ]
 })
 export class ImgUploaderComponent extends FilesUploaderComponent implements ControlValueAccessor{
-  @Input() representImg: boolean = true;
+  @Input() showRepresent: boolean = true;
+  @Input() crop: boolean = false;
+  @ViewChild(ImgJcropComponent) jCrop: ImgJcropComponent;
   imgList: Array<any>;
+  selectedId: number;
+
+  @Output() imgSelectedIdxChange = new EventEmitter<number>();
+  _imgSelectedIdx: number = 0; // implement a fake two-way binding for Represent Image selected
+  @Input()
+  get imgSelectedIdx() {
+    return this._imgSelectedIdx;
+  }
+
+  set imgSelectedIdx(idx: number) {
+    this._imgSelectedIdx = idx;
+    this.imgSelectedIdxChange.emit(this._imgSelectedIdx);
+  }
+
   fineUploaderCallBack={
     onAllComplete: () => {
       this.imgList = this.getAllFiles();
       this.touch('');
       this.propagateChange(this.imgList);
       let item;
-      this.elementRef.nativeElement.querySelectorAll('[qq-file-id]').forEach((value) => {
+      this.elementRef.nativeElement.querySelectorAll('[qq-file-id]').forEach((value, idx) => {
         item = this.dataArray[value.getAttribute('qq-file-id')];
         value.getElementsByTagName('a')[0].setAttribute('href', item.thumbnailUrl);
         value.getElementsByTagName('a')[0].setAttribute('target', '_target');
         value.getElementsByClassName('qq-default-image')[0].setAttribute('file-id', value.getAttribute('qq-file-id'));
+        value.getElementsByClassName('qq-upload-crop-selector')[0].setAttribute('successId', this.imgList[idx].fileid);
       });
 
       // photo gallery default image
-      if (this.representImg) {
+      if (this.showRepresent) {
         this.setDefaultImageSelector();
         this.titleEditBtn = true; // show hide title edit btn
       }
-      // if(!this.imageSelected){
-      //   $('.qq-default-image').find('[type=radio]').eq(0).click();
-      // }
-      // that.propagateChange(this.getAllFilesList());
+      if(this.crop) this.setCropBtn();
     },
     onComplete: (id, name, responseJSON, xhr) => {
       //完成上傳
@@ -105,33 +119,42 @@ export class ImgUploaderComponent extends FilesUploaderComponent implements Cont
   constructor(protected elementRef: ElementRef,
               protected renderer: Renderer2,
               protected uploadService: FilesuploaderService,
-              protected http: HttpClient,
+              protected http: Http,
+              @Inject(APP_CONFIG_TOKEN) protected config: Config,
               private sanitizer: DomSanitizer
   ) {
-    super(elementRef, renderer, uploadService, http);
+    super(elementRef, renderer, uploadService, http, config);
   }
 
   setDefaultImageSelector() {
     const representBtn = this.elementRef.nativeElement.querySelectorAll('.qq-default-image');
-    let selectedidx = -1, imgList = this.getAllFiles();
-    const setReoresentImg = (evt) => {
-      imgList = this.uploadService.resetAllRepresentImg(imgList);
-      imgList[evt.target.parentNode.getAttribute('file-id')].represent = true;
-    };
-    selectedidx = imgList.findIndex(v => v.hasOwnProperty('represent') ? v.represent : false);
-    representBtn.forEach((el, idx) => {
+    let imgList = this.getAllFiles();
+    representBtn.forEach((el) => {
       el.classList.remove('qq-hide');
-      el.removeEventListener('click', setReoresentImg);
-      el.addEventListener('click', setReoresentImg);
-      if (idx === selectedidx) el.querySelectorAll('[type=radio]')[0].checked = true;
     });
+    $('.qq-default-image').find('[type=radio]').off('click').on('click', (evt) => {
+      this.imgSelectedIdx = imgList[$(evt.target).parent().attr('file-id')].fileid;
+    });
+    if (this.imgSelectedIdx) {
+      const indexOfStevie = imgList.findIndex(v => v['fileid'] === this.imgSelectedIdx);
+      $('.qq-default-image').find('[type=radio]').eq(indexOfStevie).click();
+    }
   }
 
-  addImageDescription(node){
-    const id = node.target.dataset.imgId.toString(),
-    selectedItem = this.dataArray.filter(v => v.fileid === +id);
+  setCropBtn(){
+    const dataArray = this.getAllFiles();
+    this.elementRef.nativeElement.querySelectorAll('.qq-upload-crop-selector').forEach((v, i) =>{
+      const squUrl = dataArray[i].transform.filter((img) =>  img.type === 'c');
+      const rectUrl = dataArray[i].transform.filter((img) =>  img.type === 'h');
+      $(v).off('click').on('click', this.showCropZone.bind(this));
+      $(v).data({'squUrl': squUrl, 'rectUrl': rectUrl, 'imgId': v.getAttribute('successid'), 'imgOrg': dataArray[i].thumbnailUrl});
+      $(v).show();
+    })
+  }
 
-    selectedItem[0].description = node.target.value;
+  showCropZone(evt){
+    evt.preventDefault(); //deny url redirect action
+    this.jCrop.showCropDialog(evt.currentTarget.getAttribute('successid'));
   }
 
   safeURL(imgUrl): any{

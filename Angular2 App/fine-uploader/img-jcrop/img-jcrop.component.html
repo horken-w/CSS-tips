@@ -1,0 +1,45 @@
+<modal [animation]="true" [keyboard]="true" [backdrop]="true" (onDismiss)="ngOnDestroy()" #innerModal>
+  <modal-body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- main Content -->
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="col-md-7 col-sm-12 responsive-1024">
+                    <div [hidden]="!cropAble" class="fake_h2">請移動裁切區域至所需範圍</div>
+                    <div [hidden]="!cropAble"><img [src]="orgUrl ? safeURL(orgUrl) : ' '" alt="並無支援圖片裁切" class="img-responsive" #jcrop/></div>
+                    <div [hidden]="cropAble" class="fake_h2 preview">裁切圖片預覽</div>
+                    <div [hidden]="cropAble" class="col-md12 col-sm-12">
+                      <div class="fake_h4">裁內頁圖 </div>
+                      <img *ngIf="squUrl" [src]="safeURL(squUrl)" alt="並無支援圖片裁切" class="img-responsive"/>
+                    </div>
+                    <div [hidden]="cropAble" class="col-md12 col-sm-12">
+                      <div class="fake_h4">裁列表代表圖</div>
+                      <img *ngIf="rectUrl" [src]="safeURL(rectUrl)" alt="並無支援圖片裁切" class="img-responsive"/>
+                    </div>
+                  </div>
+                  <div [hidden]="cropAble" class="col-md-5 col-sm-12 responsive-1024">
+                    <div class="fake_h4">請選擇要裁切的樣式</div>
+                    <div class="radio" *ngFor=" let cropStyle of cropFrameStyle; let idx = index">
+                      <label>
+                        <input type="radio" name="radiogroup" (change)="cropFrameSelected = $event.target.value" [checked]="idx === 0" [value]="idx">{{cropStyle.style}}
+                        <div class="{{cropStyle.className}}"></div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-primary" [disabled]="cropAble" (click)="resetCropArea()">裁切圖片</button>
+    <button type="button" class="btn btn-primary" [disabled]="!cropAble" (click)="innerModal.close(); submit()">送出</button>
+  </modal-footer>
+</modal>

@@ -1,37 +1,39 @@
 <div class="container-fluid row mb-1" [class.deny]="disabled">
-  <div class="col-2" *ngIf="titleEditBtn">
-    <div class="btn btn-warning" (click)="imgDetail.open()">修改圖片資訊</div>
+  <div class="col-2" *ngIf="titleEditBtn && showDetail">
+    <div class="btn btn-warning" (click)="imgDetail.open()">圖片資訊</div>
   </div>
   <div class="col-4" style="padding: 0.375rem 0.75rem;">上傳格式: <span class="extention">{{extendTypes.type | transformToString:'array'}}</span></div>
 </div>
-<!--files detail modify model-->
-<modal [animation]="true" [keyboard]="true" [backdrop]="true" size="lg" (onDismiss)="true" #imgDetail>
-  <modal-body>
-    <div class="container-fluid row">
-        <div class="col-lg-12">
-          <!-- main Content -->
-          <div class="row">
-            <div class="col-12">
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <div class="col-12 responsive-1024">
-                    <div class="fake_h4">圖說文字修改</div>
-                    <div class=" twrap">
-                      <div class="row  thead">
-                        <div class="col-md-6">
-                          圖片樣式
-                        </div>
-                        <div class="col-md-6">
-                          圖說文字
-                        </div>
-                      </div>
-                      <div class="row tbody" *ngIf="imgList">
-                        <div class="col-12 tcell row" *ngFor="let img of imgList; let i =index">
+  <!--image title modify model-->
+  <modal [animation]="true" [keyboard]="true" [backdrop]="true" size="lg" (onDismiss)="true" #imgDetail>
+    <modal-body>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- main Content -->
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <div class="col-md-10 col-sm-12 responsive-1024">
+                      <div class="fake_h4">圖說文字修改</div>
+                      <div class="col-md-12 twrap">
+                        <div class="col-md-12 thead">
                           <div class="col-md-6">
-                            <img [src]="safeURL(img.thumbnailUrl)" class="img-responsive">
+                            圖片樣式
                           </div>
                           <div class="col-md-6">
-                            <textarea cols="30" rows="5" (change)="addImageDescription($event)" [attr.data-img-id]="img.fileid" [value]="img.description?img.description: ''"></textarea>
+                            圖說文字
+                          </div>
+                        </div>
+                        <div class="col-md-12 tbody" *ngIf="imgList">
+                          <div class="col-md-12 tcell" *ngFor="let img of imgList; let i =index">
+                            <div class="col-md-6">
+                              <img [src]="safeURL(img.thumbnailUrl)" class="img-responsive">
+                            </div>
+                            <div class="col-md-6">
+                              <textarea cols="30" rows="5" (change)="addImageDescription($event)" [attr.data-img-id]="img.fileid" [value]="img.description ? img.description : ''"></textarea>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -42,12 +44,13 @@
             </div>
           </div>
         </div>
-    </div>
-  </modal-body>
-  <modal-footer>
-    <button type="button" class="btn btn-primary" (click)="imgDetail.close()">送出</button>
-  </modal-footer>
-</modal>
+      </div>
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="imgDetail.close()">送出</button>
+    </modal-footer>
+  </modal>
+<tm-img-jcrop *ngIf="crop" [filesCollection]="getAllFiles()"></tm-img-jcrop>
 
 <ng-template #filesTemplate>
   <div class="qq-uploader-selector qq-uploader qq-gallery" qq-drop-area-text="拖曳檔案至此範圍內">

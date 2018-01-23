@@ -1,0 +1,18 @@
+/* Image Crop */
+.fake_h2{
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.fake_h4{
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.fake_h2 + div .img-responsive{
+  height: inherit;
+}
+
+.preview ~ div > .img-responsive{
+  height: 250px;
+}

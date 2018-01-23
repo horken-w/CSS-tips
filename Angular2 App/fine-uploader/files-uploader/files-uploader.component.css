@@ -29,7 +29,11 @@
   margin-bottom: 5px;
 }
 
-.deny, .deny + >>> div{
-  pointer-events: none;
-  cursor: not-allowed;
+.deny{
+  /*pointer-events: none;*/
+  /*cursor: not-allowed;*/
+}
+
+.deny + >>> div .qq-upload-delete{
+  display: none;
 }

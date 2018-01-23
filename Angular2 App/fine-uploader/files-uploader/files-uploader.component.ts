@@ -1,12 +1,11 @@
 import {
-  AfterViewInit, Component, ElementRef, forwardRef, Input, Renderer2, TemplateRef,
-  ViewChild
+  AfterViewInit, Component, ElementRef, forwardRef, Inject, Input, Renderer2, TemplateRef, ViewChild
 } from '@angular/core';
 import { FineUploader } from 'fine-uploader';
-import {FilesuploaderService} from "@techmore/fine-uploader/services/filesuploader.service";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "@env/environment";
+import {FilesuploaderService} from "../services/filesuploader.service";
+import {APP_CONFIG_TOKEN, Config} from "../../../../core/service/config";
+import {Http, Headers} from "@angular/http";
 
 @Component({
   selector: 'tm-files-uploader',
@@ -25,8 +24,10 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
   touch =  (_: any) => {};
 
   writeValue(obj: Array<any>): void {
-    if(obj)
+    if(obj){
       this.dataArray = obj;
+      this.setInitFiles();
+    }
     else
       this.dataArray = [];
   }
@@ -44,21 +45,25 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
 
   @Input() single: boolean = false;
   @Input() serverType: string;
+  @Input() showDetail: boolean = true;
+  @Input() name: string;
   @ViewChild('filesTemplate')
   tempRef: TemplateRef<any>;
 
   extendTypes:any = {type: ['jpg', 'jpeg', 'bnp'], size: 500000};
-  apiHost = environment.apiHost;
-  commonToken = environment.commonToken;
+  apiHost = this.config.apiHost;
+  commonToken = this.config.common_token;
   fineUploader: any;
   dataArray: Array<any>=[]; //Collect all uploader files information
   titleEditBtn: boolean;
+  filesList: Array<any>;
   disabled: boolean = false;
 
   fineUploaderCallBack={
     onAllComplete: () => {
+      this.filesList = this.getAllFiles();
       this.touch('');
-      this.propagateChange(this.getAllFiles());
+      this.propagateChange(this.filesList);
       let item;
       this.elementRef.nativeElement.querySelectorAll('[qq-file-id]').forEach((value) => {
         item = this.dataArray.filter(el =>{
@@ -100,7 +105,8 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
     protected elementRef: ElementRef,
     protected renderer: Renderer2,
     protected uploadService: FilesuploaderService,
-    protected http: HttpClient
+    protected http: Http,
+    @Inject(APP_CONFIG_TOKEN) protected config: Config,
   ) { }
 
   ngAfterViewInit(): void {
@@ -108,7 +114,12 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
     this.tempRef.createEmbeddedView(null).rootNodes.forEach((node) => {//make HTML5 temp transform to DOM element
       root.appendChild(node);
     });
-    this.http.get<Array<any>>(this.apiHost + '/api/common/file.upload?type=' + this.serverType)
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('access_token', this.commonToken);
+
+    this.http.get(this.apiHost + '/api/common/file.upload?type=' + this.serverType, {headers: headers})
+      .map((data) => data.json())
       .subscribe(data => {
         this.extendTypes = data;
         this.initUploadZone(root);
@@ -125,7 +136,7 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
       request: {
         endpoint: this.apiHost + '/api/common/file.upload?type=' + this.serverType,
         customHeaders: {
-          'common_token': this.commonToken
+          'access_token': this.commonToken
         }
       },
       deleteFile: {
@@ -133,13 +144,13 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
         endpoint: this.apiHost + '/api/common/file.upload?type=' + this.serverType,
         method: "delete",
         customHeaders: {
-          'common_token': this.commonToken// this.config.common_token
+          'access_token': this.commonToken // this.config.common_token
         }
       },
       thumbnails: {
         placeholders: {
-          waitingPath: '/images/fine-uploader/waiting-generic.png',
-          notAvailablePath: '/images/fine-uploader/not_available-generic.png'
+          waitingPath: '/images/fineUploader/waiting-generic.png',
+          notAvailablePath: '/images/fineUploader/not_available-generic.png'
         }
       },
       validation: {
@@ -159,10 +170,22 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
       });
 
     if(this.dataArray.length) // init file icon if file already exists
-      this.fineUploader.addInitialFiles(this.dataArray);
+      this.setInitFiles();
+  }
+
+  setInitFiles(){
+    if(this.fineUploader) this.fineUploader.addInitialFiles(this.dataArray);
   }
 
   getAllFiles(){
     return this.uploadService.getAllFilesList(this.dataArray);
+  }
+
+  addFilesDescription(node, ...keys){
+    const id = node.target.closest('div.row').dataset.imgId.toString(),
+      selectedItem = this.dataArray.filter(v => v.fileid === +id)[0];
+    if (selectedItem < 0) this.dataArray.push({'imgId': id, 'description': node.target.value});
+    else this.dataArray[selectedItem]['description'] = node.target.value;
+    console.log(selectedItem);
   }
 }
