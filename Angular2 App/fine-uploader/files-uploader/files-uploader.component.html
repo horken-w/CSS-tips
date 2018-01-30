@@ -2,7 +2,7 @@
   <div class="col-2" *ngIf="titleEditBtn && showDetail">
     <div class="btn btn-warning" (click)="filesModal.open();">檔案資訊</div>
   </div>
-  <div class="col-4" style="padding: 0.375rem 0.75rem;">上傳格式: <span class="extention">{{extendTypes.type | transformToString:'array'}}</span></div>
+  <div class="col-4" style="padding: 0.375rem 0.75rem;">上傳格式: <span *ngIf="extendTypes" class="extention">{{extendTypes.type | transformToString:'array'}}</span></div>
 </div>
 <!--files detail modify model-->
 <modal [animation]="true" [keyboard]="true" [backdrop]="true" size="lg" (onDismiss)="true" #filesModal>

@@ -1,8 +1,7 @@
 import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {DomSanitizer} from "@angular/platform-browser";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {FilesuploaderService} from "../services/filesuploader.service";
+import {ModalComponent} from "ng2-bs4-modal/lib/components/modal";
 
 @Component({
   selector: 'tm-img-jcrop',
@@ -33,7 +32,6 @@ export class ImgJcropComponent implements OnChanges, OnInit {
 
   constructor(
     private sanitizer: DomSanitizer,
-    protected uploadService: FilesuploaderService,
   ) { }
   ngOnChanges(changes: SimpleChanges): void { }
 
@@ -49,7 +47,7 @@ export class ImgJcropComponent implements OnChanges, OnInit {
     const data = this.filesCollection.filter((img) => img.fileid === +id)[0];
     this.cropId = id;
     this.squUrl = data.transform.filter((img) =>  img.type === 'c').length ? data.transform.filter((img) => img.type === 'c')[0].thumbnailUrl : '/images/no-pic.png';
-    this.rectUrl = data.transform.filter((img) => img.type === 'l').length ? data.transform.filter((img) => img.type === 'l')[0].thumbnailUrl : '/images/no-pic.png';
+    this.rectUrl = data.transform.filter((img) => img.type === 'l').length ? data.transform.filter((img) => img.type === 'l')[0].thumbnailUrl : data.transform.filter((img) => img.type === 'n')[0].thumbnailUrl;
     this.innerModal.open('lg');
   }
 
@@ -58,46 +56,48 @@ export class ImgJcropComponent implements OnChanges, OnInit {
     this.cropAble = true;
     this.orgUrl = selectedImg.thumbnailUrl;
     this.baseElement.setAttribute('data-fileid', selectedImg.fileid);
-    this.baseElement.removeAttribute("style");
-    setTimeout(() => this.setCropArea(), 1000); // wait for image loaded
+    this.baseElement.removeAttribute('style');
+    setTimeout(() => this.setCropArea(), 800);
   }
 
   setCropArea(){
-    const _that = this;
-    this.getNaturalWidthnHeight();
-    this.roomSize = this.naturalWidth / this.baseElement.width;
-    if (!this.jcrop_api)
-      switch (this.cropFrameSelected){
-        case '0':
-          $(this.baseElement).Jcrop({
-            onChange: this.showCoords.bind(this),
-            setSelect: [0, 0, 800 / this.roomSize, 0],
-            allowResize: true,
-            aspectRatio: 4 / 3
-          }, function () {
-            _that.jcrop_api = this;
-          });
-          break;
-        case '1':
-          $(this.baseElement).Jcrop({
-            onChange: this.showCoords.bind(this),
-            setSelect: [0, 0, 500, 500],
-            allowResize: true,
-            aspectRatio: 2 / 2
-          }, function () {
-            _that.jcrop_api = this;
-          });
-          break;
-        default:
-          $(this.baseElement).Jcrop({
-            onChange: this.showCoords.bind(this),
-            setSelect: [0, 0, 1200, 1200],
-            allowResize: true
-          }, function () {
-            _that.jcrop_api = this;
-          });
-          break;
-      }
+    const _that = this, promise = Promise.resolve();
+    promise.then(() => this.getNaturalWidthnHeight())
+      .then(() => {
+        this.roomSize = this.naturalWidth / this.baseElement.width;
+        if (!this.jcrop_api)
+          switch (this.cropFrameSelected){
+            case '0':
+              $(this.baseElement).Jcrop({
+                onChange: this.showCoords.bind(this),
+                setSelect: [0, 0, 800 / this.roomSize, 0],
+                allowResize: true,
+                aspectRatio: 4 / 3
+              }, function () {
+                _that.jcrop_api = this;
+              });
+              break;
+            case '1':
+              $(this.baseElement).Jcrop({
+                onChange: this.showCoords.bind(this),
+                setSelect: [0, 0, 500, 500],
+                allowResize: true,
+                aspectRatio: 2 / 2
+              }, function () {
+                _that.jcrop_api = this;
+              });
+              break;
+            default:
+              $(this.baseElement).Jcrop({
+                onChange: this.showCoords.bind(this),
+                setSelect: [0, 0, 1200, 1200],
+                allowResize: true
+              }, function () {
+                _that.jcrop_api = this;
+              });
+              break;
+          }
+      });
   }
 
   showCoords(data) {
@@ -123,9 +123,12 @@ export class ImgJcropComponent implements OnChanges, OnInit {
     const coords = this.getCropCoords();
     this.cropAble = false;
     +this.cropFrameSelected ? coords.type = 'l' : coords.type = 'c';
-    this.uploadService.updateCropZone(coords).subscribe((data) => {
-      console.log(data);
-    });
+    console.log(coords);
+    // this.uploadService.updateCropZone(coords).subscribe((data) => {
+    //   if (data.type === 'l') this.rectUrl = data.thumbnailUrl;
+    //   else this.squUrl = data.thumbnailUrl;
+    //   console.log(data);
+    // });
     this.ngOnDestroy();
   }
 
@@ -138,8 +141,15 @@ export class ImgJcropComponent implements OnChanges, OnInit {
   }
 
   getNaturalWidthnHeight(){
-    this.naturalWidth = this.baseElement.naturalWidth;
-    this.naturalHeight = this.baseElement.naturalHeight;
+    return new Promise((resolve) => {
+      const theImage = new Image();
+      theImage.onload = () => {
+        this.naturalWidth = theImage.naturalWidth;
+        this.naturalHeight = theImage.naturalHeight;
+        resolve();
+      };
+      theImage.src = this.orgUrl;
+    });
   }
 
   safeURL(imgUrl): any{

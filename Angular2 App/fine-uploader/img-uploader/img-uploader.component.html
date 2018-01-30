@@ -2,7 +2,7 @@
   <div class="col-2" *ngIf="titleEditBtn && showDetail">
     <div class="btn btn-warning" (click)="imgDetail.open()">圖片資訊</div>
   </div>
-  <div class="col-4" style="padding: 0.375rem 0.75rem;">上傳格式: <span class="extention">{{extendTypes.type | transformToString:'array'}}</span></div>
+  <div class="col-4" style="padding: 0.375rem 0.75rem;">上傳格式: <span *ngIf="extendTypes" class="extention">{{extendTypes.type | transformToString:'array'}}</span></div>
 </div>
   <!--image title modify model-->
   <modal [animation]="true" [keyboard]="true" [backdrop]="true" size="lg" (onDismiss)="true" #imgDetail>
@@ -17,21 +17,21 @@
                   <div class="panel-body">
                     <div class="col-md-10 col-sm-12 responsive-1024">
                       <div class="fake_h4">圖說文字修改</div>
-                      <div class="col-md-12 twrap">
-                        <div class="col-md-12 thead">
-                          <div class="col-md-6">
+                      <div class="twrap">
+                        <div class="row  thead">
+                          <div class="col-6">
                             圖片樣式
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-6">
                             圖說文字
                           </div>
                         </div>
-                        <div class="col-md-12 tbody" *ngIf="imgList">
-                          <div class="col-md-12 tcell" *ngFor="let img of imgList; let i =index">
-                            <div class="col-md-6">
-                              <img [src]="safeURL(img.thumbnailUrl)" class="img-responsive">
+                        <div class="row tbody" *ngIf="imgList">
+                          <div class="tcell row" *ngFor="let img of imgList; let i =index">
+                            <div class="col-6">
+                              <img [src]="safeURL(img.thumbnailUrl)" class="img-thumbnail rounded">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-6">
                               <textarea cols="30" rows="5" (change)="addImageDescription($event)" [attr.data-img-id]="img.fileid" [value]="img.description ? img.description : ''"></textarea>
                             </div>
                           </div>
@@ -95,7 +95,7 @@
             <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
             <span class="qq-upload-size-selector qq-upload-size qq-hide"></span>
             <button type="button" class="qq-btn qq-upload-crop qq-upload-crop-selector" style="display: none;">
-              <span class="glyphicon glyphicon-scissors" aria-label="Crop"></span>
+              <span class="fa fa-scissors" aria-label="Crop"></span>
             </button>
             <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">
               <span class="fa fa-trash" aria-label="Delete"></span>

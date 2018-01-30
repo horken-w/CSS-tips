@@ -25,18 +25,18 @@
   font-size: 1em;
   font-weight: 600;
 }
- .twrap{
+.twrap{
       margin-top:1em;
     }
- .thead{
+.thead{
       border-bottom: 3px solid hsla(0, 0%, 20%, 1);
       font-size: 1em;
       padding: 10px;
     }
- .tbody{
+.tbody{
       padding-top: 10px;
     }
- .tcell:not(:last-child){
+.tcell:not(:last-child){
       border-bottom: 3px solid hsl(0 ,0%, 0%);
       margin-bottom: 5px;
     }
@@ -51,14 +51,14 @@
 }
 
 /* crop frame style */
- .frame_square{
+.frame_square{
       width: 80px;
       height: 80px;
       border: 3px dashed #000000;
       background: #ddd;
     }
 
- .frame_rectangle{
+.frame_rectangle{
       width: 80px;
       height: 60px;
       border: 3px dashed #000000;

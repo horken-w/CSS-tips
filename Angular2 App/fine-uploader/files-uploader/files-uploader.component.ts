@@ -1,11 +1,8 @@
 import {
-  AfterViewInit, Component, ElementRef, forwardRef, Inject, Input, Renderer2, TemplateRef, ViewChild
+  Component, ElementRef, forwardRef, Input, OnChanges, Renderer2, SimpleChanges, TemplateRef, ViewChild
 } from '@angular/core';
 import { FineUploader } from 'fine-uploader';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {FilesuploaderService} from "../services/filesuploader.service";
-import {APP_CONFIG_TOKEN, Config} from "../../../../core/service/config";
-import {Http, Headers} from "@angular/http";
 
 @Component({
   selector: 'tm-files-uploader',
@@ -19,42 +16,19 @@ import {Http, Headers} from "@angular/http";
     }
   ]
 })
-export class FilesUploaderComponent implements AfterViewInit, ControlValueAccessor {
-  propagateChange = (_: any) => {};
-  touch =  (_: any) => {};
-
-  writeValue(obj: Array<any>): void {
-    if(obj){
-      this.dataArray = obj;
-      this.setInitFiles();
-    }
-    else
-      this.dataArray = [];
-  }
-
-  registerOnChange(fn: any): void {
-    this.propagateChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.touch = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void{
-    if(isDisabled) this.disabled = isDisabled;
-  }
-
-  @Input() single: boolean = false;
+export class FilesUploaderComponent implements OnChanges, ControlValueAccessor {
+  @Input() single = false;
   @Input() serverType: string;
   @Input() showDetail: boolean = true;
   @Input() name: string;
+  @Input() extendTypes: any = {type: [], size: 500000};
   @ViewChild('filesTemplate')
   tempRef: TemplateRef<any>;
 
-  extendTypes:any = {type: ['jpg', 'jpeg', 'bnp'], size: 500000};
-  apiHost = this.config.apiHost;
-  commonToken = this.config.common_token;
+  apiHost = 'http://localhost:8080';
+  commonToken = '8CC1C549-35D7-4691-9E1D-67D8EC7951B5';
   fineUploader: any;
-  dataArray: Array<any>=[]; //Collect all uploader files information
+  dataArray: Array<any> = []; // Collect all uploader files information
   titleEditBtn: boolean;
   filesList: Array<any>;
   disabled: boolean = false;
@@ -75,7 +49,7 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
       this.titleEditBtn = true; // show hide title edit btn
     },
     onComplete: (id, name, responseJSON, xhr) => {
-      //完成上傳
+      // 完成上傳
       if(this.single) this.dataArray = [];
       if (responseJSON.success) {
         responseJSON.filesId=id;
@@ -85,16 +59,16 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
         this.dataArray[id] = undefined;
     },
     onSubmitDelete: (id) => {
-      //點擊刪除按鈕
+      // 點擊刪除按鈕
     },
     onDeleteComplete: (id, xhr, isError) => {
-      //完成刪除
+      // 完成刪除
       this.dataArray[id] = undefined;
       this.propagateChange(this.getAllFiles());
       if(!this.getAllFiles().length) this.titleEditBtn = false;
     },
     onUpload: (id, name) => {
-      //等待上傳中
+      // 等待上傳中
     },
     onError: (id, name, errorReason, xhr) => {
       console.log(errorReason);
@@ -104,26 +78,38 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
   constructor(
     protected elementRef: ElementRef,
     protected renderer: Renderer2,
-    protected uploadService: FilesuploaderService,
-    protected http: Http,
-    @Inject(APP_CONFIG_TOKEN) protected config: Config,
   ) { }
 
-  ngAfterViewInit(): void {
-    const root = document.createElement('div');
-    this.tempRef.createEmbeddedView(null).rootNodes.forEach((node) => {//make HTML5 temp transform to DOM element
-      root.appendChild(node);
-    });
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('access_token', this.commonToken);
+  propagateChange = (_: any) => {};
+  touch =  (_: any) => {};
 
-    this.http.get(this.apiHost + '/api/common/file.upload?type=' + this.serverType, {headers: headers})
-      .map((data) => data.json())
-      .subscribe(data => {
-        this.extendTypes = data;
-        this.initUploadZone(root);
+  writeValue(obj: Array<any>): void {
+    if(obj){
+      this.dataArray = obj;
+      this.setInitFiles();
+    }
+    else this.dataArray = [];
+  }
+
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.touch = fn;
+  }
+  setDisabledState?(isDisabled: boolean): void{
+    if (isDisabled) this.disabled = isDisabled;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const root = document.createElement('div');
+    if(changes.extendTypes.currentValue){
+      this.tempRef.createEmbeddedView(null).rootNodes.forEach((node) => { // make HTML5 temp transform to DOM element
+        root.appendChild(node);
       });
+      this.initUploadZone(root);
+    }
   }
 
   initUploadZone(targetNode){
@@ -142,7 +128,7 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
       deleteFile: {
         enabled: true,
         endpoint: this.apiHost + '/api/common/file.upload?type=' + this.serverType,
-        method: "delete",
+        method: 'delete',
         customHeaders: {
           'access_token': this.commonToken // this.config.common_token
         }
@@ -177,15 +163,30 @@ export class FilesUploaderComponent implements AfterViewInit, ControlValueAccess
     if(this.fineUploader) this.fineUploader.addInitialFiles(this.dataArray);
   }
 
+  private getAllFilesList(dataArray: Array<Object> = []): Array<any> {
+    const temp = [];
+
+    for (let i of dataArray)
+      i && temp.push(i); // copy each non-empty value to the 'temp' array
+
+    return temp;
+  }
+
   getAllFiles(){
-    return this.uploadService.getAllFilesList(this.dataArray);
+    return this.getAllFilesList(this.dataArray);
   }
 
   addFilesDescription(node, ...keys){
     const id = node.target.closest('div.row').dataset.imgId.toString(),
       selectedItem = this.dataArray.filter(v => v.fileid === +id)[0];
-    if (selectedItem < 0) this.dataArray.push({'imgId': id, 'description': node.target.value});
-    else this.dataArray[selectedItem]['description'] = node.target.value;
+    switch(keys[1]){
+      case 'input':
+        selectedItem[keys[0]] = node.target.value;
+        break;
+      case 'select':
+        selectedItem[keys[0]] = node.target.selectedOptions[0].value;
+        break;
+    }
     console.log(selectedItem);
   }
 }
