@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {ModalComponent} from "ng2-bs4-modal/lib/components/modal";
@@ -8,7 +8,7 @@ import {ModalComponent} from "ng2-bs4-modal/lib/components/modal";
   templateUrl: './img-jcrop.component.html',
   styleUrls: ['./img-jcrop.component.css']
 })
-export class ImgJcropComponent implements OnChanges, OnInit {
+export class ImgJcropComponent implements OnChanges, OnInit, OnDestroy{
   @Input() filesCollection: any;
   @ViewChild(ModalComponent) innerModal: ModalComponent;
   @ViewChild('jcrop') cropZone: ElementRef;
