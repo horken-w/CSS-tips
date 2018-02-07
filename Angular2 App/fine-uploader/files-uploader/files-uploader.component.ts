@@ -160,7 +160,10 @@ export class FilesUploaderComponent implements OnChanges, ControlValueAccessor {
   }
 
   setInitFiles(){
-    if(this.fineUploader) this.fineUploader.addInitialFiles(this.dataArray);
+    if(this.fineUploader){
+      this.fineUploader.reset(); //use to avoid SPA change page with no reflash, occurs old file doesn't remove
+      this.fineUploader.addInitialFiles(this.dataArray);
+    }
   }
 
   private getAllFilesList(dataArray: Array<Object> = []): Array<any> {
