@@ -5,16 +5,75 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Banner Room in Effect</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 	<style>
-		
+		.image-wrap{
+			height: 100vh;
+		}
+		.owl-item .item{
+			-webkit-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-animation: 16s forwards zoomScale;
+			animation: 16s forwards zoomScale;
+			overflow: hidden;
+			opacity: 0;
+			z-index: 0;
+		}
+		@keyframes zoomScale {
+			from {
+				transform: scale(1.2) rotate(.02deg);
+			}
+			to {
+				transform: scale(1) rotate(.02deg);
+			}
+		}
+		.owl-item.active .item{
+			z-index: 6;
+			opacity: 1;
+		}
+		.owl-item:first-child .item{
+			background: url("https://placeimg.com/1024/1024/animals") no-repeat;
+			background-size: cover;
+			z-index: 5;
+		}
+		.owl-item:nth-child(2) .item{
+			background: url("https://placeimg.com/1024/1024/any") no-repeat;
+			background-size: cover;
+		}
+		.owl-item:nth-child(3) .item{
+			background: url("https://placeimg.com/1024/1024/people") no-repeat;
+			background-size: cover;
+		}
+		.owl-item:nth-child(4) .item{
+			background: url("https://placeimg.com/1024/1024/arch") no-repeat;
+			background-size: cover;
+		}
+		.owl-item:last-child .item{
+			background: url("https://placeimg.com/1024/1024/tech") no-repeat;
+			background-size: cover;
+		}
 	</style>
 </head>
 <body>
-
+	<div class="owl-carousel owl-theme">
+		<div class="image-wrap item"><h4>1</h4></div>
+		<div class="image-wrap item"><h4>2</h4></div>
+		<div class="image-wrap item"><h4>3</h4></div>
+		<div class="image-wrap item"><h4>4</h4></div>
+		<div class="image-wrap item"><h4>5</h4></div>
+	</div>
 	<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
 	<script>
-		
+		$('.owl-carousel').owlCarousel({
+			animateIn: 'fadeIn',
+			items: 1,
+			loop: false,
+			mouseDrag: false,
+			stagePadding: 30,
+			smartSpeed: 450
+		});
 	</script>
 </body>
 </html>
