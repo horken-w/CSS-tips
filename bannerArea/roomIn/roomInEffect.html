@@ -20,6 +20,16 @@
 			opacity: 0;
 			z-index: 0;
 		}
+		.owl-theme .owl-nav.disabled+.owl-dots{
+			margin-top: -15px;
+			position: absolute;
+			left: 50%;
+			transform: translateY(-50%);
+		}
+		.owl-theme .owl-dots .owl-dot span{
+			width: 15px;
+			height: 15px;
+		}
 		@keyframes zoomScale {
 			from {
 				transform: scale(1.2) rotate(.02deg);
