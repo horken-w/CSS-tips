@@ -7,83 +7,101 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-	<style>
-		.image-wrap{
-			height: 100vh;
-		}
-		.owl-item .item{
-			-webkit-transform: translateZ(0);
-			transform: translateZ(0);
-			-webkit-animation: 16s forwards zoomScale;
-			animation: 16s forwards zoomScale;
-			overflow: hidden;
-			opacity: 0;
-			z-index: 0;
-		}
-		.owl-theme .owl-nav.disabled+.owl-dots{
-			margin-top: -15px;
-			position: absolute;
-			left: 50%;
-			transform: translateY(-50%);
-		}
-		.owl-theme .owl-dots .owl-dot span{
-			width: 15px;
-			height: 15px;
-		}
-		@keyframes zoomScale {
-			from {
-				transform: scale(1.2) rotate(.02deg);
-			}
-			to {
-				transform: scale(1) rotate(.02deg);
-			}
-		}
-		.owl-item.active .item{
-			z-index: 6;
-			opacity: 1;
-		}
-		.owl-item:first-child .item{
-			background: url("https://placeimg.com/1024/1024/animals") no-repeat;
-			background-size: cover;
-			z-index: 5;
-		}
-		.owl-item:nth-child(2) .item{
-			background: url("https://placeimg.com/1024/1024/any") no-repeat;
-			background-size: cover;
-		}
-		.owl-item:nth-child(3) .item{
-			background: url("https://placeimg.com/1024/1024/people") no-repeat;
-			background-size: cover;
-		}
-		.owl-item:nth-child(4) .item{
-			background: url("https://placeimg.com/1024/1024/arch") no-repeat;
-			background-size: cover;
-		}
-		.owl-item:last-child .item{
-			background: url("https://placeimg.com/1024/1024/tech") no-repeat;
-			background-size: cover;
-		}
-	</style>
+	<link rel="stylesheet" href="heroBannerStyle.css">
 </head>
 <body>
-	<div class="owl-carousel owl-theme">
-		<div class="image-wrap item"><h4>1</h4></div>
-		<div class="image-wrap item"><h4>2</h4></div>
-		<div class="image-wrap item"><h4>3</h4></div>
-		<div class="image-wrap item"><h4>4</h4></div>
-		<div class="image-wrap item"><h4>5</h4></div>
+	<div id="hero_banner" class="owl-carousel owl-theme">
+		<div class="image-wrap item"></div>
+		<div class="image-wrap item"></div>
+		<div class="image-wrap item"></div>
+		<div class="image-wrap item"></div>
+		<div class="image-wrap item"></div>
+	</div>
+	<div class="natvigation">
+		<div class="container base">
+			<div class="nav_wrap">
+				<nav class="menu">
+					<div class="nav_item">
+						<div class="cursor_maske" data-slider=1></div>
+						<div class="disc_area">
+							<div class="number_mark">
+								1
+								<span class="diamond"></span>
+							</div>
+							<span class="disc_lebel">馬祖繞境</span>
+						</div>
+					</div>
+					<div class="nav_item">
+						<div class="cursor_maske" data-slider=2></div>
+						<div class="disc_area">
+							<div class="number_mark">
+								2
+								<span class="diamond"></span>
+							</div>
+							<span class="disc_lebel">龍洞攀岩</span>
+						</div>
+					</div>
+					<div class="nav_item">
+						<div class="cursor_maske" data-slider=3></div>
+						<div class="disc_area">
+							<div class="number_mark">
+								3
+								<span class="diamond"></span>
+							</div>
+							<span class="disc_lebel">東台灣海濱</span>
+						</div>
+					</div>
+					<div class="nav_item">
+						<div class="cursor_maske" data-slider=4></div>
+						<div class="disc_area">
+							<div class="number_mark">
+								4
+								<span class="diamond"></span>
+							</div>
+							<span class="disc_lebel">夜市美食</span>
+						</div>
+					</div>
+					<span class="point_bar"></span>
+				</nav>
+			</div>
+			<div class="small_icon">
+				12
+			</div>
+			
+		
+		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
 	<script>
-		$('.owl-carousel').owlCarousel({
+		let point_bar = $('.point_bar'), owlCarousel = $('.owl-carousel');
+
+		function resetPointerBar(){
+			const itemWidth = $('.cursor_maske');
+			point_bar.css('width', itemWidth[0].offsetWidth);
+			point_bar.css('left', 0);
+		}
+
+		function movePointBar(evt){
+			const target = evt.currentTarget;
+			point_bar.css('left', $(target).offset().left);
+			owlCarousel.trigger('to.owl.carousel', target.dataset.slider)
+		}
+
+		owlCarousel.owlCarousel({
 			animateIn: 'fadeIn',
 			items: 1,
+			dots: false,
 			loop: false,
 			mouseDrag: false,
-			stagePadding: 30,
+			stagePadding: 0,
 			smartSpeed: 450
 		});
+		resetPointerBar();
+		$(window).on('resize', resetPointerBar);
+
+		$('.cursor_maske').on('click', movePointBar)
+
 	</script>
 </body>
 </html>
