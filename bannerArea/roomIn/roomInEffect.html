@@ -74,16 +74,19 @@
 	<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
 	<script>
-		let point_bar = $('.point_bar'), owlCarousel = $('.owl-carousel');
+		let point_bar = $('.point_bar'), 
+			owlCarousel = $('.owl-carousel'), 
+			currectTarget = 0;
 
 		function resetPointerBar(){
 			const itemWidth = $('.cursor_maske');
 			point_bar.css('width', itemWidth[0].offsetWidth);
-			point_bar.css('left', 0);
+			point_bar.css('left', itemWidth.eq(currectTarget).offset().left);
 		}
 
 		function movePointBar(evt){
 			const target = evt.currentTarget;
+			currectTarget = target.dataset.slider-1;
 			point_bar.css('left', $(target).offset().left);
 			owlCarousel.trigger('to.owl.carousel', target.dataset.slider)
 		}
@@ -99,6 +102,7 @@
 			smartSpeed: 450
 		});
 		resetPointerBar();
+
 		$(window).on('resize', resetPointerBar);
 
 		$('.cursor_maske').on('click', movePointBar)
