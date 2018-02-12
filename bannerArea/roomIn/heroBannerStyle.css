@@ -8,13 +8,16 @@ body, html{
     height: 100vh;
 }
 
+.owl-item{
+    opacity: 0;
+}
+
 .owl-item .item {
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
     -webkit-animation: 16s forwards zoomScale;
     animation: 16s forwards zoomScale;
     overflow: hidden;
-    opacity: 0;
     z-index: 0;
 }
 
@@ -39,7 +42,7 @@ body, html{
     }
 }
 
-.owl-item.active .item {
+.owl-item.active{
     z-index: 6;
     opacity: 1;
 }
