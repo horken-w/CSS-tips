@@ -11,11 +11,10 @@
 </head>
 <body>
 	<div id="hero_banner" class="owl-carousel owl-theme">
-		<div class="image-wrap item"></div>
-		<div class="image-wrap item"></div>
-		<div class="image-wrap item"></div>
-		<div class="image-wrap item"></div>
-		<div class="image-wrap item"></div>
+		<div class="image-wrap item" style="background-image: url(./images/animals.jpg)"></div>
+		<div class="image-wrap item" style="background-image: url(./images/any.jpg)"></div>
+		<div class="image-wrap item" style="background-image: url(./images/arch.jpg)"></div>
+		<div class="image-wrap item" style="background-image: url(./images/tech.jpg)"></div>
 	</div>
 	<div class="natvigation">
 		<div class="container base">
@@ -67,46 +66,11 @@
 			<div class="small_icon">
 				12
 			</div>
-			
-		
 		</div>
 	</div>
+	<!-- <img class="detected" style="display: none"> -->
 	<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
-	<script>
-		let point_bar = $('.point_bar'), 
-			owlCarousel = $('.owl-carousel'), 
-			currectTarget = 0;
-
-		function resetPointerBar(){
-			const itemWidth = $('.cursor_maske');
-			point_bar.css('width', itemWidth[0].offsetWidth);
-			point_bar.css('left', itemWidth.eq(currectTarget).offset().left);
-		}
-
-		function movePointBar(evt){
-			const target = evt.currentTarget;
-			currectTarget = target.dataset.slider-1;
-			point_bar.css('left', $(target).offset().left);
-			owlCarousel.trigger('to.owl.carousel', target.dataset.slider)
-		}
-
-		owlCarousel.owlCarousel({
-			animateOut: 'fadeOut',
-			animateIn: 'fadeIn',
-			items: 1,
-			dots: false,
-			loop: false,
-			mouseDrag: false,
-			stagePadding: 0,
-			smartSpeed: 450
-		});
-		resetPointerBar();
-
-		$(window).on('resize', resetPointerBar);
-
-		$('.cursor_maske').on('click', movePointBar)
-
-	</script>
+	<script src="heroBanner.js"></script>
 </body>
 </html>

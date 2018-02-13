@@ -43,33 +43,11 @@ body, html{
 }
 
 .owl-item.active{
-    z-index: 6;
+    z-index: 3;
     opacity: 1;
 }
 
-.owl-item:first-child .item {
-    background: url("https://placeimg.com/1024/1024/animals") no-repeat;
-    background-size: cover;
-    z-index: 5;
-}
-
-.owl-item:nth-child(2) .item {
-    background: url("https://placeimg.com/1024/1024/any") no-repeat;
-    background-size: cover;
-}
-
-.owl-item:nth-child(3) .item {
-    background: url("https://placeimg.com/1024/1024/people") no-repeat;
-    background-size: cover;
-}
-
-.owl-item:nth-child(4) .item {
-    background: url("https://placeimg.com/1024/1024/arch") no-repeat;
-    background-size: cover;
-}
-
-.owl-item:last-child .item {
-    background: url("https://placeimg.com/1024/1024/tech") no-repeat;
+.owl-item .item {
     background-size: cover;
 }
 
@@ -140,7 +118,6 @@ body, html{
 	backface-visibility: hidden;
 	width: 24px;
 	height: 24px;
-	color: white;
 	font-size: 14px;
 	line-height: 24px;
 	position: relative;
@@ -163,7 +140,6 @@ body, html{
 }
 
 .disc_lebel{
-	color: white;
 	padding-left: 1.4em;
 	width: 85%;
 	font-weight: 800;
