@@ -1,0 +1,39 @@
+:host .qq-upload-list-selector > li {
+  text-align: left;
+}
+
+/* description area */
+.fake_h2{
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.fake_h4{
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.twrap{
+      margin-top:1em;
+    }
+.thead{
+      border-bottom: 3px solid hsla(0, 0%, 20%, 1);
+      font-size: 1em;
+      padding: 10px;
+    }
+.tbody{
+      padding-top: 10px;
+    }
+.tcell:not(:last-child){
+  border-bottom: 3px solid hsl(0 ,0%, 0%);
+  margin-bottom: 5px;
+}
+
+.deny{
+  /*pointer-events: none;*/
+  /*cursor: not-allowed;*/
+}
+
+.deny + >>> div .qq-upload-delete{
+  display: none;
+}

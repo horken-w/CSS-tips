@@ -5,31 +5,33 @@ import {DOCUMENT} from "@angular/platform-browser";
 trigger btn set #friendlyPrint
 ex: <a class="print" title="{{'print' | translate}}" id="btnPrint" href="javascript:void(0)" #friendlyPrint>
 printer tag set clickEl and selector
-ex: <section [clickEl]=friendlyPrint printer> ..... </section>
+ex: <section [customStyle]="CSSstyleUrl" [clickEl]=friendlyPrint> ..... </section>
+give CSSstyleUrl to used custom style print,
+else will just default print
 -*/
 
 @Directive({
   selector: '[printer]'
 })
 export class PrinterDirective implements AfterViewInit {
-  @Input() clickEl: ElementRef; 
+  @Input('printer') clickEl: ElementRef;
+  @Input('customStyle') customPrint: ElementRef;
 
   constructor(private el: ElementRef,
-              private rend: Renderer2,
-              @Inject(DOCUMENT) private document: any) {
+              private rend: Renderer2) {
   }
 
   ngAfterViewInit() {
     this.rend.listen(this.clickEl, 'click', this.friendlyPrint.bind(this))
   }
 
-  
   friendlyPrint(evt) {
     evt.preventDefault();
-    let printContents, popupWin;
-    printContents = this.el.nativeElement.innerHTML;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
-    popupWin.document.write(`
+    if(this.customPrint){
+      let printContents, popupWin;
+      printContents = this.el.nativeElement.innerHTML;
+      popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+      popupWin.document.write(`
       <html>
         <head>
           <title>友善列印</title>
@@ -65,17 +67,12 @@ export class PrinterDirective implements AfterViewInit {
             article li a{
                 text-decoration: none;
             }
-            article li a:not([href^="#"]):after,
-            article li a[href^="http://"]:after, 
-            article li a[href^="https://"]:after {
-                content: "_連結位置："attr(href);
-                font-size: 80%;
-            }
           </style>
         </head>
         <body onload="window.print();window.close()">${printContents}</body>
       </html>`
-    );
-    popupWin.document.close();
+      );
+      popupWin.document.close();
+    }
+    else window.print();
   }
-}

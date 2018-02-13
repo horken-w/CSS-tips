@@ -1,0 +1,246 @@
+/*! 2016-07-11 */
+
+#trigger-upload {
+  color: white;
+  background-color: #777;
+  font-size: 14px;
+  padding: 7px 20px;
+  background-image: none;
+  border-color: #eee;
+}
+.qq-upload-button{
+  display: none;
+}
+#fine-uploader-manual-trigger .qq-upload-button {
+  margin-right: 15px;
+}
+
+#fine-uploader-manual-trigger .qq-uploader .qq-total-progress-bar-container {
+  width: 60%;
+}
+
+/*.img-responsive {*/
+  /*height: 120px;*/
+/*}*/
+
+.qq-upload-list-selector > li {
+  text-align: center;
+  margin: 0;
+  background-color: white;
+  border-bottom: none;
+}
+
+.qq-upload-list-selector > li > img {
+  margin: auto;
+}
+.upload-image .qq-upload-file {
+  max-width: 100%;
+  width: inherit;
+}
+
+/* Custom CSS */
+
+.qq-uploader{
+  overflow: hidden;
+  max-height: none;
+}
+
+.upload-image .qq-thumbnail-wrapper {
+  height: 150px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+}
+
+.upload-image .qq-thumbnail-wrapper:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.upload- .qq-upload-list li {
+  position: relative;
+}
+
+.upload-image .qq-thumbnail-selector,
+.upload-image .qq-upload-cancel,
+.upload-image .qq-edit-filename-icon {
+  margin-right: 0;
+}
+.qq-default-image{
+  position: absolute;
+  top: 67%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size:0.8em;
+}
+
+.qq-upload-cancel {
+  margin-bottom: 5px;
+  width: 105px;
+  padding: 7.5px 10px;
+  margin: auto;
+  margin-bottom: 5px;
+  background: #777;
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.qq-upload-cancel-selector {
+  color: #ccc;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+}
+
+.upload-image .qq-upload-cancel-selector {
+  position: absolute;
+  top: 15px;
+}
+
+.qq-upload-cancel-selector:hover {
+  color: #eee;
+}
+
+INPUT.qq-edit-filename.qq-editing {
+  outline: none;
+  border: none;
+  border-bottom: 1px dashed #ccc;
+  height: 23px;
+}
+.qq-upload-list{
+  overflow: hidden;
+  max-height: none;
+  box-shadow: none;
+}
+.upload-file .qq-upload-list {
+  box-shadow: none;
+}
+
+.upload-file .qq-upload-cancel-selector {
+  float: left;
+  width: 25px;
+  height: 25px;
+}
+
+.upload-file .qq-upload-list-selector > li {
+  text-align: left;
+}
+
+.upload-file .qq-file-info {
+  float: left;
+}
+
+.clickarea {
+  position: absolute;
+  min-height: 160px;
+  height: 96%;
+  width: 96%;
+}
+
+/* DateTimePicker hide year */
+/*.datepicker-months thead > tr:first-of-type{*/
+  /*display: none !important;*/
+/*}*/
+
+/* nestable menu */
+body > ul .list_item{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.list_placeholder{
+  position: relative;
+  margin: 5px 0;
+  padding: 0;
+  min-height: 20px;
+  font-size: 2em;
+  line-height: 20px;
+  border: 1px dashed #e7e8ed;
+  background: #a04b99;
+}
+
+.list_item > button {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  float: left;
+  width: 25px;
+  height: 20px;
+  margin: 5px 0;
+  padding: 0;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  font-size: 1.5em;
+  line-height: 1;
+  text-align: center;
+  font-weight: bold;
+  font-weight: bold;
+  color: white;
+}
+
+.list_item > button:before {
+  content: '+';
+  display: block;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  text-indent: 0;
+  z-index: 1;
+}
+
+.list_item > button[data-action="collapse"]:before {
+  content: '-';
+}
+
+.list_item.list_collapsed{
+  box-shadow: 0 0 0 1px #cde, 0 2px 0 #fff, 0 3px 0 #cde, 0 5px 0 #fff, 0 5.5px 0 #cde;
+}
+
+.list_items {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left
+}
+
+.list_dragel {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.list_items .list_items{
+  padding-left: 25px;
+}
+
+.qq-gallery .qq-delete-icon {
+  background: url("/images/fineUploader/trash.gif") white;
+  width: 17px;
+  height: 17px;
+  vertical-align: sub;
+  display: inline-block;
+}
+
+.cdk-global-overlay-wrapper{
+  justify-content: flex-end!important;
+}
+
+.qq-upload-crop{
+  font-size: 12px;
+  font-weight: normal;
+  cursor: pointer;
+  vertical-align: middle;
+  background-color: #e69915;
+  color: #FAFAFA;
+  border-color:  #e69915;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.55);
+}

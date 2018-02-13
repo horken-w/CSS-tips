@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head runat="server">
+    <meta charset="UTF-8" />
+    <title>Angled Edges</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="patw, Patrick Wang" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <style>
+    .quote:nth-child(odd) {
+        background: #41ade5;
+        position: relative;
+        z-index: 1;
+    }
+
+    .quote:nth-child(even) {
+        background: hsl(0, 0%, 75%);
+        position: relative;
+        z-index: 1;
+    }
+    
+    .quote:before,
+    .quote:after {
+        background: #41ade5;
+        content: '';
+        display: block;
+        height: 20%;
+        left: 0;
+        position: absolute;
+        right: 0;
+        z-index: -1;
+        -webkit-backface-visibility: hidden;
+    }
+    
+    .quote:nth-child(even):before,
+    .quote:nth-child(even):after{
+        background: hsl(0, 0%, 75%);
+    }
+
+    .quote:before {
+        top: -50px;
+        -webkit-transform: skewY(-1.5deg);
+        transform: skewY(-1.5deg);
+        -webkit-transform-origin: 100% 0;
+        transform-origin: 100% 0;
+    }
+    
+    .quote:after {
+        bottom: 0;
+        -webkit-transform: skewY(-1.5deg);
+        transform: skewY(-1.5deg);
+        -webkit-transform-origin: 100%;
+        transform-origin: 100%;
+    }
+    
+    .quote {
+        color: #fff;
+        font-family: 'Fira Sans', sans-serif;
+        margin: 50px 0;
+        padding: 20% 20px;
+        text-align: center;
+    }
+    
+    h1 {
+        font-size: 32px;
+        font-weight: 500;
+    }
+    
+    p {
+        font-size: 14px;
+        font-weight: 300;
+        margin-top: 0.5em;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="quote">
+        <h1>Angled Edges</h1>
+        <p>With 2 Pseudo Elements</p>
+        <a href="https://www.viget.com/articles/angled-edges-with-css-masks-and-transforms">Ref from Jeremy Frank</a>
+    </div>
+    <div class="quote">
+        <h1>Angled Edges</h1>
+        <p>With 2 Pseudo Elements</p>
+        <a href="https://www.viget.com/articles/angled-edges-with-css-masks-and-transforms">Ref from Jeremy Frank</a>
+    </div>
+    <div class="quote">
+        <h1>Angled Edges</h1>
+        <p>With 2 Pseudo Elements</p>
+        <a href="https://www.viget.com/articles/angled-edges-with-css-masks-and-transforms">Ref from Jeremy Frank</a>
+    </div>
+    <script>
+    </script>
+</body>
+
+</html>

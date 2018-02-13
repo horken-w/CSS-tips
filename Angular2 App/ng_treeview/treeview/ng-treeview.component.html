@@ -1,0 +1,24 @@
+<ng-template #baseTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
+  <div class="form-check list-group-item">
+    <!--{{item|json}}-->
+    <span class="icon expand-icon glyphicon" *ngIf="item.menus" aria-hidden="true"
+          (click)="onCollapseExpand()"
+          [class.glyphicon-minus]="!item.collapsed"
+          [class.glyphicon-plus]="item.collapsed"></span>
+    <label class="form-check-label">
+      <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" [value]="item.path" (ngModelChange)="onCheckedChange()" />{{item.name}}
+    </label>
+  </div>
+</ng-template>
+<div *ngIf="items">
+  <!-- todo: Select All -->
+  <div class="select_all row" *ngIf="false">
+    <div class="btn btn-info col-md-2">全選</div>
+    <div class=" col-md-4">
+      <label class="form-check-label">
+        <input type="checkbox" class="form-check-input"/>全部展開
+      </label>
+    </div>
+  </div>
+  <treeview-item *ngFor="let item of items" [temp]="baseTemplate" [item]="item"></treeview-item>
+</div>

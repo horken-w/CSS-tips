@@ -1,0 +1,70 @@
+:host .qq-thumbnail-wrapper {
+  height: 150px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+}
+
+:host .qq-thumbnail-wrapper:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+:host img[class] {
+  width: auto;
+}
+
+/* description area */
+.fake_h2{
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.fake_h4{
+  font-size: 1em;
+  font-weight: 600;
+}
+.twrap{
+      margin-top:1em;
+    }
+.thead{
+      border-bottom: 3px solid hsla(0, 0%, 20%, 1);
+      font-size: 1em;
+      padding: 10px;
+    }
+.tbody{
+      padding-top: 10px;
+    }
+.tcell:not(:last-child){
+      border-bottom: 3px solid hsl(0 ,0%, 0%);
+      margin-bottom: 5px;
+    }
+
+.deny{
+  /*pointer-events: none;*/
+  /*cursor: not-allowed;*/
+}
+
+.deny + >>> div .qq-upload-delete, .deny + >>> div .qq-default-image{
+  display: none;
+}
+
+/* crop frame style */
+.frame_square{
+      width: 80px;
+      height: 80px;
+      border: 3px dashed #000000;
+      background: #ddd;
+    }
+
+.frame_rectangle{
+      width: 80px;
+      height: 60px;
+      border: 3px dashed #000000;
+      background: #ddd;
+    }
+
+.qq-upload-file{
+  width: auto;
+}
