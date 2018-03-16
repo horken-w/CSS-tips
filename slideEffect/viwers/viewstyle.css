@@ -4,7 +4,7 @@
 	height: 600px;
 	cursor: pointer;
 }
-.beforeAfterSlidebar div{
+.beforeAfterSlidebar figure{
 	position: absolute;
 	top: 0;
 	left: 0;
