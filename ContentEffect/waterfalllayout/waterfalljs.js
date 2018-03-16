@@ -1,13 +1,13 @@
 !function(window, document){
 	'user strict';
-	var min_column=3, flowindex=0;
-	var column_width=240, gap_width=15, gap_height=15;
-	var managing = false, loading=false;
-	var columheights, scrollDelay, columnCount;
+	let min_column=3, flowindex=0;
+	let column_width=240, gap_width=15, gap_height=15;
+	let managing = false, loading=false;
+	let columheights, scrollDelay, columnCount;
 
-	var wrapper = document.getElementById('container');
+	const wrapper = document.getElementById('container');
 
-	var addEvent = function(element, type, handler) {
+	const addEvent = function(element, type, handler) {
 	  if(element.addEventListener) {
 	    addEvent = function(element, type, handler) {
 	      element.addEventListener(type, handler, false);
@@ -24,20 +24,20 @@
 	  addEvent(element, type, handler);
 	};
 
-	var getColumnCount= function(){
+	const getColumnCount=function(){
 		return Math.max(min_column, Math.floor((document.body.offsetWidth+gap_width)/(column_width+gap_width)));
 	};
-	var getMinVal=function(arr){
+	const getMinVal=function(arr){
 		return Math.min.apply(Math, arr);
 	};
-	var getMaxVal=function(arr){
+	const getMaxVal=function(arr){
 		return Math.max.apply(Math, arr);
 	};
-	var getMinkey=function(arr){
-		var key=0;
-		var min=arr[0];
+	const getMinkey=function(arr){
+		let key=0;
+		let min=arr[0];
 
-		for(var i=0, l=arr.length; i<l; i++){
+		for(let i=0, l=arr.length; i<l; i++){
 			if(min > arr[i]){
 				key=i;
 				min=arr[i];
@@ -45,10 +45,10 @@
 		}
 		return key;
 	};
-	var getMaxVal=function(arr){
-		var key=0, max=arr[0];
+	const getMaxVal=function(arr){
+		let key=0, max=arr[0];
 
-		for(var i=0, l=arr.length; i<l; i++){
+		for(let i=0, l=arr.length; i<l; i++){
 			if(max < arr[i]){
 				key=i;
 				max=arr[i];
@@ -56,19 +56,18 @@
 		}
 		return max;
 	};
-	var managetiles=function(){
+	const managetiles=function(){
 		managing = true;
-		var flows=wrapper.children;
-		var viewportTop=(document.body.scrollTop || document.documentElement.scrollTop)- wrapper.offsetTop;
-		var viewporBottom= (window.innerHeight || document.documentElement.clientHeight) +viewportTop;
+		let flows=wrapper.children;
+		let viewportTop=(document.body.scrollTop || document.documentElement.scrollTop)- wrapper.offsetTop;
+		let viewporBottom= (window.innerHeight || document.documentElement.clientHeight) +viewportTop;
 
 		if(viewporBottom > getMinVal(columheights)) appendtiles(columnCount);
 		managing = false;
 	};
-	var appendtiles=function(count){
-		if(loading) {
-	      return;
-	    }
+	const appendtiles=function(count){
+		if(loading) return;
+		
 	    var tiles=[];
 	    for(var i=0; i<count; i++ ){
 	    	tiles.push(wrapper.children[flowindex]);
@@ -79,7 +78,7 @@
 	      adjusttiles(tiles);
 	    },500);
 	};
-	var adjusttiles=function(flows, reflow){
+	const adjusttiles=function(flows, reflow){
 		var columnIndex;
     	var columnheight;
 
@@ -100,14 +99,14 @@
     	wrapper.style.height = getMaxVal(columheights) + 'px';
     	managetiles(flows.length);
 	}
-	var resetHeights=function(count){
+	const resetHeights=function(count){
 		columheights=[];
 		for(var i=0; i<count; i++){
 			columheights.push(0);
 		}
 		wrapper.style.width=(count *(column_width+gap_width)-gap_width)+'px';
 	};
-	var reflowtiles=function(){
+	const reflowtiles=function(){
 		columnCount = getColumnCount();
 		if(columheights.length != columnCount){
 			resetHeights(columnCount);
@@ -115,17 +114,17 @@
 		}else managetiles();
 	};
 
-	var delayedResize=function(){
+	const delayedResize=function(){
 		clearTimeout(scrollDelay);
 		scrollDelay=setTimeout(reflowtiles ,0)
 	};
-	var delayedScroll=function(){
+	const delayedScroll=function(){
 		clearTimeout(scrollDelay);
 		if(!managing){
 			scrollDelay=setTimeout(managetiles ,500)
 		}
 	};
-	var init = function() {
+	const init = function() {
 	    addEvent(window, 'resize', delayedResize);
 	    addEvent(window, 'scroll', delayedScroll);
 

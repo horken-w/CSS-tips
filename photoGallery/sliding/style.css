@@ -5,7 +5,7 @@
 	margin: 20px auto;
 }
 .slider{
-	overflow-x: scroll;
+	overflow-x: hidden;
 }
 .slide{
 	width: 280px;
@@ -24,19 +24,19 @@
 	background: linear-gradient(transparent, black);
 }
 .slide:nth-child(1){
-	background: url('https://dl.dropboxusercontent.com/u/50502234/wave.jpg');
+	background: url('https://placeimg.com/450/600/animals');
 }
 .slide:nth-child(2){
-	background: url('https://dl.dropboxusercontent.com/u/50502234/iceland.jpg');
+	background: url('https://placeimg.com/450/600/tech');
 }
 .slide:nth-child(4){
- 	background: url('https://dl.dropboxusercontent.com/u/50502234/rain.jpg');
+ 	background: url('https://placeimg.com/450/600/people');
 }
 .slide:nth-child(3){
-	background: url('https://dl.dropboxusercontent.com/u/50502234/sunny.jpg');
+	background: url('https://placeimg.com/450/600/arch');
 }
 .slide:nth-child(5){
-	background: url('https://dl.dropboxusercontent.com/u/50502234/thunder.jpg');
+	background: url('https://placeimg.com/450/600/naturl');
 }
 .holder{
 	width: 500%;

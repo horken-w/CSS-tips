@@ -22,32 +22,11 @@
 		getImgBrightness(targetUrl);
 	}
 
-	owlCarousel.owlCarousel({
-		animateOut: 'fadeOut',
-		animateIn: 'fadeIn',
-		items: 1,
-		dots: false,
-		loop: false,
-		mouseDrag: false,
-		stagePadding: 0,
-		smartSpeed: 450,
-		autoplay:false,
-		autoplayTimeout:3000,
-		autoplayHoverPause:true
-	});
-	resetPointerBar();
-	fontColorChange();
-	$(window).on('resize', resetPointerBar);
-
-	$('.cursor_maske').on('click', movePointBar)
-
-
 	function getImgBrightness(detectedURL){
 		const detectedImg = document.createElement('img');
 		detectedImg.id = 'detected_img';
 		detectedImg.src = detectedURL;
 		detectedImg.style.display = 'none';
-		detectedImg.crossOrigin = "Anonymous";
 		document.body.appendChild(detectedImg);
 
 		detectedImg.onload = function(){
@@ -85,4 +64,23 @@
 		}
 		document.getElementById('detected_img').remove()
 	}
+
+	owlCarousel.owlCarousel({
+		animateOut: 'fadeOut',
+		animateIn: 'fadeIn',
+		items: 1,
+		dots: false,
+		loop: false,
+		mouseDrag: false,
+		stagePadding: 0,
+		smartSpeed: 450,
+		autoplay:false,
+		autoplayTimeout:3000,
+		autoplayHoverPause:true
+	});
+	resetPointerBar();
+	fontColorChange();
+	$(window).on('resize', resetPointerBar);
+
+	$('.cursor_maske').on('click', movePointBar)
 })(window, $)

@@ -81,7 +81,7 @@
 			</li>
 		</ul>
 	</nav>
-	<script src="https://dl.dropboxusercontent.com/u/50502234/jquery.min.js"></script>
+	<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script>
 		$(function(){
 			var animTime=1500, ctindex;
@@ -98,9 +98,7 @@
 					$('.content').css({'marginTop': 0})
 				});
 				$('.content:nth-child('+ctindex+')').show()
-				.animate({'opacity': 1, 'marginTop': 0}, 1500);
-
-				console.log('1')				
+				.animate({'opacity': 1, 'marginTop': 0}, 1500);				
 			})
 		})	
 	</script>

@@ -9,9 +9,9 @@
 
 	function showUploadedItem(file){
 		var list = document.getElementById('image-list'),
-				li = document.createElement('li'),
-				img = document.createElement('img'),
-				span = document.createElement('span');
+			li = document.createElement('li'),
+			img = document.createElement('img'),
+			span = document.createElement('span');
 
 		img.src = file.result;
 		span.innerHTML = file.name;

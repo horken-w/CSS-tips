@@ -1,12 +1,12 @@
 $(function(){
 	$('#dialog-called').on('click', function(){
-		var dialog='<div id="bgpaper">\
-					<div id="dialogBox">\
-					<div class="content">\
-						<div id="dialogmsg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel saepe, distinctio non unde hic rerum aspernatur molestias consectetur culpa laborum.</div>\
-						<a href="javascript:;" class="button">Close</a>\
-					</div>\
-				</div></div>';
+		var dialog=`<div id="bgpaper">
+					<div id="dialogBox">
+					<div class="content">
+						<div id="dialogmsg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel saepe, distinctio non unde hic rerum aspernatur molestias consectetur culpa laborum.</div>
+						<a href="#" class="button">Close</a>
+					</div>
+				</div></div>`;
 		$('body').append(dialog);
 
 		$(window).resize(function(){

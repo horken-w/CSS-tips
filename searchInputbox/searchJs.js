@@ -1,9 +1,7 @@
 !function(window, document){
 	'user strict';
 
-	var dataList = ['項目一', '項目二', '項目三', '項目四', '最後一項'];
-
-	var domRoot = {
+	let domRoot = {
 		root: $('.txtsearch'),
 		select: $('.txt-selectbox'),
 		input: $('.txt-inputexpend'),
@@ -11,157 +9,151 @@
 		ul: $('#searchbox')
 	}, value=[];
 
-	function fastSearchFilter(){
-		var inputBox = domRoot.input;
-		domRoot.input.on('focus', function(){
-			domRoot.root.addClass('ckactive');
-			domRoot.ul.fadeIn(500);
-		})
+	class fastSearchFilter{
+		constructor(){
+			this.selectedCollection = [];
 
-		domRoot.listArea.on('click', function(){
-			domRoot.input.focus();
-		})
-
-		$(document).on('click', function(evt){
-			if($(evt.target).prop("tagName") !== "INPUT" && !$(evt.target).hasClass('txt-ctrl')
-				&& !$.contains(domRoot.ul[0], evt.target)){
-				domRoot.root.removeClass('ckactive');
-				domRoot.ul.fadeOut(500);
-			}
-		})
-		this.customList = function(listArr){
-			dataList = listArr;
-		}
-
-		this.export = function(){
-			select = domRoot.select;
-
-			return select.val();
-		}
-
-		inputBox.on('keyup', function(evt){
-			var search = evt.target.value.toLowerCase();
-			if(!search)
-				$(domRoot.ul).children().show();
-		    else {
-				$(domRoot.ul).children().each(function(){
-					var text = $(this).text().toLowerCase();
-					(text.indexOf(search) >= 0) ? $(this).show() : $(this).hide();
-				});
-			};
-		});
-		inputBox.on('keypress', function(evt){
-			var found = false;
-			if(evt.keyCode === 13 && $(this).val().length) {
-				var search = $(this).val().toLowerCase();
-				$(domRoot.ul).children().each(function(){
-					var text = $(this).text().toLowerCase();
-					if (text === search){
-						$(this).click();
-						found = true;
-					}
-					else found = false;
-				});
-				if(!found) {
-					var opt = $('<option>');
-					opt.val(search).text(search);
-					opt.appendTo(domRoot.select);
-					value.push(search);
-					selectOptions(value);
-					$(this).val('');
+			domRoot.input.on('focus', ()=>{
+				domRoot.root.addClass('ckactive');
+				domRoot.ul.fadeIn(500);
+			})
+			$(document).off('click').on('click', (evt)=>{
+				if(!$(evt.target).hasClass('txt-ctrl') && !$.contains(domRoot.listArea[0], evt.target) && !$.contains(domRoot.ul[0], evt.target)){
+					domRoot.root.removeClass('ckactive');
+					domRoot.ul.fadeOut(500);
+				}
+			})
+			if(fastSearchFilter.customList.length) this.renderList();
+			domRoot.ul.on('click', $.proxy(this.selectItemAction, this));
+			domRoot.listArea.on('click', function(evt){
+				domRoot.input.focus();
+				if(evt.target.nodeName === 'BUTTON') this.removeTags(evt);
+			}.bind(this));
+			domRoot.input.on('keyup', function(evt){
+				const search = evt.target.value.toLowerCase();
+				if(!search)
+					$(domRoot.ul).children().show();
+				else {
+					$(domRoot.ul).children().each(function(){
+						const text = $(this).text().toLowerCase();
+						(text.indexOf(search) >= 0) ? $(this).show() : $(this).hide();
+					});
 				};
-			};
-		})
-	}
+			});
+			domRoot.input.on('keypress', function(evt){
+				if(evt.keyCode === 13 && $(evt.target).val().length) {
+					const search = $(evt.target).val().toLowerCase();
+					const orgArray = fastSearchFilter.customList;
+					let result = [], clickItem=0;
 
-	function findArrayIndex(array, value){
-		return array.indexOf(value);
-	}
+					for(let i = 0, len = orgArray.length; i<len; i++){
+						if (orgArray[i].name.toLowerCase().indexOf(search)>= 0) result.push({name: orgArray[i].name, index: i});
+					}
+					if(this.selectedCollection.indexOf(result[0].name)<0){
+						this.selectedCollection.push(result[0].name);
+						domRoot.ul.children().eq(result[0].index).addClass('selected');
+						this.updateItems();
+					};
 
-	function selectOptions(value){
-		if(value.length){
-			domRoot.select.val(value);
-			setToInput();
+					$(evt.target).val('');
+				};
+			}.bind(this));
 		}
-		else{
-			domRoot.select.val('');
-			defaultInput();
+
+		selectItemAction(evt){
+			let target = evt.target;
+			if(Array.prototype.indexOf.call(target.classList, 'selected') < 0){
+				target.classList.add('selected');
+				this.selectedCollection.push(target.innerText);
+			}
+			else{
+				target.classList.remove('selected');
+				this.selectedCollection = this.getItemStorage(this.selectedCollection, target.innerText);
+				domRoot.input.val('');
+				// this.selectedCollection = this.selectedCollection.filter(function(value){
+				// 	return value !== this
+				// }, target.innerText);
+
+			}
+			this.updateItems();
+			console.log(this.selectedCollection);			
 		}
-	}
 
-	function setToInput(){
-		var selectData = domRoot.select.val(), 
-			div=$('<div class="txt-select-item" />'),
-			btn=$('<button class="removebtn" type="button">X</button>'),
-			width = 0;
-		defaultInput(selectData);
+		renderList(){
+			let _that = this;
+			domRoot.select.html(fastSearchFilter.customList.map((data) => `<option value=${data.value}>${data.name}</option>`));
+			domRoot.ul.html(fastSearchFilter.customList.map((data) => `<li class="txt-item">${data.name}</li>`));
+			
+		}
+		
+		updateItems(){
+			if(this.selectedCollection.length) this.createItemTags(this.selectedCollection);
+			else this.cleanAllSelection();
+		}
 
-		btn.on('click', function(evt){
+		createItemTags(dataArray = []){
+			let tagCollection = [];
+			this.cleanAllSelection();
+			tagCollection = dataArray.map(function(item, i){
+				return `<div class="txt-select-item" data-idx=${i}>
+							<button class="removebtn" type="button">X</button>${item}
+						</div>`;
+			});
+			domRoot.listArea.prepend(tagCollection);
+		}
+		
+		removeTags(evt){
+			let text = evt.target.nextSibling.data.replace(/\s/g, '');
 			evt.stopPropagation();
 
-			var idx = findArrayIndex(value, $(this).parent().text().substring(0, $(this).parent().text().length-1));
+			this.selectedCollection = this.getItemStorage(this.selectedCollection, text);
+			this.updateItems();
 			$('.selected').map(function(i, v){
-				if($(v).text() === value[idx]) $(this).removeClass('selected');
+				if($(v).text() === text) $(this).removeClass('selected');
 			})
-			if(idx>-1) value.splice(idx, 1);
-			selectOptions(value);
-			$(this).parent().remove();
-		});
+		}
 
-		selectData.map(function(v, i){
-			var _div = div.clone();
-			_div.text(v);
-			_div.append(btn.clone(true));
-			domRoot.listArea.prepend(_div);
-			width+=(_div.outerWidth()+15);
-		})
-		domRoot.input.css('width', domRoot.input.width()-width);
+		cleanAllSelection(){
+			$('.txt-select-item').remove();
+			domRoot.input.css('width', '100%');
+		}
 
-	}
-
-	function defaultInput(data){
-		$('.txt-select-item').remove();
-		domRoot.input.css('width', '100%');
-	}
-
-	function madeSearchItem(data, root){
-		data.map(function(v, i){
-			var li=$('<li class="txt-item" />');
-			li.text(data[i]).on('click', function(){
-				if(!$(this).hasClass('selected')){
-					value.push($(this).text());
-					$(this).addClass('selected');
-				}
-				else{
-					$(this).removeClass('selected');
-					var idx = findArrayIndex(value, $(this).text());
-					if(idx>-1) value.splice(idx, 1);
-				}
-				selectOptions(value);
-				domRoot.input.val('');
-				$(domRoot.ul).children().show();
-			}).appendTo(domRoot.ul);
-		})
-
+		set customList(listArr = [{name: '', value: ''}]){
+			fastSearchFilter.customList = listArr;
+			if(fastSearchFilter.customList.length) this.renderList();
+			else console.log('查詢無資料');
+		}		
+		get export(){
+			return this.selectedCollection;
+		}
 		
+		getItemStorage(allItem, removeItem){
+			let map = {}, storage = [];
+			
+			for (let i = allItem.length; i--;) {
+				if (allItem[i] !== removeItem) {
+					storage.push(allItem[i]);
+				}
+			}
+			return storage.reverse();
+		}
 	}
 
-	var selectStruct = new fastSearchFilter();
-	window.onload = selectStruct;
-
-	//自訂搜尋下拉欄位
-	selectStruct.customList(['Articuno', 'Arcanine', 'Suicune', 'Poliwhirl', 'Ditto']);
-
-	dataList.map(function(v, i){
-		var opt = $('<option>');
-		opt.val(dataList[i]).text(dataList[i]);
-		opt.appendTo(domRoot.select);
+	Object.defineProperty(fastSearchFilter, 'customList', {
+		value: [{name: '項目一', value: 'xxx'}, {name: '項目二', value: 'ddd'}, {name: '項目三', value: 'eee'}, {name: '項目四', value: 'ccc'}, {name: '最後一項', value: 'nnn'}],
+		readable: true,
+		writable: true,
+		enumerable: false,
+		configurable: false
 	})
-	madeSearchItem(dataList);
+	
+	var selectStruct = new fastSearchFilter();
+	//自訂搜尋下拉欄位 
+	selectStruct.customList = [{name: 'Articuno', value: 'xxx'}, {name: 'Arcanine', value: 'ddd'}, {name: 'Suicune', value: 'eee'}, {name: 'Poliwhirl', value: 'ccc'}, {name: 'Ditto', value: 'ddd'}];
 
 	// 匯出選取值
 	$('#clickme').on('click', function(){
-		$('#showselect').text(selectStruct.export());
+		$('#showselect').text(selectStruct.export);
 	})
 	
 }(window, document);

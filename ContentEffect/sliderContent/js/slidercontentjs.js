@@ -1,4 +1,4 @@
-;(function($, w, undefined){
+(function($, w, undefined){
 	'use strict';
 
 	$.ContentSlider = function(options, elem){
@@ -79,8 +79,7 @@
 			this.each(function(){
 				var instance = $.data(this, 'ContentSlider')
 				if(!instance) {
-					logError('cannot call methods on ContentSlider prior to initialization; ' +
-					'attempted to call method "' + options + '"');
+					logError(`cannot call methods on ContentSlider prior to initialization;	attempted to call method "${options}"`);
 					return;
 				}
 				if(!$.isFunction(instance[options]) || options.charAt(0) === '_'){

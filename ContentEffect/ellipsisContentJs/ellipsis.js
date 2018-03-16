@@ -14,8 +14,7 @@
                     .css('position', 'absolute')
                     .css('overflow', 'visible')
                     .width(multiline ? el.width() : 'auto')
-                    .height(multiline ? 'auto' : el.height())
-                    ;
+                    .height(multiline ? 'auto' : el.height());
 
                 el.after(t);
 
