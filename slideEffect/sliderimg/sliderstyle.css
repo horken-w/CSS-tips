@@ -10,16 +10,16 @@
 	background-size: cover;
 }
 .page:nth-child(1){
-	background-image: url("https://dl.dropboxusercontent.com/u/50502234/arcanine.png");
+	background-image: url("https://placeimg.com/1024/1024/animals");
 }
 .page:nth-child(2){
-	background-image: url("https://dl.dropboxusercontent.com/u/50502234/articuno.png");
+	background-image: url("https://placeimg.com/1024/1024/arch");
 }
 .page:nth-child(3){
-	background-image: url("https://dl.dropboxusercontent.com/u/50502234/suicune.png");
+	background-image: url("https://placeimg.com/1024/1024/tech");
 }
 .page:nth-child(4){
-	background-image: url("https://dl.dropboxusercontent.com/u/50502234/dragonair.png");
+	background-image: url("https://placeimg.com/1024/1024/naturl");
 }
 .slider-nav{
 	text-align: center;

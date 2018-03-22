@@ -44,7 +44,7 @@
 				if(evt.keyCode === 13 && $(evt.target).val().length) {
 					const search = $(evt.target).val().toLowerCase();
 					const orgArray = fastSearchFilter.customList;
-					let result = [], clickItem=0;
+					let result = [];
 
 					for(let i = 0, len = orgArray.length; i<len; i++){
 						if (orgArray[i].name.toLowerCase().indexOf(search)>= 0) result.push({name: orgArray[i].name, index: i});
@@ -117,15 +117,6 @@
 			$('.txt-select-item').remove();
 			domRoot.input.css('width', '100%');
 		}
-
-		set customList(listArr = [{name: '', value: ''}]){
-			fastSearchFilter.customList = listArr;
-			if(fastSearchFilter.customList.length) this.renderList();
-			else console.log('查詢無資料');
-		}		
-		get export(){
-			return this.selectedCollection;
-		}
 		
 		getItemStorage(allItem, removeItem){
 			let map = {}, storage = [];
@@ -136,6 +127,15 @@
 				}
 			}
 			return storage.reverse();
+		}
+
+		set customList(listArr = [{name: '', value: ''}]){
+			fastSearchFilter.customList = listArr;
+			if(fastSearchFilter.customList.length) this.renderList();
+			else console.log('查詢無資料');
+		}		
+		get export(){
+			return this.selectedCollection;
 		}
 	}
 
